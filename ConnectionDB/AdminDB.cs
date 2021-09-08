@@ -38,5 +38,32 @@ public class AdminDB
                 return con.Query<Admin>(sql).ToList();
             }
         }
+
+       
+
+
+
+
+
+
+        public static bool Insert(Users user)
+        {
+            string sql = "INSERT INTO [Users](Username, Password, FirstName, LastName, MobileNumber) VALUES (@Username, @Password, @FirstName, @LastName, @MobileNumber)";
+
+            using (var con = ConnectionUtil.GetConnection())
+            {
+                return con.Execute(sql, user) > 0;
+            }
+        }
+        public static List<Users> FetchList1()
+        {
+            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName], [MobileNumber] FROM [BIOSproject].[dbo].[Users]";
+            using (var con = ConnectionUtil.GetConnection())
+            {
+                return con.Query<Users>(sql).ToList();
+            }
+        }
+
+
     }
 }

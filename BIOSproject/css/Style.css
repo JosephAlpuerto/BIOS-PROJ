@@ -9,7 +9,7 @@
 }
 
 body {
-    padding: 0 10px;
+    padding: 0px;
 }
 
 .wrapper {
@@ -26,7 +26,7 @@ body {
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 25px;
-        color: #fec107;
+        color: #d00149;
         text-transform: uppercase;
         text-align: center;
     }
@@ -66,5 +66,5 @@ body {
 }
 
     .wrapper1 .form1 .inputfield1 .btn:hover {
-        background: red;
+        background: #d00149;
     }
