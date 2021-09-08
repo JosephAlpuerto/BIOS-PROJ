@@ -110,10 +110,10 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="Default.aspx">Login</a>
+                            <h6 class="collapse-header">Function Screens:</h6>
+                            
                             <a class="collapse-item" href="AddAdmin.aspx">Add Admin</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                            <a class="collapse-item" href="AddUser.aspx">Add Users</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Other Pages:</h6>
                             <a class="collapse-item" href="404.html">404 Page</a>
@@ -122,18 +122,26 @@
                     </div>
                 </li>
 
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
-                </li>
+               
+                
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="AllAdmin.aspx">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
+                        aria-expanded="true" aria-controls="collapseTables">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
+                        <span>Tables</span>
+                    </a>
+                    <div id="collapseTables" class="collapse" aria-labelledby="headingTables" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Function Screens:</h6>
+                            
+                            <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
+                            
+                            <div class="collapse-divider"></div>
+                           
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->
