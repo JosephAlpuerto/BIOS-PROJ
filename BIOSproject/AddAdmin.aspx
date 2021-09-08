@@ -14,10 +14,6 @@
                         </div>
         </div>
 
-
-
-
-
         <!--Register form-->
 
         <div class="container">
