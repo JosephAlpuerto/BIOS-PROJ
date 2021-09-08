@@ -75,6 +75,8 @@
     <Content Include="AllAdmin.aspx" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="css\Style.css" />
+    <Content Include="css\Style2.css" />
     <Content Include="Default.aspx" />
     <Content Include="Generate.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />

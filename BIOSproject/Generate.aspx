@@ -18,7 +18,62 @@
                         </div>
         </div>
 
+    
+          <div class="wrapper1">
+            <div class="title1">
+                Generate Series
+            </div>
 
+            <div class="form1">
+                <div class="input_field1">
+                    <label>Date</label>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
+                </div>
+
+                <div class="input_field1">
+                    <label>Area</label>
+                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="input1">
+                        <asp:ListItem>EMM - EAST METRO MANILA</asp:ListItem>
+                        <asp:ListItem>EAST METRO</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <div class="input_field1">
+                    <label>Team</label>
+                    <asp:DropDownList ID="DropDownList2" runat="server" CssClass="input1">
+                        <asp:ListItem>ANTIPOLO</asp:ListItem>
+                        <asp:ListItem>1075 - ANTIPOLO TEAM</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            <div class="input_field1">
+                    <label>Branch</label>
+                    <asp:DropDownList ID="DropDownList3" runat="server" CssClass="input1">
+                        <asp:ListItem>EMM - EAST METRO MANILA</asp:ListItem>
+                        <asp:ListItem>1319 - ANTIPOLO CIRCUMFERENTIAL</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div class="input_field1">
+                    <label>Start Series</label>
+                    <input type="text" class="input1" />
+                </div>
+
+                <div class="input_field1">
+                    <label>End Series</label>
+                    <input type="text" class="input1" />
+                </div>
+                <div class="inputfield1">
+        <input type="submit" value="Generate" class="btn"/>
+      </div>
+
+
+               
+            </div>
+
+
+          
+
+        </div>
+        
 
 
 

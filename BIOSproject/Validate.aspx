@@ -15,7 +15,49 @@
         </div>
 
 
+    <div class="wrapper">
+            <div class="title">
+                Validate Series
+            </div>
 
+            <div class="form">
+                <div class="input_field">
+                    <label>Enter Tracking</label>
+                    <input type="text" class="input" />
+                </div>
+
+                <div class="input_field">
+                    <label>Area</label>
+                    <asp:DropDownList ID="DropDownList4" runat="server" CssClass="input" Enabled="false"></asp:DropDownList>
+                </div>
+
+                <div class="input_field">
+                    <label>Team</label>
+                    <asp:DropDownList ID="DropDownList5" runat="server" CssClass="input" Enabled="false"></asp:DropDownList>
+                </div>
+
+                <div class="input_field">
+                    <label>Branch</label>
+                    <asp:DropDownList ID="DropDownList6" runat="server" CssClass="input" Enabled="false"></asp:DropDownList>
+                </div>
+
+                <div class="input_field">
+                    <label>Date</label>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="input" TextMode="Date" ReadOnly="true"></asp:TextBox>
+                    
+                </div>
+                <div class="input_field">
+                    <label>Start Series</label>
+                    <asp:TextBox ID="TextBox3" runat="server" CssClass="input" ReadOnly="true"></asp:TextBox>
+                </div>
+                <div class="input_field">
+                    <label>End Series</label>
+                    <asp:TextBox ID="TextBox4" runat="server" ReadOnly="true" CssClass="input"></asp:TextBox>
+                </div>
+
+                
+            </div>
+        </div>
 
 </asp:Content>
 
