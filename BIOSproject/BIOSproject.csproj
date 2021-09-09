@@ -73,6 +73,7 @@
     <Content Include="AddAdmin.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
+    <Content Include="AllUsers.aspx" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
     <Content Include="css\Style.css" />
@@ -1785,6 +1786,13 @@
     </Compile>
     <Compile Include="AllAdmin.aspx.designer.cs">
       <DependentUpon>AllAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AllUsers.aspx.cs">
+      <DependentUpon>AllUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllUsers.aspx.designer.cs">
+      <DependentUpon>AllUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

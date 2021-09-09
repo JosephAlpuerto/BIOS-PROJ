@@ -48,7 +48,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="SB-Admin.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -155,7 +155,7 @@
                             <h6 class="collapse-header">Function Screens:</h6>
                             
                             <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
-                            
+                            <a class="collapse-item" href="AllUsers.aspx">All Users</a>
                             <div class="collapse-divider"></div>
                            
                         </div>
@@ -449,7 +449,11 @@
                         $('.dataTable1').DataTable();
                     });
                 </script>
-
+                <script>
+                    $(document).ready(function () {
+                        $('.dataTable2').DataTable();
+                    });
+                </script>
 
 
 

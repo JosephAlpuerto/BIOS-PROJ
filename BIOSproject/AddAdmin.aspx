@@ -3,20 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
-    <div id="wrapper">
-        
-         <!-- End of Topbar -->
-                    <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Add Admin</h1>
-                            
-                        </div>
-                        </div>
-        </div>
-
-
-
-
 
 
         <!--Register form-->
@@ -31,7 +17,7 @@
                     <div class="col-lg-10">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create an Admin Account!</h1>
                             </div>
 
                             <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
