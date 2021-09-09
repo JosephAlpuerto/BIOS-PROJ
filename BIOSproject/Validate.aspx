@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="input_field">
-                    <label>Team</label>
+                    <label>Teams</label>
                     <asp:DropDownList ID="DropDownList5" runat="server" CssClass="input" Enabled="false"></asp:DropDownList>
                 </div>
 
