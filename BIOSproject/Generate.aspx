@@ -21,7 +21,7 @@
     
           <div class="wrapper1">
             <div class="title1">
-                Generate Series
+                Encode Series
             </div>
 
             <div class="form1">
@@ -61,8 +61,13 @@
                     <label>End Series</label>
                     <input type="text" class="input1" />
                 </div>
+                <div class="input_field1">
+                    <label>Upload File</label>
+                   <asp:FileUpload ID="FileUpload1" runat="server" CssClass="input1" />
+                </div>
+
                 <div class="inputfield1">
-        <input type="submit" value="Generate" class="btn"/>
+        <input type="submit" value="Done" class="btn"/>
       </div>
 
 

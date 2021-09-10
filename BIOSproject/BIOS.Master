@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="BIOSproject.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BIOS.master.cs" Inherits="BIOSproject.BIOS" %>
 
 <!DOCTYPE html>
 
@@ -24,7 +24,8 @@
     <link href="css/Style2.css" rel="stylesheet" />
     <link href="css/Style.css" rel="stylesheet" />
     <link href="css/Supplier.css" rel="stylesheet" />
-
+    <link href="css/Hitcheck.css" rel="stylesheet" />
+    <link href="css/Request.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -54,50 +55,7 @@
                         <span>Dashboard</span></a>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-           
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Components</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Utilities</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.html">Colors</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
-                        </div>
-                    </div>
-                </li>
-
+               
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -108,61 +66,20 @@
                 </div>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="Validate.aspx">
+                    <a class="nav-link" href="HitCheck.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Validate</span></a>
+                        <span>Hit Check</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="Generate.aspx">
+                    <a class="nav-link" href="Request.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Generate</span></a>
+                        <span>Request</span></a>
                 </li>
                 
-
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Function Screens:</h6>
-                            
-                            <a class="collapse-item" href="AddAdmin.aspx">Add Admin</a>
-                            <a class="collapse-item" href="AddUser.aspx">Add Users</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
-                        </div>
-                    </div>
-                </li>
 
                
                 
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
-                        aria-expanded="true" aria-controls="collapseTables">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <div id="collapseTables" class="collapse" aria-labelledby="headingTables" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Function Screens:</h6>
-                            
-                            <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
-                            <a class="collapse-item" href="AllUsers.aspx">All Users</a>
-                            <div class="collapse-divider"></div>
-                           
-                        </div>
-                    </div>
-                </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">

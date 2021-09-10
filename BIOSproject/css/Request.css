@@ -8,11 +8,8 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body {
-    padding: 0px;
-}
 
-.wrapper1 {
+.wrapp {
     max-width: 500px;
     width: 100%;
     background-color: white;
@@ -21,7 +18,7 @@ body {
     box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
 }
 
-    .wrapper1 .title1 {
+    .wrapp .title1 {
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 25px;
@@ -30,24 +27,39 @@ body {
         text-align: center;
     }
 
-    .wrapper1 .form1 {
+    .wrapp .form1 {
         width: 100%;
     }
 
-        .wrapper1 .form1 .input_field1 {
+        .wrapp .form1 .input_field1 {
             margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
-            .wrapper1 .form1 .input_field1 label {
+            .wrapp .form1 .input_field1 label {
                 width: 200px;
                 color: #757575;
                 margin-right: 10px;
                 font-size: 14px;
+                margin-top: 10px;
             }
 
-            .wrapper1 .form1 .input_field1 .input1 {
+            .wrapp .form1 .input_field1 .input1 {
                 width: 100%;
                 outline: none;
+                margin-top: 10px;
             }
+.wrapp .form1 .input_field1 .btn3 {
+    width: 40%;
+    padding: 8px 10px;
+    margin-left: 150px;
+    margin-top: 20px;
+    font-size: 15px;
+    border: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    background-color: #d00149;
+    color: White;
+}
