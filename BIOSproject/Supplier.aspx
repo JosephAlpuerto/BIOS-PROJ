@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Validate.aspx.cs" Inherits="BIOSproject.Validate" %>
-
+﻿<%@ Page Language="C#" MasterPageFile="~/BIOS.Master" AutoEventWireup="true" CodeBehind="Supplier.aspx.cs" Inherits="BIOSproject.Supplier" %>
+         
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div id="wrapper">
         
@@ -24,7 +24,10 @@
                 <div class="input_field">
                     <label>Enter Tracking</label>
                     <input type="text" class="input" />
+
                 </div>
+
+
 
                 <div class="input_field">
                     <label>Area</label>
@@ -59,6 +62,7 @@
             </div>
         </div>
 
-</asp:Content>
 
 
+
+    </asp:Content>

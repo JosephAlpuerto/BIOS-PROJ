@@ -74,12 +74,16 @@
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
     <Content Include="AllUsers.aspx" />
+    <Content Include="css\Hitcheck.css" />
+    <Content Include="css\Request.css" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
     <Content Include="css\Style.css" />
     <Content Include="css\Style2.css" />
+    <Content Include="css\Supplier.css" />
     <Content Include="Default.aspx" />
     <Content Include="Generate.aspx" />
+    <Content Include="HitCheck.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />
     <Content Include="img\undraw_profile.svg" />
     <Content Include="img\undraw_profile_1.svg" />
@@ -92,7 +96,9 @@
     <Content Include="js\demo\datatables-demo.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="js\sb-admin-2.min.js" />
+    <Content Include="Request.aspx" />
     <Content Include="SB-Admin.aspx" />
+    <Content Include="Supplier.aspx" />
     <Content Include="Validate.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1794,6 +1800,13 @@
     <Compile Include="AllUsers.aspx.designer.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BIOS.Master.cs">
+      <DependentUpon>BIOS.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BIOS.Master.designer.cs">
+      <DependentUpon>BIOS.Master</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1808,6 +1821,13 @@
     <Compile Include="Generate.aspx.designer.cs">
       <DependentUpon>Generate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HitCheck.aspx.cs">
+      <DependentUpon>HitCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HitCheck.aspx.designer.cs">
+      <DependentUpon>HitCheck.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1816,12 +1836,26 @@
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request.aspx.cs">
+      <DependentUpon>Request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Request.aspx.designer.cs">
+      <DependentUpon>Request.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SB-Admin.aspx.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SB-Admin.aspx.designer.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.aspx.cs">
+      <DependentUpon>Supplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Supplier.aspx.designer.cs">
+      <DependentUpon>Supplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="Validate.aspx.cs">
       <DependentUpon>Validate.aspx</DependentUpon>
@@ -1833,6 +1867,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MainMaster.Master" />
+    <Content Include="BIOS.Master" />
     <None Include="packages.config" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
