@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BIOSproject.FolConnectionDB;
+using Telerik.Reporting.Processing;
 
 namespace BIOSproject
 {
@@ -27,6 +29,25 @@ namespace BIOSproject
             gvList1.UseAccessibleHeader = true;
             gvList1.HeaderRow.TableSection = TableRowSection.TableHeader;
             gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
+        }
+
+        protected void btnPrint2_Click(object sender, EventArgs e)
+        {
+            var list = DbUsers.FetchList3();
+
+            if (list.Count > 0)
+            {
+                ReportProcessor reportProcessor = new ReportProcessor();
+                RenderingResult result = reportProcessor.RenderReport("PDF", new Report.ReportUsers(list), null);
+
+                Response.Clear();
+                Response.ContentType = result.MimeType;
+                Response.Cache.SetCacheability(HttpCacheability.Private);
+                Response.Expires = -1;
+                Response.Buffer = true;
+                Response.BinaryWrite(result.DocumentBytes);
+                Response.End();
+            }
         }
     }
 }
