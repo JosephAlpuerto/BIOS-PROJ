@@ -49,7 +49,7 @@
                 outline: none;
             }
 
-.wrapper1 .form1 .inputfield1 .btn {
+ .wrapper1 .form1 .inputfield1 .btn {
     width: 100%;
     padding: 8px 10px;
     font-size: 15px;
@@ -64,3 +64,18 @@
     .wrapper1 .form1 .inputfield1 .btn:hover {
         background: #d00149;
     }
+
+
+
+.btnRes {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border: 1px;
+    background: #d00149;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    color: white;
+}
+

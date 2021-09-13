@@ -24,6 +24,7 @@
     <link href="css/Style2.css" rel="stylesheet" />
     <link href="css/Style.css" rel="stylesheet" />
     <link href="css/Supplier.css" rel="stylesheet" />
+    <link href="css/Generator.css" rel="stylesheet" />
 
 
 
@@ -117,6 +118,12 @@
                     <a class="nav-link" href="Generate.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Generate</span></a>
+                </li>
+
+                 <li class="nav-item active">
+                    <a class="nav-link" href="Generator.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Generator</span></a>
                 </li>
                 
 

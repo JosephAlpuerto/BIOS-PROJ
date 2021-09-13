@@ -74,6 +74,7 @@
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
     <Content Include="AllUsers.aspx" />
+    <Content Include="css\Generator.css" />
     <Content Include="css\Hitcheck.css" />
     <Content Include="css\Request.css" />
     <Content Include="css\sb-admin-2.css" />
@@ -83,6 +84,7 @@
     <Content Include="css\Supplier.css" />
     <Content Include="Default.aspx" />
     <Content Include="Generate.aspx" />
+    <Content Include="Generator.aspx" />
     <Content Include="HitCheck.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />
     <Content Include="img\undraw_profile.svg" />
@@ -1820,6 +1822,13 @@
     </Compile>
     <Compile Include="Generate.aspx.designer.cs">
       <DependentUpon>Generate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Generator.aspx.cs">
+      <DependentUpon>Generator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Generator.aspx.designer.cs">
+      <DependentUpon>Generator.aspx</DependentUpon>
     </Compile>
     <Compile Include="HitCheck.aspx.cs">
       <DependentUpon>HitCheck.aspx</DependentUpon>
