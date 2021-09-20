@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BIOSproject.FolConnectionDB;
-using Telerik.Reporting.Processing;
+using Microsoft.Reporting.WebForms;
 
 namespace BIOSproject
 {
     public partial class AllUsers : System.Web.UI.Page
     {
+        String ConnectionString = @"Data Source=THEOTEDDY07\SQLEXPRESS;Initial Catalog=BIOSproject;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             AllData();
@@ -33,21 +36,21 @@ namespace BIOSproject
 
         protected void btnPrint2_Click(object sender, EventArgs e)
         {
-            var list = DbUsers.FetchList3();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "Users_SelectAll";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            conn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            conn.Close();
 
-            if (list.Count > 0)
-            {
-                ReportProcessor reportProcessor = new ReportProcessor();
-                RenderingResult result = reportProcessor.RenderReport("PDF", new Report.ReportUsers(list), null);
-
-                Response.Clear();
-                Response.ContentType = result.MimeType;
-                Response.Cache.SetCacheability(HttpCacheability.Private);
-                Response.Expires = -1;
-                Response.Buffer = true;
-                Response.BinaryWrite(result.DocumentBytes);
-                Response.End();
-            }
+            ReportUsers.LocalReport.DataSources.Add(new ReportDataSource("DataSetUser", dt));
+            ReportUsers.LocalReport.ReportPath = Server.MapPath("~/Report/ReportUsers.rdlc");
+            ReportUsers.LocalReport.EnableHyperlinks = true;
+            ModalUsers.Show();
         }
     }
 }
