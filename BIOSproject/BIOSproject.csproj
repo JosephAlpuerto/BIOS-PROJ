@@ -112,6 +112,7 @@
     <Content Include="AddAdmin.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
+    <Content Include="AllDeletedAdmin.aspx" />
     <Content Include="AllUsers.aspx" />
     <Content Include="css\Generator.css" />
     <Content Include="css\Hitcheck.css" />
@@ -1846,6 +1847,13 @@
     </Compile>
     <Compile Include="AllAdmin.aspx.designer.cs">
       <DependentUpon>AllAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AllDeletedAdmin.aspx.cs">
+      <DependentUpon>AllDeletedAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllDeletedAdmin.aspx.designer.cs">
+      <DependentUpon>AllDeletedAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="AllUsers.aspx.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
