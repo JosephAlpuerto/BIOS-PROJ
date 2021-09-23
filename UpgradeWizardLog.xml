@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOSproject.csproj" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddAdmin.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddAdmin.aspx" />
+  <event action="Analyze" type="Success" name="AddAdmin.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddAdmin.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddUser.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddUser.aspx" />
+  <event action="Analyze" type="Success" name="AddUser.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AddUser.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllAdmin.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllAdmin.aspx" />
+  <event action="Analyze" type="Success" name="AllAdmin.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllAdmin.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllUsers.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllUsers.aspx" />
+  <event action="Analyze" type="Success" name="AllUsers.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\AllUsers.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOS.Master" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOS.Master" />
+  <event action="Analyze" type="Success" name="BIOS.Master" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOS.Master" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Default.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Default.aspx" />
+  <event action="Analyze" type="Success" name="Default.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Default.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generate.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generate.aspx" />
+  <event action="Analyze" type="Success" name="Generate.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generate.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generator.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generator.aspx" />
+  <event action="Analyze" type="Success" name="Generator.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Generator.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\HitCheck.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\HitCheck.aspx" />
+  <event action="Analyze" type="Success" name="HitCheck.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\HitCheck.aspx" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\MainMaster.Master" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\MainMaster.Master" />
+  <event action="Analyze" type="Success" name="MainMaster.Master" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\MainMaster.Master" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="packages.config" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\packages.config" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Request.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Request.aspx" />
+  <event action="Analyze" type="Success" name="Request.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Request.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\SB-Admin.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\SB-Admin.aspx" />
+  <event action="Analyze" type="Success" name="SB-Admin.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\SB-Admin.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Supplier.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Supplier.aspx" />
+  <event action="Analyze" type="Success" name="Supplier.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Supplier.aspx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Validate.aspx" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Validate.aspx" />
+  <event action="Analyze" type="Success" name="Validate.aspx" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Validate.aspx" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Web.config" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Web.Debug.config" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Web.Release.config" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\Web.Release.config" />
+  <event action="Analyze" type="Success" name="BIOSproject" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOSproject.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\Domain\Domain.csproj" />
+  <event action="Analyze" type="Success" name="Domain" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\Domain\Domain.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\ConnectionDB.csproj" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="packages.config" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\packages.config" />
+  <event action="Analyze" type="Success" name="ConnectionDB" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\ConnectionDB\ConnectionDB.csproj" />
+  <event action="Analyze" type="Success" name="BIOSproject" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject.sln" />
+  <event>Installed NuGet package: Telerik.Reporting 15.1.21.616</event>
+  <event type="Error">System.InvalidOperationException: A problem occurred while trying to install the NuGet package Telerik.Reporting 15.1.21.616.
+You can try to update your NuGet client or install the packages manually.
+ ---&gt; System.InvalidOperationException: Package 'Telerik.Reporting 15.1.21.616' is not found in the following primary source(s): 'https://nuget.telerik.com/nuget,https://api.nuget.org/v3/index.json,C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\'. Please verify all your online package sources are available (OR) package id, version are specified correctly.
+   at NuGet.PackageManagement.ResolverGather.&lt;GatherAsync&gt;d__21.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at NuGet.PackageManagement.ResolverGather.&lt;GatherAsync&gt;d__20.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at NuGet.PackageManagement.NuGetPackageManager.&lt;PreviewInstallPackageAsync&gt;d__69.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at NuGet.PackageManagement.NuGetPackageManager.&lt;InstallPackageAsync&gt;d__48.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at NuGet.PackageManagement.NuGetPackageManager.&lt;InstallPackageAsync&gt;d__47.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at NuGet.VisualStudio.VsPackageInstaller.&lt;InstallInternalCoreAsync&gt;d__31.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at NuGet.VisualStudio.VsPackageInstaller.&lt;InstallInternalAsync&gt;d__30.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at NuGet.VisualStudio.VsPackageInstaller.&lt;InstallInternalAsync&gt;d__30.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.VisualStudio.Threading.JoinableTask.CompleteOnCurrentThread()
+   at NuGet.VisualStudio.VsPackageInstaller.RunJTFWithCorrectContext(Project project, Func`1 asyncTask)
+   at NuGet.VisualStudio.VsPackageInstaller.InstallPackage(String source, Project project, String packageId, String version, Boolean ignoreDependencies)
+--- End of stack trace from previous location where exception was thrown ---
+   at NuGet.VisualStudio.VsPackageInstaller.InstallPackage(String source, Project project, String packageId, String version, Boolean ignoreDependencies)
+   at Telerik.Reporting.Vs.Common.NugetManager.InstallPackage(String package, String version)
+   --- End of inner exception stack trace ---</event>
+  <event action="Upgrade" type="Success" name="Assembly References" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOSproject.csproj" />
+  <event action="Upgrade" type="Success" name="BIOSproject" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject\BIOSproject.csproj" />
+  <event action="Upgrade" type="Success" name="BIOSproject" path="C:\Users\teodorocalimbas\source\repos\BIOS-PROJ\BIOSproject.sln" />
+</log>

@@ -29,7 +29,12 @@ namespace BIOSproject
                 Username = email,
                 Password = password,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
+                CreatedBy ="Admin",
+                CreatedDate= DateTime.Now.ToString(),
+                UpdatedBy ="Admin",
+                UpdatedDate = DateTime.Now.ToString(),
+                DeletedDate = null,
 
             };
             // validations
