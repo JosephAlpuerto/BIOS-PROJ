@@ -122,7 +122,7 @@
     <Content Include="css\Style2.css" />
     <Content Include="css\Supplier.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Generate.aspx" />
+    <Content Include="Gen.aspx" />
     <Content Include="Generator.aspx" />
     <Content Include="HitCheck.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />
@@ -1890,12 +1890,12 @@
     <Compile Include="FolConnectionDB\DbUsers.cs" />
     <Compile Include="FolDomain\clsAdmin.cs" />
     <Compile Include="FolDomain\clsUsers.cs" />
-    <Compile Include="Generate.aspx.cs">
-      <DependentUpon>Generate.aspx</DependentUpon>
+    <Compile Include="Gen.aspx.cs">
+      <DependentUpon>Gen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Generate.aspx.designer.cs">
-      <DependentUpon>Generate.aspx</DependentUpon>
+    <Compile Include="Gen.aspx.designer.cs">
+      <DependentUpon>Gen.aspx</DependentUpon>
     </Compile>
     <Compile Include="Generator.aspx.cs">
       <DependentUpon>Generator.aspx</DependentUpon>
