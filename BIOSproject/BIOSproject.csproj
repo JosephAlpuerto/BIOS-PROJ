@@ -1866,6 +1866,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BIOSprojectDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="BIOSprojectDataSetUsers.cs">
+      <DependentUpon>BIOSprojectDataSetUsers.xsd</DependentUpon>
+    </Compile>
     <Compile Include="BIOSprojectDataSetUsers.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

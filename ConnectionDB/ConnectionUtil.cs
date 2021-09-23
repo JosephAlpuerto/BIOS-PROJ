@@ -10,7 +10,7 @@ namespace ConnectionDB
 {
     class ConnectionUtil
     {
-        private static string ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private static string ConnectionString = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
 
         public  static SqlConnection GetConnection() 
         {

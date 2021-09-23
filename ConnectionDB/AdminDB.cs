@@ -22,7 +22,7 @@ public class AdminDB
 
         public static bool Insert (Admin admin)
         {
-            string sql = "INSERT INTO [Admin](Username, Password, FirstName, LastName) VALUES (@Username, @Password, @FirstName, @LastName)";
+            string sql = "INSERT INTO [Admin] VALUES (@Username, @Password, @FirstName, @LastName,1,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedDate)";
 
             using (var con = ConnectionUtil.GetConnection())
             {
@@ -32,7 +32,7 @@ public class AdminDB
 
         public static List<Admin> FetchList()
         {
-            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName] FROM [BIOSproject].[dbo].[Admin]";
+            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName] FROM [LBC.BIOS].[dbo].[Admin]";
             using (var con = ConnectionUtil.GetConnection())
             {
                 return con.Query<Admin>(sql).ToList();
@@ -59,7 +59,7 @@ public class AdminDB
         }
         public static List<Users> FetchList1()
         {
-            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName], [MobileNumber] FROM [BIOSproject].[dbo].[Users]";
+            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName], [MobileNumber] FROM [LBC.BIOS].[dbo].[Users]";
             using (var con = ConnectionUtil.GetConnection())
             {
                 return con.Query<Users>(sql).ToList();

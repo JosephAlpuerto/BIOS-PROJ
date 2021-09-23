@@ -11,7 +11,7 @@ namespace BIOSproject.FolConnectionDB
 {
     public class DbUsers
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        static string connectionString = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
 
         // connection Users
         public static SqlConnection GetConnection()
@@ -25,7 +25,7 @@ namespace BIOSproject.FolConnectionDB
 
         public static List<clsUsers> FetchList3()
         {
-            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName], [MobileNumber] FROM [BIOSproject].[dbo].[Users]";
+            string sql = "SELECT [Id], [Username], [Password], [FirstName], [LastName], [MobileNumber] FROM [LBC.BIOS].[dbo].[Users]";
 
             using (var con = GetConnection())
             {

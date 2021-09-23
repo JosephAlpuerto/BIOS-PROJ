@@ -7,58 +7,141 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-
-   
-                <div id="wrapper">
+    
+    
+    <div id="wrapper">
         
          <!-- End of Topbar -->
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                            
-                        <asp:Button Text="Generate Report" ID="btnPrint" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" Onclick="btnPrint_Click" runat="server"></asp:Button>
-
-       <ajaxtoolkit:modalpopupextender ID="ModalAdmin" PopupControlID="PanelAdmin" TargetControlID="gvList" CancelControlID="btnClose" runat="server"></ajaxtoolkit:modalpopupextender>
+    <asp:Button Text="Generate Report" ID="btnPrint" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" Onclick="btnPrint_Click" runat="server"></asp:Button>
+                        
+       <ajaxtoolkit:modalpopupextender ID="ModalAdmin" PopupControlID="PanelAdmin" TargetControlID="gvModal" CancelControlID="btnClose" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAdmin" runat="server">
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <rsweb:ReportViewer ID="ReportAdmin" runat="server" Width="750px" BackColor="White" CssClass="bg-white"></rsweb:ReportViewer>
             <asp:Button ID="btnClose" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" />
         </asp:Panel>
-
                         </div>
                         </div>
                    
         </div>
+          
+    
 
-                     <!-- DataTales Example -->
+    <!-- DataView Example -->
+     <ajaxtoolkit:modalpopupextender ID="ModalView" PopupControlID="PanelView" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelView" runat="server">
+           
+           
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-2">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    
+                    <div class="col-lg-10">
+                        <div class="p-5">
+                            
+             <asp:UpdatePanel ID="Panel1" runat="server"><ContentTemplate>
+    <div>
+               <asp:HiddenField ID="hfId" runat="server" />
+               <table >
+                   
+                   <asp:Label ID="lblSuccess" runat="server" Text="" ForeColor="Green"></asp:Label>
+                   <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
+                   <tr>
+                      <td>
+                           <asp:Label CssClass="col-10" runat="server" Text="Email:"></asp:Label>
+                       </td>
+                       
+                       <td>
+                           <asp:TextBox ID="txtEmail" CssClass="form-control form-control-user col-12" placeholder="Email" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" CssClass="col-10" Text="Password:"></asp:Label>
+                       </td>
+                       
+                       <td>
+                           <asp:TextBox ID="txtPass" CssClass="form-control form-control-user col-12" placeholder="Password" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
+
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" Text="FirstName:"></asp:Label>
+                       </td>
+                       
+                       <td colspan="2">
+                           <asp:TextBox ID="txtFname" CssClass="form-control form-control-user" placeholder="FirstName" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
+
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" Text="LastName:"></asp:Label>
+                       </td>
+                       
+                       <td colspan="2">
+                           <asp:TextBox ID="txtLname" CssClass="form-control form-control-user" placeholder="LastName" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
+
+                  
+               </table>
+         <asp:Button ID="btnSave" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " runat="server" Text="Save" OnClick="btnSave_Click" />
+         <asp:Button ID="btnDelete" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+         <asp:Button ID="btnClear" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Clear" OnClick="btnClear_Click" />
+         
+    </div>
+                 </ContentTemplate></asp:UpdatePanel>     
+                   
+                         </div>
+                    </div>
+                </div>
+         <asp:Button ID="Close" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseView_Click" />
+            </div>
+       </div> 
+  </div>
+               
+</asp:Panel>
+
+
+
+     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-
+                           
+                                <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="gvList" CssClass="table table-bordered dataTable1" width="100%" AutoGenerateColumns="false">
-                                    <Columns>
-                                        <asp:ButtonField DataTextField="Id" HeaderText="Admin ID" />
-                                        <asp:ButtonField DataTextField="Username" HeaderText="Username" />
-                                        <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
-                                        <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
-                                    </Columns>
-                                </asp:GridView>
-                               
+                                                    <Columns>
+                                                        <asp:ButtonField DataTextField="Id" HeaderText="Admin ID" />
+                                                        <asp:ButtonField DataTextField="Username" HeaderText="Username" />
+                                                        <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
+                                                        <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
+                                     
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="LinkView" runat="server" CommandArgument='<%# Eval("Id") %>' OnClick="LinkView_OnClick">View</asp:LinkButton>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
+                                       
+                                                    </Columns>
+                                                </asp:GridView>
+                                             </div>
+                                        </div>
+                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
 
-   
-    
-   
+
+
         
 </asp:Content>
-
-    
-
-
 
