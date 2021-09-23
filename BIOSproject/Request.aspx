@@ -31,10 +31,8 @@
                 </div>
                 <div class="input_field1">
                     <label>Quantity</label>
-
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="input1" TextMode="Number"></asp:TextBox>
                 </div>
-
                 <div class="input_field1">
                     <asp:Button ID="Button2" runat="server" Text="Request" CssClass="btn3" />
                 </div>

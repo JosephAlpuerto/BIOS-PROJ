@@ -74,11 +74,11 @@
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
     <Content Include="AllUsers.aspx" />
-    <Content Include="css\Generator.css" />
     <Content Include="css\Hitcheck.css" />
     <Content Include="css\Request.css" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="css\Series.css" />
     <Content Include="css\Style.css" />
     <Content Include="css\Style2.css" />
     <Content Include="css\Supplier.css" />
@@ -100,6 +100,7 @@
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="Request.aspx" />
     <Content Include="SB-Admin.aspx" />
+    <Content Include="Series.aspx" />
     <Content Include="Supplier.aspx" />
     <Content Include="Validate.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
@@ -1809,6 +1810,7 @@
     <Compile Include="BIOS.Master.designer.cs">
       <DependentUpon>BIOS.Master</DependentUpon>
     </Compile>
+    <Compile Include="datatable.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1859,6 +1861,13 @@
     <Compile Include="SB-Admin.aspx.designer.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Series.aspx.cs">
+      <DependentUpon>Series.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Series.aspx.designer.cs">
+      <DependentUpon>Series.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Supplier.aspx.cs">
       <DependentUpon>Supplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1866,6 +1875,7 @@
     <Compile Include="Supplier.aspx.designer.cs">
       <DependentUpon>Supplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="textWriter.cs" />
     <Compile Include="Validate.aspx.cs">
       <DependentUpon>Validate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
