@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Generate.aspx.cs" Inherits="BIOSproject.Generator" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Generate.aspx.cs" Inherits="BIOSproject.Generate" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
@@ -42,8 +42,8 @@
         </div>
 
         <div class="input_field1">
-            <asp:Button ID="Button1" runat="server" Text="Generate" OnClick="Button1_Click" CssClass="btnGen" />
-            <asp:Button ID="Button2" runat="server" Text="Button" CssClass="btnSave" OnClick="Button2_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" CssClass="btnGen" />
+            <asp:Button ID="Button2" runat="server" Text="Button" CssClass="btnSave" />
         </div>
                 
          

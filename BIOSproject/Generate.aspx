@@ -27,26 +27,26 @@
             <div class="form1">
                 <div class="input_field1">
                     <label>Date</label>
-                    <asp:TextBox ID="TxtDate" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
                     <label>Area</label>
-                    <asp:DropDownList ID="DropArea" runat="server" CssClass="input1">
+                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="input1">
                         <asp:ListItem>EMM - EAST METRO MANILA</asp:ListItem>
                         <asp:ListItem>EAST METRO</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="input_field1">
                     <label>Team</label>
-                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
+                    <asp:DropDownList ID="DropDownList2" runat="server" CssClass="input1">
                         <asp:ListItem>ANTIPOLO</asp:ListItem>
                         <asp:ListItem>1075 - ANTIPOLO TEAM</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             <div class="input_field1">
                     <label>Branch</label>
-                    <asp:DropDownList ID="DropBranch" runat="server" CssClass="input1">
+                    <asp:DropDownList ID="DropDownList3" runat="server" CssClass="input1">
                         <asp:ListItem>EMM - EAST METRO MANILA</asp:ListItem>
                         <asp:ListItem>1319 - ANTIPOLO CIRCUMFERENTIAL</asp:ListItem>
                     </asp:DropDownList>
@@ -54,24 +54,21 @@
 
                 <div class="input_field1">
                     <label>Start Series</label>
-                    <asp:TextBox ID="TxtStart" runat="server" CssClass="input1"></asp:TextBox>
+                    <input type="text" class="input1" />
                 </div>
 
                 <div class="input_field1">
                     <label>End Series</label>
-                    <asp:TextBox ID="TxtEnd" runat="server" CssClass="input1"></asp:TextBox>
+                    <input type="text" class="input1" />
+                </div>
+                <div class="input_field1">
+                    <label>Upload File</label>
+                   <asp:FileUpload ID="FileUpload1" runat="server" CssClass="input1" />
                 </div>
 
-                <div class="input_field1">
-                    <label>Quantity</label>
-                    <asp:TextBox ID="TxtQuantity" runat="server" CssClass="input1"></asp:TextBox>
-                </div>                
-
-                
                 <div class="inputfield1">
-                    <asp:Button ID="Button1" runat="server" Text="Done" CssClass="btn" OnClick="Button1_Click" />
+        <input type="submit" value="Done" class="btn"/>
       </div>
-
 
 
                

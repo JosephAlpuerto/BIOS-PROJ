@@ -24,7 +24,7 @@
     <link href="css/Style2.css" rel="stylesheet" />
     <link href="css/Style.css" rel="stylesheet" />
     <link href="css/Supplier.css" rel="stylesheet" />
-    <link href="css/Series.css" rel="stylesheet" />
+    <link href="css/Generator.css" rel="stylesheet" />
 
 
 
@@ -34,7 +34,7 @@
 <body id="page-top">
     <form id="form1" runat="server">
         <div id="wrapper">
-            
+
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
@@ -120,11 +120,11 @@
                         <span>Generate</span></a>
                 </li>
 
-                 <%--<li class="nav-item active">
-                    <a class="nav-link" href="Series.aspx">
+                 <li class="nav-item active">
+                    <a class="nav-link" href="Generator.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Generate Series</span></a>
-                </li>--%>
+                        <span>Generator</span></a>
+                </li>
                 
 
 

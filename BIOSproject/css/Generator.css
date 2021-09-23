@@ -8,8 +8,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    padding: 0px;
+}
 
-.wrap {
+.wrapper1 {
     max-width: 500px;
     width: 100%;
     background-color: white;
@@ -18,7 +21,7 @@
     box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
 }
 
-    .wrap .title1 {
+    .wrapper1 .title1 {
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 25px;
@@ -27,73 +30,78 @@
         text-align: center;
     }
 
-    .wrap .form1 {
+    .wrapper1 .form1 {
         width: 100%;
     }
 
-        .wrap .form1 .input_field1 {
+        .wrapper1 .form1 .input_field1 {
             margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
-            .wrap .form1 .input_field1 lbl {
+
+
+            .wrapper1 .form1 .input_field1 lbl {
                 width: 200px;
                 color: #757575;
                 margin-right: 10px;
                 font-size: 14px;
-                margin-top: 10px;
             }
 
-            .wrap .form1 .input_field1 .input2 {
+            .wrapper1 .form1 .input_field1 .input2 {
                 width: 60%;
                 outline: none;
-                margin-top: 10px;
-                margin-left: 14px;
-            }
-            .wrap .form1 .input_field1 .inpu {
-                width: 60%;
-                outline: none;
-                margin-top: 10px;
-                margin-left: 20px;
-            }
-            .wrap .form1 .input_field1 .txtRes {
-                width: 60%;
-                outline: none;
-                margin-top: 10px;
-                margin-left: 77px;
+                margin-left: 11px;
             }
 
-            .wrap .form1 .input_field1 .txtDrop {
+            .wrapper1 .form1 .input_field1 .inpu {
                 width: 60%;
                 outline: none;
-                margin-top: 10px;
-                margin-left: 60px;
+                margin-left: 17px;
             }
-.wrap .form1 .input_field1 .btnGen {
-    width: 40%;
-    padding: 8px 10px;
-    margin-left: 30px;
-    margin-top: 20px;
-    font-size: 15px;
-    border: 1px;
-    cursor: pointer;
-    border-radius: 3px;
-    outline: none;
-    background-color: #d00149;
-    color: White;
-}
-            .wrap .form1 .input_field1 .btnSave {
-                width: 40%;
+
+            .wrapper1 .form1 .input_field1 .txtRes {
+                width: 60%;
+                outline: none;
+                margin-left: 76px;
+            }
+
+
+
+            .wrapper1 .form1 .input_field1 .btnGen {
+                width: 30%;
                 padding: 8px 10px;
-                margin-left: 30px;
-                margin-top: 20px;
                 font-size: 15px;
                 border: 1px;
+                background: #d00149;
+                cursor: pointer;
+                margin-left: 80px;
+                border-radius: 3px;
+                outline: none;
+                color: white;
+            }
+
+                .wrapper1 .form1 .input_field1 .btnGen:hover {
+                    background: #d00149;
+                }
+
+            .wrapper1 .form1 .input_field1 .btnSave {
+                width: 30%;
+                padding: 8px 10px;
+                font-size: 15px;
+                margin-left: 20px;
+                border: 1px;
+                background: #d00149;
                 cursor: pointer;
                 border-radius: 3px;
                 outline: none;
-                background-color: #d00149;
-                color: White;
+                color: white;
             }
 
+                .wrapper1 .form1 .input_field1 .btnSave:hover {
+                    background: #d00149;
+                }
+
+body {
+}
