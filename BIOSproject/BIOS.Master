@@ -26,6 +26,7 @@
     <link href="css/Supplier.css" rel="stylesheet" />
     <link href="css/Hitcheck.css" rel="stylesheet" />
     <link href="css/Request.css" rel="stylesheet" />
+     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -42,7 +43,7 @@
                     <div class="sidebar-brand-icon">
                         <i><img src="img/lbc.png"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">LBC Admin</div>
+                    <div class="sidebar-brand-text mx-3"></div>
                 </a>
 
                 <!-- Divider -->
@@ -54,6 +55,7 @@
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
+              
 
                
                 <!-- Divider -->
@@ -65,11 +67,11 @@
            
                 </div>
 
-                <li class="nav-item active">
+               <%-- <li class="nav-item active">
                     <a class="nav-link" href="HitCheck.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Hit Check</span></a>
-                </li>
+                </li>--%>
 
                 <li class="nav-item active">
                     <a class="nav-link" href="Request.aspx">
@@ -378,7 +380,9 @@
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-                
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            </asp:ContentPlaceHolder>   
+
 
         </div>
             </div>

@@ -123,9 +123,6 @@
     <Content Include="css\Style2.css" />
     <Content Include="css\Supplier.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Gen.aspx" />
-    <Content Include="Generator.aspx" />
-    <Content Include="HitCheck.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />
     <Content Include="img\undraw_profile.svg" />
     <Content Include="img\undraw_profile_1.svg" />
@@ -140,21 +137,6 @@
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="Request.aspx" />
     <Content Include="SB-Admin.aspx" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Supplier.aspx" />
-    <Content Include="Validate.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.js" />
@@ -1898,27 +1880,6 @@
     <Compile Include="FolConnectionDB\DbUsers.cs" />
     <Compile Include="FolDomain\clsAdmin.cs" />
     <Compile Include="FolDomain\clsUsers.cs" />
-    <Compile Include="Gen.aspx.cs">
-      <DependentUpon>Gen.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gen.aspx.designer.cs">
-      <DependentUpon>Gen.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Generator.aspx.cs">
-      <DependentUpon>Generator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Generator.aspx.designer.cs">
-      <DependentUpon>Generator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="HitCheck.aspx.cs">
-      <DependentUpon>HitCheck.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HitCheck.aspx.designer.cs">
-      <DependentUpon>HitCheck.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1940,21 +1901,6 @@
     </Compile>
     <Compile Include="SB-Admin.aspx.designer.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Supplier.aspx.cs">
-      <DependentUpon>Supplier.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Supplier.aspx.designer.cs">
-      <DependentUpon>Supplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Validate.aspx.cs">
-      <DependentUpon>Validate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Validate.aspx.designer.cs">
-      <DependentUpon>Validate.aspx</DependentUpon>
     </Compile>
     <Compile Include="_LBC_BIOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
