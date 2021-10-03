@@ -1,0 +1,29 @@
+﻿body {
+}
+.div1 .lblDate {
+    margin-left: 100px;
+    align-items: center;
+}
+.div2 .txtDate1 {
+    margin-left: 100px;
+    align-items: center;
+    width: 20%;
+}
+.div1 .lblArea {
+    margin-left: 250px;
+}
+
+.div2 .txtArea1 {
+    margin-left: 120px;
+    align-items: center;
+    width: 20%;
+}
+.div1 .lblTeam1 {
+    margin-left: 300px;
+}
+
+.div2 .txtTeam {
+    margin-left: 120px;
+    align-items: center;
+    width: 20%;
+}
