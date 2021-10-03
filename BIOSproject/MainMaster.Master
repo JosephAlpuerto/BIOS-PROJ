@@ -74,8 +74,9 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
+                            <a class="collapse-item" href="AllUsers.aspx">All Users</a>
+                            <a class="collapse-item" href="AllDeletedAccounts.aspx">All Deactivate Accounts</a>
                         </div>
                     </div>
                 </li>
@@ -91,10 +92,10 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.html">Colors</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
+                            <a class="collapse-item" href="#">Colors</a>
+                            <a class="collapse-item" href="#">Borders</a>
+                            <a class="collapse-item" href="#">Animations</a>
+                            <a class="collapse-item" href="#">Other</a>
                         </div>
                     </div>
                 </li>
@@ -129,7 +130,7 @@
 
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                         aria-expanded="true" aria-controls="collapsePages">
                         <i class="fas fa-fw fa-folder"></i>
@@ -147,12 +148,12 @@
                             <a class="collapse-item" href="blank.html">Blank Page</a>
                         </div>
                     </div>
-                </li>
+                </li>-->
 
                
                 
 
-                <!-- Nav Item - Tables -->
+                <!-- Nav Item - Tables 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
                         aria-expanded="true" aria-controls="collapseTables">
@@ -165,11 +166,12 @@
                             
                             <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
                             <a class="collapse-item" href="AllUsers.aspx">All Users</a>
+                            <a class="collapse-item" href="AllDeletedAccounts.aspx">All Deactivate Accounts</a>
                             <div class="collapse-divider"></div>
                            
                         </div>
                     </div>
-                </li>
+                </li>-->
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -196,7 +198,7 @@
                         </button>
 
                         <!-- Topbar Search -->
-                        <div
+                        <!--<div
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -207,18 +209,18 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <li class="nav-item dropdown no-arrow d-sm-none">
+                           <!-- <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
                                 </a>
-                                <!-- Dropdown - Messages -->
+                                
                                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                     aria-labelledby="searchDropdown">
                                     <form class="form-inline mr-auto w-100 navbar-search">
@@ -234,7 +236,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </li>
+                            </li>-->
 
                             <!-- Nav Item - Alerts -->
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -367,9 +369,11 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="img/undraw_profile.svg" >
+                                    <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
+                                    <!--<span ID="txtUsername" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>-->
+                                    
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -400,6 +404,8 @@
                    
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
             </asp:ContentPlaceHolder> 
+                     <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            </asp:ContentPlaceHolder> 
                     
         </div>
         <!-- End of Page Wrapper -->
@@ -423,7 +429,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="Default.aspx">Logout</a>
                     </div>
                 </div>
             </div>
@@ -469,8 +475,7 @@
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-               <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
-            </asp:ContentPlaceHolder>   
+               
 
         </div>
             </div>

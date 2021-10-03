@@ -15,6 +15,15 @@ namespace BIOSproject
     {
 
         /// <summary>
+        /// hfId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfId;
+
+        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -24,58 +33,58 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// textUFirstName control.
+        /// txtUFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textUFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtUFirstName;
 
         /// <summary>
-        /// textULastName control.
+        /// txtULastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textULastName;
+        protected global::System.Web.UI.WebControls.TextBox txtULastName;
 
         /// <summary>
-        /// textUEmail control.
+        /// txtUEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textUEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtUEmail;
 
         /// <summary>
-        /// textUNumber control.
+        /// txtUNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textUNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtUNumber;
 
         /// <summary>
-        /// textUPassword control.
+        /// txtUPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textUPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtUPassword;
 
         /// <summary>
-        /// textUConfirmPassword control.
+        /// txtUConfirmPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textUConfirmPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtUConfirmPassword;
 
         /// <summary>
         /// buttonAddUser control.

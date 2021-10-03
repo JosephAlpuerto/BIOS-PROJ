@@ -112,7 +112,7 @@
     <Content Include="AddAdmin.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
-    <Content Include="AllDeletedAdmin.aspx" />
+    <Content Include="AllDeletedAccounts.aspx" />
     <Content Include="AllUsers.aspx" />
     <Content Include="css\Generator.css" />
     <Content Include="css\Hitcheck.css" />
@@ -1848,12 +1848,12 @@
     <Compile Include="AllAdmin.aspx.designer.cs">
       <DependentUpon>AllAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AllDeletedAdmin.aspx.cs">
-      <DependentUpon>AllDeletedAdmin.aspx</DependentUpon>
+    <Compile Include="AllDeletedAccounts.aspx.cs">
+      <DependentUpon>AllDeletedAccounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AllDeletedAdmin.aspx.designer.cs">
-      <DependentUpon>AllDeletedAdmin.aspx</DependentUpon>
+    <Compile Include="AllDeletedAccounts.aspx.designer.cs">
+      <DependentUpon>AllDeletedAccounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="AllUsers.aspx.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
@@ -1955,6 +1955,11 @@
     </Compile>
     <Compile Include="Validate.aspx.designer.cs">
       <DependentUpon>Validate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_LBC_BIOSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -2170,12 +2175,24 @@
     <Content Include="scss\_utilities.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Properties\PublishProfiles\LBCBios.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="_LBC_BIOSDataSet.xsc">
+      <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="_LBC_BIOSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_LBC_BIOSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_LBC_BIOSDataSet.xss">
+      <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectionDB\ConnectionDB.csproj">

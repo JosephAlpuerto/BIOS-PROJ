@@ -51,6 +51,7 @@
                                                     placeholder="Password"/>
                                                
                                             </div>
+                                            <asp:HiddenField ID="txtFname" runat="server" />
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox small">
                                                     <input type="checkbox" class="custom-control-input" id="customCheck"/>
@@ -62,6 +63,7 @@
 
 
                  <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="btnLogin_Click"/>
+
                                  
                                         </div>
                                         <br />

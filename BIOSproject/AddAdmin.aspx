@@ -19,36 +19,36 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Admin Account!</h1>
                             </div>
-
+                            <asp:HiddenField ID="hfId" runat="server" />
                             <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 
                             <div class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                             
-                               <asp:TextBox runat="server" ID="textFirstName" CssClass="form-control form-control-user" placeholder="First Name"/>
+                               <asp:TextBox runat="server" ID="txtFirstName" CssClass="form-control form-control-user" placeholder="First Name"/>
 
                                     </div>
                                     <div class="col-sm-6">
 
-                               <asp:TextBox runat="server" ID="textLastName" CssClass="form-control form-control-user" placeholder="Last Name"/>
+                               <asp:TextBox runat="server" ID="txtLastName" CssClass="form-control form-control-user" placeholder="Last Name"/>
                                         
                                     </div>
                                 </div>
                                 <div class="form-group">
 
-                                    <asp:TextBox runat="server" ID="textEmail" CssClass="form-control form-control-user" placeholder="Email"/>
+                                    <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control form-control-user" placeholder="Email"/>
                                     
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
 
-                               <asp:TextBox runat="server" ID="textPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Password"/>
+                               <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Password"/>
                                         
                                     </div>
                                     <div class="col-sm-6">
 
-                                <asp:TextBox runat="server" ID="textConfirmPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Confrim Password"/>
+                                <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Confrim Password"/>
                                         
                                     </div>
                                 </div>

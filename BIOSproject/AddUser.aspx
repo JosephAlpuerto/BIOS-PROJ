@@ -17,31 +17,31 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an User Account!</h1>
                             </div>
-
+                            <asp:HiddenField ID="hfId" runat="server" />
                             <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 
                             <div class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                             
-                               <asp:TextBox runat="server" ID="textUFirstName" CssClass="form-control form-control-user" placeholder="First Name"/>
+                               <asp:TextBox runat="server" ID="txtUFirstName" CssClass="form-control form-control-user" placeholder="First Name"/>
 
                                     </div>
                                     <div class="col-sm-6">
 
-                               <asp:TextBox runat="server" ID="textULastName" CssClass="form-control form-control-user" placeholder="Last Name"/>
+                               <asp:TextBox runat="server" ID="txtULastName" CssClass="form-control form-control-user" placeholder="Last Name"/>
                                         
                                     </div>
                                 </div>
                                 <div class="form-group">
 
-                                    <asp:TextBox runat="server" ID="textUEmail" CssClass="form-control form-control-user" placeholder="Email"/>
+                                    <asp:TextBox runat="server" ID="txtUEmail" CssClass="form-control form-control-user" placeholder="Email"/>
                                   
                                 </div>
 
                                 <div class="form-group">
 
-                                   <asp:TextBox runat="server" ID="textUNumber" CssClass="form-control form-control-user" placeholder="Mobile Number"/>
+                                   <asp:TextBox runat="server" ID="txtUNumber" CssClass="form-control form-control-user" placeholder="Mobile Number"/>
                                                                          
                                 </div>
 
@@ -49,12 +49,12 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
 
-                               <asp:TextBox runat="server" ID="textUPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Password"/>
+                               <asp:TextBox runat="server" ID="txtUPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Password"/>
                                         
                                     </div>
                                     <div class="col-sm-6">
 
-                                <asp:TextBox runat="server" ID="textUConfirmPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Confrim Password"/>
+                                <asp:TextBox runat="server" ID="txtUConfirmPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Confrim Password"/>
                                         
                                     </div>
                                 </div>
