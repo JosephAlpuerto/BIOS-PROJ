@@ -109,23 +109,23 @@
            
                 </div>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="Validate.aspx">
+                <%--<li class="nav-item active">
+                    <a class="nav-link" href="AllRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Validate</span></a>
-                </li>
+                        <span>AllRequest1</span></a>
+                </li>--%>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="Generate.aspx">
+                    <a class="nav-link" href="RequestAll.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Generate</span></a>
+                        <span>AllRequest</span></a>
                 </li>
 
-                 <li class="nav-item active">
+                 <%--<li class="nav-item active">
                     <a class="nav-link" href="Generator.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Generator</span></a>
-                </li>
+                </li>--%>
                 
 
 

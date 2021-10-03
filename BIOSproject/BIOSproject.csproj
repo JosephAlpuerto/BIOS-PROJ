@@ -136,6 +136,7 @@
     <Content Include="js\sb-admin-2.js" />
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="Request.aspx" />
+    <Content Include="RequestAll.aspx" />
     <Content Include="SB-Admin.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1894,6 +1895,13 @@
     </Compile>
     <Compile Include="Request.aspx.designer.cs">
       <DependentUpon>Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestAll.aspx.cs">
+      <DependentUpon>RequestAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestAll.aspx.designer.cs">
+      <DependentUpon>RequestAll.aspx</DependentUpon>
     </Compile>
     <Compile Include="SB-Admin.aspx.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
