@@ -98,7 +98,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ViewActivateAdmin", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("ViewActivateUsers", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
             DataTable dtbl = new DataTable();
@@ -108,6 +108,7 @@ namespace BIOSproject
             txtEmail.Text = dtbl.Rows[0]["Username"].ToString();
             txtFname.Text = dtbl.Rows[0]["FirstName"].ToString();
             txtLname.Text = dtbl.Rows[0]["LastName"].ToString();
+            txtMobile.Text = dtbl.Rows[0]["MobileNumber"].ToString();
             ModalActivateAdmin.Show();
         }
         protected void Activate1_Click(object sender, EventArgs e)
@@ -135,15 +136,16 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("ActivateAdmin", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("ActivateUsers", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
             sqlCmd.Parameters.AddWithValue("@Username", txtEmail.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@Password ", (hfPassword.Value == "" ? 0 : Convert.ToChar(hfPassword.Value)));
             sqlCmd.Parameters.AddWithValue("@FirstName", txtFname.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@LastName", txtLname.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@MobileNumber", txtMobile.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
-            sqlCmd.Parameters.AddWithValue("@CreatedBy", "Admin");
+            sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
@@ -153,7 +155,10 @@ namespace BIOSproject
             sqlCon.Close();
             Clear();
             FillGridView();
+            FillGridView1();
             lblSuccess1.Text = "Activate Successfully";
+            
+           
         }
         public void Clear()
         {
@@ -164,7 +169,10 @@ namespace BIOSproject
         protected void btnCloseView_Click(object sender, EventArgs e)
         {
             Clear();
+            Clearlbl();
             ModalActivateAdmin.Hide();
+            FillGridView();
+            FillGridView1();
         }
 
         protected void btnActivateUsers_Click(object sender, EventArgs e)
@@ -181,7 +189,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@LastName", txtLname1.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@MobileNumber", txtMobile1.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
-            sqlCmd.Parameters.AddWithValue("@CreatedBy", "Admin");
+            sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
@@ -190,14 +198,24 @@ namespace BIOSproject
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
             Clear();
+            FillGridView();
             FillGridView1();
             lblSuccess2.Text = "Activate Successfully";
+            
+            
         }
 
         protected void btnCloseViewUsers_Click(object sender, EventArgs e)
         {
             Clear();
+            Clearlbl();
             ModalActivateUsers.Hide();
+            FillGridView1();
+            FillGridView();
+        }
+        public void Clearlbl()
+        {
+            lblSuccess1.Text = lblSuccess2.Text = "";
         }
     }
 }

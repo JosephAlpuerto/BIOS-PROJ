@@ -57,10 +57,11 @@ namespace BIOSproject
                 SqlConnection con = new SqlConnection(connectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "login";
+                cmd.CommandText = "loginUser";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Username", txtUsername.Text.ToString());
                 cmd.Parameters.AddWithValue("@Password", txtPassword.Text.ToString());
+                cmd.Parameters.AddWithValue("@RoleType", DropDownList.SelectedItem.ToString());
                 con.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -70,13 +71,20 @@ namespace BIOSproject
                     lblError.Text = "Login Successful! ";
 
                     reader.Close();
+                    if(DropDownList.SelectedIndex == 0)
+                    {
+                        Response.Redirect("AllUsers.aspx");
+                    }
+                    else if(DropDownList.SelectedIndex == 1)
+                    {
+                        Response.Redirect("Request.aspx");
+                    }
                     con.Close();
 
-                    Response.Redirect("SB-admin.aspx");
                 }
                 else
                 {
-                    lblError.Text = "Invalid Username or Password! "; 
+                    lblError.Text = "Invalid Username, Password or Role! "; 
                 }
 
                 reader.Close();

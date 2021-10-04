@@ -12,6 +12,14 @@ namespace BIOSproject
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            try
+            {
+                txtUserName.Text = Session["Username"].ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

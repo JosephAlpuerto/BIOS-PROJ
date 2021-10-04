@@ -27,6 +27,7 @@
     <link href="css/Hitcheck.css" rel="stylesheet" />
     <link href="css/Request.css" rel="stylesheet" />
      <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/Req.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -39,7 +40,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="SB-Admin.aspx">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center">
                     <div class="sidebar-brand-icon">
                         <i><img src="img/lbc.png"></i>
                     </div>
@@ -51,7 +52,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="SB-Admin.aspx">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -279,9 +280,9 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="img/undraw_profile.svg" >
+                                    <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -334,7 +335,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="Default.aspx">Logout</a>
                     </div>
                 </div>
             </div>

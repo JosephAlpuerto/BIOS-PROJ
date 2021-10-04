@@ -45,7 +45,7 @@
                        </td>
                        
                        <td>
-                           <asp:TextBox ID="TxtDate" CssClass="form-control form-control-user col-12" placeholder="Date" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtDate" CssClass="form-control form-control-user col-12" placeholder="Date" runat="server"></asp:TextBox>
                        </td>
                    </tr>
                    <tr>
@@ -54,7 +54,7 @@
                        </td>
                        
                        <td>
-                           <asp:TextBox ID="TxtArea" CssClass="form-control form-control-user col-12" placeholder="Area" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtArea" CssClass="form-control form-control-user col-12" placeholder="Area" runat="server"></asp:TextBox>
                        </td>
                    </tr>
 
@@ -64,7 +64,7 @@
                        </td>
                        
                        <td colspan="2">
-                           <asp:TextBox ID="TxtTeam" CssClass="form-control form-control-user" placeholder="Team" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtTeam" CssClass="form-control form-control-user" placeholder="Team" runat="server"></asp:TextBox>
                        </td>
                    </tr>
 
@@ -74,7 +74,7 @@
                        </td>
                        
                        <td colspan="2">
-                           <asp:TextBox ID="TxtBranch" CssClass="form-control form-control-user" placeholder="Branch" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtBranch" CssClass="form-control form-control-user" placeholder="Branch" runat="server"></asp:TextBox>
                        </td>
                    </tr>
                     <tr>
@@ -83,7 +83,7 @@
                        </td>
                        
                        <td colspan="2">
-                           <asp:TextBox ID="TxtProduct" CssClass="form-control form-control-user" placeholder="Product" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtProduct" CssClass="form-control form-control-user" placeholder="Product" runat="server"></asp:TextBox>
                        </td>
                    </tr>
                    <tr>
@@ -92,7 +92,7 @@
                        </td>
                        
                        <td colspan="2">
-                           <asp:TextBox ID="TxtQuantity" CssClass="form-control form-control-user" placeholder="Quantity" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtQuantity" CssClass="form-control form-control-user" placeholder="Quantity" runat="server"></asp:TextBox>
                        </td>
                    </tr>
                    <tr>
@@ -101,13 +101,13 @@
                        </td>
                        
                        <td colspan="2">
-                           <asp:TextBox ID="TxtStatus" CssClass="form-control form-control-user" placeholder="Status" runat="server"></asp:TextBox>
+                           <asp:TextBox ReadOnly="true" ID="TxtStatus" CssClass="form-control form-control-user" placeholder="Status" runat="server"></asp:TextBox>
                        </td>
                    </tr>
 
                   
                </table>
-         <asp:Button ID="btnSave" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " runat="server" Text="Save"  />
+         <asp:Button ID="btnSave" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " runat="server" Text="Check Series"  />
          
          
     </div>

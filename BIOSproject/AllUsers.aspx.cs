@@ -71,6 +71,7 @@ namespace BIOSproject
             ReportUsers.LocalReport.DataSources.Add(new ReportDataSource("DataSetUsers", dt));
             ReportUsers.LocalReport.ReportPath = Server.MapPath("~/Report/ReportUsers.rdlc");
             ReportUsers.LocalReport.EnableHyperlinks = true;
+            FillGridView();
             ModalUsers.Show();
         }
 
@@ -99,12 +100,14 @@ namespace BIOSproject
             {
                 btnActivate.Visible = false;
                 btnDelete.Visible = true;
+                FillGridView();
                 ModalView.Show();
             }
             else
             {
                 btnActivate.Visible = true;
                 btnDelete.Visible = false;
+                FillGridView();
                 ModalView.Show();
             }
             
@@ -178,10 +181,11 @@ namespace BIOSproject
             else
             {
                 Clear();
+                FillGridView();
                 lblSuccess.Text = "Updated Successfully!";
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
-                FillGridView();
+               
             }
 
 
@@ -242,11 +246,14 @@ namespace BIOSproject
         protected void btnCloseView_Click(object sender, EventArgs e)
         {
             Clear();
+            FillGridView();
             ModalView.Hide();
+            
         }
 
         protected void btnAddUser_Click(object sender, EventArgs e)
         {
+            FillGridView();
             ModalAddUser.Show();
         }
         protected void buttonAddUser1_Click(object sender, EventArgs e)
@@ -272,6 +279,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
             sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
+            sqlCmd.Parameters.AddWithValue("@RoleType", DropDownList.SelectedItem.Value);
             //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
             //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
             //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
@@ -329,7 +337,9 @@ namespace BIOSproject
         protected void AddUserbtn_Click(object sender, EventArgs e)
         {
             Clear1();
+            FillGridView();
             ModalAddUser.Hide();
+            
         }
 
         protected void LinkViewReset_Click(object sender, EventArgs e)
@@ -349,13 +359,17 @@ namespace BIOSproject
             hfIdReset.Value = Id.ToString();
             hfPassReset.Value = dtbl.Rows[0]["Password"].ToString();
             txtEmailReset.Text = dtbl.Rows[0]["Username"].ToString();
+            FillGridView();
             ModalResetPass.Show();
+            
         }
 
         protected void btnCloseReset_Click(object sender, EventArgs e)
         {
             Clear2();
+            FillGridView();
             ModalResetPass.Hide();
+           
         }
         protected void Clear2()
         {
@@ -421,10 +435,11 @@ namespace BIOSproject
             else
             {
                 Clear2();
+                FillGridView();
                 lblSuccessReset.Text = "Password Reset Successfully!";
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
-                FillGridView();
+                
             }
 
         }
@@ -442,12 +457,16 @@ namespace BIOSproject
             gvActive.DataSource = dtbl;
             gvActive.DataBind();
             gvActive.FooterRow.TableSection = TableRowSection.TableFooter;
+            FillGridView();
             ModalAllActive.Show();
+           
         }
 
         protected void btnCloseAllActive_Click(object sender, EventArgs e)
         {
+            FillGridView();
             ModalAllActive.Hide();
+            
         }
 
         protected void btnAllDeactive_Click(object sender, EventArgs e)
@@ -463,12 +482,66 @@ namespace BIOSproject
             gvAllDeactive.DataSource = dtbl;
             gvAllDeactive.DataBind();
             gvAllDeactive.FooterRow.TableSection = TableRowSection.TableFooter;
+            FillGridView();
             ModalAllDeactive.Show();
+            
         }
 
         protected void btnCloseAllDeactive_Click(object sender, EventArgs e)
         {
+            FillGridView();
             ModalAllDeactive.Hide();
+            
+        }
+
+        protected void btnAllAdmin_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("AllAdminAccounts", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            gvAllAdmin.DataSource = dtbl;
+            gvAllAdmin.DataBind();
+            gvAllAdmin.FooterRow.TableSection = TableRowSection.TableFooter;
+            FillGridView();
+            ModalAllAdmin.Show();
+           
+        }
+
+        protected void btnCloseAllADmin_Click(object sender, EventArgs e)
+        {
+            FillGridView();
+            ModalAllAdmin.Hide();
+           
+        }
+
+        protected void btnAllUser_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("AllUsersAccounts", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            gvAllUser.DataSource = dtbl;
+            gvAllUser.DataBind();
+            gvAllUser.FooterRow.TableSection = TableRowSection.TableFooter;
+            FillGridView();
+            ModalAllUser.Show();
+           
+        }
+
+        protected void btnCloseAllUser_Click(object sender, EventArgs e)
+        {
+            FillGridView();
+            ModalAllUser.Hide();
+           
         }
     }
 }

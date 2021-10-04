@@ -9,16 +9,16 @@
 }
 
 
-.wrapp {
+/*.wrapp {
     max-width: 500px;
     width: 100%;
     background-color: white;
     margin: 20px auto;
     padding: 30px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
-}
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);*/
+/*}*/
 
-    .wrapp .title1 {
+     .title1 {
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 25px;
@@ -27,17 +27,17 @@
         text-align: center;
     }
 
-    .wrapp .form1 {
+.form1 {
         width: 100%;
     }
 
-        .wrapp .form1 .input_field1 {
+ .form1 .input_field1 {
             margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
-            .wrapp .form1 .input_field1 label {
+ .form1 .input_field1 label {
                 width: 200px;
                 color: #757575;
                 margin-right: 10px;
@@ -45,12 +45,12 @@
                 margin-top: 10px;
             }
 
-            .wrapp .form1 .input_field1 .input1 {
+            .form1 .input_field1 .input1 {
                 width: 100%;
                 outline: none;
                 margin-top: 10px;
             }
-.wrapp .form1 .input_field1 .btn3 {
+ .form1 .input_field1 .btn3 {
     width: 40%;
     padding: 8px 10px;
     margin-left: 150px;

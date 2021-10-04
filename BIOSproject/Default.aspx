@@ -52,13 +52,13 @@
                                                
                                             </div>
                                             <asp:HiddenField ID="txtFname" runat="server" />
+                                            
                                             <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck"/>
-                                                    <label class="custom-control-label" for="customCheck">
-                                                        Remember
-                                                    Me</label>
-                                                </div>
+                                                 <label>Select Role Type</label>
+                                                 <asp:DropDownList ID="DropDownList" runat="server">
+                                                    <asp:ListItem>Admin</asp:ListItem>
+                                                    <asp:ListItem>User</asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
 
 

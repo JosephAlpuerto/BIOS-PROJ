@@ -1,0 +1,34 @@
+﻿
+
+.container .form3{
+    width: 100%;
+}
+
+.container .form2 .input_field1 .input1 {
+    width: 100%;
+    outline: none;
+    margin-bottom:10px;
+}
+
+.container .form2 .input_field1 .label {
+    width: 200px;
+    color: #757575;
+    margin-right: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container .form2 .input_field1 .btn3 {
+    width: 40%;
+    padding: 8px 10px;
+    margin-left: 150px;
+    margin-top: 20px;
+    font-size: 15px;
+    border: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    background-color: #d00149;
+    color: White;
+}

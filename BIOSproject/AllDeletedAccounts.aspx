@@ -52,6 +52,15 @@
                            <asp:TextBox ID="txtLname" CssClass="form-control form-control-user" placeholder="LastName" runat="server"></asp:TextBox>
                        </td>
                    </tr>
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" Text="MobileNumber:"></asp:Label>
+                       </td>
+                       
+                       <td colspan="2">
+                           <asp:TextBox ID="txtMobile" CssClass="form-control form-control-user" placeholder="MobileNumber" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
 
                   
                </table>
@@ -83,6 +92,7 @@
                                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
                                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
+                                                        <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
                                                         <asp:ButtonField DataTextField="DeletedBy" HeaderText="Deleted By" />
                                                         <asp:ButtonField DataTextField="DeletedDate" HeaderText="Deleted Date" />
 

@@ -116,6 +116,7 @@
     <Content Include="AllUsers.aspx" />
     <Content Include="css\Generator.css" />
     <Content Include="css\Hitcheck.css" />
+    <Content Include="css\Req.css" />
     <Content Include="css\Request.css" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />

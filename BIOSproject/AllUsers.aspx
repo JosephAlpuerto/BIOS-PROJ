@@ -17,7 +17,9 @@
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                        <asp:Button Text="Add User Account" ID="btnAddUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAddUser_Click" runat="server"></asp:Button>
+                        <asp:Button Text="All Admin Accounts" ID="btnAllAdmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllAdmin_Click" runat="server"></asp:Button>
+                        <asp:Button Text="All User Accounts" ID="btnAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllUser_Click" runat="server"></asp:Button>
+                        <asp:Button Text="Add Account" ID="btnAddUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAddUser_Click" runat="server"></asp:Button>
                         <asp:Button Text="All Active Accounts" ID="btnAllActive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllActive_Click" runat="server"></asp:Button>
                         <asp:Button Text="All Deactive Accounts" ID="btnAllDeactive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllDeactive_Click" runat="server"></asp:Button>
                         <asp:Button Text="Generate Report" ID="btnPrint2" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnPrint2_Click" runat="server"></asp:Button>
@@ -31,6 +33,83 @@
                             </div>
                         </div>
                      </div>
+
+     <!--All Admin-->
+    <ajaxtoolkit:modalpopupextender ID="ModalAllAdmin" PopupControlID="PanelAllAdmin" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelAllAdmin" runat="server">
+                     
+                    <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <asp:GridView runat="server" ID="gvAllAdmin" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
+                                        <asp:ButtonField DataTextField="Username" HeaderText="Username" />
+                                        <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
+                                        <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
+                                        <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
+                                        <asp:ButtonField DataTextField="RoleType" HeaderText="Role Type" />
+                                        <asp:ButtonField DataTextField="IsActive" HeaderText="Active" />
+                                        
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="LinkViewReset" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkViewReset_Click">Reset Password</asp:LinkButton>
+                                                           </ItemTemplate>
+                                                        </asp:TemplateField>
+                                        
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="LinkView" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkView_Click">View</asp:LinkButton>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                                </div>
+                                <asp:Button ID="btnCloseAllADmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllADmin_Click" />
+                            </div>
+                        </div>
+        </asp:Panel>
+
+
+
+    <!--All User-->
+    <ajaxtoolkit:modalpopupextender ID="ModalAllUser" PopupControlID="PanelAllUser" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelAllUser" runat="server">
+                     
+                    <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <asp:GridView runat="server" ID="gvAllUser" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
+                                        <asp:ButtonField DataTextField="Username" HeaderText="Username" />
+                                        <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
+                                        <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
+                                        <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
+                                        <asp:ButtonField DataTextField="RoleType" HeaderText="Role Type" />
+                                        <asp:ButtonField DataTextField="IsActive" HeaderText="Active" />
+                                        
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="LinkViewReset" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkViewReset_Click">Reset Password</asp:LinkButton>
+                                                           </ItemTemplate>
+                                                        </asp:TemplateField>
+                                        
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="LinkView" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkView_Click">View</asp:LinkButton>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                                </div>
+                                <asp:Button ID="btnCloseAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllUser_Click" />
+                            </div>
+                        </div>
+        </asp:Panel>
+
 
      <ajaxtoolkit:modalpopupextender ID="ModalAddUser" PopupControlID="PanelAddUser" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAddUser" runat="server">
@@ -88,6 +167,13 @@
                                         
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                                 <label>Select Role Type</label>
+                                                 <asp:DropDownList ID="DropDownList" runat="server">
+                                                    <asp:ListItem>Admin</asp:ListItem>
+                                                    <asp:ListItem>User</asp:ListItem>
+                                                </asp:DropDownList>
+                                 </div>
 
                                 <asp:Button Text="Add Account" ID="buttonAddUser1" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="buttonAddUser1_Click"/>
                                 <hr>    
@@ -101,6 +187,7 @@
         </div>
     </div>
 </asp:Panel>
+
 
 
     <!--All Active-->
@@ -118,7 +205,7 @@
                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
                                         <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
-
+                                        <asp:ButtonField DataTextField="RoleType" HeaderText="Role Type" />
                                         <asp:ButtonField DataTextField="IsActive" HeaderText="Active" />
                                         
                                                         <asp:TemplateField>
@@ -153,7 +240,7 @@
                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
                                         <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
-
+                                        <asp:ButtonField DataTextField="RoleType" HeaderText="Role Type" />
                                         <asp:ButtonField DataTextField="IsActive" HeaderText="Active" />
                                         
                                                         <asp:TemplateField>
@@ -337,7 +424,7 @@
                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
                                         <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
-
+                                        <asp:ButtonField DataTextField="RoleType" HeaderText="Role Type" />
                                         <asp:ButtonField DataTextField="IsActive" HeaderText="Active" />
                                         
                                                         <asp:TemplateField>

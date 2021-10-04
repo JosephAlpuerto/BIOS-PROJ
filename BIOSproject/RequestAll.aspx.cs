@@ -65,7 +65,6 @@ namespace BIOSproject
             TxtProduct.Text = dtbl.Rows[0]["Product"].ToString();
             TxtQuantity.Text = dtbl.Rows[0]["Quantity"].ToString();
             TxtStatus.Text = dtbl.Rows[0]["Done"].ToString();
-            btnSave.Text = "Update";
             ModalView.Show();
 
 

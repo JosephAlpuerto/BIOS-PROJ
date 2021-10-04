@@ -13,6 +13,7 @@ namespace BIOSproject
 {
     public partial class Gen : System.Web.UI.Page
     {
+        String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
 
@@ -21,7 +22,7 @@ namespace BIOSproject
 
                 if (!IsPostBack)
                 {
-
+                    FillGridView(); 
                     string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
                     string sqlquery = "select * from Areas";
                     SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
@@ -34,6 +35,7 @@ namespace BIOSproject
                     DropArea.DataValueField = "AreaDescr";
                     DropArea.DataBind();
                     conn.Close();
+                    
 
 
                 string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
@@ -78,7 +80,13 @@ namespace BIOSproject
 
             }
             }
-            protected void Button1_Click(object sender, EventArgs e)
+        private void Clear()
+        {
+            HiddenField1.Value = "";
+            txtProduct.Text = "";
+            TxtQuantity.Text = "";
+        }
+        protected void Button1_Click(object sender, EventArgs e)
             {
 
                 con.Open();
@@ -96,14 +104,45 @@ namespace BIOSproject
                 sqlcmd.Parameters.AddWithValue("@DeletedBy", Convert.DBNull);
                 sqlcmd.Parameters.AddWithValue("@DeletedDate", Convert.DBNull);
                 sqlcmd.Parameters.AddWithValue("@Done", "0");
+                sqlcmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
+                sqlcmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
                 sqlcmd.ExecuteNonQuery();
+                FillGridView();
                 if (HiddenField1.Value == "")
                 {
-                    Response.Write("<script>alert('Request Sent');</script>");
-                    txtProduct.Text = "";
-                    TxtQuantity.Text = "";
-                }
+                Clear();
+                    lblSuccess.Text = "New Request added Successfully!";
+                FillGridView();
+            }
                 con.Close();
             }
+
+        void FillGridView()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("AllRequestedforUser", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            gvListRequest.DataSource = dtbl;
+            gvListRequest.DataBind();
+            gvListRequest.UseAccessibleHeader = true;
+            gvListRequest.HeaderRow.TableSection = TableRowSection.TableHeader;
+            gvListRequest.FooterRow.TableSection = TableRowSection.TableFooter;
         }
+
+        protected void btnAddRequest_Click(object sender, EventArgs e)
+        {
+            ModalRequest.Show();
+        }
+
+        protected void CloseAddRequest_Click(object sender, EventArgs e)
+        {
+            ModalRequest.Hide();
+            Clear();
+        }
+    }
     }
