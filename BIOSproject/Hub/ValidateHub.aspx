@@ -22,17 +22,17 @@
                 <div class="input_field1">
 
                     <asp:Label ID="Label3" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
-                    <asp:TextBox ID="TxtTicket" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:TextBox ID="TxtTicket" runat="server" CssClass="input1" Enabled="false"></asp:TextBox>
                 </div>
                 <div class="input_field1">
                     <%--<label>Team</label>--%>
                     <asp:Label ID="Label2" runat="server" Text="PONumber" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtPONo" runat="server" CssClass="input1"></asp:TextBox>
+                     <asp:TextBox ID="TxtPONo" runat="server" CssClass="input1" Enabled="false"></asp:TextBox>
                 </div>
 
             <div class="input_field1">
                 <asp:Label ID="Label1" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                <asp:TextBox ID="TxtSupplier" runat="server" CssClass="input1"></asp:TextBox>
+                <asp:TextBox ID="TxtSupplier" runat="server" CssClass="input1" Enabled="false"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">

@@ -61,17 +61,18 @@ namespace BIOSproject.Supplier
                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                 if (sqlCon.State == ConnectionState.Closed)
                     sqlCon.Open();
-                SqlDataAdapter sqlData = new SqlDataAdapter("SupplierRequestShow", sqlCon);
-                sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-                DataTable dtbl = new DataTable();
-                sqlData.Fill(dtbl);
-                sqlCon.Close();
-                Gridview1.DataSource = dtbl;
-                Gridview1.DataBind();
-                Gridview1.UseAccessibleHeader = true;
-                Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-                Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
-            }
+            SqlDataAdapter sqlData = new SqlDataAdapter("SupplierRequestShow", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+            Gridview1.UseAccessibleHeader = true;
+            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
+
+        }
 
         protected void btnRequest_Click(object sender, EventArgs e)
         {

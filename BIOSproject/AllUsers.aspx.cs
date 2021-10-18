@@ -543,6 +543,19 @@ namespace BIOSproject
             Response.Redirect(Request.Url.AbsoluteUri);
         }
 
-        
+        protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if (DropDownList.SelectedItem.Value == "Hub")
+                {
+                    BranchCode.Visible = true;
+                }
+                else
+                {
+
+                }
+            }
+        }
     }
 }
