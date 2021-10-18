@@ -137,14 +137,16 @@
                                 <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
                                     <Columns>
-                                        <asp:ButtonField DataTextField="Id" HeaderText="ID" />
+                                        <asp:ButtonField DataTextField="Id" HeaderText="Requested ID" />
                                         <asp:ButtonField DataTextField="DateRequested" HeaderText="DateRequested" />
+                                         <asp:ButtonField DataTextField="Product" HeaderText="Product" />
+                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
+                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
+                                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
+                                        <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
                                         <asp:ButtonField DataTextField="Area" HeaderText="Area" />
                                         <asp:ButtonField DataTextField="Team" HeaderText="Team" />
-                                        <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
-                                        <asp:ButtonField DataTextField="Product" HeaderText="Product" />
-                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
-                                        <asp:ButtonField DataTextField="Done" HeaderText="Status" />
+                                       
 
                                         <asp:TemplateField>
                                                            <ItemTemplate>

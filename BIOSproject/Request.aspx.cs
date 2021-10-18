@@ -45,9 +45,13 @@ namespace BIOSproject
                 SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
                 DataSet ds = new DataSet();
                 sd.Fill(ds);
+                DropTeam.DataSource = ds;
+                DropTeam.DataTextField = "TeamDescr";
+                DropTeam.DataValueField = "TeamDescr";
+                DropTeam.DataBind();
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    DropTeam.Items.Add(ds.Tables[0].Rows[i][5] + "--" + ds.Tables[0].Rows[i][4]);
+                   
                     DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
                 }
 
@@ -89,32 +93,32 @@ namespace BIOSproject
         protected void Button1_Click(object sender, EventArgs e)
             {
 
-                con.Open();
-                SqlCommand sqlcmd = new SqlCommand("Requests", con);
-                sqlcmd.CommandType = CommandType.StoredProcedure;
-                sqlcmd.Parameters.AddWithValue("@ID", HiddenField1.Value == "" ? 0 : Convert.ToInt32(HiddenField1.Value));
-                sqlcmd.Parameters.AddWithValue("@DateRequested", TxtDate.Text.Trim());
-                sqlcmd.Parameters.AddWithValue("@Area", DropArea.SelectedItem.Value);
-                sqlcmd.Parameters.AddWithValue("@Team", DropTeam.SelectedItem.Value);
-                sqlcmd.Parameters.AddWithValue("@Branch", DropBranch.SelectedItem.Value);
-                sqlcmd.Parameters.AddWithValue("@Product", txtProduct.Text.Trim());
-                sqlcmd.Parameters.AddWithValue("@Quantity", TxtQuantity.Text.Trim());
-                sqlcmd.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
-                sqlcmd.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
-                sqlcmd.Parameters.AddWithValue("@DeletedBy", Convert.DBNull);
-                sqlcmd.Parameters.AddWithValue("@DeletedDate", Convert.DBNull);
-                sqlcmd.Parameters.AddWithValue("@Done", "0");
-                sqlcmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-                sqlcmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
-                sqlcmd.ExecuteNonQuery();
-                FillGridView();
-                if (HiddenField1.Value == "")
-                {
-                Clear();
-                    lblSuccess.Text = "New Request added Successfully!";
-                FillGridView();
-            }
-                con.Close();
+            //    con.Open();
+            //    SqlCommand sqlcmd = new SqlCommand("Requests", con);
+            //    sqlcmd.CommandType = CommandType.StoredProcedure;
+            //    sqlcmd.Parameters.AddWithValue("@ID", HiddenField1.Value == "" ? 0 : Convert.ToInt32(HiddenField1.Value));
+            //    sqlcmd.Parameters.AddWithValue("@DateRequested", TxtDate.Text.Trim());
+            //    sqlcmd.Parameters.AddWithValue("@Area", DropArea.SelectedItem.Value);
+            //    sqlcmd.Parameters.AddWithValue("@Team", DropTeam.SelectedItem.Value);
+            //    sqlcmd.Parameters.AddWithValue("@Branch", DropBranch.SelectedItem.Value);
+            //    sqlcmd.Parameters.AddWithValue("@Product", txtProduct.Text.Trim());
+            //    sqlcmd.Parameters.AddWithValue("@Quantity", TxtQuantity.Text.Trim());
+            //    sqlcmd.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
+            //    sqlcmd.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
+            //    sqlcmd.Parameters.AddWithValue("@DeletedBy", Convert.DBNull);
+            //    sqlcmd.Parameters.AddWithValue("@DeletedDate", Convert.DBNull);
+            //    sqlcmd.Parameters.AddWithValue("@Done", "0");
+            //    sqlcmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
+            //    sqlcmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
+            //    sqlcmd.ExecuteNonQuery();
+            //    FillGridView();
+            //    if (HiddenField1.Value == "")
+            //    {
+            //    Clear();
+            //        lblSuccess.Text = "New Request added Successfully!";
+            //    FillGridView();
+            //}
+            //    con.Close();
             }
 
         void FillGridView()

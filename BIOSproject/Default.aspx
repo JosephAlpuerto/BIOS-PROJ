@@ -51,15 +51,18 @@
                                                     placeholder="Password"/>
                                                
                                             </div>
-                                            <asp:HiddenField ID="txtFname" runat="server" />
+                                            <asp:HiddenField ID="txtAdmin" runat="server" />
+                                                
                                             
                                             <div class="form-group">
-                                                 <label>Select Role Type</label>
-                                                 <asp:DropDownList ID="DropDownList" runat="server">
-                                                    <asp:ListItem>Admin</asp:ListItem>
-                                                    <asp:ListItem>User</asp:ListItem>
+                                                 
+                                                 <asp:DropDownList Visible="false" ID="DropDownList" runat="server" >
+                                                    <asp:ListItem Value="Admin" Selected="True">Admin</asp:ListItem>
+                                                    <asp:ListItem Value="User" Selected="True">User</asp:ListItem>
+                                                     <asp:ListItem Value="Branch" Selected="True">Branch</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
+
 
 
                  <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="btnLogin_Click"/>
