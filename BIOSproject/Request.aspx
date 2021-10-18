@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Request.aspx.cs" Inherits="BIOSproject.Gen" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BIOS.Master" AutoEventWireup="true" CodeBehind="Request.aspx.cs" Inherits="BIOSproject.Gen" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
@@ -59,18 +59,10 @@
                       
                     </asp:DropDownList>
                 </div>
-               
             <div class="input_field1">
                     <%--<label>Branch</label>--%>
                 <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
                     <asp:DropDownList ID="DropBranch" runat="server" CssClass="input1">
-                    </asp:DropDownList>
-                </div>
-                                 <div class="input_field1">
-                    <%--<label>Team</label>--%>
-                    <asp:Label ID="Label7" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="input1">
-                      
                     </asp:DropDownList>
                 </div>
 
@@ -117,15 +109,12 @@
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Requested ID" />
                                         <asp:ButtonField DataTextField="DateRequested" HeaderText="DateRequested" />
-                                         <asp:ButtonField DataTextField="Product" HeaderText="Product" />
-                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
-                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
-                                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                        <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
                                         <asp:ButtonField DataTextField="Area" HeaderText="Area" />
                                         <asp:ButtonField DataTextField="Team" HeaderText="Team" />
-                                       
-                                       
+                                        <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
+
+                                        <asp:ButtonField DataTextField="Product" HeaderText="Product" />
+                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
                                         <asp:ButtonField DataTextField="Done" HeaderText="Requested Status" />
                                         
                                                         <%--<asp:TemplateField>

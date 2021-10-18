@@ -131,6 +131,8 @@ namespace BIOSproject
             var firstName = txtFname.Text.Trim();
             var lastName = txtLname.Text.Trim();
             var email = txtEmail.Text.Trim();
+            
+            
             var mobile = txtMobile.Text.Trim();
 
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
@@ -243,8 +245,10 @@ namespace BIOSproject
         }
         protected void btnCloseView_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Request.Url.AbsoluteUri);
-
+            Clear();
+            FillGridView();
+            ModalView.Hide();
+            
         }
 
         protected void btnAddUser_Click(object sender, EventArgs e)
@@ -362,8 +366,10 @@ namespace BIOSproject
 
         protected void btnCloseReset_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Request.Url.AbsoluteUri);
-
+            Clear2();
+            FillGridView();
+            ModalResetPass.Hide();
+           
         }
         protected void Clear2()
         {
@@ -537,12 +543,5 @@ namespace BIOSproject
             ModalAllUser.Hide();
            
         }
-
-        protected void AddUserbtn_Click1(object sender, EventArgs e)
-        {
-            Response.Redirect(Request.Url.AbsoluteUri);
-        }
-
-        
     }
 }

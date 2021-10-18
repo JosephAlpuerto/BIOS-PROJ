@@ -69,15 +69,6 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button btnPrint2;
 
         /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
         /// ModalUsers control.
         /// </summary>
         /// <remarks>
@@ -96,6 +87,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Panel PanelUsers;
 
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// ReportUsers control.
         /// </summary>
         /// <remarks>
@@ -103,6 +103,15 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.Reporting.WebForms.ReportViewer ReportUsers;
+
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClose;
 
         /// <summary>
         /// ModalAllAdmin control.
@@ -132,6 +141,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.GridView gvAllAdmin;
 
         /// <summary>
+        /// btnCloseAllADmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseAllADmin;
+
+        /// <summary>
         /// ModalAllUser control.
         /// </summary>
         /// <remarks>
@@ -159,6 +177,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.GridView gvAllUser;
 
         /// <summary>
+        /// btnCloseAllUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseAllUser;
+
+        /// <summary>
         /// ModalAddUser control.
         /// </summary>
         /// <remarks>
@@ -175,15 +202,6 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelAddUser;
-
-        /// <summary>
-        /// AddUserbtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddUserbtn;
 
         /// <summary>
         /// UpdatePanel1 control.
@@ -285,6 +303,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button buttonAddUser1;
 
         /// <summary>
+        /// AddUserbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddUserbtn;
+
+        /// <summary>
         /// ModalAllActive control.
         /// </summary>
         /// <remarks>
@@ -310,6 +337,15 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvActive;
+
+        /// <summary>
+        /// btnCloseAllActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseAllActive;
 
         /// <summary>
         /// ModalAllDeactive control.
@@ -339,6 +375,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.GridView gvAllDeactive;
 
         /// <summary>
+        /// btnCloseAllDeactive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseAllDeactive;
+
+        /// <summary>
         /// ModalView control.
         /// </summary>
         /// <remarks>
@@ -355,15 +400,6 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelView;
-
-        /// <summary>
-        /// btnCloseView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCloseView;
 
         /// <summary>
         /// Panel1 control.
@@ -483,6 +519,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button btnClear;
 
         /// <summary>
+        /// Close control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Close;
+
+        /// <summary>
         /// ModalResetPass control.
         /// </summary>
         /// <remarks>
@@ -499,15 +544,6 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelResetPass;
-
-        /// <summary>
-        /// btnCloseReset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCloseReset;
 
         /// <summary>
         /// UpdatePanel2 control.
@@ -634,6 +670,15 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveReset;
+
+        /// <summary>
+        /// btnCloseReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseReset;
 
         /// <summary>
         /// gvModal control.

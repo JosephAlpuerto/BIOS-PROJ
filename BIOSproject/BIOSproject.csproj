@@ -113,28 +113,17 @@
     <Content Include="AddUser.aspx" />
     <Content Include="AllAdmin.aspx" />
     <Content Include="AllDeletedAccounts.aspx" />
-    <Content Include="AllSupplierRequest.aspx" />
     <Content Include="AllUsers.aspx" />
-    <Content Include="img\download.png" />
-    <Content Include="img\lbc.png" />
-    <Content Include="MyRejectedRequestSupp.aspx" />
-    <Content Include="RejectedBySupplierlist.aspx" />
-    <Content Include="SSPRequestList.aspx" />
-    <Content Include="Hub\BarcodeIssuer.aspx" />
-    <Content Include="Branch.aspx" />
-    <Content Include="css\BIssuer.css" />
-    <Content Include="css\Validate.css" />
+    <Content Include="css\Generator.css" />
+    <Content Include="css\Hitcheck.css" />
     <Content Include="css\Req.css" />
     <Content Include="css\Request.css" />
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="css\Style.css" />
+    <Content Include="css\Style2.css" />
+    <Content Include="css\Supplier.css" />
     <Content Include="Default.aspx" />
-    <Content Include="RequestForm.aspx" />
-    <Content Include="Hub\HubList.aspx" />
-    <Content Include="SuppValidate.aspx" />
-    <Content Include="TextFile\Download.txt" />
-    <Content Include="TextFile\NEW.txt" />
-    <Content Include="Validate.aspx" />
     <Content Include="img\undraw_posting_photo.svg" />
     <Content Include="img\undraw_profile.svg" />
     <Content Include="img\undraw_profile_1.svg" />
@@ -150,8 +139,6 @@
     <Content Include="Request.aspx" />
     <Content Include="RequestAll.aspx" />
     <Content Include="SB-Admin.aspx" />
-    <Content Include="ValidateSSP.aspx" />
-    <Content Include="Hub\ValidateHub.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.js" />
@@ -1852,54 +1839,12 @@
     <Compile Include="AllDeletedAccounts.aspx.designer.cs">
       <DependentUpon>AllDeletedAccounts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AllSupplierRequest.aspx.cs">
-      <DependentUpon>AllSupplierRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AllSupplierRequest.aspx.designer.cs">
-      <DependentUpon>AllSupplierRequest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AllUsers.aspx.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AllUsers.aspx.designer.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Hub\Hub.Master.cs">
-      <DependentUpon>Hub.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Hub\Hub.Master.designer.cs">
-      <DependentUpon>Hub.Master</DependentUpon>
-    </Compile>
-    <Compile Include="MyRejectedRequestSupp.aspx.cs">
-      <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MyRejectedRequestSupp.aspx.designer.cs">
-      <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RejectedBySupplierlist.aspx.cs">
-      <DependentUpon>RejectedBySupplierlist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RejectedBySupplierlist.aspx.designer.cs">
-      <DependentUpon>RejectedBySupplierlist.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SSPRequestList.aspx.cs">
-      <DependentUpon>SSPRequestList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SSPRequestList.aspx.designer.cs">
-      <DependentUpon>SSPRequestList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Hub\BarcodeIssuer.aspx.cs">
-      <DependentUpon>BarcodeIssuer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Hub\BarcodeIssuer.aspx.designer.cs">
-      <DependentUpon>BarcodeIssuer.aspx</DependentUpon>
     </Compile>
     <Compile Include="BIOS.Master.cs">
       <DependentUpon>BIOS.Master</DependentUpon>
@@ -1921,13 +1866,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BIOSprojectDataSetUsers.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Branch.aspx.cs">
-      <DependentUpon>Branch.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Branch.aspx.designer.cs">
-      <DependentUpon>Branch.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DataSetAdmin.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1944,41 +1882,6 @@
     <Compile Include="FolConnectionDB\DbUsers.cs" />
     <Compile Include="FolDomain\clsAdmin.cs" />
     <Compile Include="FolDomain\clsUsers.cs" />
-    <Compile Include="RequestForm.aspx.cs">
-      <DependentUpon>RequestForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RequestForm.aspx.designer.cs">
-      <DependentUpon>RequestForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Hub\HubList.aspx.cs">
-      <DependentUpon>HubList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Hub\HubList.aspx.designer.cs">
-      <DependentUpon>HubList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Supp.Master.cs">
-      <DependentUpon>Supp.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Supp.Master.designer.cs">
-      <DependentUpon>Supp.Master</DependentUpon>
-    </Compile>
-    <Compile Include="SuppValidate.aspx.cs">
-      <DependentUpon>SuppValidate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SuppValidate.aspx.designer.cs">
-      <DependentUpon>SuppValidate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Validate.aspx.cs">
-      <DependentUpon>Validate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Validate.aspx.designer.cs">
-      <DependentUpon>Validate.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2007,20 +1910,6 @@
     </Compile>
     <Compile Include="SB-Admin.aspx.designer.cs">
       <DependentUpon>SB-Admin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ValidateSSP.aspx.cs">
-      <DependentUpon>ValidateSSP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ValidateSSP.aspx.designer.cs">
-      <DependentUpon>ValidateSSP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Hub\ValidateHub.aspx.cs">
-      <DependentUpon>ValidateHub.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Hub\ValidateHub.aspx.designer.cs">
-      <DependentUpon>ValidateHub.aspx</DependentUpon>
     </Compile>
     <Compile Include="_LBC_BIOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2067,7 +1956,6 @@
     <Content Include="DataSetAdmin.xss">
       <DependentUpon>DataSetAdmin.xsd</DependentUpon>
     </Content>
-    <Content Include="Hub\Hub.Master" />
     <None Include="packages.config" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
@@ -2242,9 +2130,7 @@
     <Content Include="scss\_utilities.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="Properties\launchSettings.json" />
-    <None Include="Properties\PublishProfiles\BiosPublish.pubxml" />
     <None Include="Properties\PublishProfiles\LBCBios.pubxml" />
-    <Content Include="Supp.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

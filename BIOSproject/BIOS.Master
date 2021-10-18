@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sourcing</title>
+    <title>LBC   - Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,9 +21,13 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
      <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/Style2.css" rel="stylesheet" />
+    <link href="css/Style.css" rel="stylesheet" />
+    <link href="css/Supplier.css" rel="stylesheet" />
+    <link href="css/Hitcheck.css" rel="stylesheet" />
+    <link href="css/Request.css" rel="stylesheet" />
      <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/Req.css" rel="stylesheet" />
-    <link href="css/Validate.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -64,21 +68,16 @@
            
                 </div>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="RequestForm.aspx">
+               <%-- <li class="nav-item active">
+                    <a class="nav-link" href="HitCheck.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Request Form</span></a>
-                </li>
+                        <span>Hit Check</span></a>
+                </li>--%>
 
                 <li class="nav-item active">
                     <a class="nav-link" href="Request.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Request List</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="ValidateSSP.aspx">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Validate</span></a>
+                        <span>Request</span></a>
                 </li>
                 
 
@@ -294,7 +293,7 @@
                                 </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Forgot Password
+                                        Settings
                                 </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -32,7 +32,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("AllRequestedforUser", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("AllRequest", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
