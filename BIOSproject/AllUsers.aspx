@@ -17,30 +17,46 @@
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                        <asp:Button Text="All Admin Accounts" ID="btnAllAdmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllAdmin_Click" runat="server"></asp:Button>
-                        <asp:Button Text="All User Accounts" ID="btnAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllUser_Click" runat="server"></asp:Button>
+                        <asp:Button Text="All Sourcing Accounts" ID="btnAllAdmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllAdmin_Click" runat="server"></asp:Button>
+                        <asp:Button Text="All Supplier Accounts" ID="btnAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllUser_Click" runat="server"></asp:Button>
                         <asp:Button Text="Add Account" ID="btnAddUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAddUser_Click" runat="server"></asp:Button>
                         <asp:Button Text="All Active Accounts" ID="btnAllActive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllActive_Click" runat="server"></asp:Button>
                         <asp:Button Text="All Deactive Accounts" ID="btnAllDeactive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllDeactive_Click" runat="server"></asp:Button>
                         <asp:Button Text="Generate Report" ID="btnPrint2" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnPrint2_Click" runat="server"></asp:Button>
-                        
+                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <ajaxtoolkit:modalpopupextender ID="ModalUsers" PopupControlID="PanelUsers" TargetControlID="gvModal" CancelControlID="btnClose" runat="server"></ajaxtoolkit:modalpopupextender>
-                        <asp:Panel ID="PanelUsers" runat="server">
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <asp:Panel ID="PanelUsers"  runat="server">
+                        
+                            <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div class="modal-header" >
+                                <h5 class="modal-title" id="">Print Report</h5>
+                                <button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                       
                         <rsweb:ReportViewer ID="ReportUsers" runat="server" Width="757px" BackColor="White" CssClass="bg-white"></rsweb:ReportViewer>
-                       <asp:Button ID="btnClose" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" />
+                       </div></div>
                             </asp:Panel>
                             </div>
                         </div>
                      </div>
 
      <!--All Admin-->
-    <ajaxtoolkit:modalpopupextender ID="ModalAllAdmin" PopupControlID="PanelAllAdmin" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <ajaxtoolkit:modalpopupextender ID="ModalAllAdmin" PopupControlID="PanelAllAdmin" TargetControlID="gvModal" CancelControlID="btnCloseAllAdmin"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAllAdmin" runat="server">
                      
                     <div class="card shadow mb-4">
 
                             <div class="card-body p-0">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id=""> ALL SOURCING ACCOUNT!</h5>
+                                <button id="btnCloseAllAdmin" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvAllAdmin" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
                                     <Columns>
@@ -66,7 +82,7 @@
                                     </Columns>
                                 </asp:GridView>
                                 </div>
-                                <asp:Button ID="btnCloseAllADmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllADmin_Click" />
+                                
                             </div>
                         </div>
         </asp:Panel>
@@ -74,12 +90,18 @@
 
 
     <!--All User-->
-    <ajaxtoolkit:modalpopupextender ID="ModalAllUser" PopupControlID="PanelAllUser" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <ajaxtoolkit:modalpopupextender ID="ModalAllUser" PopupControlID="PanelAllUser" TargetControlID="gvModal" CancelControlID="btnCloseAllUser"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAllUser" runat="server">
                      
                     <div class="card shadow mb-4">
 
                             <div class="card-body p-0">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id=""> ALL SUPPLIERS ACCOUNT!</h5>
+                                <button id="btnCloseAllUser" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvAllUser" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
                                     <Columns>
@@ -105,7 +127,7 @@
                                     </Columns>
                                 </asp:GridView>
                                 </div>
-                                <asp:Button ID="btnCloseAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllUser_Click" />
+                                
                             </div>
                         </div>
         </asp:Panel>
@@ -117,15 +139,19 @@
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
+                <div class="modal-header">
+                                <h5 class="modal-title" id="">Create an User Account!</h5>
+                                <%--<button id="AddUserbtn" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>--%>
+                            <asp:LinkButton ID="AddUserbtn" runat="server" Text="x" OnClick="AddUserbtn_Click1"/>
+                            </div>
                 <div class="row">
                     
                     <div class="col-lg-10">
                         <div class="p-5">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an User Account!</h1>
-                            </div>
+                            
                             <asp:HiddenField ID="hfId1" runat="server" />
                             <asp:Label Text="" ID="lblError1" ForeColor="Red" Font-Bold="true" runat="server" />
 
@@ -170,8 +196,9 @@
                                 <div class="form-group">
                                                  <label>Select Role Type</label>
                                                  <asp:DropDownList ID="DropDownList" runat="server">
-                                                    <asp:ListItem>Admin</asp:ListItem>
-                                                    <asp:ListItem>User</asp:ListItem>
+                                                    <asp:ListItem>Sourcing</asp:ListItem>
+                                                    <asp:ListItem>Supplier</asp:ListItem>
+                                                     <asp:ListItem>Hub</asp:ListItem>
                                                 </asp:DropDownList>
                                  </div>
 
@@ -182,7 +209,7 @@
                         </div>
                     </div>
                 </div>
-                <asp:Button ID="AddUserbtn" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="AddUserbtn_Click" />
+                
             </div>
         </div>
     </div>
@@ -191,12 +218,18 @@
 
 
     <!--All Active-->
-    <ajaxtoolkit:modalpopupextender ID="ModalAllActive" PopupControlID="PanelAllActive" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <ajaxtoolkit:modalpopupextender ID="ModalAllActive" PopupControlID="PanelAllActive" TargetControlID="gvModal" CancelControlID="btnCloseAllActive"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAllActive" runat="server">
                      
                     <div class="card shadow mb-4">
 
                             <div class="card-body p-0">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="">All Active Accounts!</h5>
+                                <button id="btnCloseAllActive" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvActive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
                                     <Columns>
@@ -222,16 +255,22 @@
                                     </Columns>
                                 </asp:GridView>
                                 </div>
-                                <asp:Button ID="btnCloseAllActive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllActive_Click" />
+                               
                             </div>
                         </div>
         </asp:Panel>
 
      <!--All Deactive-->
-    <ajaxtoolkit:modalpopupextender ID="ModalAllDeactive" PopupControlID="PanelAllDeactive" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <ajaxtoolkit:modalpopupextender ID="ModalAllDeactive" PopupControlID="PanelAllDeactive" TargetControlID="gvModal" CancelControlID="btnCloseAllDeactive"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelAllDeactive" runat="server">
                     <div class="card shadow mb-4">
                             <div class="card-body p-0">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="">All Deactive Accounts!</h5>
+                                <button id="btnCloseAllDeactive" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvAllDeactive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
                                     <Columns>
@@ -257,22 +296,29 @@
                                     </Columns>
                                 </asp:GridView>
                                 </div>
-                                <asp:Button ID="btnCloseAllDeactive" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseAllDeactive_Click" />
+                               
                             </div>
                         </div>
            </asp:Panel>
 
 
     <!-- DataView Example -->
-     <ajaxtoolkit:modalpopupextender ID="ModalView" PopupControlID="PanelView" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+     <ajaxtoolkit:modalpopupextender ID="ModalView" PopupControlID="PanelView" TargetControlID="gvModal"   runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelView" runat="server">
            
            
     <div class="container">
+                             
         <div class="card o-hidden border-0 shadow-lg my-2">
             <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
+                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <%--<button id="btnCloseView" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>--%>
+                                <asp:LinkButton ID="btnCloseView" runat="server" Text="x" OnClick="btnCloseView_Click"/>
+                            </div>
+                <div class="row">   
                     
                     <div class="col-lg-10">
                         <div class="p-5">
@@ -338,7 +384,7 @@
                          </div>
                     </div>
                 </div>
-         <asp:Button ID="Close" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseView_Click" />
+         <%--<asp:Button ID="Close" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseView_Click" />--%>
             </div>
        </div> 
   </div>
@@ -350,17 +396,25 @@
     <ajaxtoolkit:modalpopupextender ID="ModalResetPass" PopupControlID="PanelResetPass" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelResetPass" runat="server">
            <div class="container">
+               
                 <div class="card o-hidden border-0 shadow-lg my-2">
                     <div class="card-body p-0">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="">Reset Password Account!</h5>
+                                <%--<button id="btnCloseReset" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>--%>
+                                <asp:LinkButton ID="btnCloseReset" runat="server" Text="x" OnClick="btnCloseReset_Click"/>
+                            </div>
                 <!-- Nested Row within Card Body -->
                         <div class="row">
                     
                             <div class="col-lg-10">
                                  <div class="p-5">
                                      <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
-                                         <div class="text-center">
+                                         <%--<div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Reset Password Account!</h1>
-                                        </div>
+                                        </div>--%>
                                      <div>
                                           <asp:HiddenField ID="hfIdReset" runat="server" />
                                          <asp:HiddenField ID="hfEmailReset" runat="server" />
@@ -401,7 +455,7 @@
                       </div>
                      </div>
                     </div>
-                        <asp:Button ID="btnCloseReset" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseReset_Click" />
+                        
                    </div>
                   </div>
                 </div>
@@ -429,13 +483,13 @@
                                         
                                                         <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="LinkViewReset" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkViewReset_Click">Reset Password</asp:LinkButton>
+                                                               <asp:LinkButton ID="LinkViewReset" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Onclick="LinkViewReset_Click">Reset Password</asp:LinkButton>
                                                            </ItemTemplate>
                                                         </asp:TemplateField>
                                         
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="LinkView" runat="server" CommandArgument='<%# Eval("Id") %>' Onclick="LinkView_Click">View</asp:LinkButton>
+                                                               <asp:LinkButton ID="LinkView" runat="server"  CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Onclick="LinkView_Click">View</asp:LinkButton>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
                                     </Columns>

@@ -80,7 +80,7 @@
      <!-- DataTales Admin Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Deactivate Admin Account's </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Deactivate Sourcing Account's </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -93,8 +93,8 @@
                                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
                                                         <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
-                                                        <asp:ButtonField DataTextField="DeletedBy" HeaderText="Deleted By" />
-                                                        <asp:ButtonField DataTextField="DeletedDate" HeaderText="Deleted Date" />
+                                                        <asp:ButtonField DataTextField="DeletedBy" HeaderText="Deactivated By" />
+                                                        <asp:ButtonField DataTextField="DeletedDate" HeaderText="Deactivated Date" />
 
                                                         <asp:TemplateField>
                                                            <ItemTemplate>
@@ -183,7 +183,7 @@
     <!-- DataTales Users Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Deactivate User Account's </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Deactivate Supplier Account's </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -196,8 +196,8 @@
                                                         <asp:ButtonField DataTextField="FirstName" HeaderText="First Name" />
                                                         <asp:ButtonField DataTextField="LastName" HeaderText="Last Name" />
                                                         <asp:ButtonField DataTextField="MobileNumber" HeaderText="Mobile Number" />
-                                                        <asp:ButtonField DataTextField="DeletedBy" HeaderText="Deleted By" />
-                                                        <asp:ButtonField DataTextField="DeletedDate" HeaderText="Deleted Date" />
+                                                        <asp:ButtonField DataTextField="DeletedBy" HeaderText="Deactivated By" />
+                                                        <asp:ButtonField DataTextField="DeletedDate" HeaderText="Deactived Date" />
                                                         
                                                         
                                                        <asp:TemplateField>
