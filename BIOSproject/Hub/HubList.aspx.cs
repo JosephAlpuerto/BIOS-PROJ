@@ -6,12 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace BIOSproject.Supplier
 {
     public partial class SupplierList : System.Web.UI.Page
     {
-
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         //SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
@@ -146,6 +147,51 @@ namespace BIOSproject.Supplier
         {
             hfId.Value = "";
             lblSuccess.Text = "";
+        }
+
+        
+
+        
+
+       
+
+        
+        private void Clear1()
+        {
+            TxtSearch.Text = TxtPONo.Text = "";
+        }
+
+        protected void hitCheckClose_Click(object sender, EventArgs e)
+        {
+            Clear1();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand comm = new SqlCommand("select * from SSPRequest where PONumber = '" + TxtSearch.Text + "' ", con);
+            SqlDataReader sdr = comm.ExecuteReader();
+            if (sdr.Read())
+            {
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This PO Number is already use!')", true);
+                TxtPONo.Text = sdr.GetValue(2).ToString();
+                Button1.Enabled = false;
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
+            }
+
+            con.Close();
+        }
+
+        protected void btnValidate_Click(object sender, EventArgs e)
+        {
+            FillGridView();
+            ModalValidate.Show();
         }
     }
 

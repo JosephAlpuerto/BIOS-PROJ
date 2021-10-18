@@ -116,6 +116,7 @@
     <Content Include="AllSupplierRequest.aspx" />
     <Content Include="AllUsers.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Hub\ValidationForm.aspx" />
     <Content Include="img\download.png" />
     <Content Include="img\lbc.png" />
     <Content Include="js\jquery.js" />
@@ -1878,6 +1879,13 @@
     </Compile>
     <Compile Include="Hub\Hub.Master.designer.cs">
       <DependentUpon>Hub.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Hub\ValidationForm.aspx.cs">
+      <DependentUpon>ValidationForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hub\ValidationForm.aspx.designer.cs">
+      <DependentUpon>ValidationForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyRejectedRequestSupp.aspx.cs">
       <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>

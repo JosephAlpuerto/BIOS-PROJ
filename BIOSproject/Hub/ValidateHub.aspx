@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Hub/Hub.Master" AutoEventWireup="true" CodeBehind="ValidateHub.aspx.cs" Inherits="BIOSproject.ValidateSupplier" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-
 
 
      <div class="container">
@@ -11,6 +11,7 @@
                     <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Validate Series</h1>
                             </div>
+         <asp:Label ID="Label7" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
                             <div class="form3">
                 <div class="input_field1">

@@ -200,10 +200,7 @@
                                                     <asp:ListItem>Supplier</asp:ListItem>
                                                      <asp:ListItem Value="Hub">Hub</asp:ListItem>
                                                 </asp:DropDownList>
-                                    <asp:DropDownList ID="BranchCode" runat="server" Visible="false">
-                                        <asp:ListItem>qweqwe</asp:ListItem>
 
-                                    </asp:DropDownList>
                                  </div>
 
                                 <asp:Button Text="Add Account" ID="buttonAddUser1" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="buttonAddUser1_Click"/>
