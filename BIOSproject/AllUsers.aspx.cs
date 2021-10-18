@@ -545,17 +545,7 @@ namespace BIOSproject
 
         protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (DropDownList.SelectedItem.Value == "Hub")
-                {
-                    BranchCode.Visible = true;
-                }
-                else
-                {
-
-                }
-            }
+            
         }
     }
 }

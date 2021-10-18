@@ -14,7 +14,6 @@ namespace BIOSproject
     public partial class ValidateSupplier : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
-        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -36,12 +35,17 @@ namespace BIOSproject
                 TxtSupplier.Text = sdr.GetValue(3).ToString();
                 txtProduct.Text = sdr.GetValue(4).ToString();
                 TxtQuantity.Text = sdr.GetValue(5).ToString();
+                Label7.Visible = false;
             }
             else
             {
-                MessageBox.Show("No Record Found!!");
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
+                //MessageBox.Show("No Record Found!!");
+                Label7.Visible = true;
+                Label7.Text = " No Record Found!";
+                con.Close();
             }
-            con.Close();
+            
         }
     }
 }
