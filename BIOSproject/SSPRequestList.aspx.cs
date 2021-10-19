@@ -79,6 +79,12 @@ namespace BIOSproject
         {
             TxtSearch.Text = TxtPONo.Text = "";
         }
+        private void Clear2()
+        {
+            TxtSearchSeries.Text =  "";
+            //TxtStart.Text = TxtEnd.Text =
+        }
+
 
         protected void btnView_Click(object sender, EventArgs e)
         {
@@ -197,6 +203,45 @@ namespace BIOSproject
         {
             Clear1();
             Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void btnValidateSeries_Click(object sender, EventArgs e)
+        {
+            
+            FillGridView();
+            ModalValidateSeries.Show();
+        }
+
+        protected void hitCheckCloseSeries_Click(object sender, EventArgs e)
+        {
+            Clear2();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SearchSeries";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Search", TxtSearchSeries.Text);
+            conn.Open();
+            
+            SqlDataReader sdr = cmd.ExecuteReader();
+            if (sdr.Read())
+            {
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This Series is already use!')", true);
+                //Button2.Enabled = false;
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
+            }
+
+            con.Close();
         }
     }
 }

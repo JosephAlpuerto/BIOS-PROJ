@@ -10,8 +10,8 @@
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                        <asp:Button Text="HitCheck" ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click" runat="server"></asp:Button>
-                        
+                        <asp:Button Text="HitCheck PO No." ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click" runat="server"></asp:Button>
+                        <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         
                             </div>
@@ -47,7 +47,7 @@
                         <div class="card o-hidden border-0 shadow-lg my-2">
                                 <div class="card-body p-0">
                             <div id="headerDiv" class="modal-header" >
-                                <h5 class="modal-title" id="">HitCheck</h5>
+                                <h5 class="modal-title" id="">HitCheck PO Number</h5>
                                 <%--<button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>--%>
@@ -74,11 +74,6 @@
                     <asp:Label ID="Label2" runat="server" Text="PONumber" CssClass="label"></asp:Label>
                      <asp:TextBox ID="TxtPONo" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>           
-                                
-
-                
-                
-
                 <div class="input_field1">
                     <asp:Button ID="Button1" runat="server" Text="Validate" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" />
         </div>           
@@ -93,6 +88,66 @@
                             </div>
                             </asp:Panel>
 
+
+
+
+
+     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
+        <asp:Panel ID="PanelValidateSeries"  runat="server">
+
+             <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-2">
+                                <div class="card-body p-0">
+                            <div id="headerDivSeries" class="modal-header" >
+                                <h5 class="modal-title" id="">HitCheck Series Number</h5>
+                                <%--<button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>--%>
+                                <asp:LinkButton ID="hitCheckCloseSeries" runat="server" Text="x" OnClick="hitCheckCloseSeries_Click"/>
+
+                            </div>
+
+        <div class="row">
+                    <div class="col-lg-10">
+                        <div class="p-5">
+                            <asp:Label ID="hitcheckerrorSeries" ForeColor="Red" runat="server" Text=""></asp:Label>
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
+                                
+                                <div class="form3">
+               <div class="input_field1">
+                    <%--<label>Date Requested</label>--%>
+                    <asp:Label ID="Label3" runat="server" Text="Enter Series Number" CssClass="label"></asp:Label>
+                    <span id="errmsgSeries"></span>
+                    <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="1" ClientIDMode="Static"></asp:TextBox>
+                </div>
+                   
+                 <%-- <div class="input_field1">
+                    <asp:Label ID="Label5" runat="server" Text="StartingSeries" CssClass="label"></asp:Label>
+                     <asp:TextBox ID="TxtStart" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                </div>     
+                 <div class="input_field1">
+                    <asp:Label ID="Label1" runat="server" Text="EndingSeries" CssClass="label"></asp:Label>
+                     <asp:TextBox ID="TxtEnd" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                </div>--%>
+                                
+
+                
+                
+
+                <div class="input_field1">
+                    <asp:Button ID="Button2" runat="server" Text="Validate" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click" />
+        </div>           
+        </div>         
+                                     </ContentTemplate></asp:UpdatePanel> 
+        </div>
+                              </div>
+                    </div>
+                </div>
+                       </div>
+                        </div>
+                            
+
+        </asp:Panel>
 
 
 
