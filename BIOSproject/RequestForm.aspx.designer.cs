@@ -51,6 +51,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
 
         /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+
+        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,24 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TicketNo;
+
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+
+        /// <summary>
+        /// txtDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
         /// Label1 control.
@@ -114,13 +141,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// txtProduct control.
+        /// drpProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProduct;
+        protected global::System.Web.UI.WebControls.DropDownList drpProduct;
 
         /// <summary>
         /// Label6 control.

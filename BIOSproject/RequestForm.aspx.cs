@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace BIOSproject
@@ -57,9 +58,38 @@ namespace BIOSproject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                using (MailMessage mail = new MailMessage())
+                {
+
+
+
+                    mail.From = new MailAddress("lbcbios08@gmail.com");
+                    mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
+                    mail.Subject = "LBC BIOS";
+                    mail.Body = "Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
+                        + PONo.Text + "<hr>Quantity:</hr>" +txtQuantity.Text+"<hr> Product: </hr>" + drpProduct.SelectedItem.Text + "<hr> Supplier: </hr>" + txtSupplier.Text ;
+                    mail.IsBodyHtml = true;
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Label7.Text = ex.Message;
+            }
+
             var Ticket = TicketNo.Text.Trim();
             var PO = PONo.Text.Trim();
-            var Product = txtProduct.Text.Trim();
+            var Product = drpProduct.Text.Trim();
             var Quantity = txtQuantity.Text.Trim();
            
 
@@ -72,7 +102,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@TicketNo", TicketNo.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PONumber ", PONo.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@Supplier", txtSupplier.SelectedItem.Value);
-            sqlCmd.Parameters.AddWithValue("@Product", txtProduct.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@Product", drpProduct.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text.Trim());
            
             sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
@@ -81,6 +111,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@DownloadFile", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@CancelRequest", "0");
             sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
+            sqlCmd.Parameters.AddWithValue("@DateRequested", txtDate.Text.Trim());
             //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
             //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
             //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
@@ -116,11 +147,12 @@ namespace BIOSproject
             {
                 lblError1.Text = "Error!";
             }
+           
         }
 
         public void Clear()
         {
-            TicketNo.Text = PONo.Text = txtProduct.Text = txtQuantity.Text = "";
+            TicketNo.Text = PONo.Text = txtQuantity.Text = "";
             hfId1.Value = "";
             lblError1.Text = "";
         }
@@ -139,7 +171,7 @@ namespace BIOSproject
                 PONo.Enabled = false;
                 txtSupplier.Enabled = false;
                 txtQuantity.Enabled = false;
-                txtProduct.Enabled = false;
+                drpProduct.Enabled = false;
 
             }
             else
@@ -148,7 +180,7 @@ namespace BIOSproject
                 PONo.Enabled = true;
                 txtSupplier.Enabled = true;
                 txtQuantity.Enabled = true;
-                txtProduct.Enabled = true;
+                drpProduct.Enabled = true;
             }
 
             con.Close();
@@ -166,7 +198,7 @@ namespace BIOSproject
                 TicketNo.Enabled = false;
                 txtSupplier.Enabled = false;
                 txtQuantity.Enabled = false;
-                txtProduct.Enabled = false;
+                drpProduct.Enabled = false;
             }
             else
             {
@@ -174,7 +206,7 @@ namespace BIOSproject
                 TicketNo.Enabled = true;
                 txtSupplier.Enabled = true;
                 txtQuantity.Enabled = true;
-                txtProduct.Enabled = true;
+                drpProduct.Enabled = true;
             }
 
             con.Close();

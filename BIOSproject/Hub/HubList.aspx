@@ -113,62 +113,71 @@
                             </div>
 
                             <div class="forms">
-                                
+                                <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
                                 <asp:HiddenField ID="hfId" runat="server" />
                                 <asp:Label Text="" ID="lblSuccess" ForeColor="Green" Font-Bold="true" runat="server" />
-                 <div class="input_field1">
+                                <%--<div class="input_field1">
                     <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label7" runat="server" Text="Request ID" CssClass="label"></asp:Label>
+                    <%--<asp:Label ID="Label7" runat="server" Text="Request ID" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtRequestID" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
-                </div>
-                <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label6" runat="server" Text="Supplier Request ID" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtSuppRequestID" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
-                </div>
-                <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label4" runat="server" Text="Tracking No." CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtTicket" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
-                </div>
+                </div>--%>
+                                            
                  <div class="input_field1">
+                   <%-- <label>Product</label>--%>
+                    <asp:Label ID="Label12" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtTicket" runat="server" CssClass="input1" TextMode="Number"></asp:TextBox>
+                </div>  
+                 
+               
+                 
+                                
+                 <div class="input_field1">
+                   <%-- <label>Product</label>--%>
+                    <asp:Label ID="Label5" runat="server" Text="Date" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtDate" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
+                </div>
+                                <div class="input_field1">
                     <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label2" runat="server" Text="PO No." CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtPO" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropBranch" runat="server" CssClass="input1"></asp:DropDownList>
+                   <%-- <asp:TextBox ID="DropBranch" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>--%>
                 </div>
 
                  <div class="input_field1">
-                   <%-- <label>Product</label>--%>
-                    <asp:Label ID="Label5" runat="server" Text="Supplier Schedule Request" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtDate" runat="server" CssClass="input1" ></asp:TextBox>
+                    <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
+                      
+                    </asp:DropDownList>
                 </div>
 
                 <div class="input_field1">
                     <%--<label>Date Requested</label>--%>
                     <asp:Label ID="Label3" runat="server" Text="Area" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtArea" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
-                </div>
-                <%--<div class="input_field1">
+                    <asp:DropDownList ID="DropArea" runat="server" CssClass="input1"></asp:DropDownList>
                     
-                    <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
-                      
-                    </asp:DropDownList>
-                </div>--%>
-
-            <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtBranch" ReadOnly="true" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
-
+            <div class="input_field1">
+                    
+                    <asp:Label ID="Label4" runat="server" Text="Starting Series" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtStart" runat="server" CssClass="input1"></asp:TextBox>
+                </div>
                 
 
-                <%--<div class="input_field1">
+                <div class="input_field1">
                     
-                    <asp:Label ID="Label6" runat="server" Text="Starting Series" CssClass="label"></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Text="Ending Series" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtEnd" runat="server" CssClass="input1"></asp:TextBox>
+                </div>
+                                <div class="input_field1">
+                    
+                    <asp:Label ID="Label10" runat="server" Text="Quantity" CssClass="label"></asp:Label>
                     <asp:TextBox ID="TxtQuantity" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>
+                </div>
+                                <div class="input_field1">
+                    
+                    <asp:Label ID="Label11" runat="server" Text="Product" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtProduct" runat="server" CssClass="input1"></asp:TextBox>
+                </div>
 
                 <%--<div class="input_field1">
                    

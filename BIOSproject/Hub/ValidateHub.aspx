@@ -28,7 +28,7 @@
                 <div class="input_field1">
                     <%--<label>Team</label>--%>
                     <asp:Label ID="Label2" runat="server" Text="PONumber" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtPONo" runat="server" CssClass="input1" Enabled="false"></asp:TextBox>
+                     <asp:TextBox ID="TxtPONo" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
 
             <div class="input_field1">
