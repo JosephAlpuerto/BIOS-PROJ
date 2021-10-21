@@ -59,8 +59,6 @@ namespace BIOSproject
             if (sdr.Read())
             {
 
-                //hitcheckerror.Text = "This PO Number is already use!";
-                //MessageBox.Show("This PO Number is Already Use!");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This PO Number is already use!')", true);
                 TxtPONo.Text = sdr.GetValue(2).ToString();
                 Button1.Enabled = false;
@@ -69,8 +67,6 @@ namespace BIOSproject
             else
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
-                //hitcheckerror.Text = "No Record Found!";
-                //MessageBox.Show("No Record Found");
             }
             
             con.Close();
@@ -82,7 +78,7 @@ namespace BIOSproject
         private void Clear2()
         {
             TxtSearchSeries.Text =  "";
-            //TxtStart.Text = TxtEnd.Text =
+            //TxtStart.Text = TxtEnd.Text = "";
         }
 
 
@@ -220,21 +216,34 @@ namespace BIOSproject
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            int start = new int();
+            int end = new int();
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandText = "SearchSeries";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Search", TxtSearchSeries.Text);
+            cmd.Parameters.AddWithValue("@startmin", start);
+            cmd.Parameters.AddWithValue("@endmax", end);
             conn.Open();
-            
+            SqlCommand sql = new SqlCommand();
+            string sqlquery = "select * from SSPRequest where StartingSeries like '%'+@start+'%' or EndingSeries like '%'+@end+'%' ";
+            sql.CommandText = sqlquery;
+            sql.Connection = conn;
+            sql.Parameters.AddWithValue("@start", TxtSearchSeries.Text);
+            sql.Parameters.AddWithValue("@end", TxtSearchSeries.Text);
+            DataTable dt = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(sql);
+            sda.Fill(dt);
+
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This Series is already use!')", true);
-                //Button2.Enabled = false;
-
+                    gridview.DataSource = dt;
+                    gridview.DataBind();
+                    gridview.UseAccessibleHeader = true;
             }
             else
             {

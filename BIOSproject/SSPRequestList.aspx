@@ -94,6 +94,25 @@
 
      <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+            <script src="js/jquery.js"></script>
+            <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+                <script>
+                    $(document).ready(function () {
+                        $("#TxtSearchSeries").keypress(function (e) {
+                            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                                $("#errmsgSeries").html("Numbers Only").show().fadeOut("slow");
+                                return false;
+                            }
+                        });
+                    });
+                </script>
+                        <style>
+                            #errmsgSeries {
+                                color: red;
+                            }
+                        </style>
 
              <div class="container">
                         <div class="card o-hidden border-0 shadow-lg my-2">
@@ -115,13 +134,23 @@
                                 
                                 <div class="form3">
                <div class="input_field1">
+                    <asp:HiddenField ID="hfId1" runat="server" />
                     <%--<label>Date Requested</label>--%>
                     <asp:Label ID="Label3" runat="server" Text="Enter Series Number" CssClass="label"></asp:Label>
                     <span id="errmsgSeries"></span>
-                    <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="1" ClientIDMode="Static"></asp:TextBox>
+                    <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="2" ClientIDMode="Static"></asp:TextBox>
+
+                   <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This is a Sequence on Series!">
+                    <Columns>
+                       <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
+                        <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
+                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
+                    </Columns>
+                   </asp:GridView>
                 </div>
+
                    
-                 <%-- <div class="input_field1">
+                  <%--<div class="input_field1">
                     <asp:Label ID="Label5" runat="server" Text="StartingSeries" CssClass="label"></asp:Label>
                      <asp:TextBox ID="TxtStart" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>     
@@ -129,6 +158,12 @@
                     <asp:Label ID="Label1" runat="server" Text="EndingSeries" CssClass="label"></asp:Label>
                      <asp:TextBox ID="TxtEnd" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>--%>
+               <%-- <div class="input_field1">
+                    <asp:Label ID="Label6" runat="server" Text="PONumber" CssClass="label"></asp:Label>
+                     <asp:TextBox ID="TxtPONoSeries" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                </div>--%>  
+
+                    
                                 
 
                 
