@@ -219,7 +219,6 @@
                                          <asp:ButtonField DataTextField="ScheduleRequest" HeaderText="Scedule Request" />
                                         <asp:ButtonField DataTextField="Area" HeaderText="Area" />
                                         <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
-                                        <asp:ButtonField DataTextField="CreatedBy" HeaderText="CreatedBy" />
                                         <asp:ButtonField DataTextField="CreatedDate" HeaderText="CreatedDate" />
 
                                                        <asp:TemplateField>

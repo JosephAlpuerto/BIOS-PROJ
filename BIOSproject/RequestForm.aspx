@@ -105,7 +105,7 @@
                 <div class="input_field1">
 
                     <asp:Label ID="Label2" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="txtSupplier" runat="server" CssClass="input1" DataSourceID="SqlDataSource1" DataTextField="Username" DataValueField="Username">
+                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataTextField="Username" DataValueField="Username">
                     </asp:DropDownList>
                 </div>
 
@@ -114,8 +114,6 @@
                 <div class="input_field1">
                     <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label"></asp:Label>
                     <asp:DropDownList ID="drpProduct" runat="server" CssClass="input1">
-                        <asp:ListItem>KB MINI</asp:ListItem>
-                        <asp:ListItem>Kilo Box MINI</asp:ListItem>
                     </asp:DropDownList>
                 </div>
 
@@ -126,7 +124,7 @@
                 </div>
 
                 <div class="input_field1">
-                    <asp:Button ID="Button1" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" />
+                    <asp:Button ID="Button1" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click"/>
                 </div>
 
 

@@ -20,73 +20,96 @@ namespace BIOSproject
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if (!IsPostBack)
-            //{
-            //    string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-            //    string sqlquery = "select * from Areas";
-            //    SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
-            //    conn.Open();
-            //    SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-            //    DataTable dt = new DataTable();
-            //    sdr.Fill(dt);
-            //    DropArea.DataSource = dt;
-            //    DropArea.DataTextField = "AreaDescr";
-            //    DropArea.DataValueField = "AreaDescr";
-            //    DropArea.DataBind();
-            //    conn.Close();
+            if (!IsPostBack)
+            {
+            string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+            string sqlquery = "select * from Supplier";
+            SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
+            conn.Open();
+            SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+            DataTable dt = new DataTable();
+            sdr.Fill(dt);
+            dropSupplier.DataSource = dt;
+            dropSupplier.DataTextField = "SupplierName";
+            dropSupplier.DataValueField = "SupplierName";
+            dropSupplier.DataBind();
+            conn.Close();
+
+                string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                string sqlqueryy = "select * from Product where ProductName != '"+null+"'";
+                SqlCommand sqlcom = new SqlCommand(sqlqueryy, con);
+                conn.Open();
+                SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
+                DataTable td = new DataTable();
+                dr.Fill(td);
+                drpProduct.DataSource = td;
+                drpProduct.DataTextField = "ProductName";
+                drpProduct.DataValueField = "ProductName";
+                drpProduct.DataBind();
+                conn.Close();
 
 
 
-            //    string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-            //    string sqlqueryy = "select * from ref_Branches";
-            //    SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
-            //    con.Open();
-            //    SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
-            //    DataSet ds = new DataSet();
-            //    sd.Fill(ds);
-            //    DropTeam.DataSource = ds;
-            //    DropTeam.DataTextField = "TeamDescr";
-            //    DropTeam.DataValueField = "TeamDescr";
-            //    DropTeam.DataBind();
-            //    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            //    {
+                //if(TicketNo.Text != "" || PONo.Text != "" || txtQuantity.Text !="")
+                //{
+                //    Button1.Enabled = true;
+                //}
+                //    string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                //    string sqlqueryy = "select * from ref_Branches";
+                //    SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
+                //    con.Open();
+                //    SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
+                //    DataSet ds = new DataSet();
+                //    sd.Fill(ds);
+                //    DropTeam.DataSource = ds;
+                //    DropTeam.DataTextField = "TeamDescr";
+                //    DropTeam.DataValueField = "TeamDescr";
+                //    DropTeam.DataBind();
+                //    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //    {
 
-            //        DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
-            ////    }
-            //}
+                //        DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
+                ////    }
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
-            try
+            if (TicketNo.Text != "" || PONo.Text != "" || txtQuantity.Text != "")
             {
-                using (MailMessage mail = new MailMessage())
+
+                try
                 {
-
-
-
-                    mail.From = new MailAddress("lbcbios08@gmail.com");
-                    mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
-                    mail.Subject = "LBC BIOS";
-                    mail.Body = "Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
-                        + PONo.Text + "<hr>Quantity:</hr>" +txtQuantity.Text+"<hr> Product: </hr>" + drpProduct.SelectedItem.Text + "<hr> Supplier: </hr>" + txtSupplier.Text ;
-                    mail.IsBodyHtml = true;
-                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    using (MailMessage mail = new MailMessage())
                     {
-                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
-                        smtp.EnableSsl = true;
-                        smtp.Send(mail);
+
+
+
+                        mail.From = new MailAddress("lbcbios08@gmail.com");
+                        mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
+                        mail.Subject = "LBC BIOS";
+                        mail.Body = "Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
+                            + PONo.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr> Product: </hr>" + drpProduct.SelectedItem.Text + "<hr> Supplier: </hr>" + dropSupplier.Text;
+                        mail.IsBodyHtml = true;
+                        using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                        {
+                            smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                            smtp.EnableSsl = true;
+                            smtp.Send(mail);
+                        }
+
+
                     }
-
-
+                }
+                catch (Exception ex)
+                {
+                    Label7.Text = ex.Message;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Label7.Text = ex.Message;
+                MessageBox.Show("Fill up all forms");
             }
-
             var Ticket = TicketNo.Text.Trim();
             var PO = PONo.Text.Trim();
             var Product = drpProduct.Text.Trim();
@@ -101,7 +124,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@Id", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@TicketNo", TicketNo.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PONumber ", PONo.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Supplier", txtSupplier.SelectedItem.Value);
+            sqlCmd.Parameters.AddWithValue("@Supplier", dropSupplier.SelectedItem.Value);
             sqlCmd.Parameters.AddWithValue("@Product", drpProduct.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text.Trim());
            
@@ -169,7 +192,7 @@ namespace BIOSproject
 
                 lblError1.Text = "Ticket Number Already Exists!!";
                 PONo.Enabled = false;
-                txtSupplier.Enabled = false;
+                dropSupplier.Enabled = false;
                 txtQuantity.Enabled = false;
                 drpProduct.Enabled = false;
 
@@ -178,7 +201,7 @@ namespace BIOSproject
             {
                 lblError1.Text = "";
                 PONo.Enabled = true;
-                txtSupplier.Enabled = true;
+                dropSupplier.Enabled = true;
                 txtQuantity.Enabled = true;
                 drpProduct.Enabled = true;
             }
@@ -196,7 +219,7 @@ namespace BIOSproject
 
                 lblError1.Text = "PO Number Already Exists!!";
                 TicketNo.Enabled = false;
-                txtSupplier.Enabled = false;
+                dropSupplier.Enabled = false;
                 txtQuantity.Enabled = false;
                 drpProduct.Enabled = false;
             }
@@ -204,7 +227,7 @@ namespace BIOSproject
             {
                 lblError1.Text = "";
                 TicketNo.Enabled = true;
-                txtSupplier.Enabled = true;
+                dropSupplier.Enabled = true;
                 txtQuantity.Enabled = true;
                 drpProduct.Enabled = true;
             }

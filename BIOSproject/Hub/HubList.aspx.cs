@@ -40,7 +40,7 @@ namespace BIOSproject.Supplier
 
 
                 string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                string sqlqueryy = "select * from ref_Branches";
+                string sqlqueryy = "select * from ref_Branches where TeamDescr != '"+null+"'";
                 SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
                 con.Open();
                 SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
@@ -60,6 +60,21 @@ namespace BIOSproject.Supplier
         }
         void FillGridView()
         {
+            //string cs = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+            //using(SqlConnection connn  = new SqlConnection(cs))
+            //{
+            //    connn.Open();
+            //    SqlCommand cmd = new SqlCommand("ListShow", connn);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    SqlDataReader sdr = cmd.ExecuteReader();
+            //    if (sdr.HasRows == true)
+            //    {
+            //        Gridview1.DataSource = sdr;
+            //        Gridview1.DataBind();
+
+            //    }
+            //}
+
 
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
@@ -87,33 +102,7 @@ namespace BIOSproject.Supplier
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (MailMessage mail = new MailMessage())
-                {
-
-
-
-                    mail.From = new MailAddress("lbcbios08@gmail.com");
-                    mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
-                    mail.Subject = "LBC BIOS";
-                    mail.Body = "Requesting for Series of Barcodes with Ticket#: " + txtTicket.Text  ;
-                    mail.IsBodyHtml = true;
-                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
-                    {
-                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
-                        smtp.EnableSsl = true;
-                        smtp.Send(mail);
-                        MessageBox.Show("Email Sent");
-                    }
-
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Label7.Text = ex.Message;
-            }
+           
 
         }
         //var ResquestID = txtSuppRequestID.Text.Trim();
