@@ -45,36 +45,36 @@ namespace BIOSproject
 
         }
 
-        protected void btnValidate_Click(object sender, EventArgs e)
-        {
-            FillGridView();
-            ModalValidate.Show();
-        }
+        //protected void btnValidate_Click(object sender, EventArgs e)
+        //{
+        //    FillGridView();
+        //    ModalValidate.Show();
+        //}
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            con.Open();
-            SqlCommand comm = new SqlCommand("select * from SSPRequest where PONumber = '" + TxtSearch.Text + "' ", con);
-            SqlDataReader sdr = comm.ExecuteReader();
-            if (sdr.Read())
-            {
+        //protected void Button1_Click(object sender, EventArgs e)
+        //{
+        //    con.Open();
+        //    SqlCommand comm = new SqlCommand("select * from SSPRequest where PONumber = '" + TxtSearch.Text + "' ", con);
+        //    SqlDataReader sdr = comm.ExecuteReader();
+        //    if (sdr.Read())
+        //    {
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This PO Number is already use!')", true);
-                TxtPONo.Text = sdr.GetValue(2).ToString();
-                Button1.Enabled = false;
+        //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This PO Number is already use!')", true);
+        //        TxtPONo.Text = sdr.GetValue(2).ToString();
+        //        Button1.Enabled = false;
                
-            }
-            else
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
-            }
+        //    }
+        //    else
+        //    {
+        //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
+        //    }
             
-            con.Close();
-        }
-        private void Clear1()
-        {
-            TxtSearch.Text = TxtPONo.Text = "";
-        }
+        //    con.Close();
+        //}
+        //private void Clear1()
+        //{
+        //    TxtSearch.Text = TxtPONo.Text = "";
+        //}
         private void Clear2()
         {
             TxtSearchSeries.Text =  "";
@@ -195,11 +195,11 @@ namespace BIOSproject
             lblSuccess.Text = "Cancel Request Successfully!";
         }
 
-        protected void hitCheckClose_Click(object sender, EventArgs e)
-        {
-            Clear1();
-            Response.Redirect(Request.Url.AbsoluteUri);
-        }
+        //protected void hitCheckClose_Click(object sender, EventArgs e)
+        //{
+        //    Clear1();
+        //    Response.Redirect(Request.Url.AbsoluteUri);
+        //}
 
         protected void btnValidateSeries_Click(object sender, EventArgs e)
         {

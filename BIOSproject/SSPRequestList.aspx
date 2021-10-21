@@ -10,7 +10,7 @@
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                        <asp:Button Text="HitCheck PO No." ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click" runat="server"></asp:Button>
+                        <%--<asp:Button Text="HitCheck PO No." ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click" runat="server"></asp:Button>--%>
                         <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         
@@ -19,7 +19,7 @@
                      </div>
 
 
-     <ajaxtoolkit:modalpopupextender ID="ModalValidate" PopupControlID="PanelValidate" TargetControlID="gvModal"  PopupDragHandleControlID="headerDiv" runat="server"></ajaxtoolkit:modalpopupextender>
+   <%--  <ajaxtoolkit:modalpopupextender ID="ModalValidate" PopupControlID="PanelValidate" TargetControlID="gvModal"  PopupDragHandleControlID="headerDiv" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidate"  runat="server">
                      
            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
@@ -48,9 +48,6 @@
                                 <div class="card-body p-0">
                             <div id="headerDiv" class="modal-header" >
                                 <h5 class="modal-title" id="">HitCheck PO Number</h5>
-                                <%--<button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>--%>
                                 <asp:LinkButton ID="hitCheckClose" runat="server" Text="x" OnClick="hitCheckClose_Click"/>
 
                             </div>
@@ -63,14 +60,14 @@
                                 
                                 <div class="form3">
                <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
+
                     <asp:Label ID="Label4" runat="server" Text="Enter PO Number" CssClass="label"></asp:Label>
                     <span id="errmsg1"></span>
                     <asp:TextBox ID="TxtSearch" runat="server" CssClass="input1" AccessKey="1" ClientIDMode="Static"></asp:TextBox>
                 </div>
                    
                   <div class="input_field1">
-                    <%--<label>Team</label>--%>
+          
                     <asp:Label ID="Label2" runat="server" Text="PONumber" CssClass="label"></asp:Label>
                      <asp:TextBox ID="TxtPONo" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>           
@@ -85,7 +82,7 @@
                 </div>
                        </div>
                         </div>
-                            </asp:Panel>
+                            </asp:Panel>--%>
 
 
 
