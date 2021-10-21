@@ -83,10 +83,16 @@
             <div class="form2">
 
                 <div class="input_field1">
+                    <asp:Label ID="Label7" runat="server"></asp:Label>
 
                     <asp:Label ID="Label4" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
                     <span id="errmsg"></span>
                     <asp:TextBox ID="TicketNo" runat="server" CssClass="input1" AutoPostBack="True" OnTextChanged="TicketNo_TextChanged" AccessKey="9" ClientIDMode="Static"></asp:TextBox>
+                </div>
+
+                <div class="input_field1">
+                    <asp:Label ID="Label3" runat="server" Text="Requested Date:" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtDate" runat="server" CssClass="input1" AutoPostBack="True" AccessKey="9" ClientIDMode="Static" TextMode="Date"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
@@ -107,8 +113,10 @@
 
                 <div class="input_field1">
                     <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label"></asp:Label>
-                    <%--<span id="errmsg4"></span>--%>
-                    <asp:TextBox ID="txtProduct" runat="server" CssClass="input1" AccessKey="6" ClientIDMode="Static"></asp:TextBox>
+                    <asp:DropDownList ID="drpProduct" runat="server" CssClass="input1">
+                        <asp:ListItem>KB MINI</asp:ListItem>
+                        <asp:ListItem>Kilo Box MINI</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
 
                 <div class="input_field1">
