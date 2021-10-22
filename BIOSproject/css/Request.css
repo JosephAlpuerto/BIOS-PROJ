@@ -44,4 +44,18 @@
             color: White;
         }
 
+        .container .form3 .input_field1 .btnCancel {
+            width: 40%;
+            padding: 8px 10px;
+            margin-left: 150px;
+            margin-top: 20px;
+            font-size: 15px;
+            border: 1px;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+            background-color: #d00149;
+            color: White;
+        }
+
 

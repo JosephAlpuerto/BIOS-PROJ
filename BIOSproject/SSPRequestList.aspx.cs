@@ -85,14 +85,14 @@ namespace BIOSproject
         protected void btnView_Click(object sender, EventArgs e)
         {
             int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
-      
+
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
             SqlDataAdapter sqlData = new SqlDataAdapter("ViewAllByIdSSPRequest", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
-           
+
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
             sqlCon.Close();
@@ -105,6 +105,8 @@ namespace BIOSproject
             txtSupplierView.Text = dtbl.Rows[0]["Supplier"].ToString();
             txtProductView.Text = dtbl.Rows[0]["Product"].ToString();
             txtQuantityView.Text = dtbl.Rows[0]["Quantity"].ToString();
+            ModalView.Show();
+
             FillGridView();
         }
 
@@ -251,5 +253,7 @@ namespace BIOSproject
 
             con.Close();
         }
+
+       
     }
 }
