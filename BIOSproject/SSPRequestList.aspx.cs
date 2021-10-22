@@ -106,7 +106,6 @@ namespace BIOSproject
             txtProductView.Text = dtbl.Rows[0]["Product"].ToString();
             txtQuantityView.Text = dtbl.Rows[0]["Quantity"].ToString();
             FillGridView();
-            ModalView.Show();
         }
 
         protected void btnUpdateView_Click(object sender, EventArgs e)
