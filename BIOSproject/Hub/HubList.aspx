@@ -13,9 +13,25 @@
                             <h1 class="h3 mb-0 text-gray-800">Tables</h1>
                         <%--<asp:Button Text="HitCheck" ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click"  runat="server"></asp:Button>--%>
                         <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
-                        <asp:Button Text="Download to Excel" ID="btnDownload" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"  runat="server"></asp:Button>
+                        <asp:Button Text="Print Report" ID="btnDownload" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnDownload_Click" runat="server"></asp:Button>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         
+                        <ajaxtoolkit:modalpopupextender ID="ModalReport" PopupControlID="PanelReport" TargetControlID="gvModal" PopupDragHandleControlID="headerReport"  CancelControlID="btnCloseReport" runat="server"></ajaxtoolkit:modalpopupextender>
+                        <asp:Panel ID="PanelReport"  runat="server">
+                        
+                            <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div id="headerReport" class="modal-header" >
+                                <h5 class="modal-title" id="">Print Report</h5>
+                                <button id="btnCloseReport" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                       
+                        <rsweb:ReportViewer ID="ReportRequest" runat="server" Width="1150px" Height="500px" BackColor="White" CssClass="bg-white"></rsweb:ReportViewer>
+                       </div></div>
+                            </asp:Panel>
                             </div>
                         </div>
                      </div>

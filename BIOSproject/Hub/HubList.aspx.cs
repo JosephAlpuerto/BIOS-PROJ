@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.Net.Mail;
 using System.IO;
+using Microsoft.Reporting.WebForms;
 
 namespace BIOSproject.Supplier
 {
@@ -162,7 +163,25 @@ namespace BIOSproject.Supplier
             con.Close();
         }
 
-       
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "PrintReport";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            conn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            conn.Close();
+
+            ReportRequest.LocalReport.DataSources.Add(new ReportDataSource("DataSetReportRequest", dt));
+            ReportRequest.LocalReport.ReportPath = Server.MapPath("~/Report/ReportRequest.rdlc");
+            ReportRequest.LocalReport.EnableHyperlinks = true;
+            FillGridView();
+            ModalReport.Show();
+        }
 
        
     }
