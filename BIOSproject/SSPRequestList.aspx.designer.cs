@@ -123,6 +123,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
+        /// ModalView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalView;
+
+        /// <summary>
         /// PanelView control.
         /// </summary>
         /// <remarks>

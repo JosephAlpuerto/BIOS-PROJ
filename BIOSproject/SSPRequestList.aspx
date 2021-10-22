@@ -87,8 +87,7 @@
 
 
 
-
-     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
+     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal" PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
@@ -184,10 +183,40 @@
 
 
 
+        
+      <ajaxtoolkit:modalpopupextender ID="ModalView" PopupControlID="PanelView" TargetControlID="gvModal" runat="server"  ></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelView" runat="server">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+            <script src="js/jquery.js"></script>
+            <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+                
+            <script>
+                $(document).ready(function () {
+                    $("#txtQuantityView").keypress(function (e) {
+                        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                            $("#errmsg5").html("Numbers Only").show().fadeOut("slow");
+                            return false;
+                        }
+                    });
+                });
+            </script>
+                        <style>
+                            #errmsg5 {
+                                color: red;
+                            }
+                        </style>
 
-    <div class="modal" id="formModal" tabindex="1">
-                    <div class="modal-body">
-                        <asp:Panel ID="PanelView" runat="server">
+           <script>
+               $(document).ready(function () {
+                   $('#txtProductView').bind('keyup blur', function () {
+                       var node = $(this);
+                       node.val(node.val().replace(/[^a-z]/g, ''));
+                   }
+                   );
+               });
+           </script>
+
                         <div class="container">
                              
         <div class="card o-hidden border-0 shadow-lg my-2">
@@ -284,12 +313,10 @@
 
 
 
-                    </div>
-            </div>
-
 
             
            </asp:Panel>
+
 
 
 
@@ -331,7 +358,7 @@
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
 
-                                                               <asp:LinkButton ID="btnView" runat="server" data-target="#formModal" data-toggle="modal" Text="View" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
+                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
                                                                 <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>       
