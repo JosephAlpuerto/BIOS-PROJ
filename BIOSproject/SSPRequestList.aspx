@@ -87,8 +87,7 @@
 
 
 
-
-     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
+     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal" PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
@@ -183,29 +182,56 @@
 
 
 
+      <ajaxtoolkit:modalpopupextender ID="ModalView" PopupControlID="PanelView" TargetControlID="gvModal" runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelView" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
+           <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+            <script src="js/jquery.js"></script>
+            <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+                
+            <script>
+                $(document).ready(function () {
+                    $("#txtQuantityView").keypress(function (e) {
+                        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                            $("#errmsg5").html("Numbers Only").show().fadeOut("slow");
+                            return false;
+                        }
+                    });
+                });
+            </script>
+                        <style>
+                            #errmsg5 {
+                                color: red;
+                            }
+                        </style>
 
+           <script>
+               $(document).ready(function () {
+                   $('#txtProductView').bind('keyup blur', function () {
+                       var node = $(this);
+                       node.val(node.val().replace(/[^a-z]/g, ''));
+                   }
+                   );
+               });
+           </script>
 
-    <div class="modal" id="formModal" tabindex="1">
-                    <div class="modal-body">
-                        <asp:Panel ID="PanelView" runat="server">
-                        <div class="container">
+                       
                              
         <div class="card o-hidden border-0 shadow-lg my-2">
             <div class="card-body p-0">
                 <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                <%--<button id="btnCloseView" class="close" type="button" data-dismiss="modal" aria-label="Close" >
-                                    <span aria-hidden="true">×</span>
-                                </button>--%>
                                 
                                     <asp:LinkButton ID="btnCloseView" runat="server" Text="x" OnClick="btnCloseView_Click1"/>
                                
                             </div>
                 
 
-
+                 <div class="container">
 
                 <div class="row">
+                    
                     <div class="col-lg-10">
                         <div class="p-5">
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
@@ -213,17 +239,17 @@
                              <asp:HiddenField ID="hfId" runat="server" />
                              <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
                              <asp:Label ID="lblSuccess" runat="server" ForeColor="Green"></asp:Label>
-                                 
-                 <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label7" runat="server" Text="Request ID" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtRequestIDView" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>
+                  
 
                 <div class="input_field1">
 
                     <asp:Label ID="Label8" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtTicketNoView" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                </div>
+                                 <div class="input_field1">
+
+                    <asp:Label ID="Label2" runat="server" Text="Request ID" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtRequestIDView" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
                 <div class="input_field1">
                     <%--<label>Team</label>--%>
@@ -264,7 +290,6 @@
                     <asp:Button ID="btnUpdateView" runat="server" Text="Update" CssClass="btn btn-primary btn-user btn-block" OnClick="btnUpdateView_Click" />
                 <asp:Button ID="btnCancelRequest" runat="server" Text="CancelRequest" CssClass="btn btn-primary btn-user btn-block" OnClick="btnCancelRequest_Click" />
                     </div> 
-                   
 
                                     
         </div>
@@ -281,15 +306,10 @@
             </div>
        </div> 
   </div>
+               </div>
 
-
-
-                    </div>
-            </div>
-
-
-            
            </asp:Panel>
+
 
 
 
@@ -331,7 +351,7 @@
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
 
-                                                               <asp:LinkButton ID="btnView" runat="server" data-target="#formModal" data-toggle="modal" Text="View" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
+                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
                                                                 <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>       
