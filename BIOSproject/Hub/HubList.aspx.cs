@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.IO;
 
 namespace BIOSproject.Supplier
 {
@@ -60,22 +61,6 @@ namespace BIOSproject.Supplier
         }
         void FillGridView()
         {
-            //string cs = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-            //using(SqlConnection connn  = new SqlConnection(cs))
-            //{
-            //    connn.Open();
-            //    SqlCommand cmd = new SqlCommand("ListShow", connn);
-            //    cmd.CommandType = CommandType.StoredProcedure;
-            //    SqlDataReader sdr = cmd.ExecuteReader();
-            //    if (sdr.HasRows == true)
-            //    {
-            //        Gridview1.DataSource = sdr;
-            //        Gridview1.DataBind();
-
-            //    }
-            //}
-
-
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
@@ -105,45 +90,7 @@ namespace BIOSproject.Supplier
            
 
         }
-        //var ResquestID = txtSuppRequestID.Text.Trim();
-        //var Ticket = txtTicket.Text.Trim();
-        //var PO = txtPO.Text.Trim();
-
-
-        //SqlConnection sqlCon = new SqlConnection(ConnectionString);
-        //if (sqlCon.State == ConnectionState.Closed)
-        //    sqlCon.Open();
-        //SqlCommand sqlCmd = new SqlCommand("IdCreateSuppRequest", sqlCon);
-        //sqlCmd.CommandType = CommandType.StoredProcedure;
-        //sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
-        //sqlCmd.Parameters.AddWithValue("@RequestID", txtSuppRequestID.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@TicketNO ", txtTicket.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@PoNO", txtPO.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@ScheduleRequest", txtDate.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@Area", txtArea.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@Branch", txtBranch.Text.Trim());
-        //sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-        //sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
-        //sqlCmd.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
-        //sqlCmd.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
-        //sqlCmd.Parameters.AddWithValue("@DeletedBy", Convert.DBNull);
-        //sqlCmd.Parameters.AddWithValue("@DeletedDate", Convert.DBNull);
-        //sqlCmd.Parameters.AddWithValue("@IsActive", "1");
-        //sqlCmd.ExecuteNonQuery();
-        //sqlCon.Close();
-        //Clear();
-        //FillGridView();
-        //string Id = hfId.Value;
-
-        //// validations
-        //if (Id == "")
-        //{
-        //    lblSuccess.Text = "New Request added Successfully!";
-        //}
-        //else
-        //{
-        //    lblSuccess.Text = "Please Cornfirm your Details!";
-        //}
+      
     
 
         private void Clear()
@@ -159,29 +106,53 @@ namespace BIOSproject.Supplier
        
 
         
-        private void Clear1()
-        {
-            TxtSearch.Text = TxtPONo.Text = "";
-        }
+      
 
-        protected void hitCheckClose_Click(object sender, EventArgs e)
+        protected void btnValidateSeries_Click(object sender, EventArgs e)
         {
-            Clear1();
+            FillGridView();
+            ModalValidateSeries.Show();
+        }
+        protected void hitCheckCloseSeries_Click(object sender, EventArgs e)
+        {
+            Clear2();
             Response.Redirect(Request.Url.AbsoluteUri);
         }
-
-        protected void Button1_Click(object sender, EventArgs e)
+        private void Clear2()
         {
-            con.Open();
-            SqlCommand comm = new SqlCommand("select * from SSPRequest where PONumber = '" + TxtSearch.Text + "' ", con);
-            SqlDataReader sdr = comm.ExecuteReader();
+            TxtSearchSeries.Text = "";
+            //TxtStart.Text = TxtEnd.Text = "";
+        }
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            int start = new int();
+            int end = new int();
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SearchSeries";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Search", TxtSearchSeries.Text);
+            cmd.Parameters.AddWithValue("@startmin", start);
+            cmd.Parameters.AddWithValue("@endmax", end);
+            conn.Open();
+            SqlCommand sql = new SqlCommand();
+            string sqlquery = "select * from SSPRequest where StartingSeries like '%'+@start+'%' or EndingSeries like '%'+@end+'%' ";
+            sql.CommandText = sqlquery;
+            sql.Connection = conn;
+            sql.Parameters.AddWithValue("@start", TxtSearchSeries.Text);
+            sql.Parameters.AddWithValue("@end", TxtSearchSeries.Text);
+            DataTable dt = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(sql);
+            sda.Fill(dt);
+
+            SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This PO Number is already use!')", true);
-                TxtPONo.Text = sdr.GetValue(2).ToString();
-                Button1.Enabled = false;
-
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This Series is already use!')", true);
+                gridview.DataSource = dt;
+                gridview.DataBind();
+                gridview.UseAccessibleHeader = true;
             }
             else
             {
@@ -191,11 +162,9 @@ namespace BIOSproject.Supplier
             con.Close();
         }
 
-        protected void btnValidate_Click(object sender, EventArgs e)
-        {
-            FillGridView();
-            ModalValidate.Show();
-        }
+       
+
+       
     }
 
     }

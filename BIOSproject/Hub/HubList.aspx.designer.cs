@@ -15,13 +15,22 @@ namespace BIOSproject.Supplier
     {
 
         /// <summary>
-        /// btnValidate control.
+        /// btnValidateSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnValidate;
+        protected global::System.Web.UI.WebControls.Button btnValidateSeries;
+
+        /// <summary>
+        /// btnDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDownload;
 
         /// <summary>
         /// ScriptManager1 control.
@@ -33,85 +42,94 @@ namespace BIOSproject.Supplier
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// ModalValidate control.
+        /// ModalValidateSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalValidate;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalValidateSeries;
 
         /// <summary>
-        /// PanelValidate control.
+        /// PanelValidateSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelValidate;
+        protected global::System.Web.UI.WebControls.Panel PanelValidateSeries;
 
         /// <summary>
-        /// hitCheckClose control.
+        /// hitCheckCloseSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton hitCheckClose;
+        protected global::System.Web.UI.WebControls.LinkButton hitCheckCloseSeries;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// hitcheckerrorSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Label hitcheckerrorSeries;
 
         /// <summary>
-        /// Label8 control.
+        /// UpdatePanel3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
 
         /// <summary>
-        /// TxtSearch control.
+        /// HiddenField1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSearch;
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
 
         /// <summary>
-        /// Label9 control.
+        /// Label13 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label Label13;
 
         /// <summary>
-        /// TxtPONo control.
+        /// TxtSearchSeries control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPONo;
+        protected global::System.Web.UI.WebControls.TextBox TxtSearchSeries;
 
         /// <summary>
-        /// Button1 control.
+        /// gridview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.GridView gridview;
+
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
         /// ModalRequest control.
