@@ -159,13 +159,13 @@ namespace BIOSproject.Supplier
         protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// ModalRequest control.
+        /// ModalDestination control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalRequest;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalDestination;
 
         /// <summary>
         /// PanelRequest control.

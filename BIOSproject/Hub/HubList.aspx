@@ -137,7 +137,7 @@
 
 
     
-     <ajaxtoolkit:modalpopupextender ID="ModalRequest" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
+     <ajaxtoolkit:modalpopupextender ID="ModalDestination" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelRequest" runat="server">
            
            <div class="container">
@@ -261,13 +261,14 @@
                                          <asp:ButtonField DataTextField="ScheduleRequest" HeaderText="Scedule Request" />
                                         <asp:ButtonField DataTextField="Area" HeaderText="Area" />
                                         <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
+                                        <asp:ButtonField DataTextField="CreatedBy" HeaderText="SupplierName" />
                                         <asp:ButtonField DataTextField="CreatedDate" HeaderText="CreatedDate" />
 
-                                                      <%-- <asp:TemplateField>
+                                                       <asp:TemplateField>
                                                            <ItemTemplate>
                                                                <asp:Button ID="btnRequest" runat="server" Text="Destination" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
+                                                       </asp:TemplateField>
 
                                                        <%-- <asp:TemplateField>
                                                            <ItemTemplate>

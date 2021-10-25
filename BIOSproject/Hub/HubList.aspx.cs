@@ -81,7 +81,7 @@ namespace BIOSproject.Supplier
         protected void btnRequest_Click(object sender, EventArgs e)
         {
 
-            ModalRequest.Show();
+            ModalDestination.Show();
             FillGridView();
 
         }
