@@ -60,6 +60,8 @@ namespace BIOSproject
             txtPO.Text = dtbl.Rows[0]["PONumber"].ToString();
             txtStart.Text = dtbl.Rows[0]["StartingSeries"].ToString();
             txtEnd.Text = dtbl.Rows[0]["EndingSeries"].ToString();
+            Product.Value = dtbl.Rows[0]["Product"].ToString();
+            Quantity.Value = dtbl.Rows[0]["Quantity"].ToString();
             ModalRequest.Show();
             FillGridView();
 
@@ -92,6 +94,11 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@DeletedDate", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@StartingSeries", txtStart.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@EndingSeries", txtEnd.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@Product", Product.Value.Trim());
+            sqlCmd.Parameters.AddWithValue("@Quantity", Quantity.Value.Trim());
+            sqlCmd.Parameters.AddWithValue("@NoOfUnit", Convert.DBNull);
+            sqlCmd.Parameters.AddWithValue("@IfProcess", "0");
+            sqlCmd.Parameters.AddWithValue("@Team", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();

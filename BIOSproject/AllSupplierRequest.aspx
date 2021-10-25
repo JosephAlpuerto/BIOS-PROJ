@@ -201,6 +201,9 @@
                             <div class="forms">
                                 
                                 <asp:HiddenField ID="hfId" runat="server" />
+                                <asp:HiddenField ID="Product" runat="server" />
+                                <asp:HiddenField ID="Quantity" runat="server" />
+
                                 <asp:Label Text="" ID="lblSuccess" ForeColor="Green" Font-Bold="true" runat="server" />
                 <div class="input_field1">
                     <%--<label>Date Requested</label>--%>
@@ -382,10 +385,9 @@
                                         <asp:ButtonField DataTextField="Product" HeaderText="Product" />
                                         <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
                                          <asp:ButtonField DataTextField="IsActive" HeaderText="Status" />
-                                         <%--<asp:TemplateField>
-                                                           <ItemTemplate>
 
-                                                               
+                                                       <%--<asp:TemplateField>
+                                                           <ItemTemplate>
                                                                <asp:LinkButton ID="ViewResetAdmin" runat="server" CommandArgument='<%# Eval("Id") %>'>View</asp:LinkButton>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>--%>
@@ -412,13 +414,6 @@
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
-                                        
-                                      
-
-                                        
-                                      
-
-                                        
                                     </Columns>
                                 </asp:GridView>
 

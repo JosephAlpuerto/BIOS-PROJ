@@ -22,18 +22,18 @@ namespace BIOSproject
 
             if (!IsPostBack)
             {
-            string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-            string sqlquery = "select * from Supplier";
-            SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
-            conn.Open();
-            SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-            DataTable dt = new DataTable();
-            sdr.Fill(dt);
-            dropSupplier.DataSource = dt;
-            dropSupplier.DataTextField = "SupplierName";
-            dropSupplier.DataValueField = "SupplierName";
-            dropSupplier.DataBind();
-            conn.Close();
+            //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+            //string sqlquery = "select * from Supplier";
+            //SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
+            //conn.Open();
+            //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+            //DataTable dt = new DataTable();
+            //sdr.Fill(dt);
+            //dropSupplier.DataSource = dt;
+            //dropSupplier.DataTextField = "SupplierName";
+            //dropSupplier.DataValueField = "SupplierName";
+            //dropSupplier.DataBind();
+            //conn.Close();
 
                 string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 string sqlqueryy = "select * from Product where ProductName != '"+null+"'";
@@ -88,7 +88,7 @@ namespace BIOSproject
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
                         mail.Subject = "LBC BIOS";
-                        mail.Body = "Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
+                        mail.Body = "Sourcing Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
                             + PONo.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr> Product: </hr>" + drpProduct.SelectedItem.Text + "<hr> Supplier: </hr>" + dropSupplier.Text;
                         mail.IsBodyHtml = true;
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
@@ -108,7 +108,7 @@ namespace BIOSproject
             }
             else
             {
-                MessageBox.Show("Fill up all forms");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Fill up all forms!')", true);
             }
             var Ticket = TicketNo.Text.Trim();
             var PO = PONo.Text.Trim();

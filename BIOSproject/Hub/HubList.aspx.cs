@@ -26,37 +26,37 @@ namespace BIOSproject.Supplier
             {
 
                 FillGridView();
-                string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                string sqlquery = "select * from Areas";
-                SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
-                conn.Open();
-                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-                DataTable dt = new DataTable();
-                sdr.Fill(dt);
-                DropArea.DataSource = dt;
-                DropArea.DataTextField = "AreaDescr";
-                DropArea.DataValueField = "AreaDescr";
-                DropArea.DataBind();
-                conn.Close();
+                //string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                //string sqlquery = "select * from Areas";
+                //SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
+                //conn.Open();
+                //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                //DataTable dt = new DataTable();
+                //sdr.Fill(dt);
+                //DropArea.DataSource = dt;
+                //DropArea.DataTextField = "AreaDescr";
+                //DropArea.DataValueField = "AreaDescr";
+                //DropArea.DataBind();
+                //conn.Close();
 
 
 
-                string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                string sqlqueryy = "select * from ref_Branches where TeamDescr != '"+null+"'";
-                SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
-                con.Open();
-                SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
-                DataSet ds = new DataSet();
-                sd.Fill(ds);
-                DropTeam.DataSource = ds;
-                DropTeam.DataTextField = "TeamDescr";
-                DropTeam.DataValueField = "TeamDescr";
-                DropTeam.DataBind();
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
+                //string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                //string sqlqueryy = "select * from ref_Branches where TeamDescr != '"+null+"'";
+                //SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
+                //con.Open();
+                //SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
+                //DataSet ds = new DataSet();
+                //sd.Fill(ds);
+                //DropTeam.DataSource = ds;
+                //DropTeam.DataTextField = "TeamDescr";
+                //DropTeam.DataValueField = "TeamDescr";
+                //DropTeam.DataBind();
+                //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //{
 
-                    DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
-                }
+                //    DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
+                //}
             }
 
         }
@@ -78,18 +78,92 @@ namespace BIOSproject.Supplier
 
         }
 
-        protected void btnRequest_Click(object sender, EventArgs e)
+        protected void btnProcess_Click(object sender, EventArgs e)
         {
+            
+            int Id = Convert.ToInt32((sender as System.Web.UI.WebControls.Button).CommandArgument);
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("ViewAllSuppRequest", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            hfId.Value = Id.ToString();
+            txtRequestID.Text = dtbl.Rows[0]["RequestID"].ToString();
+            txtTicket.Text = dtbl.Rows[0]["TicketNo"].ToString();
+            txtPO.Text = dtbl.Rows[0]["PoNO"].ToString();
+            txtBranch.Text = dtbl.Rows[0]["Branch"].ToString();
+            txtArea.Text = dtbl.Rows[0]["Area"].ToString();
+            txtStart.Text = dtbl.Rows[0]["StartingSeries"].ToString();
+            txtEnd.Text = dtbl.Rows[0]["EndingSeries"].ToString();
+            txtProduct.Text = dtbl.Rows[0]["Product"].ToString();
+            txtQuantity.Text = dtbl.Rows[0]["Quantity"].ToString();
+            txtSuppName.Text = dtbl.Rows[0]["CreatedBy"].ToString();
+            double start, end, answer;
+            double.TryParse(txtStart.Text, out start);
+            double.TryParse(txtEnd.Text, out end);
+            answer = end - start + 2;
+            if(answer > 0)
+                txtUnit.Text = answer.ToString();
+            
 
-            ModalDestination.Show();
+
+            ModalProcess.Show();
             FillGridView();
 
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-           
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("HubProcess", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
+            sqlCmd.Parameters.AddWithValue("@NoOfUnit", txtUnit.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@IfProcess", "1");
+            sqlCmd.Parameters.AddWithValue("@Team", DropTeam.SelectedItem.Text.Trim());
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+            Clear();
+            FillGridView();
+            string Id = hfId.Value;
 
+            // validations
+            if (Id == "")
+            {
+                using (MailMessage mail = new MailMessage())
+                {
+
+
+
+                    mail.From = new MailAddress("lbcbios08@gmail.com");
+                    mail.To.Add(txtSuppName.Text);
+                    mail.Subject = "LBC BIOS";
+                    mail.Body = "This Item Proceed to the Delivery with Ticket#: " + txtTicket.Text + "<hr>PONumber:</hr>"
+                        + txtPO.Text + "<hr> Branch: </hr>" + txtBranch.Text + "<hr> Area: </hr>" + txtArea.Text + "<hr> Team: </hr>" + DropTeam.SelectedItem.Text + 
+                        "<hr> Product: </hr>" + txtProduct.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr>StartingSeries:</hr>" + txtStart.Text + "<hr>EndingSeries:</hr>" + txtEnd.Text +
+                        "<hr>No. of Units:</hr>" + txtUnit.Text + "<hr> Supplier: </hr>" + txtSuppName.Text;
+                    mail.IsBodyHtml = true;
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+
+
+                }
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Process added and Email send Successfully!')", true);
+            }
+            else
+            {
+                lblSuccess.Text = "Please Cornfirm your Details!";
+            }
         }
       
     

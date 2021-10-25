@@ -5,7 +5,7 @@
    
     
 
-      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier'"></asp:SqlDataSource>
+      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
     
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
@@ -73,6 +73,7 @@
 
 
         <div class="container">
+     
             <asp:HiddenField ID="hfId1" runat="server" />
             <asp:Label Text="" ID="lblError1" ForeColor="Red" Font-Bold="true" runat="server" />
             <asp:HiddenField ID="HiddenField1" runat="server" />
@@ -105,7 +106,7 @@
                 <div class="input_field1">
 
                     <asp:Label ID="Label2" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataTextField="Username" DataValueField="Username">
+                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataTextField="Username" DataValueField="Username" DataSourceID="SqlDataSource1">
                     </asp:DropDownList>
                 </div>
 
@@ -127,18 +128,9 @@
                     <asp:Button ID="Button1" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click"/>
                 </div>
 
-
-
-
-
-
-            </div>
-
-        </div>
-   
-
-
-
+  </div>
+                            </div>
+                   
 
 
 

@@ -72,7 +72,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="HubList.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>List</span></a>
+                        <span>Supplier Request List</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="ProcessList.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Process list</span></a>
                 </li>
                 <%--<li class="nav-item active">
                     <a class="nav-link" href="ValidationForm.aspx">

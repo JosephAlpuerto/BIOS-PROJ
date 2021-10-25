@@ -98,7 +98,7 @@
 
                                                         <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="Activate" runat="server" CommandArgument='<%# Eval("Id") %>' OnClick="Activate_Click">Activate</asp:LinkButton>
+                                                               <asp:LinkButton ID="Activate" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' OnClick="Activate_Click">Activate</asp:LinkButton>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
                                        
@@ -202,7 +202,7 @@
                                                         
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="Activate" runat="server" CommandArgument='<%# Eval("Id") %>' OnClick="Activate1_Click">Activate</asp:LinkButton>
+                                                               <asp:LinkButton ID="Activate" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' OnClick="Activate1_Click">Activate</asp:LinkButton>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
                                                        
