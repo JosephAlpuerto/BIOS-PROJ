@@ -58,7 +58,7 @@
                             <asp:Label ID="hitcheckerrorSeries" ForeColor="Red" runat="server" Text=""></asp:Label>
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
                                 
-                                <div class="form3">
+                                <div class="forms">
                <div class="input_field1">
                     <asp:HiddenField ID="HiddenField1" runat="server" />
                     <%--<label>Date Requested</label>--%>
