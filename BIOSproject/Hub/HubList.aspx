@@ -76,7 +76,7 @@
                             <asp:Label ID="hitcheckerrorSeries" ForeColor="Red" runat="server" Text=""></asp:Label>
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
                                 
-                                <div class="form3">
+                                <div class="forms">
                <div class="input_field1">
                     <asp:HiddenField ID="HiddenField1" runat="server" />
                     <%--<label>Date Requested</label>--%>
@@ -138,8 +138,8 @@
 
     
      <ajaxtoolkit:modalpopupextender ID="ModalDestination" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
-       <asp:Panel ID="PanelRequest" runat="server">
-           
+       <asp:Panel ID="PanelRequest" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
+           <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
            <div class="container">
 
                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_Ref %>" SelectCommand="SELECT [AreaDescr] FROM [Areas]"></asp:SqlDataSource>
@@ -237,7 +237,7 @@
                                  
 
         </div>
-                                    
+                                    </div>
 
         </div>
         </asp:Panel>
