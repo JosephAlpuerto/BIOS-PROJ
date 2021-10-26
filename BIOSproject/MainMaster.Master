@@ -26,8 +26,6 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/Validate.css" rel="stylesheet" />
-    <link href="css/BIssuer.css" rel="stylesheet" />
-    <link href="css/Req.css" rel="stylesheet" />
     
     <script>
         $(document).ready(function () {
