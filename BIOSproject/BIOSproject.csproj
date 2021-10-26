@@ -1882,6 +1882,9 @@
     <Compile Include="AllUsers.aspx.designer.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DataSetAdmin.cs">
+      <DependentUpon>DataSetAdmin.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1912,6 +1915,11 @@
     </Compile>
     <Compile Include="MyRejectedRequestSupp.aspx.designer.cs">
       <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrintRequest2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintRequest2.xsd</DependentUpon>
     </Compile>
     <Compile Include="RejectedBySupplierlist.aspx.cs">
       <DependentUpon>RejectedBySupplierlist.aspx</DependentUpon>
@@ -2280,6 +2288,17 @@
     <Content Include="scss\_utilities.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="Properties\launchSettings.json" />
+    <Content Include="PrintRequest2.xsc">
+      <DependentUpon>PrintRequest2.xsd</DependentUpon>
+    </Content>
+    <None Include="PrintRequest2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PrintRequest2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PrintRequest2.xss">
+      <DependentUpon>PrintRequest2.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\LBCBios.pubxml" />
     <Content Include="Supp.Master" />
     <Content Include="ReportRequest.xsc">
@@ -2327,6 +2346,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Report\ReportRequest.rdlc" />
+    <EmbeddedResource Include="Report\ReportRequest2.rdlc" />
     <EmbeddedResource Include="Report\ReportUsers.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

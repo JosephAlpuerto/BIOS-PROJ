@@ -138,8 +138,8 @@
 
     
      <ajaxtoolkit:modalpopupextender ID="ModalProcess" PopupControlID="PanelProcess" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
-       <asp:Panel ID="PanelProcess" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
-           <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
+       <asp:Panel ID="PanelProcess" runat="server"  Height="500px">
+           <div runat="server" style="max-height: 500px; overflow: auto; background-color: white;">
            <div class="container">
 
                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_Ref %>" SelectCommand="SELECT [AreaDescr] FROM [Areas]"></asp:SqlDataSource>

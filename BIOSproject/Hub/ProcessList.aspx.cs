@@ -45,5 +45,25 @@ namespace BIOSproject.Hub
                 gvlist.FooterRow.TableSection = TableRowSection.TableFooter;
 
         }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "PrintReport2";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            conn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            conn.Close();
+
+            ReportRequest.LocalReport.DataSources.Add(new ReportDataSource("DataSetPrintRequest2", dt));
+            ReportRequest.LocalReport.ReportPath = Server.MapPath("~/Report/ReportRequest2.rdlc");
+            ReportRequest.LocalReport.EnableHyperlinks = true;
+            FillGridView();
+            ModalReport.Show();
+        }
     }
 }
