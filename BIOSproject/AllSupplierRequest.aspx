@@ -184,7 +184,8 @@
 
 
     <ajaxtoolkit:modalpopupextender ID="ModalRequest" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
-       <asp:Panel ID="PanelRequest" runat="server">
+       <asp:Panel ID="PanelRequest" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
+           <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
           
            <div class="container">
 
@@ -284,9 +285,8 @@
                                  
 
         </div>
-                                    
-
-        </div>
+                                    </div>
+               </div>
         </asp:Panel>
 
 
