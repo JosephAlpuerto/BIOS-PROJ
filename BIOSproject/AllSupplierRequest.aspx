@@ -362,6 +362,54 @@
 
 
 
+    <ajaxtoolkit:modalpopupextender ID="ModalDownloadView" PopupControlID="PanelDownloadView" TargetControlID="gvModal" CancelControlID="btnCloseDownloadView"  runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelDownloadView" runat="server">
+            <div class="container">
+                <div class="card o-hidden border-0 shadow-lg my-2">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="p-5">
+    <div>
+                
+               <table >
+                   
+                   <asp:Label ID="Label10" runat="server" Text="" ForeColor="Green"></asp:Label>
+                   
+
+                   <asp:Label runat="server" ForeColor="Red" Text="Are you sure you want to Download this Request!?"></asp:Label>
+                   
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" Text="ID:"></asp:Label>
+                       </td>
+                       
+                       <td colspan="2">
+                           <asp:TextBox ID="txtId" CssClass="form-control form-control-user" Enabled="false" runat="server"></asp:TextBox>
+                       </td>
+                   </tr>
+                   <asp:HiddenField ID="hfTicketNo" runat="server" />   
+                   <asp:HiddenField ID="hfPONumber" runat="server" />   
+                   <asp:HiddenField ID="hfStartingSeries" runat="server" />   
+                   <asp:HiddenField ID="hfEndingSeries" runat="server" />   
+                   <asp:HiddenField ID="hfSupplier" runat="server" />  
+                   <asp:HiddenField ID="hfProduct" runat="server" />  
+                   <asp:HiddenField ID="hfQuantity" runat="server" />  
+
+               </table>
+         <asp:Button ID="Download" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " runat="server" Text="Download Now" OnClick="Download_Click" />
+         <asp:Button ID="btnCloseDownloadView" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" />
+    </div>
+                            </div>
+                          </div>
+                        </div>
+               
+                      </div>
+                    </div>
+                  </div>
+           </asp:Panel>
+
 
 
 
@@ -408,7 +456,10 @@
 
                                                        <asp:TemplateField >
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="LinkButton1" runat="server" Text="Download" Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="LinkButton1_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+
+                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+
+                                                               <%--<asp:LinkButton ID="LinkButton1" runat="server" Text="Download" Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="LinkButton1_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>--%>
                                                                <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
                                                               <%-- <asp:Button ID="btnDownload" runat="server" Text="Download" CssClass="btn btn-primary btn-user btn-block" OnClick="btnDownload_Click" />--%>
                                                            </ItemTemplate>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -124,17 +125,17 @@ namespace BIOSproject
 
 
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
+        //protected void LinkButton1_Click(object sender, EventArgs e)
+        //{
 
-            LinkButton linkdownload = sender as LinkButton;
-            GridViewRow gridrow = linkdownload.NamingContainer as GridViewRow;
-            string downloadfile = Gridview1.DataKeys[gridrow.RowIndex].Value.ToString();
-            Response.ContentType = "Text/txt";
-            Response.AddHeader("Content-Disposition", "attachment;filename=\"" + downloadfile + "\"");
-            Response.TransmitFile(Server.MapPath(downloadfile));
-            Response.End();
-        }
+        //    LinkButton linkdownload = sender as LinkButton;
+        //    GridViewRow gridrow = linkdownload.NamingContainer as GridViewRow;
+        //    string downloadfile = Gridview1.DataKeys[gridrow.RowIndex].Value.ToString();
+        //    Response.ContentType = "Text/txt";
+        //    Response.AddHeader("Content-Disposition", "attachment;filename=\"" + downloadfile + "\"");
+        //    Response.TransmitFile(Server.MapPath(downloadfile));
+        //    Response.End();
+        //}
 
         protected void btnViewReject_Click(object sender, EventArgs e)
         {
@@ -275,6 +276,72 @@ namespace BIOSproject
             }
 
             con.Close();
+        }
+
+        protected void DownloadView_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("ViewtoDownload", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            txtId.Text = Id.ToString();
+            hfTicketNo.Value = dtbl.Rows[0]["TicketNo"].ToString();
+            hfPONumber.Value = dtbl.Rows[0]["PONumber"].ToString();
+            hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
+            hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
+            hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
+            hfProduct.Value = dtbl.Rows[0]["Product"].ToString();
+            hfQuantity.Value = dtbl.Rows[0]["Quantity"].ToString();
+            
+            ModalDownloadView.Show();
+            FillGridView();
+        }
+
+        protected void Download_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Id = txtId.Text;
+                string TicketNo = hfTicketNo.Value;
+                string PONumber = hfPONumber.Value;
+                string StartingSeries = hfStartingSeries.Value;
+                string EndingSeries = hfEndingSeries.Value;
+                string Supplier = hfSupplier.Value;
+                string Product = hfProduct.Value;
+                string Quantity = hfQuantity.Value;
+                Response.Clear();
+                Response.ClearHeaders();
+                Response.AddHeader("Content-Length", Id.Length.ToString());
+                Response.AddHeader("Content-Length", TicketNo.Length.ToString());
+                Response.AddHeader("Content-Length", PONumber.Length.ToString());
+                Response.AddHeader("Content-Length", StartingSeries.Length.ToString());
+                Response.AddHeader("Content-Length", EndingSeries.Length.ToString());
+                Response.AddHeader("Content-Length", Supplier.Length.ToString());
+                Response.AddHeader("Content-Length", Product.Length.ToString());
+                Response.AddHeader("Content-Length", Quantity.Length.ToString());
+                Response.ContentType = "text/plain";
+                Response.AppendHeader("content-disposition", "attachment;filename=\""+txtId.Text+".txt\"");
+                Response.Write("ID: "+ Id +" \r \n");
+                Response.Write("Ticket Number: " + TicketNo + " \r \n");
+                Response.Write("PO Number: " + PONumber + " \r \n");
+                Response.Write("Starting Series: " + StartingSeries + " \r \n");
+                Response.Write("Ending Series: " + EndingSeries + " \r \n");
+                Response.Write("Supplier Name: " + Supplier + " \r \n");
+                Response.Write("Product Name: " + Product + " \r \n");
+                Response.Write("Quantity: " + Quantity);
+                Response.End();
+                
+            }
+            catch (Exception ex) { }
+            
+            
+
         }
         //protected void btnReject_Click(object sender, EventArgs e)
         //{
