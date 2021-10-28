@@ -26,18 +26,18 @@ namespace BIOSproject.Supplier
             {
 
                 FillGridView();
-                //string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                //string sqlquery = "select * from Areas";
-                //SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
-                //conn.Open();
-                //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-                //DataTable dt = new DataTable();
-                //sdr.Fill(dt);
-                //DropArea.DataSource = dt;
-                //DropArea.DataTextField = "AreaDescr";
-                //DropArea.DataValueField = "AreaDescr";
-                //DropArea.DataBind();
-                //conn.Close();
+                string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                string sqlquery = "select * from ref_Branches where TeamDescr != '"+null+"'";
+                SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
+                conn.Open();
+                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                DataTable dt = new DataTable();
+                sdr.Fill(dt);
+                DropTeam.DataSource = dt;
+                DropTeam.DataTextField = "TeamDescr";
+                DropTeam.DataValueField = "TeamDescr";
+                DropTeam.DataBind();
+                conn.Close();
 
 
 

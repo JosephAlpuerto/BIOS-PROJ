@@ -213,10 +213,8 @@
 
                  <div class="input_field1">
                     <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1" DataSourceID="SqlDataSource5" DataTextField="TeamDescr" DataValueField="TeamID">
-                    </asp:DropDownList>
-                     <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_Ref %>" SelectCommand="SELECT [TeamID], [TeamDescr] FROM [ref_Branches]"></asp:SqlDataSource>
-                </div>
+                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
+                    </asp:DropDownList>  </div>
 
                 <div class="input_field1">
                     <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSubmit_Click"/>
