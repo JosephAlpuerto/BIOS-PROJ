@@ -87,9 +87,10 @@ namespace BIOSproject
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
-                        mail.Subject = "LBC BIOS";
-                        mail.Body = "Sourcing Requesting for Series of Barcodes with Ticket#: " + TicketNo.Text + "<hr>PONumber:</hr>"
-                            + PONo.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr> Product: </hr>" + drpProduct.SelectedItem.Text + "<hr> Supplier: </hr>" + dropSupplier.Text;
+                        mail.Subject = "Request for Barcode Series" + dropSupplier.Text + " " + PONo.Text;
+                        mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/><br/>" + 
+                            "Product & Quantity: "+ drpProduct.Text + " - " + txtQuantity.Text + "<br/><br/>Starting Series - Ending Series<br/><br/>" +
+                            "Thanks,";
                         mail.IsBodyHtml = true;
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                         {

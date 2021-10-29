@@ -82,7 +82,6 @@
             </div>
 
             <div class="form2">
-
                 <div class="input_field1">
                     <asp:Label ID="Label7" runat="server"></asp:Label>
 
