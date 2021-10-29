@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace BIOSproject
 {
@@ -120,6 +121,7 @@ namespace BIOSproject
         private void Clear()
         {
             hfId.Value = "";
+            hfId1.Value = "";
             lblSuccess.Text = "";
         }
 
@@ -150,6 +152,12 @@ namespace BIOSproject
             sqlData.Fill(dtbl);
             sqlCon.Close();
             hfId1.Value = Id.ToString();
+            hfSupplier1.Value = dtbl.Rows[0]["Supplier"].ToString();
+            hfSourcing1.Value = dtbl.Rows[0]["CreatedBy"].ToString();
+            hfProduct1.Value = dtbl.Rows[0]["Product"].ToString();
+            hfQuantity1.Value = dtbl.Rows[0]["Quantity"].ToString();
+            hfStart1.Value = dtbl.Rows[0]["StartingSeries"].ToString();
+            hfEnd1.Value = dtbl.Rows[0]["EndingSeries"].ToString();
             txtRequestID1.Text = dtbl.Rows[0]["Id"].ToString();
             txtTicketNo1.Text = dtbl.Rows[0]["TicketNo"].ToString();
             txtPONo1.Text = dtbl.Rows[0]["PONumber"].ToString();
@@ -166,10 +174,10 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@Id", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@TicketNo", txtTicketNo1.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PONumber", txtPONo1.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Supplier", (hfSupplier1.Value == "" ? 0 : Convert.ToChar(hfSupplier1.Value)));
-            sqlCmd.Parameters.AddWithValue("@Quantity", (hfQuantity1.Value == "" ? 0 : Convert.ToInt32(hfQuantity1.Value)));
-            sqlCmd.Parameters.AddWithValue("@StartingSeries", (hfStart1.Value == "" ? 0 : Convert.ToInt64(hfStart1.Value)));
-            sqlCmd.Parameters.AddWithValue("@EndingSeries", (hfEnd1.Value == "" ? 0 : Convert.ToInt64(hfEnd1.Value)));
+            sqlCmd.Parameters.AddWithValue("@Supplier", hfSupplier1.Value.Trim());
+            sqlCmd.Parameters.AddWithValue("@Quantity", hfQuantity1.Value.Trim());
+            sqlCmd.Parameters.AddWithValue("@StartingSeries", hfStart1.Value.Trim());
+            sqlCmd.Parameters.AddWithValue("@EndingSeries", hfEnd1.Value.Trim());
             sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@UpdatedBy", Session["Username"].ToString());
@@ -184,7 +192,38 @@ namespace BIOSproject
             sqlCon.Close();
             Clear();
             FillGridView();
-            lblSuccess1.Text = "Request Rejected!";
+            string Id = hfId1.Value;
+
+            if (Id == "")
+            {
+                using (MailMessage mail = new MailMessage())
+                {
+
+
+
+                    mail.From = new MailAddress("lbcbios08@gmail.com");
+                    mail.To.Add(hfSourcing1.Value);
+                    mail.Subject = "Rejected of Request By: " + hfSupplier1.Value + " " + txtPONo1.Text;
+                    mail.Body = "This PONumber have duplicate series of barcodes <hr>Ticket#:</hr> " + txtTicketNo1.Text + "<hr>PONumber:</hr>"
+                        + txtPONo1.Text + "<hr> Product: </hr>" + hfProduct1.Value + "<hr>Quantity:</hr>" + hfQuantity1.Value +
+                        "<hr>Starting Series:</hr>" + hfStart1.Value + "<hr>Ending Series:</hr>" + hfEnd1.Value +
+                         "<hr> Supplier: </hr>" + hfSupplier1.Value + "<br/><br/>Thanks,";
+                    mail.IsBodyHtml = true;
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+
+
+                }
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Request Rejected and Email send Successfully!')", true);
+            }
+            else
+            {
+                lblSuccess.Text = "Please Cornfirm your Details!";
+            }
         }
 
         //protected void btnValidate_Click(object sender, EventArgs e)

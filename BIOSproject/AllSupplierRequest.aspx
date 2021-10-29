@@ -307,6 +307,8 @@
     <div>
                <asp:HiddenField ID="hfId1" runat="server" />   
                <asp:HiddenField ID="hfSupplier1" runat="server" />   
+               <asp:HiddenField ID="hfSourcing1" runat="server" />   
+               <asp:HiddenField ID="hfProduct1" runat="server" />   
                <asp:HiddenField ID="hfQuantity1" runat="server" />   
                <asp:HiddenField ID="hfStart1" runat="server" />   
                <asp:HiddenField ID="hfEnd1" runat="server" />   
@@ -432,6 +434,7 @@
                                         <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier" />
                                         <asp:ButtonField DataTextField="Product" HeaderText="Product" />
                                         <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
+                                        <asp:ButtonField DataTextField="CreatedBy" HeaderText="Sourcing" />
                                          <asp:ButtonField DataTextField="IsActive" HeaderText="Status" />
 
                                                        <%--<asp:TemplateField>

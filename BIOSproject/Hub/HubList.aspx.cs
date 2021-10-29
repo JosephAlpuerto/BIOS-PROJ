@@ -143,11 +143,11 @@ namespace BIOSproject.Supplier
 
                     mail.From = new MailAddress("lbcbios08@gmail.com");
                     mail.To.Add(txtSuppName.Text);
-                    mail.Subject = "LBC BIOS";
+                    mail.Subject = "Request for Process" + txtSuppName.Text + " " + txtPO.Text;
                     mail.Body = "This Item Proceed to the Delivery with Ticket#: " + txtTicket.Text + "<hr>PONumber:</hr>"
                         + txtPO.Text + "<hr> Branch: </hr>" + txtBranch.Text + "<hr> Area: </hr>" + txtArea.Text + "<hr> Team: </hr>" + DropTeam.SelectedItem.Text + 
                         "<hr> Product: </hr>" + txtProduct.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr>StartingSeries:</hr>" + txtStart.Text + "<hr>EndingSeries:</hr>" + txtEnd.Text +
-                        "<hr>No. of Units:</hr>" + txtUnit.Text + "<hr> Supplier: </hr>" + txtSuppName.Text;
+                        "<hr>No. of Units:</hr>" + txtUnit.Text + "<hr> Supplier: </hr>" + txtSuppName.Text + "<br/><br/>Thanks,";
                     mail.IsBodyHtml = true;
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                     {

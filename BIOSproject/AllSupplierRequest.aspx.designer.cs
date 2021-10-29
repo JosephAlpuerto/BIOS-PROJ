@@ -393,6 +393,24 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.HiddenField hfSupplier1;
 
         /// <summary>
+        /// hfSourcing1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSourcing1;
+
+        /// <summary>
+        /// hfProduct1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfProduct1;
+
+        /// <summary>
         /// hfQuantity1 control.
         /// </summary>
         /// <remarks>
