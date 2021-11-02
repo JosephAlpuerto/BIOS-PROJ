@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BIOSproject
+namespace BIOSproject.Hub
 {
 
 
-    public partial class AllSupplierRequest
+    public partial class Warehouselist
     {
 
         /// <summary>
@@ -24,6 +24,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button btnValidateSeries;
 
         /// <summary>
+        /// btnDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDownload;
+
+        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,33 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
+        /// ModalReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalReport;
+
+        /// <summary>
+        /// PanelReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelReport;
+
+        /// <summary>
+        /// ReportRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.Reporting.WebForms.ReportViewer ReportRequest;
 
         /// <summary>
         /// ModalValidateSeries control.
@@ -87,13 +123,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
 
         /// <summary>
-        /// Label9 control.
+        /// Label13 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label Label13;
 
         /// <summary>
         /// TxtSearchSeries control.
@@ -123,31 +159,22 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// ModalRequest control.
+        /// ModalProcess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalRequest;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalProcess;
 
         /// <summary>
-        /// PanelRequest control.
+        /// PanelProcess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelRequest;
-
-        /// <summary>
-        /// Div1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.WebControls.Panel PanelProcess;
 
         /// <summary>
         /// SqlDataSource1 control.
@@ -177,24 +204,6 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.HiddenField hfId;
 
         /// <summary>
-        /// Product control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField Product;
-
-        /// <summary>
-        /// Quantity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField Quantity;
-
-        /// <summary>
         /// lblSuccess control.
         /// </summary>
         /// <remarks>
@@ -204,13 +213,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label lblSuccess;
 
         /// <summary>
-        /// Label6 control.
+        /// Labe27 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.Label Labe27;
 
         /// <summary>
         /// txtRequestID control.
@@ -222,13 +231,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.TextBox txtRequestID;
 
         /// <summary>
-        /// Label4 control.
+        /// Label12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label Label12;
 
         /// <summary>
         /// txtTicket control.
@@ -240,13 +249,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.TextBox txtTicket;
 
         /// <summary>
-        /// Label2 control.
+        /// Label8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Label8;
 
         /// <summary>
         /// txtPO control.
@@ -258,58 +267,22 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.TextBox txtPO;
 
         /// <summary>
-        /// Label7 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// txtStart control.
+        /// txtBranch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStart;
-
-        /// <summary>
-        /// Label8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
-
-        /// <summary>
-        /// txtEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEnd;
-
-        /// <summary>
-        /// Label5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
-
-        /// <summary>
-        /// txtDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDate;
+        protected global::System.Web.UI.WebControls.TextBox txtBranch;
 
         /// <summary>
         /// Label3 control.
@@ -321,31 +294,67 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// DropArea control.
+        /// txtArea control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropArea;
+        protected global::System.Web.UI.WebControls.TextBox txtArea;
 
         /// <summary>
-        /// Label1 control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// DropBranch control.
+        /// txtStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropBranch;
+        protected global::System.Web.UI.WebControls.TextBox txtStart;
+
+        /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+
+        /// <summary>
+        /// txtEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEnd;
+
+        /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+
+        /// <summary>
+        /// txtUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUnit;
 
         /// <summary>
         /// Label11 control.
@@ -357,175 +366,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
-        /// DropDesti control.
+        /// txtProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDesti;
-
-        /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
-
-        /// <summary>
-        /// ModalViewReject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalViewReject;
-
-        /// <summary>
-        /// PanelViewReject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelViewReject;
-
-        /// <summary>
-        /// hfId1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfId1;
-
-        /// <summary>
-        /// hfSupplier1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfSupplier1;
-
-        /// <summary>
-        /// hfSourcing1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfSourcing1;
-
-        /// <summary>
-        /// hfProduct1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfProduct1;
-
-        /// <summary>
-        /// hfQuantity1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfQuantity1;
-
-        /// <summary>
-        /// hfStart1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfStart1;
-
-        /// <summary>
-        /// hfEnd1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfEnd1;
-
-        /// <summary>
-        /// lblSuccess1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSuccess1;
-
-        /// <summary>
-        /// txtRequestID1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestID1;
-
-        /// <summary>
-        /// txtTicketNo1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTicketNo1;
-
-        /// <summary>
-        /// txtPONo1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPONo1;
-
-        /// <summary>
-        /// btnReject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReject;
-
-        /// <summary>
-        /// Close control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Close;
-
-        /// <summary>
-        /// ModalDownloadView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalDownloadView;
-
-        /// <summary>
-        /// PanelDownloadView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelDownloadView;
+        protected global::System.Web.UI.WebControls.TextBox txtProduct;
 
         /// <summary>
         /// Label10 control.
@@ -537,94 +384,58 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label10;
 
         /// <summary>
-        /// txtId control.
+        /// txtQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtId;
+        protected global::System.Web.UI.WebControls.TextBox txtQuantity;
 
         /// <summary>
-        /// hfTicketNo control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfTicketNo;
+        protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// hfPONumber control.
+        /// txtSuppName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfPONumber;
+        protected global::System.Web.UI.WebControls.TextBox txtSuppName;
 
         /// <summary>
-        /// hfStartingSeries control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfStartingSeries;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// hfEndingSeries control.
+        /// DropTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfEndingSeries;
+        protected global::System.Web.UI.WebControls.DropDownList DropTeam;
 
         /// <summary>
-        /// hfSupplier control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfSupplier;
-
-        /// <summary>
-        /// hfProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfProduct;
-
-        /// <summary>
-        /// hfQuantity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfQuantity;
-
-        /// <summary>
-        /// Download control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Download;
-
-        /// <summary>
-        /// btnCloseDownloadView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCloseDownloadView;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
         /// gvModal control.

@@ -199,6 +199,7 @@
                                                     <asp:ListItem Value="Sourcing">Sourcing</asp:ListItem>
                                                     <asp:ListItem>Supplier</asp:ListItem>
                                                      <asp:ListItem Value="Hub">Hub</asp:ListItem>
+                                                     <asp:ListItem Value="Warehouse">Warehouse</asp:ListItem>
                                                 </asp:DropDownList>
 
                                  </div>

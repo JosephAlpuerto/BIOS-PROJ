@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BIOSproject
+namespace BIOSproject.Hub
 {
 
 

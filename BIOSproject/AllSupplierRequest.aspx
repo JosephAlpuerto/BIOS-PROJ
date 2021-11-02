@@ -253,12 +253,18 @@
                 </div>--%>
 
             <div class="input_field1">
-                    <%--<label>Branch</label>--%>
                 <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
                     <asp:DropDownList ID="DropBranch" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="BranchCodeDesc" DataValueField="BranchCodeDesc">
                     </asp:DropDownList>
                 </div>
-
+    
+                <div class="input_field1">
+                <asp:Label ID="Label11" runat="server" Text="Destination To:" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropDesti" runat="server" CssClass="input1">
+                        <asp:ListItem>Hub</asp:ListItem>
+                        <asp:ListItem>Warehouse</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
                 
 
                 <%--<div class="input_field1">

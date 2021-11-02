@@ -113,7 +113,7 @@
                         </button>
 
                         <!-- Topbar Search -->
-                        <div
+                        <%--<div
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -124,7 +124,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -293,18 +293,18 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <%--<a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
+                                    </a>--%>
+                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ForgotModal">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Forgot Password
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <%--<a class="dropdown-item" href="#">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Activity Log
-                                    </a>
+                                    </a>--%>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -346,7 +346,32 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Forgot pass Modal-->
+                <div class="modal fade" id="ForgotModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">Enter Email to reset your password</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-header">
+                                <asp:Label ID="lblError" runat="server"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Visible="false" Text="Email ID:" CssClass="label"></asp:Label>
+                                <asp:Label ID="lbl" runat="server" Text="Email ID:" CssClass="align-content-sm-stretch"></asp:Label>
+                                <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control form-control-user" ></asp:TextBox>
+                                <asp:Label ID="MsgError" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <asp:Button id="btnSend" Text="Send" class="btn btn-primary" OnClick="btnSend_Click" runat="server"></asp:Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 

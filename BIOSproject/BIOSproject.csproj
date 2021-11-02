@@ -129,6 +129,8 @@
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
+    <Content Include="Hub\Warehouselist.aspx" />
+    <Content Include="Hub\WarehouseProcesslist.aspx" />
     <Content Include="img\download.png" />
     <Content Include="img\lbc.png" />
     <Content Include="js\jquery.js" />
@@ -1909,6 +1911,27 @@
     <Compile Include="Hub\ValidationForm.aspx.designer.cs">
       <DependentUpon>ValidationForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Hub\Warehouse.Master.cs">
+      <DependentUpon>Warehouse.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hub\Warehouse.Master.designer.cs">
+      <DependentUpon>Warehouse.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Hub\Warehouselist.aspx.cs">
+      <DependentUpon>Warehouselist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hub\Warehouselist.aspx.designer.cs">
+      <DependentUpon>Warehouselist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hub\WarehouseProcesslist.aspx.cs">
+      <DependentUpon>WarehouseProcesslist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hub\WarehouseProcesslist.aspx.designer.cs">
+      <DependentUpon>WarehouseProcesslist.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MyRejectedRequestSupp.aspx.cs">
       <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2114,6 +2137,7 @@
       <DependentUpon>DataSetAdmin.xsd</DependentUpon>
     </Content>
     <Content Include="Hub\Hub.Master" />
+    <Content Include="Hub\Warehouse.Master" />
     <None Include="packages.config" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />

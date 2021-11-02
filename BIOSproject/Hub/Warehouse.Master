@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="BIOSproject.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Warehouse.master.cs" Inherits="BIOSproject.Hub.Warehouse" %>
 
 <!DOCTYPE html>
 
@@ -10,139 +10,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LBC   - Admin</title>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-    <script src="js/jquery.js"></script>
-    <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <title></title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
+
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="css/Validate.css" rel="stylesheet" />
-    <link href="css/Req.css" rel="stylesheet" />
-    
-    <script>
-        $(document).ready(function () {
-            $("#9").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsg").html("Numbers Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
-        });
-    </script>
-                <style>
-                    #errmsg{
-                        color: red;
-                    }
-                </style>
-
-    <script>
-        $(document).ready(function () {
-            $("#8").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsg2").html("Numbers Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
-        });
-    </script>
-                <style>
-                    #errmsg2 {
-                        color: red;
-                    }
-                </style>
-
-    <script>
-        $(document).ready(function () {
-            $("#7").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsg3").html("Numbers Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
-        });
-    </script>
-                <style>
-                    #errmsg3 {
-                        color: red;
-                    }
-                </style>
-
-    <script>
-        $(document).ready(function () {
-            $('#6').bind('keyup blur', function () {
-                var node = $(this);
-                node.val(node.val().replace(/[^a-z]/g, ''));
-            }
-            );
-        });
-    </script>
-
-<script>
-    $(document).ready(function () {
-        $("#1").keypress(function (e) {
-            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                $("#errmsg1").html("Numbers Only").show().fadeOut("slow");
-                return false;
-            }
-        });
-    });
-</script>
-                        <style>
-                            #errmsg1 {
-                                color: red;
-                            }
-                        </style>      
-    
-    <script>
-        $(document).ready(function () {
-            $("#5").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsg5").html("Numbers Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
-        });
-    </script>
-                        <style>
-                            #errmsg5 {
-                                color: red;
-                            }
-                        </style>
-
-    <script>
-        $(document).ready(function () {
-            $('#4').bind('keyup blur', function () {
-                var node = $(this);
-                node.val(node.val().replace(/[^a-z]/g, ''));
-            }
-            );
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#2").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsgSeries").html("Numbers Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
-        });
-    </script>
-                        <style>
-                            #errmsgSeries {
-                                color: red;
-                            }
-                        </style>
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../css/BIssuer.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -155,69 +35,25 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="SB-Admin.aspx">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center">
                     <div class="sidebar-brand-icon">
-                        <i>
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/98/LBC_Express_2013_Logo.svg/1200px-LBC_Express_2013_Logo.svg.png"></i>
+                        <i><img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/98/LBC_Express_2013_Logo.svg/1200px-LBC_Express_2013_Logo.svg.png"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">LBC Admin</div>
+                    <div class="sidebar-brand-text mx-3"></div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <%--<li class="nav-item active">
-                    <a class="nav-link" href="SB-Admin.aspx">
+               <%-- <li class="nav-item active">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>--%>
+              
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-           
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Account's</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Pages:</h6>
-                            <%--<a class="collapse-item" href="AllAdmin.aspx">All Admin</a>--%>
-                            <a class="collapse-item" href="AllUsers.aspx">All Users</a>
-                            <a class="collapse-item" href="AllDeletedAccounts.aspx">All Deactivate Accounts</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Utilities Collapse Menu -->
-
-                <%--<li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Utilities</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="Validate.aspx">Validate Series</a>
-                            <a class="collapse-item" href="BarcodeIssuer.aspx">Barcode Issuer</a>
-                          
-                        </div>
-                    </div>
-                </li>--%>
-
+               
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -227,78 +63,30 @@
            
                 </div>
 
+
                 <%--<li class="nav-item active">
-                    <a class="nav-link" href="AllRequest.aspx">
+                    <a class="nav-link" href="ValidateHub.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>AllRequest1</span></a>
+                        <span>Validate</span></a>
                 </li>--%>
-
                 <li class="nav-item active">
-                    <a class="nav-link" href="SSPRequestList.aspx">
+                    <a class="nav-link" href="Warehouselist.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>AllRequest</span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="RequestForm.aspx">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Request</span></a>
+                        <span>Supplier Request List</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="RejectedBySupplierlist.aspx">
+                    <a class="nav-link" href="WarehouseProcessList.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Rejected list By Supplier </span></a>
+                        <span>Process list</span></a>
                 </li>
                 <%--<li class="nav-item active">
-                    <a class="nav-link" href="Validate.aspx">
+                    <a class="nav-link" href="ValidationForm.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Validate </span></a>
+                        <span>Validate List</span></a>
                 </li>--%>
 
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <!--<li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Function Screens:</h6>
-                            
-                            <a class="collapse-item" href="AddAdmin.aspx">Add Admin</a>
-                            <a class="collapse-item" href="AddUser.aspx">Add Users</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
-                        </div>
-                    </div>
-                </li>-->
-
-
-
-
-                <!-- Nav Item - Tables 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
-                        aria-expanded="true" aria-controls="collapseTables">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <div id="collapseTables" class="collapse" aria-labelledby="headingTables" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Function Screens:</h6>
-                            
-                            <a class="collapse-item" href="AllAdmin.aspx">All Admin</a>
-                            <a class="collapse-item" href="AllUsers.aspx">All Users</a>
-                            <a class="collapse-item" href="AllDeletedAccounts.aspx">All Deactivate Accounts</a>
-                            <div class="collapse-divider"></div>
-                           
-                        </div>
-                    </div>
-                </li>-->
+               
+                
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -325,7 +113,7 @@
                         </button>
 
                         <!-- Topbar Search -->
-                        <!--<div
+                      <%--  <div
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -336,18 +124,18 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>--%>
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <!-- <li class="nav-item dropdown no-arrow d-sm-none">
+                            <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
                                 </a>
-                                
+                                <!-- Dropdown - Messages -->
                                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                     aria-labelledby="searchDropdown">
                                     <form class="form-inline mr-auto w-100 navbar-search">
@@ -363,7 +151,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </li>-->
+                            </li>
 
                            <%-- <!-- Nav Item - Alerts -->
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -377,7 +165,7 @@
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="alertsDropdown">
                                     <h6 class="dropdown-header">Alerts Center
-                                    </h6>
+                                </h6>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-primary">
@@ -429,7 +217,7 @@
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="messagesDropdown">
                                     <h6 class="dropdown-header">Message Center
-                                    </h6>
+                                </h6>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
                                             <img class="rounded-circle" src="img/undraw_profile_1.svg"
@@ -493,11 +281,11 @@
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
+                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="../img/undraw_profile.svg">
                                     <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
                                     <!--<span ID="txtUsername" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>-->
 
@@ -509,7 +297,7 @@
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>--%>
-                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ForgotModal">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ForgotModal">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Forgot Password
                                     </a>
@@ -528,21 +316,18 @@
                         </ul>
 
                     </nav>
-
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-                    </asp:ContentPlaceHolder>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
-                    </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder> 
+                    
+        </div>
+        <!-- End of Page Wrapper -->
 
-                </div>
-                <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
+         <!-- Logout Modal-->
                 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -556,13 +341,11 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="Default.aspx">Logout</a>
+                                <a class="btn btn-primary" href="../Default.aspx">Logout</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
                  <!-- Forgot pass Modal-->
                 <div class="modal fade" id="ForgotModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -575,6 +358,7 @@
                                 </button>
                             </div>
                             <div class="modal-header">
+                                <asp:Label ID="lblError" runat="server"></asp:Label>
                                 <asp:Label ID="Label1" runat="server" Visible="false" Text="Email ID:" CssClass="label"></asp:Label>
                                 <asp:Label ID="lbl" runat="server" Text="Email ID:" CssClass="align-content-sm-stretch"></asp:Label>
                                 <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control form-control-user" ></asp:TextBox>
@@ -590,28 +374,28 @@
                 </div>
 
 
+
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="../vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="../js/demo/chart-area-demo.js"></script>
+        <script src="../js/demo/chart-pie-demo.js"></script>
                 
-
-                <!-- Bootstrap core JavaScript-->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-                <!-- Core plugin JavaScript-->
-                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="js/sb-admin-2.min.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="vendor/chart.js/Chart.min.js"></script>
-
-                <!-- Page level custom scripts -->
-                <script src="js/demo/chart-area-demo.js"></script>
-                <script src="js/demo/chart-pie-demo.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-                <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+         <!-- Page level plugins -->
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
                 <script>
                     $(document).ready(function () {
@@ -623,14 +407,17 @@
                         $('.dataTable2').DataTable();
                     });
                 </script>
-                
-
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
 
 
-            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            </asp:ContentPlaceHolder>   
+
+
         </div>
+            </div>
     </form>
 </body>
 </html>

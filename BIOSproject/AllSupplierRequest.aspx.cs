@@ -101,6 +101,7 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@NoOfUnit", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@IfProcess", "0");
             sqlCmd.Parameters.AddWithValue("@Team", Convert.DBNull);
+            sqlCmd.Parameters.AddWithValue("@Destination", DropDesti.SelectedItem.Value);
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();

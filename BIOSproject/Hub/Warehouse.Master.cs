@@ -12,7 +12,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace BIOSproject
+namespace BIOSproject.Hub
 {
     public partial class Warehouse : System.Web.UI.MasterPage
     {
@@ -60,7 +60,7 @@ namespace BIOSproject
                     txtEmailId.Text = "";
                     //MsgError.Text = "Your password has been sent to registered Email!!";
                 }
-                else if(textEmail == "")
+                else if (textEmail == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Enter Email!!')", true);
                 }

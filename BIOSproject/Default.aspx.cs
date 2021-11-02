@@ -52,6 +52,11 @@ namespace BIOSproject
                         Session["Username"] = txtUsername.Text.ToString();
                         Response.Redirect("~/Hub/HubList.aspx");
                     }
+                    if (roleType == "Warehouse")
+                    {
+                        Session["Username"] = txtUsername.Text.ToString();
+                        Response.Redirect("~/Hub/Warehouselist.aspx");
+                    }
                 }
           
                 else

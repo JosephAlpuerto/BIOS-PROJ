@@ -32,6 +32,7 @@ namespace BIOSproject
         {
             try
             {
+                var textEmail = txtEmailId.Text.Trim();
                 string cs = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 SqlConnection con = new SqlConnection(cs);
                 con.Open();
@@ -59,6 +60,10 @@ namespace BIOSproject
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Your password has been sent to registered Email!!')", true);
                     txtEmailId.Text = "";
                     //MsgError.Text = "Your password has been sent to registered Email!!";
+                }
+                else if (textEmail == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Enter Email!!')", true);
                 }
                 else
                 {
