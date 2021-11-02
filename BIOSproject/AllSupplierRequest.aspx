@@ -66,7 +66,7 @@
                     <span id="errmsgSeries"></span>
                     <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="2" ClientIDMode="Static"></asp:TextBox>
 
-                   <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This is a Sequence on Series!">
+                   <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This Series Sequence is already use!">
                     <Columns>
                        <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />

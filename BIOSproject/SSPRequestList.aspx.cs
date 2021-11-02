@@ -250,7 +250,6 @@ namespace BIOSproject
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('No Record Found')", true);
             }
-
             con.Close();
         }
 
