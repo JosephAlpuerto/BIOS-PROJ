@@ -26,7 +26,7 @@ namespace BIOSproject
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("select * from Users where Username='" + txtUsername.Text + "' and Password='" + txtPassword.Text + "'",con);
+                SqlCommand cmd = new SqlCommand("select * from Users where Username='" + txtUsername.Text + "' and Password='" + txtPassword.Text + "' and IsActive = 1",con);
                 con.Open();
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
