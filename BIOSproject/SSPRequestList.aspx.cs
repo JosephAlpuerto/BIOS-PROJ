@@ -245,6 +245,7 @@ namespace BIOSproject
                     gridview.DataSource = dt;
                     gridview.DataBind();
                     gridview.UseAccessibleHeader = true;
+                   
             }
             else
             {

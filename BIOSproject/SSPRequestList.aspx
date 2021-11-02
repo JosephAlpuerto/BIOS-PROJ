@@ -140,6 +140,12 @@
                        <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
+                        <asp:TemplateField>
+                          <ItemTemplate>
+                                <asp:LinkButton runat="server" Text="DUPLICATE!" ForeColor="Red" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
+                                <asp:Button runat="server" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                          </ItemTemplate>
+                        </asp:TemplateField> 
                     </Columns>
                    </asp:GridView>
                 </div>
