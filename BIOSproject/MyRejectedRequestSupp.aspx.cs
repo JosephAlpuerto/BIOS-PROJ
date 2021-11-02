@@ -27,6 +27,7 @@ namespace BIOSproject
                 sqlCon.Open();
             SqlDataAdapter sqlData = new SqlDataAdapter("SuppRejectedList", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
             sqlCon.Close();
