@@ -212,10 +212,11 @@ namespace BIOSproject.Supplier
             cmd.Parameters.AddWithValue("@endmax", end);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from SSPRequest where StartingSeries <= @search and EndingSeries >= @search ";
+            string sqlquery = "select * from SupplierRequest where StartingSeries <= @search and EndingSeries >= @search and Destination = 'Hub'";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(TxtSearchSeries.Text));
+            
             //sql.Parameters.AddWithValue("@end", Convert.ToInt64(TxtSearchSeries.Text));
             DataTable dt = new DataTable();
             SqlDataAdapter sda = new SqlDataAdapter(sql);

@@ -85,13 +85,13 @@
 
                    <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This Series Sequence is already use!">
                     <Columns>
-                       <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
+                       <asp:ButtonField DataTextField="PoNO" HeaderText="PO No." />
                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
                          <asp:TemplateField>
                           <ItemTemplate>
-                                <asp:LinkButton runat="server" Text="OnProcess!" ForeColor="Red" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
-                                <asp:Button runat="server" Text="Done" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                <asp:LinkButton runat="server" Text="RequestBy Supplier" ForeColor="Red" Enabled="false" Visible='<%# Eval("IfProcess").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
+                                <asp:Button runat="server" Text="OnProcess!" Enabled="false" Visible='<%# Eval("IfProcess").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                           </ItemTemplate>
                         </asp:TemplateField> 
                     </Columns>
