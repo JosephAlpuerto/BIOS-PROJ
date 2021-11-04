@@ -73,8 +73,8 @@
                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
                          <asp:TemplateField>
                           <ItemTemplate>
-                                <asp:LinkButton runat="server" Text="DUPLICATE!" ForeColor="Red" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
-                                <asp:Button runat="server" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                <asp:LinkButton runat="server" Text="OnProcess!" ForeColor="Red" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
+                                <asp:Button runat="server" Text="Done" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                           </ItemTemplate>
                         </asp:TemplateField> 
                     </Columns>
