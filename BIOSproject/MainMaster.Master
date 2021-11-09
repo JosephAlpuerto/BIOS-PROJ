@@ -26,7 +26,6 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/Validate.css" rel="stylesheet" />
-    <link href="css/Req.css" rel="stylesheet" />
     
     <script>
         $(document).ready(function () {
@@ -240,7 +239,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="RequestForm.aspx">
+                    <a class="nav-link" href="NewRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Request</span></a>
                 </li>

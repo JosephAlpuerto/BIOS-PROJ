@@ -46,5 +46,20 @@
     background-color: #d00149;
     color: White;
 }
-
+.container .form2 .input_field1 .input2 {
+    width: 100%;
+    outline: none;
+}
+.container .form2 .input_field1 .label1 {
+    width: 200px;
+    color: #757575;
+    margin-right: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.container .form2 .input_field1 .drop1 {
+    width: 50%;
+    outline: none;
+}
 
