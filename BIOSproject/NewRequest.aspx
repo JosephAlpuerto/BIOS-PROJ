@@ -33,13 +33,12 @@
                 <asp:Label ID="Label3" runat="server" Text="PO Number" CssClass="label"></asp:Label>
                 <asp:TextBox ID="PONumber" runat="server" CssClass="input1" AutoPostBack="true" OnTextChanged="PONumber_TextChanged"  AccessKey="8" ClientIDMode="Static"></asp:TextBox>
             </div>
-
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
             <div class="field">
                 <asp:Label ID="Label4" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" >
+                <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="Vendor" DataValueField="VendorEmail" >
                 </asp:DropDownList>
             </div>
-
             <div class="field">
                 <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label1"></asp:Label>
                 <asp:Label ID="Label6" runat="server" Text="Quantity" CssClass="label2"></asp:Label>
@@ -47,8 +46,9 @@
                 <asp:HiddenField ID="HFValue" runat="server" />
             </div>
 
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ID], [ItemDescr] as Product FROM [Reference]"></asp:SqlDataSource>
             <div class="field">
-                <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1">
+                <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="ID">
                     <asp:ListItem>KILO BOX</asp:ListItem>
                     <asp:ListItem>KB MINI</asp:ListItem>
                 </asp:DropDownList>

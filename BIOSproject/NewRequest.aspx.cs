@@ -22,23 +22,23 @@ namespace BIOSproject
             if (!IsPostBack)
             {
 
-                string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-                string sqlquery = "select * from Reference where VendorName != '"+null+"'";
-                SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
-                con.Open();
-                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-                DataTable dt = new DataTable();
-                sdr.Fill(dt);
-                dropSupplier.DataSource = dt;
-                dropSupplier.DataTextField = "VendorName";
-                dropSupplier.DataValueField = "VendorName";
-                dropSupplier.DataBind();
+                //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                //string sqlquery = "select * from Reference where VendorName != '"+null+"'";
+                //SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
+                //con.Open();
+                //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                //DataTable dt = new DataTable();
+                //sdr.Fill(dt);
+                //dropSupplier.DataSource = dt;
+                //dropSupplier.DataTextField = "VendorName";
+                //dropSupplier.DataValueField = "VendorName";
+                //dropSupplier.DataBind();
 
-                DropProduct.DataSource = dt;
-                DropProduct.DataTextField = "ItemDescr";
-                DropProduct.DataValueField = "ItemDescr";
-                DropProduct.DataBind();
-                con.Close();
+                //DropProduct.DataSource = dt;
+                //DropProduct.DataTextField = "ItemDescr";
+                //DropProduct.DataValueField = "ItemDescr";
+                //DropProduct.DataBind();
+                //con.Close();
 
                 //string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 //string sqlqueryy = "select * from Product";
@@ -151,7 +151,7 @@ namespace BIOSproject
 
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
-                        mail.To.Add("castillojhondavid6@gmail.com , jmalpuerto@lbcexpress.com");
+                        mail.To.Add(dropSupplier.SelectedValue);
                         mail.Subject = "Request for Barcode Series" + "<br />"+ dropSupplier.Text + " " + PONumber.Text;
                         mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/><br/>" +
                             "Product & Quantity: " +"<br/>"+ TxtAllProduct.Text + " - " + "<br/><br/>Starting Series - Ending Series<br/><br/>" +
@@ -196,6 +196,7 @@ namespace BIOSproject
                 sqlCmd.Parameters.AddWithValue("@CancelRequest", "0");
                 sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
                 sqlCmd.Parameters.AddWithValue("@DateRequested", ReqDate.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@forHitCheck", "0");
                 //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
                 //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
                 //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
