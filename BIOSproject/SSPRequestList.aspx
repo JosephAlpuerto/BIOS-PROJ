@@ -343,8 +343,8 @@
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
                                         <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier Name" />
-                                        <asp:ButtonField DataTextField="Product" HeaderText="Product" />
-                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
+                                        <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
+                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />
                                         
                                          <%--<asp:TemplateField>
                                                            <ItemTemplate>
