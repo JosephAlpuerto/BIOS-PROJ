@@ -443,17 +443,14 @@
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                        <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier" />
-                                        <asp:ButtonField DataTextField="Product" HeaderText="Product" />
-                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
-                                        <asp:ButtonField DataTextField="CreatedBy" HeaderText="Sourcing" />
-                                         <asp:ButtonField DataTextField="IsActive" HeaderText="Status" />
 
-                                                       <%--<asp:TemplateField>
-                                                           <ItemTemplate>
-                                                               <asp:LinkButton ID="ViewResetAdmin" runat="server" CommandArgument='<%# Eval("Id") %>'>View</asp:LinkButton>
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate> 
+                                                               <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("forHitCheck").ToString() == "False" && Eval("IsActive").ToString() == "True" %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
+                                                               <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
+                                                       </asp:TemplateField>
 
                                                        <asp:TemplateField >
                                                            <ItemTemplate>
@@ -462,14 +459,13 @@
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
-                                                        <asp:TemplateField >
+                                                        <asp:TemplateField>
                                                            <ItemTemplate>
                                                                <asp:LinkButton ID="btnViewReject" runat="server" Text="Reject" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsRejected").ToString() == "False"%>' OnClick="btnViewReject_Click"/>
-                                                               
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
-                                                       <asp:TemplateField >
+                                                       <asp:TemplateField>
                                                            <ItemTemplate>
 
                                                                <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
