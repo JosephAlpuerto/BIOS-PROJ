@@ -1,5 +1,5 @@
 ﻿.wrapper {
-    max-width: 500px;
+    max-width: 1000px;
     width: 100%;
     height: 100%;
     margin: 20px auto;
@@ -25,8 +25,10 @@
     }
 
     .wrapper .forms .field .drop1{
-        width: 40%;
+        width: 45%;
         outline: none;
+        margin-left: 20px;
+        
     }
     .wrapper .forms .field .drop2 {
         width: 45%;
@@ -35,8 +37,9 @@
         margin-bottom: 10px;
     }
     .wrapper .forms .field .label1 {
-        margin-left: 30px;
+        margin-left: 110px;
     }
     .wrapper .forms .field .label2 {
-        margin-left: 200px;
+        margin-left: 500px;
+        
     }

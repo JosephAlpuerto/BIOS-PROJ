@@ -19,7 +19,49 @@ namespace BIOSproject
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-            ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
+            if (!IsPostBack)
+            {
+
+                string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                string sqlquery = "select * from Reference where VendorName != '"+null+"'";
+                SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
+                con.Open();
+                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                DataTable dt = new DataTable();
+                sdr.Fill(dt);
+                dropSupplier.DataSource = dt;
+                dropSupplier.DataTextField = "VendorName";
+                dropSupplier.DataValueField = "VendorName";
+                dropSupplier.DataBind();
+
+                DropProduct.DataSource = dt;
+                DropProduct.DataTextField = "ItemDescr";
+                DropProduct.DataValueField = "ItemDescr";
+                DropProduct.DataBind();
+                con.Close();
+
+                //string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                //string sqlqueryy = "select * from Product";
+                //SqlCommand sqlcom = new SqlCommand(sqlqueryy, con);
+                //con.Open();
+                //SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
+                //DataTable td = new DataTable();
+                //dr.Fill(td);
+                //DropProduct.DataSource = td;
+                //DropProduct.DataTextField = "ItemDescr";
+                //DropProduct.DataValueField = "ItemDescr";
+                //DropProduct.DataBind();
+                //con.Close();
+
+
+
+
+
+
+                ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
+
+
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -62,7 +104,7 @@ namespace BIOSproject
         protected void PONumber_TextChanged(object sender, EventArgs e)
         {
             con.Open();
-            SqlCommand comm = new SqlCommand("select * from SSPRequest where PONumber = '" + PONumber.Text + "' ", con);
+            SqlCommand comm = new SqlCommand("select * from SSPNewRequest where PONumber = '" + PONumber.Text + "' ", con);
             SqlDataReader sdr = comm.ExecuteReader();
             if (sdr.Read())
             {
@@ -72,6 +114,8 @@ namespace BIOSproject
                 dropSupplier.Enabled = false;
                 TxtQuantity.Enabled = false;
                 DropProduct.Enabled = false;
+                btnAdd.Enabled = false;
+                Button1.Enabled = false;
             }
             else
             {
@@ -80,6 +124,8 @@ namespace BIOSproject
                 dropSupplier.Enabled = true;
                 TxtQuantity.Enabled = true;
                 DropProduct.Enabled = true;
+                btnAdd.Enabled = true;
+                Button1.Enabled = true;
             }
 
             con.Close();
@@ -89,6 +135,7 @@ namespace BIOSproject
             TicketNo.Text = PONumber.Text = txtTotal.Text = "";
             HiddenField1.Value = "";
             lblError1.Text = "";
+            TxtAllProduct.Text = "";
         }
 
         protected void Button1_Click(object sender, EventArgs e)

@@ -16,7 +16,7 @@
 
 
 
-            <asp:Label ID="lblError1" runat="server"></asp:Label>
+            <asp:Label ID="lblError1" runat="server" ForeColor="Red"></asp:Label>
             <div class="field">
                 <asp:Label ID="lblTicketNo" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
                 <asp:TextBox ID="TicketNo" runat="server" CssClass="input1"></asp:TextBox>
@@ -31,18 +31,23 @@
 
             <div class="field">
                 <asp:Label ID="Label3" runat="server" Text="PO Number" CssClass="label"></asp:Label>
-                <asp:TextBox ID="PONumber" runat="server" CssClass="input1" OnTextChanged="PONumber_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="PONumber" runat="server" CssClass="input1" AutoPostBack="true" OnTextChanged="PONumber_TextChanged"  AccessKey="8" ClientIDMode="Static"></asp:TextBox>
             </div>
 
             <div class="field">
                 <asp:Label ID="Label4" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1"  DataTextField="Username" DataValueField="Username" DataSourceID="SqlDataSource1">
+                <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" >
                 </asp:DropDownList>
             </div>
 
             <div class="field">
-                <asp:Label ID="Label5" runat="server" Text="Product1" CssClass="label1"></asp:Label>
-                <asp:Label ID="Label6" runat="server" Text="Quantity1" CssClass="label2"></asp:Label>
+                <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label1"></asp:Label>
+                <asp:Label ID="Label6" runat="server" Text="Quantity" CssClass="label2"></asp:Label>
+                
+                <asp:HiddenField ID="HFValue" runat="server" />
+            </div>
+
+            <div class="field">
                 <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1">
                     <asp:ListItem>KILO BOX</asp:ListItem>
                     <asp:ListItem>KB MINI</asp:ListItem>
@@ -52,7 +57,6 @@
                 <asp:Button ID="btnAdd" runat="server" Text="Add Product" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click"/>
                 <br />
                 <asp:TextBox ID="TxtAllProduct" runat="server" TextMode="MultiLine" CssClass="input1" value="=Convert.ToString(info[0])" ></asp:TextBox>
-                <asp:HiddenField ID="HFValue" runat="server" />
             </div>
             
             <div class="field">
