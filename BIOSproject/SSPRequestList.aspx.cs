@@ -103,8 +103,8 @@ namespace BIOSproject
             txtStartingSeriesView.Text = dtbl.Rows[0]["StartingSeries"].ToString();
             txtEndingSeriesView.Text = dtbl.Rows[0]["EndingSeries"].ToString();
             txtSupplierView.Text = dtbl.Rows[0]["Supplier"].ToString();
-            txtProductView.Text = dtbl.Rows[0]["Product"].ToString();
-            txtQuantityView.Text = dtbl.Rows[0]["Quantity"].ToString();
+            txtProductView.Text = dtbl.Rows[0]["ProductQuantity"].ToString();
+            txtQuantityView.Text = dtbl.Rows[0]["TotalQuantity"].ToString();
             ModalView.Show();
 
             FillGridView();

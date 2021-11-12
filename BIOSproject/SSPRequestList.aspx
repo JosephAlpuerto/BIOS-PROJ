@@ -283,7 +283,7 @@
                  <div class="input_field1">
                     <%--<label>Quantity</label>--%>
                     <asp:Label ID="Label13" runat="server" Text="Product Name" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtProductView" runat="server" CssClass="input1" AccessKey="4" ClientIDMode="Static"></asp:TextBox>
+                    <asp:TextBox ID="txtProductView" runat="server" CssClass="input1" TextMode="MultiLine" AccessKey="4" ClientIDMode="Static"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
