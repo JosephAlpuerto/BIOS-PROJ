@@ -126,6 +126,7 @@
     <Content Include="AllDeletedAccounts.aspx" />
     <Content Include="AllSupplierRequest.aspx" />
     <Content Include="AllUsers.aspx" />
+    <Content Include="css\NewRequest.css" />
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
@@ -136,6 +137,7 @@
     <Content Include="js\jquery.js" />
     <Content Include="js\sweetAlert.js" />
     <Content Include="MyRejectedRequestSupp.aspx" />
+    <Content Include="NewRequest.aspx" />
     <Content Include="RejectedBySupplierlist.aspx" />
     <Content Include="SSPRequestList.aspx" />
     <Content Include="Hub\BarcodeIssuer.aspx" />
@@ -1938,6 +1940,13 @@
     </Compile>
     <Compile Include="MyRejectedRequestSupp.aspx.designer.cs">
       <DependentUpon>MyRejectedRequestSupp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewRequest.aspx.cs">
+      <DependentUpon>NewRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewRequest.aspx.designer.cs">
+      <DependentUpon>NewRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="PrintRequest2.Designer.cs">
       <AutoGen>True</AutoGen>

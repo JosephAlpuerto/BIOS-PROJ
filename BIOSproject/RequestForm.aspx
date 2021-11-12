@@ -3,8 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
    
-    
-
       <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
     
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
@@ -112,9 +110,10 @@
 
 
                 <div class="input_field1">
-                    <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="drpProduct" runat="server" CssClass="input1">
+                    <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label1"></asp:Label>
+                    <asp:DropDownList ID="drpProduct" runat="server" CssClass="drop1">
                     </asp:DropDownList>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="drop1" AccessKey="7" ClientIDMode="Static"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
