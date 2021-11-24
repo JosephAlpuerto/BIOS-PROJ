@@ -16,7 +16,7 @@
          <!-- End of Topbar -->
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>
+                            <h1 class="h3 mb-0 text-gray-800"></h1>
                         <asp:Button Text="All Sourcing Accounts" ID="btnAllAdmin" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllAdmin_Click" runat="server"></asp:Button>
                         <asp:Button Text="All Supplier Accounts" ID="btnAllUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAllUser_Click" runat="server"></asp:Button>
                         <asp:Button Text="Add Account" ID="btnAddUser" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnAddUser_Click" runat="server"></asp:Button>

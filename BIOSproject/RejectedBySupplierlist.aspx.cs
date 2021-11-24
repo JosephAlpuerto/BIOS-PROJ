@@ -53,8 +53,8 @@ namespace BIOSproject
             hfId.Value = Id.ToString();
             hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
             hfSourcing.Value = dtbl.Rows[0]["CreatedBy"].ToString();
-            hfProduct.Value = dtbl.Rows[0]["Product"].ToString();
-            hfQuantity.Value = dtbl.Rows[0]["Quantity"].ToString();
+            hfProduct.Value = dtbl.Rows[0]["ProductQuantity"].ToString();
+            hfQuantity.Value = dtbl.Rows[0]["TotalQuantity"].ToString();
             txtStart.Text = dtbl.Rows[0]["StartingSeries"].ToString();
             txtEnd.Text = dtbl.Rows[0]["EndingSeries"].ToString();
             txtRequestID.Text = dtbl.Rows[0]["Id"].ToString();

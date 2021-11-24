@@ -9,10 +9,10 @@
     <div id="wrapper">
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>
+                            <h1 class="h3 mb-0 text-gray-800"></h1>
                         <%--<asp:Button Text="HitCheck" ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click"  runat="server"></asp:Button>--%>
                         <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
-                        <asp:Button Text="Print Report" ID="btnDownload" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnDownload_Click" runat="server"></asp:Button>
+                       <%-- <asp:Button Text="Print Report" ID="btnDownload" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnDownload_Click" runat="server"></asp:Button>--%>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         
                         <ajaxtoolkit:modalpopupextender ID="ModalReport" PopupControlID="PanelReport" TargetControlID="gvModal" PopupDragHandleControlID="headerReport"  CancelControlID="btnCloseReport" runat="server"></ajaxtoolkit:modalpopupextender>
@@ -85,15 +85,15 @@
 
                    <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This Series Sequence is already use!">
                     <Columns>
-                       <asp:ButtonField DataTextField="PoNO" HeaderText="PO No." />
+                       <asp:ButtonField DataTextField="PoNumber" HeaderText="PO No." />
                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                         <asp:TemplateField>
+                         <%--<asp:TemplateField>
                           <ItemTemplate>
                                 <asp:LinkButton runat="server" Text="RequestBy Supplier" ForeColor="Red" Enabled="false" Visible='<%# Eval("IfProcess").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                 <asp:Button runat="server" Text="OnProcess!" Enabled="false" Visible='<%# Eval("IfProcess").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                           </ItemTemplate>
-                        </asp:TemplateField> 
+                        </asp:TemplateField> --%>
                     </Columns>
                    </asp:GridView>
                 </div>
@@ -147,7 +147,7 @@
            <div runat="server" style="max-height: 500px; overflow: auto; background-color: white;">
            <div class="container">
 
-               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_Ref %>" SelectCommand="SELECT [AreaDescr] FROM [Areas]"></asp:SqlDataSource>
+              
                     <div class="modal-header" >
                                 <h5 class="modal-title" id="">
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_Ref %>" SelectCommand="SELECT [BranchCode] + ' - ' + [BranchDescr] as BranchCodeDesc FROM [ref_Branches]"></asp:SqlDataSource>
@@ -176,16 +176,6 @@
                     <asp:TextBox ID="txtPO" Enabled="false" runat="server" CssClass="input1" TextMode="Number"></asp:TextBox>
                 </div> 
 
-                <div class="input_field1">
-                    <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtBranch" Enabled="false" runat="server" CssClass="input1" ></asp:TextBox>
-                </div>
-
-                <div class="input_field1">
-                    <asp:Label ID="Label3" runat="server" Text="Area" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtArea" Enabled="false" runat="server" CssClass="input1" ></asp:TextBox>
-                </div>
-
                 <div class="input_field1"> 
                     <asp:Label ID="Label4" runat="server" Text="Starting Series" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtStart" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
@@ -202,12 +192,12 @@
                 </div>
 
                 <div class="input_field1">
-                    <asp:Label ID="Label11" runat="server" Text="Product" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtProduct" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:Label ID="Label11" runat="server" Text="Product list" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtProduct" Enabled="false" runat="server" TextMode="MultiLine" CssClass="input1"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
-                    <asp:Label ID="Label10" runat="server" Text="Quantity" CssClass="label"></asp:Label>
+                    <asp:Label ID="Label10" runat="server" Text="Total Quantity" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtQuantity" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
 
@@ -216,10 +206,6 @@
                     <asp:TextBox ID="txtSuppName" Enabled="false" runat="server" CssClass="input1" ></asp:TextBox>
                 </div>
 
-                 <div class="input_field1">
-                    <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
-                    </asp:DropDownList>  </div>
 
                 <div class="input_field1">
                     <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSubmit_Click"/>
@@ -242,23 +228,26 @@
                                 <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False">
                                     <Columns>
-                                        <asp:ButtonField DataTextField="Id" HeaderText="ID" />
-                                         <asp:ButtonField DataTextField="RequestID" HeaderText="Supplier Request ID" />
+                                         <asp:ButtonField DataTextField="ID" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
-                                         <asp:ButtonField DataTextField="PoNO" HeaderText="PO No." />
+                                         <asp:ButtonField DataTextField="PoNumber" HeaderText="PO No." />
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                         <asp:ButtonField DataTextField="ScheduleRequest" HeaderText="Scedule Request" />
-                                        <asp:ButtonField DataTextField="Area" HeaderText="Area" />
-                                        <asp:ButtonField DataTextField="Branch" HeaderText="Branch" />
-                                        <asp:ButtonField DataTextField="Product" HeaderText="Product" />
-                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Quantity" />
-                                        <asp:ButtonField DataTextField="CreatedBy" HeaderText="SupplierName" />
-                                        <asp:ButtonField DataTextField="CreatedDate" HeaderText="CreatedDate" />
+                                        <asp:ButtonField DataTextField="Supplier" HeaderText="SupplierName" />
+                                        <asp:ButtonField DataTextField="ScheduleDate" HeaderText="Schedule Dated" />
+
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate> 
+                                                               <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("WHcheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
+                                                               <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("WHcheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-user btn-block" />
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:Button ID="btnRequest" runat="server" Text="Destination" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnProcess_Click"/>
+                                                               <asp:Button ID="btnRequest" runat="server" Text="Submit" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("WHcheck").ToString() == "True"%>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnProcess_Click"/>
+                                                               <asp:Button runat="server" Text="Submit" Enabled="false"  Visible='<%# Eval("WHcheck").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 

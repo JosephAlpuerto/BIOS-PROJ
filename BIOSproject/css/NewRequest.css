@@ -1,4 +1,4 @@
-﻿.wrapper {
+﻿/*.wrapper {
     max-width: 1000px;
     width: 100%;
     height: 100%;
@@ -43,3 +43,66 @@
         margin-left: 500px;
         
     }
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*.body{
+    display: flex;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}*/
+.container{
+    width: 100%;
+    padding: 7px 10px;
+    background-color: #f2f2f2;
+}
+.container formview .form-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+formview .form-details .input-box {
+    margin: 10px 0 6px 0;
+    width: calc(100% / 3 - 20px);
+}
+formview .form-details .input-box2 {
+    margin: 20px 0 12px 0;
+    width: calc(100% / 3 - 20px);
+}
+formview .form-details .input-box4 {
+    margin: 10px 0 6px 0;
+    align-content: center;
+    width: calc(100% / 1 - 40px);
+}
+formview .form-details .input-box3 {
+    margin: 10px 0 6px 0;
+    align-content: center;
+    width: calc(100% / 1 - 100px);
+}
+formview .form-details .input-box6 {
+    margin: 5px 0 3px 0;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 2 - 100px);
+}
+formview .form-details .input-box7 {
+    margin: 5px 0 3px 0;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 2 - 100px);
+}
+.form-details .input-box DropDownList {
+    height: 25px;
+    width: 100%;
+}
+.form-details .input-box input {
+    height: 25px;
+    width: 100%;
+}
+

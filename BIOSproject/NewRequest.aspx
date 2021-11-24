@@ -6,6 +6,81 @@
     <link href="css/NewRequest.css" rel="stylesheet" />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
     
+<div class="body">
+    <div class="container">
+        <formview action="#">
+            <div class="form-details">
+                <div class="input-box2">
+                    <span class="details">Ticket No.:</span>
+                    <asp:TextBox ID="TicketNo" runat="server" CssClass="input1"></asp:TextBox>
+                </div>
+
+                <div class="input-box2">
+                    <span class="details">PONumber:</span>
+                    <asp:TextBox ID="PONumber" runat="server" CssClass="input1" AutoPostBack="true" OnTextChanged="PONumber_TextChanged"  AccessKey="8" ClientIDMode="Static"></asp:TextBox><asp:Label ID="lblError1" runat="server" ForeColor="Red"></asp:Label>
+                </div>
+
+                <div class="input-box2">
+                    <span class="details">Requested Date:</span>
+                    <asp:TextBox ID="ReqDate" runat="server" CssClass="input1" TextMode="Date" ReadOnly="True" Enabled="false"></asp:TextBox>
+                </div>
+
+                <div class="input-box4">
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
+                    <span class="details">Supplier:</span>
+                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="Vendor" DataValueField="VendorEmail" Width="300px" >
+                </asp:DropDownList>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Product:</span>
+                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
+                    <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px">
+                </asp:DropDownList>  
+                </div>
+                
+                <div class="input-box">
+                    <span class="details">Quantity:</span>
+                    <asp:TextBox ID="TxtQuantity" runat="server" CssClass="drop2" Width="120px"></asp:TextBox><asp:Label ID="lblerror" runat="server" ForeColor="Red" CssClass="label"></asp:Label>
+                </div>
+                <div class="input-box">
+                <asp:Button ID="btnAdd" runat="server" Text="Add Product" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click" Width="150px" Height="30px"/>
+                </div>
+
+                <div class="input-box7">
+                     <span class="details">List of Product's:</span>
+                </div>
+                <div class="input-box7">
+                     <asp:Label ID="Label9" runat="server" Text="Total Quantity" CssClass="label"></asp:Label>
+                </div>
+                 <div class="input-box6">
+                <asp:TextBox ID="TxtAllProduct" runat="server" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox>
+                </div>
+                <div class="input-box6">
+                    <asp:TextBox ID="txtTotal" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
+                </div>
+                
+
+                 <div class="input-box6">
+                    <asp:Button ID="Button1" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
+                </div>
+               
+            </div>
+        </formview>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="wrapper">
 
         <div class="forms">
@@ -13,64 +88,52 @@
 
 
             <asp:Label ID="Label8" runat="server"></asp:Label>
-
-
-
-            <asp:Label ID="lblError1" runat="server" ForeColor="Red"></asp:Label>
-            <div class="field">
-                <asp:Label ID="lblTicketNo" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
-                <asp:TextBox ID="TicketNo" runat="server" CssClass="input1"></asp:TextBox>
+           
+            <div class="field1">
+                <asp:Label ID="lblTicketNo" runat="server" Visible="false" Text="Ticket No." CssClass="label"></asp:Label>
+                
+                <asp:Label ID="Label3" runat="server" Visible="false" Text="PO Number" CssClass="label"></asp:Label>
+               
             </div>
             <asp:HiddenField ID="HiddenField1" runat="server" />
 
-            <div class="field">
-                <asp:Label ID="Label2" runat="server" Text="Requested Date" CssClass="label"></asp:Label>
-                <asp:TextBox ID="ReqDate" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
-            </div>
-            
+            <div class="field2">
+                <asp:Label ID="Label2" runat="server" Visible="false" Text="Requested Date" CssClass="label"></asp:Label>
+                
 
-            <div class="field">
-                <asp:Label ID="Label3" runat="server" Text="PO Number" CssClass="label"></asp:Label>
-                <asp:TextBox ID="PONumber" runat="server" CssClass="input1" AutoPostBack="true" OnTextChanged="PONumber_TextChanged"  AccessKey="8" ClientIDMode="Static"></asp:TextBox>
+                
+                <asp:Label ID="Label4" runat="server" Visible="false" Text="Supplier" CssClass="label"></asp:Label>
+                
             </div>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
+           
             <div class="field">
-                <asp:Label ID="Label4" runat="server" Text="Supplier" CssClass="label"></asp:Label>
-                <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="Vendor" DataValueField="VendorEmail" >
-                </asp:DropDownList>
-            </div>
-            <div class="field">
-                <asp:Label ID="Label5" runat="server" Text="Product" CssClass="label1"></asp:Label>
-                <asp:Label ID="Label6" runat="server" Text="Quantity" CssClass="label2"></asp:Label>
+                <asp:Label ID="Label5" runat="server" Visible="false" Text="Product" CssClass="label1"></asp:Label>
+                <asp:Label ID="Label6" runat="server" Visible="false" Text="Quantity" CssClass="label2"></asp:Label>
                 
                 <asp:HiddenField ID="HFValue" runat="server" />
             </div>
 
-            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ID], [ItemDescr] as Product FROM [Reference]"></asp:SqlDataSource>
+           
             <div class="field">
-                <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="ID">
-                    <asp:ListItem>KILO BOX</asp:ListItem>
-                    <asp:ListItem>KB MINI</asp:ListItem>
-                </asp:DropDownList>
-                <asp:TextBox ID="TxtQuantity" runat="server" CssClass="drop2"></asp:TextBox>
+                
+                
                 <br />
-                <asp:Button ID="btnAdd" runat="server" Text="Add Product" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click"/>
+                
                 <br />
-                <asp:TextBox ID="TxtAllProduct" runat="server" TextMode="MultiLine" CssClass="input1" value="=Convert.ToString(info[0])" ></asp:TextBox>
+                <asp:Label ID="Label1" runat="server" Visible="false" Text="List of Product's" CssClass="label"></asp:Label>
+                
             </div>
             
             <div class="field">
-                <asp:Label ID="Label7" runat="server" Text="Total Quantity" CssClass="label"></asp:Label>
-                <asp:TextBox ID="txtTotal" runat="server" CssClass="input1" ></asp:TextBox>
+                <asp:Label ID="Label7" runat="server" Visible="false" Text="Total Quantity" CssClass="label"></asp:Label>
+               
             </div>
 
 
           
 
             <br />
-            <div class="input_field1">
-                    <asp:Button ID="Button1" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click"/>
-                </div>
+           
 
         </div>
 

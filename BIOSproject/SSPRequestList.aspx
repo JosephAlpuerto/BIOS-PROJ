@@ -8,13 +8,12 @@
 
      <div id="wrapper">
                     <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>
-                        <%--<asp:Button Text="HitCheck PO No." ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click" runat="server"></asp:Button>--%>
-                        <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
+                   <%-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>   
+                        <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>--%>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         
-                            </div>
+                            <%--</div>--%>
                         </div>
                      </div>
 
@@ -283,17 +282,17 @@
                  <div class="input_field1">
                     <%--<label>Quantity</label>--%>
                     <asp:Label ID="Label13" runat="server" Text="Product Name" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtProductView" runat="server" CssClass="input1" TextMode="MultiLine" AccessKey="4" ClientIDMode="Static"></asp:TextBox>
+                    <asp:TextBox ID="txtProductView" runat="server" Enabled="false" CssClass="input1" TextMode="MultiLine" AccessKey="4" ClientIDMode="Static"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">
                     <%--<label>Quantity</label>--%>
                     <asp:Label ID="Label14" runat="server" Text="Quantity" CssClass="label"></asp:Label>
                     <span id="errmsg5"></span>
-                    <asp:TextBox ID="txtQuantityView" runat="server" CssClass="input1" AccessKey="5" ClientIDMode="Static"></asp:TextBox>
+                    <asp:TextBox ID="txtQuantityView" runat="server" Enabled="false" CssClass="input1" AccessKey="5" ClientIDMode="Static"></asp:TextBox>
                 </div>
                 <div class="input_field1">
-                    <asp:Button ID="btnUpdateView" runat="server" Text="Update" CssClass="btn btn-primary btn-user btn-block" OnClick="btnUpdateView_Click" />
+                    <%--<asp:Button ID="btnUpdateView" runat="server" Text="Update" CssClass="btn btn-primary btn-user btn-block" OnClick="btnUpdateView_Click" />--%>
                 <asp:Button ID="btnCancelRequest" runat="server" Text="CancelRequest" CssClass="btn btn-primary btn-user btn-block" OnClick="btnCancelRequest_Click" />
                     </div> 
 
@@ -343,16 +342,9 @@
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
                                         <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier Name" />
-                                        <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
-                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />
+                                       <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
+                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
                                         
-                                         <%--<asp:TemplateField>
-                                                           <ItemTemplate>
-
-                                                               
-                                                               <asp:LinkButton ID="ViewResetAdmin" runat="server" CommandArgument='<%# Eval("Id") %>'>View</asp:LinkButton>
-                                                           </ItemTemplate>
-                                                       </asp:TemplateField>--%>
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>

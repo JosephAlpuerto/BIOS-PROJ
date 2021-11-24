@@ -63,42 +63,56 @@ namespace BIOSproject
 
             }
         }
+        public void Clear3()
+        {
+            TxtQuantity.Text = "";
+            lblerror.Text = "";
+        }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            if(TxtAllProduct.Text == "")
+            if (TxtQuantity.Text == "")
             {
-                TxtAllProduct.Text = DropProduct.SelectedItem.Text + "-" + TxtQuantity.Text;
-                if (txtTotal.Text == "")
-                {
-                    txtTotal.Text = TxtQuantity.Text;
-                }
-                else if (txtTotal.Text != "")
-                {
-                    int num1, num2, num3;
-                    num1 = Convert.ToInt32(txtTotal.Text);
-                    num2 = Convert.ToInt32(TxtQuantity.Text);
-                    num3 = num1 + num2;
-                    txtTotal.Text = num3.ToString();
-                }
+                lblerror.Text = "Please Input Quantity!";
             }
-            else if (TxtAllProduct.Text != "")
+            else
             {
-                TxtAllProduct.Text = TxtAllProduct.Text + "\n" + DropProduct.SelectedItem.Text + "-" + TxtQuantity.Text;
-                if(txtTotal.Text == "")
+                if (TxtAllProduct.Text == "")
                 {
-                    txtTotal.Text = TxtQuantity.Text;
+                    TxtAllProduct.Text = DropProduct.SelectedItem.Text +" : "+ TxtQuantity.Text + "pcs";
+                    if (txtTotal.Text == "")
+                    {
+                        txtTotal.Text = TxtQuantity.Text;
+                        Clear3();
+                    }
+                    else if (txtTotal.Text != "")
+                    {
+                        int num1, num2, num3;
+                        num1 = Convert.ToInt32(txtTotal.Text);
+                        num2 = Convert.ToInt32(TxtQuantity.Text);
+                        num3 = num1 + num2;
+                        txtTotal.Text = num3.ToString();
+                    }
                 }
-                else if (txtTotal.Text != "")
-                {
-                    int num1, num2, num3;
-                    num1 = Convert.ToInt32(txtTotal.Text);
-                    num2 = Convert.ToInt32(TxtQuantity.Text);
-                    num3 = num1 + num2;
-                    txtTotal.Text = num3.ToString();
-                }
-            }
 
+                else if (TxtAllProduct.Text != "")
+                {
+                    TxtAllProduct.Text = TxtAllProduct.Text + "\n" + DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs";
+                    if (txtTotal.Text == "")
+                    {
+                        txtTotal.Text = TxtQuantity.Text;
+                    }
+                    else if (txtTotal.Text != "")
+                    {
+                        int num1, num2, num3;
+                        num1 = Convert.ToInt32(txtTotal.Text);
+                        num2 = Convert.ToInt32(TxtQuantity.Text);
+                        num3 = num1 + num2;
+                        txtTotal.Text = num3.ToString();
+                        Clear3();
+                    }
+                }
+            }
         }
 
         protected void PONumber_TextChanged(object sender, EventArgs e)
@@ -108,7 +122,6 @@ namespace BIOSproject
             SqlDataReader sdr = comm.ExecuteReader();
             if (sdr.Read())
             {
-
                 lblError1.Text = "PO Number Already Exists!!";
                 TicketNo.Enabled = false;
                 dropSupplier.Enabled = false;
@@ -135,6 +148,7 @@ namespace BIOSproject
             TicketNo.Text = PONumber.Text = txtTotal.Text = "";
             HiddenField1.Value = "";
             lblError1.Text = "";
+            TxtQuantity.Text = "";
             TxtAllProduct.Text = "";
         }
 
@@ -188,15 +202,16 @@ namespace BIOSproject
                 sqlCmd.Parameters.AddWithValue("@Supplier", dropSupplier.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@Product", TxtAllProduct.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@Quantity", txtTotal.Text.Trim());
-
                 sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
                 sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
                 sqlCmd.Parameters.AddWithValue("@IsActive", "0");
-                sqlCmd.Parameters.AddWithValue("@DownloadFile", Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@CancelRequest", "0");
                 sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
                 sqlCmd.Parameters.AddWithValue("@DateRequested", ReqDate.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@forHitCheck", "0");
+                sqlCmd.Parameters.AddWithValue("@IfDownload", "0");
+                sqlCmd.Parameters.AddWithValue("@IfProcess", "0");
+                sqlCmd.Parameters.AddWithValue("@WHcheck", "0");
                 //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
                 //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
                 //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
@@ -225,12 +240,14 @@ namespace BIOSproject
                     sqlCmd.ExecuteNonQuery();
                     Clear();
                     sqlCon.Close();
-                    lblError1.Text = "New Request added Successfully!";
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Request added Successfully!')", true);
+                    //lblError1.Text = "New Request added Successfully!";
                     //FillGridView();
                 }
                 else
                 {
-                    lblError1.Text = "Error!";
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Error!')", true);
+                    //lblError1.Text = "Error!";
                 }
             }
 

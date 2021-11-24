@@ -8,15 +8,14 @@
 
     <div id="wrapper">
                     <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>
+                    <%--<div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>--%>
                         <%--<asp:Button Text="HitCheck" ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click"  runat="server"></asp:Button>--%>
-                        <asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>
+                        <%--<asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>--%>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        
                             </div>
                         </div>
-                     </div>
+                     <%--</div>--%>
 
     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
@@ -191,6 +190,7 @@
 
     <ajaxtoolkit:modalpopupextender ID="ModalRequest" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelRequest" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
+ 
            <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
           
            <div class="container">
@@ -243,13 +243,6 @@
                     <asp:TextBox ID="txtDate" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
                 </div>
 
-                <div class="input_field1">
-                    <%--<label>Area</label>--%>
-                    <asp:Label ID="Label3" runat="server" Text="Area" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropArea" runat="server" CssClass="input1" DataSourceID="SqlDataSource1" DataTextField="AreaDescr" DataValueField="AreaDescr">
-                       
-                    </asp:DropDownList>
-                </div>
                 <%--<div class="input_field1">
                     
                     <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
@@ -258,46 +251,64 @@
                     </asp:DropDownList>
                 </div>--%>
 
-            <div class="input_field1">
-                <asp:Label ID="Label1" runat="server" Text="Branch" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropBranch" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="BranchCodeDesc" DataValueField="BranchCodeDesc">
-                    </asp:DropDownList>
-                </div>
-    
-                <div class="input_field1">
+            
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
+                <div id="Destination" class="input_field1">
                 <asp:Label ID="Label11" runat="server" Text="Destination To:" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropDesti" runat="server" CssClass="input1">
-                        <asp:ListItem>Hub</asp:ListItem>
-                        <asp:ListItem>Warehouse</asp:ListItem>
+                    <asp:DropDownList ID="DropDesti" runat="server" CssClass="input1" AutoPostBack="true"  OnSelectedIndexChanged="DropDesti_SelectedIndexChanged">
+                        <asp:ListItem>~Select~</asp:ListItem>
+                        <asp:ListItem Value="B">Branches</asp:ListItem>
+                        <asp:ListItem Value="H">Hub</asp:ListItem>
+                        <asp:ListItem Value="W">Warehouse</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                
+               
+              <div class="input_field1">
+                <asp:Label ID="lblBranch" runat="server" Visible="false" Text="Branch" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropBranch" Visible="false" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropBranch_SelectedIndexChanged" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                        </asp:DropDownList>
+                </div>
 
-                <%--<div class="input_field1">
-                    
-                    <asp:Label ID="Label6" runat="server" Text="Starting Series" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="TxtQuantity" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>
+                <div class="input_field1">
+                <asp:Label ID="lblTeam" runat="server" Visible="false" Text="Team" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropTeam" Visible="false" runat="server" AutoPostBack="true" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
 
-                <%--<div class="input_field1">
-                   
-                    <asp:Label ID="Label7" runat="server" Text="Ending Series" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>
-               <%-- <div class="input_field1">
-                   
-                    <asp:Label ID="Label8" runat="server" Text="Particulars" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="input1"></asp:DropDownList>
-                </div>--%>
-                
+                <div class="input_field1">
+                    <asp:Label ID="lblArea" runat="server" Visible="false" Text="Area" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropArea" Visible="false" runat="server" AutoPostBack="true" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
 
+               <%--IF HUB--%>
+               <%-- <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Hub] FROM [Reference] where [Hub] != 'NULL'"></asp:SqlDataSource>--%>
+                 <div class="input_field1">
+                    <asp:Label ID="lblHub" runat="server" Visible="false" Text="HUB" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropHub" Visible="False" runat="server" CssClass="input1">
+                       <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <%--IF WAREHOUSE--%>
+               <%-- <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [WareHouse] FROM [Reference] WHERE [WareHouse] != 'NULL'"></asp:SqlDataSource>--%>
+                 <div class="input_field1">
+                    <asp:Label ID="lblWare" runat="server" Visible="false" Text="WAREHOUSE" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropWare" Visible="False" runat="server" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                </ContentTemplate></asp:UpdatePanel> 
                 <div class="input_field1">
                     <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSubmit_Click" />
-        </div>  
+                </div>  
                                  
 
         </div>
-                                    </div>
+            </div>
                </div>
         </asp:Panel>
 
@@ -358,6 +369,16 @@
                            <asp:TextBox ID="txtPONo1" CssClass="form-control form-control-user" ReadOnly="true" runat="server"></asp:TextBox>
                        </td>
                    </tr>
+
+                   <tr>
+                       <td>
+                           <asp:Label runat="server" Text="Reason:"></asp:Label>
+                       </td>
+                       
+                       <td colspan="2">
+                           <asp:TextBox ID="txtReason" CssClass="form-control form-control-user" runat="server" Height="70px" Rows="20" TextMode="MultiLine"></asp:TextBox>
+                       </td>
+                   </tr>
                   
 
                   
@@ -376,7 +397,7 @@
 
 
 
-    <ajaxtoolkit:modalpopupextender ID="ModalDownloadView" PopupControlID="PanelDownloadView" TargetControlID="gvModal" CancelControlID="btnCloseDownloadView"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <ajaxtoolkit:modalpopupextender ID="ModalDownloadView" PopupControlID="PanelDownloadView" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelDownloadView" runat="server">
             <div class="container">
                 <div class="card o-hidden border-0 shadow-lg my-2">
@@ -412,8 +433,8 @@
                    <asp:HiddenField ID="hfQuantity" runat="server" />  
 
                </table>
-         <asp:Button ID="Download" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " runat="server" Text="Download Now" OnClick="Download_Click" />
-         <asp:Button ID="btnCloseDownloadView" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" />
+         <asp:Button ID="Download" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Download Now" OnClick="Download_Click" />
+         <asp:Button ID="btnCloseDownloadView" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseDownloadView_Click"/>
     </div>
                             </div>
                           </div>
@@ -436,7 +457,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server"/>
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" DataKeyNames="DownloadFile">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
@@ -446,33 +467,33 @@
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate> 
-                                                               <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("forHitCheck").ToString() == "False" && Eval("IsActive").ToString() == "True" %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
+                                                               <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
                                                                <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
-                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
                                                        <asp:TemplateField >
                                                            <ItemTemplate>
-                                                               <asp:Button ID="btnRequest" runat="server" Text="Destination" Enabled='<%# Eval("StartingSeries") != DBNull.Value %>' CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
+                                                               <asp:Button ID="btnRequest" runat="server" Text="Destination" Enabled='<%# Eval("StartingSeries") != DBNull.Value %>' Visible='<%# Eval("forHitCheck").ToString() == "True" && Eval("IsActive").ToString() == "False" %>' CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button ID="Button3" runat="server" Text="Destination" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
                                                         <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="btnViewReject" runat="server" Text="Reject" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsRejected").ToString() == "False"%>' OnClick="btnViewReject_Click"/>
+                                                               <asp:LinkButton ID="btnViewReject" runat="server" Text="Reject" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsRejected").ToString() == "False" && Eval("IsActive").ToString() == "False" && Eval("IfDownload").ToString() == "False"%>' OnClick="btnViewReject_Click"/>
+                                                               <asp:Button runat="server" Text="Disabled" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True" || Eval("IfDownload").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
 
-                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
-
-                                                               <%--<asp:LinkButton ID="LinkButton1" runat="server" Text="Download" Visible='<%# Eval("StartingSeries") != DBNull.Value %>' OnClick="LinkButton1_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>--%>
-                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
-                                                              <%-- <asp:Button ID="btnDownload" runat="server" Text="Download" CssClass="btn btn-primary btn-user btn-block" OnClick="btnDownload_Click" />--%>
+                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
+                                                             
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 

@@ -106,7 +106,6 @@ namespace BIOSproject
             txtProductView.Text = dtbl.Rows[0]["ProductQuantity"].ToString();
             txtQuantityView.Text = dtbl.Rows[0]["TotalQuantity"].ToString();
             ModalView.Show();
-
             FillGridView();
         }
 
@@ -173,27 +172,16 @@ namespace BIOSproject
             SqlCommand sqlCmd = new SqlCommand("CancelRequestSSP", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
-            sqlCmd.Parameters.AddWithValue("@TicketNo", txtTicketNoView.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@PONumber", txtPONumberView.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Supplier", txtSupplierView.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Quantity", txtQuantityView.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@StartingSeries", txtStartingSeriesView.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@EndingSeries", txtEndingSeriesView.Text.Trim());  
-            sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-            sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
-            sqlCmd.Parameters.AddWithValue("@UpdatedBy", Session["Username"].ToString());
-            sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@DeletedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
-            sqlCmd.Parameters.AddWithValue("@IsActive", "0");
-            sqlCmd.Parameters.AddWithValue("@DownloadFile", Convert.DBNull);
             sqlCmd.Parameters.AddWithValue("@CancelRequest", "1");
-            sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
             Clear();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Cancel Request Successfully!')", true);
+            ModalView.Hide();
             FillGridView();
-            lblSuccess.Text = "Cancel Request Successfully!";
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         //protected void hitCheckClose_Click(object sender, EventArgs e)
@@ -233,7 +221,6 @@ namespace BIOSproject
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(TxtSearchSeries.Text));
-            //sql.Parameters.AddWithValue("@end", Convert.ToInt64(TxtSearchSeries.Text));
             DataTable dt = new DataTable();
             SqlDataAdapter sda = new SqlDataAdapter(sql);
             sda.Fill(dt);
@@ -253,6 +240,6 @@ namespace BIOSproject
             con.Close();
         }
 
-       
+      
     }
 }

@@ -128,7 +128,6 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@Supplier", dropSupplier.SelectedItem.Value);
             sqlCmd.Parameters.AddWithValue("@Product", drpProduct.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text.Trim());
-           
             sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@IsActive","0");

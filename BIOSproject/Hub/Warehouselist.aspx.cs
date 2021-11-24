@@ -26,18 +26,18 @@ namespace BIOSproject.Hub
             {
 
                 FillGridView();
-                string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                string sqlquery = "select * from ref_Branches where TeamDescr != '" + null + "'";
-                SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
-                conn.Open();
-                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-                DataTable dt = new DataTable();
-                sdr.Fill(dt);
-                DropTeam.DataSource = dt;
-                DropTeam.DataTextField = "TeamDescr";
-                DropTeam.DataValueField = "TeamDescr";
-                DropTeam.DataBind();
-                conn.Close();
+                //string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                //string sqlquery = "select * from ref_Branches where TeamDescr != '" + null + "'";
+                //SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
+                //conn.Open();
+                //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                //DataTable dt = new DataTable();
+                //sdr.Fill(dt);
+                //DropTeam.DataSource = dt;
+                //DropTeam.DataTextField = "TeamDescr";
+                //DropTeam.DataValueField = "TeamDescr";
+                //DropTeam.DataBind();
+                //conn.Close();
 
 
 
@@ -92,16 +92,14 @@ namespace BIOSproject.Hub
             sqlData.Fill(dtbl);
             sqlCon.Close();
             hfId.Value = Id.ToString();
-            txtRequestID.Text = dtbl.Rows[0]["RequestID"].ToString();
+            txtRequestID.Text = dtbl.Rows[0]["ID"].ToString();
             txtTicket.Text = dtbl.Rows[0]["TicketNo"].ToString();
-            txtPO.Text = dtbl.Rows[0]["PoNO"].ToString();
-            txtBranch.Text = dtbl.Rows[0]["Branch"].ToString();
-            txtArea.Text = dtbl.Rows[0]["Area"].ToString();
+            txtPO.Text = dtbl.Rows[0]["PoNumber"].ToString();
             txtStart.Text = dtbl.Rows[0]["StartingSeries"].ToString();
             txtEnd.Text = dtbl.Rows[0]["EndingSeries"].ToString();
-            txtProduct.Text = dtbl.Rows[0]["Product"].ToString();
-            txtQuantity.Text = dtbl.Rows[0]["Quantity"].ToString();
-            txtSuppName.Text = dtbl.Rows[0]["CreatedBy"].ToString();
+            txtProduct.Text = dtbl.Rows[0]["ProductQuantity"].ToString();
+            txtQuantity.Text = dtbl.Rows[0]["TotalQuantity"].ToString();
+            txtSuppName.Text = dtbl.Rows[0]["Supplier"].ToString();
             double start, end, answer;
             double.TryParse(txtStart.Text, out start);
             double.TryParse(txtEnd.Text, out end);
@@ -124,9 +122,7 @@ namespace BIOSproject.Hub
             SqlCommand sqlCmd = new SqlCommand("HubProcess", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
-            sqlCmd.Parameters.AddWithValue("@NoOfUnit", txtUnit.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@IfProcess", "1");
-            sqlCmd.Parameters.AddWithValue("@Team", DropTeam.SelectedItem.Text.Trim());
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
             Clear();
@@ -139,14 +135,12 @@ namespace BIOSproject.Hub
                 using (MailMessage mail = new MailMessage())
                 {
 
-
-
                     mail.From = new MailAddress("lbcbios08@gmail.com");
                     mail.To.Add(txtSuppName.Text);
                     mail.Subject = "Request for Process" + txtSuppName.Text + " " + txtPO.Text;
                     mail.Body = "This Item Proceed to the Delivery with Ticket#: " + txtTicket.Text + "<hr>PONumber:</hr>"
-                        + txtPO.Text + "<hr> Branch: </hr>" + txtBranch.Text + "<hr> Area: </hr>" + txtArea.Text + "<hr> Team: </hr>" + DropTeam.SelectedItem.Text +
-                        "<hr> Product: </hr>" + txtProduct.Text + "<hr>Quantity:</hr>" + txtQuantity.Text + "<hr>StartingSeries:</hr>" + txtStart.Text + "<hr>EndingSeries:</hr>" + txtEnd.Text +
+                        + txtPO.Text + 
+                        "<hr> Product list: </hr>" + txtProduct.Text + "<hr>Total Quantity:</hr>" + txtQuantity.Text + "<hr>StartingSeries:</hr>" + txtStart.Text + "<hr>EndingSeries:</hr>" + txtEnd.Text +
                         "<hr>No. of Units:</hr>" + txtUnit.Text + "<hr> Supplier: </hr>" + txtSuppName.Text + "<br/><br/>Thanks,";
                     mail.IsBodyHtml = true;
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
@@ -155,8 +149,6 @@ namespace BIOSproject.Hub
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }
-
-
                 }
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Process added and Email send Successfully!')", true);
             }
@@ -212,12 +204,10 @@ namespace BIOSproject.Hub
             cmd.Parameters.AddWithValue("@endmax", end);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from SupplierRequest where StartingSeries <= @search and EndingSeries >= @search and Destination = 'Warehouse'";
+            string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and DestinationTo = 'Warehouse'";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(TxtSearchSeries.Text));
-
-            //sql.Parameters.AddWithValue("@end", Convert.ToInt64(TxtSearchSeries.Text));
             DataTable dt = new DataTable();
             SqlDataAdapter sda = new SqlDataAdapter(sql);
             sda.Fill(dt);
@@ -238,27 +228,64 @@ namespace BIOSproject.Hub
             con.Close();
         }
 
-        protected void btnDownload_Click(object sender, EventArgs e)
+        //protected void btnDownload_Click(object sender, EventArgs e)
+        //{
+        //    SqlConnection conn = new SqlConnection(ConnectionString);
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.Connection = conn;
+        //    cmd.CommandText = "WarehousePrint";
+        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //    conn.Open();
+        //    SqlDataReader dr = cmd.ExecuteReader();
+        //    DataTable dt = new DataTable();
+        //    dt.Load(dr);
+        //    conn.Close();
+
+        //    ReportRequest.LocalReport.DataSources.Add(new ReportDataSource("DataSetReportRequest", dt));
+        //    ReportRequest.LocalReport.ReportPath = Server.MapPath("~/Report/ReportRequest.rdlc");
+        //    ReportRequest.LocalReport.EnableHyperlinks = true;
+        //    FillGridView();
+        //    ModalReport.Show();
+        //}
+
+        protected void HitCheck_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "WarehousePrint";
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            conn.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            conn.Close();
+            LinkButton HitCheck = (sender as LinkButton);
+            string[] commandArguments = HitCheck.CommandArgument.Split(',');
 
-            ReportRequest.LocalReport.DataSources.Add(new ReportDataSource("DataSetReportRequest", dt));
-            ReportRequest.LocalReport.ReportPath = Server.MapPath("~/Report/ReportRequest.rdlc");
-            ReportRequest.LocalReport.EnableHyperlinks = true;
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("CheckDuplicate", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", commandArguments[0]);
+            sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", commandArguments[1]);
+            sqlData.SelectCommand.Parameters.AddWithValue("@EndingSeries", commandArguments[2]);
             FillGridView();
-            ModalReport.Show();
+
+            SqlDataReader sdr = sqlData.SelectCommand.ExecuteReader();
+            if (sdr.Read())
+            {
+                SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+                if (sqlCon2.State == ConnectionState.Closed)
+                    sqlCon2.Open();
+                SqlCommand sqlCmd = new SqlCommand("CheckDuplicate3", sqlCon2);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
+                sqlCmd.Parameters.AddWithValue("@WHcheck", "1");
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series has not been used.')", true);
+                sqlCmd.ExecuteNonQuery();
+                sqlCon2.Close();
+                FillGridView();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series is used by another PONumber!!')", true);
+            }
+
+            sqlCon.Close();
         }
-
-
     }
 
 }
