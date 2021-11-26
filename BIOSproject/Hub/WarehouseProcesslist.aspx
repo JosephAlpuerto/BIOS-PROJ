@@ -102,8 +102,8 @@
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
                                          <asp:ButtonField DataTextField="ScheduleDate" HeaderText="Scedule Date" />
-                                        <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product list" />
-                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />
+                                       <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product list" />
+                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
                                         <asp:ButtonField DataTextField="Supplier" HeaderText="SupplierName" />
                                         <asp:ButtonField DataTextField="CreatedDate" HeaderText="CreatedDate" />
 

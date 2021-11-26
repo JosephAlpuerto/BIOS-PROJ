@@ -27,7 +27,7 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/Validate.css" rel="stylesheet" />
     
-    <script>
+    <%--<script>
         $(document).ready(function () {
             $("#9").keypress(function (e) {
                 if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -141,7 +141,28 @@
                             #errmsgSeries {
                                 color: red;
                             }
-                        </style>
+                        </style>--%>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#1").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    $("#error").html("Numbers Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+        });
+    </script>
+    <style>
+        #error{
+            color: red;
+        }
+    </style>
+
+
+
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
