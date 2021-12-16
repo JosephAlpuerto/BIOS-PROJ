@@ -129,7 +129,9 @@
     <Content Include="AllDeletedAccounts.aspx" />
     <Content Include="AllSupplierRequest.aspx" />
     <Content Include="AllUsers.aspx" />
+    <Content Include="css\Dashboard.css" />
     <Content Include="css\NewRequest.css" />
+    <Content Include="css\sorcedb.css" />
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
@@ -142,6 +144,8 @@
     <Content Include="MyRejectedRequestSupp.aspx" />
     <Content Include="NewRequest.aspx" />
     <Content Include="RejectedBySupplierlist.aspx" />
+    <Content Include="SourcDashboard.aspx" />
+    <Content Include="SourcingDashboard.aspx" />
     <Content Include="SSPRequestList.aspx" />
     <Content Include="Hub\BarcodeIssuer.aspx" />
     <Content Include="Branch.aspx" />
@@ -154,6 +158,7 @@
     <Content Include="Default.aspx" />
     <Content Include="RequestForm.aspx" />
     <Content Include="Hub\HubList.aspx" />
+    <Content Include="SuppDashboard.aspx" />
     <Content Include="SuppValidate.aspx" />
     <Content Include="TextFile\Download.txt" />
     <Content Include="TextFile\NEW.txt" />
@@ -1968,6 +1973,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportRequest.xsd</DependentUpon>
     </Compile>
+    <Compile Include="SourcDashboard.aspx.cs">
+      <DependentUpon>SourcDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SourcDashboard.aspx.designer.cs">
+      <DependentUpon>SourcDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SourcingDashboard.aspx.cs">
+      <DependentUpon>SourcingDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SourcingDashboard.aspx.designer.cs">
+      <DependentUpon>SourcingDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SSPRequestList.aspx.cs">
       <DependentUpon>SSPRequestList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2046,6 +2065,13 @@
     <Compile Include="Supp.Master.designer.cs">
       <DependentUpon>Supp.Master</DependentUpon>
     </Compile>
+    <Compile Include="SuppDashboard.aspx.cs">
+      <DependentUpon>SuppDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuppDashboard.aspx.designer.cs">
+      <DependentUpon>SuppDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuppValidate.aspx.cs">
       <DependentUpon>SuppValidate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2102,6 +2128,13 @@
     </Compile>
     <Compile Include="Hub\ValidateHub.aspx.designer.cs">
       <DependentUpon>ValidateHub.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="_LBC_BIOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2354,6 +2387,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="WebForm1.aspx" />
     <Content Include="_LBC_BIOSDataSet.xsc">
       <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
     </Content>

@@ -26,6 +26,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/Validate.css" rel="stylesheet" />
+    <link href="css/Dashboard.css" rel="stylesheet" />
     
     <%--<script>
         $(document).ready(function () {
@@ -252,6 +253,12 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>AllRequest1</span></a>
                 </li>--%>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="WebForm1.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
                 <li class="nav-item active">
                     <a class="nav-link" href="SSPRequestList.aspx">

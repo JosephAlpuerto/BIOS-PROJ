@@ -1,0 +1,36 @@
+﻿
+
+.content {
+    position: relative;
+    margin-top: 10vh;
+}
+
+    .content .cards {
+        padding: 20px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+        .content .cards .card {
+            width: 150px;
+            height: 100px;
+            background: white;
+            background-color: #d00149;
+        }
+
+    .content .cards .card .box .label1 {
+        width: 200px;
+        color: #757575;
+        font-size: 15px;
+        color: white;
+        margin-left: 10px;
+    }
+    .content .cards .card .box1 .label2 {
+        width: 200px;
+        color: #757575;
+        font-size: 20px;
+        margin-top: 70px;
+        color: white;
+        margin-left: 100px;
+    }
