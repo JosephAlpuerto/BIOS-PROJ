@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Net.Mail;
 using System.Windows.Forms;
+using Button = System.Web.UI.WebControls.Button;
 
 namespace BIOSproject
 {
@@ -17,11 +18,12 @@ namespace BIOSproject
         String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
+
+        DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
-
                 //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 //string sqlquery = "select * from Reference where VendorName != '"+null+"'";
                 //SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
@@ -53,13 +55,12 @@ namespace BIOSproject
                 //DropProduct.DataBind();
                 //con.Close();
 
-
-
-
-
-
                 ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
-
+                if (ViewState["Records"] == null)
+                {
+                    dt.Columns.Add("List of Products");
+                    ViewState["Records"] = dt;
+                }
 
             }
         }
@@ -71,18 +72,28 @@ namespace BIOSproject
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            if (TxtQuantity.Text == "")
+            dt = (DataTable)ViewState["Records"];
+
+            if (TxtQuantity.Text == "" && PONumber.Text == "")
             {
                 lblerror.Text = "Please Input Quantity!";
+                lblError1.Text = "Please Input PO Number!";
             }
             else
             {
-                if (TxtAllProduct.Text == "")
+                if (TxtAllProduct.Text == "" && PONumber.Text != "" && TxtQuantity.Text != "")
                 {
-                    TxtAllProduct.Text = DropProduct.SelectedItem.Text +" : "+ TxtQuantity.Text + "pcs";
+                    
                     if (txtTotal.Text == "")
                     {
+                        dt.Rows.Add(DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs");
+                        TxtAllProduct.Text = DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs";
+                        DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
+                        DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
+
                         txtTotal.Text = TxtQuantity.Text;
+                        PONumber.Enabled = false;
+                        dropSupplier.Enabled = false;
                         Clear3();
                     }
                     else if (txtTotal.Text != "")
@@ -92,28 +103,131 @@ namespace BIOSproject
                         num2 = Convert.ToInt32(TxtQuantity.Text);
                         num3 = num1 + num2;
                         txtTotal.Text = num3.ToString();
+                    }
+                    else
+                    {
+                        lblerror.Text = "Please Input Quantity!";
                     }
                 }
 
-                else if (TxtAllProduct.Text != "")
+                else if (TxtAllProduct.Text != "" && TxtQuantity.Text != "")
                 {
-                    TxtAllProduct.Text = TxtAllProduct.Text + "\n" + DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs";
-                    if (txtTotal.Text == "")
+
+                    if (DDL.Items.FindByText(DropProduct.SelectedItem.Text) == null)
+                        {
+                            dt.Rows.Add(DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs");
+                            TxtAllProduct.Text = TxtAllProduct.Text + "\n" + DropProduct.SelectedItem.Text + " : " + TxtQuantity.Text + "pcs";
+                            DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Value.ToString(), DropProduct.SelectedItem.Value.ToString()));
+                            DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
+
+                            int num1, num2, num3;
+                            num1 = Convert.ToInt32(txtTotal.Text);
+                            num2 = Convert.ToInt32(TxtQuantity.Text);
+                            num3 = num1 + num2;
+                            txtTotal.Text = Convert.ToString(num3);
+                            PONumber.Enabled = false;
+                            dropSupplier.Enabled = false;
+                            lblerrorDrop.Text = "";   
+                            Clear3();
+                        }
+                        else
+                        {
+                            lblerrorDrop.Text = "Product already used!";
+                            lblerror.Text = "";
+                        }
+                    
+                }
+                else
+                {
+                    if(PONumber.Text == "")
                     {
-                        txtTotal.Text = TxtQuantity.Text;
+                        lblError1.Text = "Please Input PO Number!";
+                        lblerror.Text = "";
                     }
-                    else if (txtTotal.Text != "")
+                    else if(TxtQuantity.Text == "")
                     {
-                        int num1, num2, num3;
-                        num1 = Convert.ToInt32(txtTotal.Text);
-                        num2 = Convert.ToInt32(TxtQuantity.Text);
-                        num3 = num1 + num2;
-                        txtTotal.Text = num3.ToString();
-                        Clear3();
+                        lblerror.Text = "Please Input Quantity!";
+                    }
+                    
+                }
+
+            }
+
+            GridView.DataSource = dt;
+            GridView.DataBind();
+        }
+
+        //protected void btnDelete_Click(object sender, EventArgs e)
+        //{
+        //    DataTable dt = ViewState["Records"] as DataTable;
+        //    ListItemCollection liCol = DDL.Items;
+        //    for (int i = 0; i < dt.Rows.Count; i++)
+        //    {
+        //        ListItem li = liCol[i];
+        //        if (li.Selected)
+        //        {
+        //            dt.Rows[i].Delete();
+        //        }
+        //    }
+        //    ViewState["Records"] = dt;
+        //    DDL.DataSource = dt;
+        //    DDL.DataTextField = "Text";
+        //    DDL.DataValueField = "Value";
+        //    DDL.DataBind();
+        //}
+
+        protected void GridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string item = e.Row.Cells[0].Text;
+                foreach (Button button in e.Row.Cells[0].Controls.OfType<Button>())
+                {
+                    if (button.CommandName == "Delete")
+                    {
+                        button.Attributes["onclick"] = "if(!confirm('Do you want to delete " + item + "?')){ return false; };";
+
                     }
                 }
             }
         }
+        protected void GridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int index = Convert.ToInt32(e.RowIndex);
+
+            DataTable dt = ViewState["Records"] as DataTable;
+            dt.Rows[index].Delete();
+            ViewState["Records"] = dt;
+
+            if (txtTotal.Text != "")
+            {
+                ListItem listItem = DDL.Items[Convert.ToInt32(index)];
+                DDL.Items.Remove(listItem);
+
+                ListItem listItem2 = DDLQuantity.Items[Convert.ToInt32(index)];
+                int num1, num2, num3;
+                num1 = Convert.ToInt32(listItem2.Text);
+                num2 = Convert.ToInt32(txtTotal.Text);
+                num3 = num2 - num1;
+                txtTotal.Text = Convert.ToString(num3);
+
+                DDLQuantity.Items.Remove(listItem2);
+            }
+            if (Convert.ToInt32(txtTotal.Text) == 0)
+            {
+                PONumber.Enabled = true;
+                dropSupplier.Enabled = true;
+            }
+            
+            //DDL.Items.Clear();
+            GridView.DataSource = dt;
+            GridView.DataBind();
+            lblerror.Text = "";
+            lblerrorDrop.Text = "";
+
+        }
+        
+
 
         protected void PONumber_TextChanged(object sender, EventArgs e)
         {
@@ -154,21 +268,53 @@ namespace BIOSproject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TicketNo.Text != "" || PONumber.Text != "" || txtTotal.Text != "")
+            if (TicketNo.Text != "" && txtTotal.Text != "")
             {
+                ListItemCollection list = DDL.Items;
+                txtAllProductQuantity.Text = list[0].Text;
+                    ModalReviewView.Show();
+                    txtDate.Text = ReqDate.Text;
+                    txtTicketNo.Text = TicketNo.Text;
+                    txtPONumber.Text = PONumber.Text;
+                    txtSupplier.Text = dropSupplier.SelectedItem.Text;
+                    txtTotalQuantity.Text = txtTotal.Text;
+            }
+         
+            else
+            {
+                lblerrorTicket.Text = "Please Enter Ticket No.!";
+            }
 
+
+
+            //else
+            //{
+            //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Fill up all forms!')", true);
+            //}
+
+
+        }
+
+        protected void btnCloseView_Click(object sender, EventArgs e)
+        {
+            ModalReviewView.Hide();
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (TicketNo.Text != "" && txtTotal.Text != "")
+            {
                 try
                 {
                     using (MailMessage mail = new MailMessage())
                     {
 
 
-
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add(dropSupplier.SelectedValue);
-                        mail.Subject = "Request for Barcode Series" + "<br />"+ dropSupplier.Text + " " + PONumber.Text;
+                        mail.Subject = "Request for Barcode Series" + "<br />" + dropSupplier.Text + " " + PONumber.Text;
                         mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/><br/>" +
-                            "Product & Quantity: " +"<br/>"+ TxtAllProduct.Text + " - " + "<br/><br/>Starting Series - Ending Series<br/><br/>" +
+                            "Product & Quantity: " + "<br/>" + txtAllProductQuantity.Text + " - " + txtTotalQuantity.Text + " pcs " + "<br/><br/>Starting Series - Ending Series<br/><br/>" +
                             "Thanks,";
                         mail.IsBodyHtml = true;
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
@@ -197,24 +343,21 @@ namespace BIOSproject
                 SqlCommand sqlCmd = new SqlCommand("NewRequest", sqlCon);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@Id", (HiddenField1.Value == "" ? 0 : Convert.ToInt32(HiddenField1.Value)));
-                sqlCmd.Parameters.AddWithValue("@TicketNo", TicketNo.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@PONumber ", PONumber.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@Supplier", dropSupplier.SelectedItem.Value);
-                sqlCmd.Parameters.AddWithValue("@Product", TxtAllProduct.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@Quantity", txtTotal.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@TicketNo", txtTicketNo.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PONumber", txtPONumber.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@Supplier", txtSupplier.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@Product", txtAllProductQuantity.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@Quantity", txtTotalQuantity.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
                 sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
                 sqlCmd.Parameters.AddWithValue("@IsActive", "0");
                 sqlCmd.Parameters.AddWithValue("@CancelRequest", "0");
                 sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
-                sqlCmd.Parameters.AddWithValue("@DateRequested", ReqDate.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@DateRequested", txtDate.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@forHitCheck", "0");
                 sqlCmd.Parameters.AddWithValue("@IfDownload", "0");
                 sqlCmd.Parameters.AddWithValue("@IfProcess", "0");
                 sqlCmd.Parameters.AddWithValue("@WHcheck", "0");
-                //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
-                //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
-                //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
                 string Id = HiddenField1.Value;
                 // validations
 
@@ -238,9 +381,14 @@ namespace BIOSproject
                 else if (Id == "")
                 {
                     sqlCmd.ExecuteNonQuery();
+                    DataTable dt = ViewState["Records"] as DataTable;
+                    
                     Clear();
                     sqlCon.Close();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Request added Successfully!')", true);
+                    dt.Rows.Clear();
+                    GridView.DataSource = dt;
+                    GridView.DataBind();
                     //lblError1.Text = "New Request added Successfully!";
                     //FillGridView();
                 }
@@ -251,16 +399,13 @@ namespace BIOSproject
                 }
             }
 
-
-
-            //else
-            //{
-            //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Fill up all forms!')", true);
-            //}
-
-
         }
 
-            }
-        }
+
+
+
+
+        // The id parameter name should match the DataKeyNames value set on the control
+    }
+}
     
