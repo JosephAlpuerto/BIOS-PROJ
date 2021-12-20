@@ -266,11 +266,18 @@
                         <span>AllRequest</span></a>
                 </li>
 
-                <li class="nav-item active">
+               <%-- <li class="nav-item active">
                     <a class="nav-link" href="NewRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Request</span></a>
+                </li>--%>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="NewRequestForm.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Request</span></a>
                 </li>
+
                 <li class="nav-item active">
                     <a class="nav-link" href="RejectedBySupplierlist.aspx">
                         <i class="fas fa-fw fa-folder"></i>

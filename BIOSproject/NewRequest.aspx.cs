@@ -103,6 +103,7 @@ namespace BIOSproject
                         num2 = Convert.ToInt32(TxtQuantity.Text);
                         num3 = num1 + num2;
                         txtTotal.Text = num3.ToString();
+                        lblerrorTicket.Text = "";
                     }
                     else
                     {
@@ -127,8 +128,10 @@ namespace BIOSproject
                             txtTotal.Text = Convert.ToString(num3);
                             PONumber.Enabled = false;
                             dropSupplier.Enabled = false;
-                            lblerrorDrop.Text = "";   
+                            lblerrorDrop.Text = "";
+                            lblerrorTicket.Text = "";
                             Clear3();
+
                         }
                         else
                         {
@@ -268,21 +271,30 @@ namespace BIOSproject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TicketNo.Text != "" && txtTotal.Text != "")
+            if (TicketNo.Text == "")
+            {
+                lblerrorTicket.Text = "Please Enter Ticket No.!";
+            }
+            else if (DDL.Text == "")
+            {
+                lblerrorDrop.Text = "Please Select Product!";
+            }
+            else if (txtTotal.Text == "")
+            {
+                lblerrorDrop.Text = "Please Select Product!";
+            }
+            else if (TicketNo.Text != "" && DDL.Text != "")
             {
                 ListItemCollection list = DDL.Items;
                 txtAllProductQuantity.Text = list[0].Text;
-                    ModalReviewView.Show();
-                    txtDate.Text = ReqDate.Text;
-                    txtTicketNo.Text = TicketNo.Text;
-                    txtPONumber.Text = PONumber.Text;
-                    txtSupplier.Text = dropSupplier.SelectedItem.Text;
-                    txtTotalQuantity.Text = txtTotal.Text;
-            }
-         
-            else
-            {
-                lblerrorTicket.Text = "Please Enter Ticket No.!";
+                ModalReviewView.Show();
+                txtDate.Text = ReqDate.Text;
+                txtTicketNo.Text = TicketNo.Text;
+                txtPONumber.Text = PONumber.Text;
+                txtSupplier.Text = dropSupplier.SelectedItem.Text;
+                txtTotalQuantity.Text = txtTotal.Text;
+                lblerrorTicket.Text = "";
+                lblerrorDrop.Text = "";
             }
 
 
@@ -308,7 +320,6 @@ namespace BIOSproject
                 {
                     using (MailMessage mail = new MailMessage())
                     {
-
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add(dropSupplier.SelectedValue);
@@ -387,6 +398,8 @@ namespace BIOSproject
                     sqlCon.Close();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Request added Successfully!')", true);
                     dt.Rows.Clear();
+                    PONumber.Enabled = true;
+                    dropSupplier.Enabled = true;
                     GridView.DataSource = dt;
                     GridView.DataBind();
                     //lblError1.Text = "New Request added Successfully!";

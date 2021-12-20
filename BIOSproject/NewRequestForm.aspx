@@ -1,8 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="NewRequest.aspx.cs" Inherits="BIOSproject.NewRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="NewRequestForm.aspx.cs" Inherits="BIOSproject.NewRequestForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+
+
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
             <script src="js/jquery.js"></script>
@@ -66,6 +68,7 @@
         });
     </script>--%>
 
+
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -74,7 +77,8 @@
         });
     });
 </script>
-    
+
+
 
     <link href="css/NewRequest.css" rel="stylesheet" />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
@@ -98,13 +102,21 @@
                     <asp:TextBox ID="ReqDate" runat="server" CssClass="input1" TextMode="Date" ReadOnly="True" Enabled="false"></asp:TextBox>
                 </div>
 
+                  
                 <div class="input-box4">
+                   <span class="details">Supplier:</span>
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
-                    <span class="details">Supplier:</span>
-                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="input1" DataSourceID="SqlDataSource2" DataTextField="Vendor" DataValueField="VendorEmail" Width="300px" >
+                    <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
+             
+                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="drop1" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
                 </asp:DropDownList>
+
                     <asp:HiddenField ID="gvModal" runat="server" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="details">Request NO.:</span>
+                     <asp:TextBox ID="txtRequestNo" CssClass="input1" runat="server" Width="134px" ReadOnly="True" Enabled="false"></asp:TextBox>
                 </div>
+                        
 
                 <div class="input-box">
                     <span class="details">Product:</span>
@@ -137,46 +149,86 @@
                     <asp:TextBox ID="txtTotal" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
                 </div>
                     
-                
-
-                 
                 <asp:DropDownList ID="DDL" runat="server" Visible="false"></asp:DropDownList>
                 <asp:DropDownList ID="DDLQuantity" runat="server" Visible="false"></asp:DropDownList>
-                
+                <asp:TextBox ID="txtSupp" Visible="false" runat="server"></asp:TextBox>
             </div>
         </formview>
-               
-        <asp:GridView ID="GridView" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" OnRowDataBound="GridView_RowDataBound" OnRowDeleting="GridView_RowDeleting" ForeColor="Black" GridLines="Horizontal" Width="569px" >
-                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
-                    <HeaderStyle BackColor="#d00149" Font-Bold="True" ForeColor="White" HorizontalAlign="Center"/>
-                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
-                    <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F7F7F7" />
-                    <SortedAscendingHeaderStyle BackColor="#4B4B4B" HorizontalAlign="Center" />
-                    <SortedDescendingCellStyle BackColor="#E5E5E5" />
-                    <SortedDescendingHeaderStyle BackColor="#242121" HorizontalAlign="Center" />
-            <Columns>
-                       <%-- <asp:TemplateField HeaderText="Action">
-                          <ItemTemplate>
-                              <asp:Button runat="server" Text="Delete" ID="btnDelete" CssClass="btn btn-user btn-block" ForeColor="#D00149" />
-                          </ItemTemplate>
-                        </asp:TemplateField> --%>
 
-                 <asp:CommandField ShowDeleteButton="True" HeaderText="Action" ControlStyle-CssClass="btn-dark" ButtonType="Button"/>
-                
-            </Columns>
-       </asp:GridView>
-         
+
+         <asp:GridView ID="GridView" runat="server" HorizontalAlign="Center" OnRowEditing="GridView_RowEditing" DataKeyNames="ID" OnRowCancelingEdit="GridView_RowCancelingEdit" OnRowUpdating="GridView_RowUpdating" OnRowDeleting="GridView_RowDeleting" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False">
+                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                    <HeaderStyle BackColor="#d00149" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                    <RowStyle ForeColor="#000066" />
+                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                    <Columns>
+
+                        <asp:TemplateField HeaderText="Products">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("Products") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                               <%-- <asp:TextBox runat="server" ID="txtProduct" Text='<%#Eval("Products") %>'></asp:TextBox>--%>
+                              <asp:DropDownList ID="DropProdGV" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product"></asp:DropDownList>
+                            </EditItemTemplate>
+                            <%--<FooterTemplate>
+                                <asp:TextBox runat="server" ID="txtProductFooter"></asp:TextBox>
+                            </FooterTemplate>--%>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Quantity">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("Quantity") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox runat="server" ID="txtQuantity" Text='<%#Eval("Quantity") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <%--<FooterTemplate>
+                                <asp:TextBox runat="server" ID="txtQuantityFooter"></asp:TextBox>
+                            </FooterTemplate>--%>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ImageUrl="~/img/EditIcon.png" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px" />
+                                <asp:ImageButton runat="server" ImageUrl="~/img/TrashIcon.png" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:ImageButton runat="server" ImageUrl="~/img/SaveIcon.png" CommandName="Update" ToolTip="Update" Width="20px" Height="20px" />
+                                <asp:ImageButton runat="server" ImageUrl="~/img/ExitIcon.png" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px" />
+                            </EditItemTemplate>
+                           <%-- <FooterTemplate>
+
+                            </FooterTemplate>--%>
+                        </asp:TemplateField>
+                    </Columns>
+
+                </asp:GridView><asp:Label ID="lblGridview" runat="server" ForeColor="Green" CssClass="label"></asp:Label><asp:Label ID="lblerrorGV" runat="server" ForeColor="Red" CssClass="label"></asp:Label>
 
         <div>
             <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
-        </div>
+       
+            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [TicketNo], [PONumber], [Supplier], [Products], [Quantity], [DateRequested], [RequestNo] FROM [TempRequest]"></asp:SqlDataSource>
+                <asp:GridView ID="gvlist" runat="server" AutoGenerateColumns="False">
+                    <Columns>
+                        <asp:BoundField DataField="TicketNo" HeaderText="TicketNo" SortExpression="TicketNo" />
+                        <asp:BoundField DataField="PONumber" HeaderText="PONumber" SortExpression="PONumber" />
+                        <asp:BoundField DataField="Supplier" HeaderText="Supplier" SortExpression="Supplier" />
+                        <asp:BoundField DataField="Products" HeaderText="Products" SortExpression="Products" />
+                        <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" />
+                        <asp:BoundField DataField="DateRequested" HeaderText="DateRequested" SortExpression="DateRequested" />
+                        <asp:BoundField DataField="RequestNo" HeaderText="RequestNo" SortExpression="RequestNo" />
+                    </Columns>
+               </asp:GridView>
+            </div>
     </div>
     </div>
-
-
-
-
 
 
      <ajaxtoolkit:modalpopupextender ID="ModalReviewView" PopupControlID="PanelView" TargetControlID="gvModal" runat="server"></ajaxtoolkit:modalpopupextender>
@@ -205,6 +257,10 @@
                     <span class="details">Requested Date:</span>
                     <asp:TextBox ID="txtDate" runat="server" CssClass="input1" ReadOnly="True" Enabled="false"></asp:TextBox>
                 </div>
+                <div  class="input_field1">
+                    <span class="details">Requested No.:</span>
+                    <asp:TextBox ID="txtRequest" runat="server" CssClass="input1" ReadOnly="True" Enabled="false"></asp:TextBox>
+                </div>
 
                 <div class="input_field1">
                     <span class="details">Ticket Number</span>
@@ -221,10 +277,69 @@
                     <asp:TextBox ID="txtSupplier" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
 
-                 <div class="input_field1">
+                 <%--<div class="input_field1">
                       <span class="details">List of Product's</span>
                     <asp:TextBox ID="txtAllProductQuantity" runat="server" Enabled="false" CssClass="input1" TextMode="MultiLine" ></asp:TextBox>
-                </div>
+                </div>--%>
+
+             <asp:GridView ID="GridView1" runat="server" HorizontalAlign="Center" DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False">
+                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                    <HeaderStyle BackColor="#d00149" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                    <RowStyle ForeColor="#000066" />
+                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                    <Columns>
+
+                        <asp:TemplateField HeaderText="Products">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("Products") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                               <%-- <asp:TextBox runat="server" ID="txtProduct" Text='<%#Eval("Products") %>'></asp:TextBox>--%>
+                              <asp:DropDownList ID="DropProdGV" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product"></asp:DropDownList>
+                            </EditItemTemplate>
+                            <%--<FooterTemplate>
+                                <asp:TextBox runat="server" ID="txtProductFooter"></asp:TextBox>
+                            </FooterTemplate>--%>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Quantity">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("Quantity") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox runat="server" ID="txtQuantity" Text='<%#Eval("Quantity") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <%--<FooterTemplate>
+                                <asp:TextBox runat="server" ID="txtQuantityFooter"></asp:TextBox>
+                            </FooterTemplate>--%>
+                        </asp:TemplateField>
+
+                        <%--<asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ImageUrl="~/img/EditIcon.png" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px" />
+                                <asp:ImageButton runat="server" ImageUrl="~/img/TrashIcon.png" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:ImageButton runat="server" ImageUrl="~/img/SaveIcon.png" CommandName="Update" ToolTip="Update" Width="20px" Height="20px" />
+                                <asp:ImageButton runat="server" ImageUrl="~/img/ExitIcon.png" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px" />
+                            </EditItemTemplate>
+                            <FooterTemplate>
+
+                            </FooterTemplate>
+                        </asp:TemplateField>--%>
+                    </Columns>
+
+                </asp:GridView>
+
+            
+
+                                
 
                 <div class="input_field1">
                      <span class="details">Total Quantity</span>
@@ -312,11 +427,6 @@
         </div>
 
     </div>
-
-
-
-
-
 
 
 </asp:Content>
