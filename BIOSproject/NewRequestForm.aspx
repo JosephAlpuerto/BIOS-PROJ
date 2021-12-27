@@ -108,22 +108,29 @@
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
                     <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
              
-                    <asp:DropDownList ID="dropSupplier" runat="server" CssClass="drop1" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
+                    <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
                 </asp:DropDownList>
+                  <%--  <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" CssClass="drop1" Width="300px" >
+                </asp:DropDownList>--%>
 
                     <asp:HiddenField ID="gvModal" runat="server" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="details">Request NO.:</span>
                      <asp:TextBox ID="txtRequestNo" CssClass="input1" runat="server" Width="134px" ReadOnly="True" Enabled="false"></asp:TextBox>
+                    
+                   <asp:DropDownList ID="DropFIE" Visible="false" runat="server" AutoPostBack="true" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                        </asp:DropDownList>
                 </div>
                         
 
                 <div class="input-box">
                     <span class="details">Product:</span>
                      <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
-                    <asp:DropDownList ID="DropProduct" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px"> 
+                    <asp:DropDownList ID="DropProduct" runat="server" AutoPostBack="true" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px"> 
                 </asp:DropDownList><asp:Label ID="lblerrorDrop" runat="server" ForeColor="Red" CssClass="label"></asp:Label> 
 
+                  
                 </div>
 
                 <div class="input-box">
@@ -275,6 +282,7 @@
                 <div class="input_field1">
                      <span class="details">Supplier</span>
                     <asp:TextBox ID="txtSupplier" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" Visible="false"></asp:TextBox>
                 </div>
 
                  <%--<div class="input_field1">

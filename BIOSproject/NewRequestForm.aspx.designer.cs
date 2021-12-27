@@ -123,6 +123,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.TextBox txtRequestNo;
 
         /// <summary>
+        /// DropFIE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropFIE;
+
+        /// <summary>
         /// SqlDataSource3 control.
         /// </summary>
         /// <remarks>
@@ -364,6 +373,15 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSupplier;
+
+        /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
         /// GridView1 control.
