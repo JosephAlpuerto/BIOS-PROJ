@@ -30,7 +30,6 @@ namespace BIOSproject
 
             int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
             LblPO.Text = numRec.ToString();
-            LblPO1.Text = numRec.ToString();
 
             sqlCon.Close();
             //string cmdText = "select count(PONumber) from [LBC.BIOS].[lbcbios].[SSPNewRequest]", con;
@@ -45,6 +44,7 @@ namespace BIOSproject
             //}
 
             Hitcheck();
+            FillGridview();
 
            
         }
@@ -64,5 +64,20 @@ namespace BIOSproject
 
            
         }
+        private void FillGridview()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("GridShow", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+        }
+
+
     }
 }

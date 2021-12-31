@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="BIOSproject.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="BIOSproject.WebForm1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -139,7 +139,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label8" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="FIENoOfPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -196,7 +196,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label20" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="ACFNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -225,7 +225,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label26" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="JRDNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -253,7 +253,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label32" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="TFTNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -281,7 +281,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label38" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="kimwinNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -337,7 +337,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label50" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="HFPCNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -365,7 +365,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label56" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="CPSPNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -392,7 +392,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label62" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="TCCNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -420,7 +420,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label68" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="SPMPCNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -448,7 +448,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label74" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="AGPTINoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">

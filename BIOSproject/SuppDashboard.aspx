@@ -29,6 +29,8 @@
         .whole .menu2 .lblTtl{
         padding: 30px 20px;
         color: black;
+        font-size: 15px;
+        position: center;
         }
     </style>
     
@@ -54,7 +56,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label4" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="NoOfdlver" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 
@@ -139,18 +141,18 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label16" runat="server" Text="KILOBOX MINI W/1 BARCODE /10 " CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label16" runat="server" Text="KILOBOX MINI " CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label17" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="POQtKBMini" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
         <asp:Label ID="Label18" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label19" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBMiniDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label20" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -168,18 +170,18 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label22" runat="server" Text="KILOBOX SLIM W/1 BARCODE /10" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label22" runat="server" Text="KILOBOX SLIM " CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="WellNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBSLIMPO" runat="server" Text="" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
         <asp:Label ID="Label23" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label24" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="SlimDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label25" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -196,18 +198,18 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label27" runat="server" Text="KILOBOX SMALL W/1 BARCODE /10" CssClass="lblTtl"> </asp:Label>
+        <asp:Label ID="Label27" runat="server" Text="KILOBOX SMALL" CssClass="lblTtl"> </asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label28" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBSMALLPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
         <asp:Label ID="Label29" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label30" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBSmallDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label31" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -225,11 +227,11 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label33" runat="server" Text="KILOBOX MEDIUM W/1 BARCODE /10" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label33" runat="server" Text="KILOBOX MEDIUM " CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label34" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBMediumPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -253,11 +255,11 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label39" runat="server" Text="KILOBOX LARGE W/1 BARCODE /10" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label39" runat="server" Text="KILOBOX LARGE" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label40" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBLARGEPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -281,11 +283,11 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label45" runat="server" Text="KILOBOX XL W/1 BARCODE /10" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label45" runat="server" Text="KILOBOX XL" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label46" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBXLPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -309,11 +311,11 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label51" runat="server" Text="N-PACK SMALL FOR 2D PRINTER /100" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label51" runat="server" Text="N-PACK SMALL FOR 2D PRINTER " CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label52" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPSMALL42DPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -337,11 +339,11 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label57" runat="server" Text="N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY " CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label57" runat="server" Text="N-PACK SMALL 4 NON 2D PRNTER " CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label58" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPSM4NONPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -365,7 +367,7 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label63" runat="server" Text="N-PACK LARGE FOR 2D PRINTER /100" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label63" runat="server" Text="N-PACK LARGE FOR 2D PRINTER" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -392,7 +394,7 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label69" runat="server" Text="N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label69" runat="server" Text="N-PACK LRGE 4 NON 2D PRNTER" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -420,7 +422,7 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label75" runat="server" Text="N-POUCH REGULAR FOR 2D PRINTER /100 " CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label75" runat="server" Text="N-POUCH REGULAR FOR 2D PRINTER" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">
@@ -448,7 +450,7 @@
         
     <div class="menuu">
         <div class="menu2">
-        <asp:Label ID="Label81" runat="server" Text="N-POUCH XL FOR 2D PRINTER /100" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label81" runat="server" Text="N-POUCH XL FOR 2D PRINTER" CssClass="lblTtl"></asp:Label>
         </div>
     
     <div class="menu2">

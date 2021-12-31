@@ -462,6 +462,7 @@
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
+                                        <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product/Quantity" />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
 

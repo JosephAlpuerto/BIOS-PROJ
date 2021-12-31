@@ -42,13 +42,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Label4 control.
+        /// NoOfdlver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label NoOfdlver;
 
         /// <summary>
         /// Label5 control.
@@ -168,13 +168,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label16;
 
         /// <summary>
-        /// Label17 control.
+        /// POQtKBMini control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
+        protected global::System.Web.UI.WebControls.Label POQtKBMini;
 
         /// <summary>
         /// Label18 control.
@@ -186,13 +186,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label18;
 
         /// <summary>
-        /// Label19 control.
+        /// KBMiniDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label19;
+        protected global::System.Web.UI.WebControls.Label KBMiniDelivered;
 
         /// <summary>
         /// Label20 control.
@@ -222,13 +222,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label22;
 
         /// <summary>
-        /// WellNoPO control.
+        /// KBSLIMPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label WellNoPO;
+        protected global::System.Web.UI.WebControls.Label KBSLIMPO;
 
         /// <summary>
         /// Label23 control.
@@ -240,13 +240,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label23;
 
         /// <summary>
-        /// Label24 control.
+        /// SlimDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label24;
+        protected global::System.Web.UI.WebControls.Label SlimDelivered;
 
         /// <summary>
         /// Label25 control.
@@ -276,13 +276,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label27;
 
         /// <summary>
-        /// Label28 control.
+        /// KBSMALLPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label28;
+        protected global::System.Web.UI.WebControls.Label KBSMALLPO;
 
         /// <summary>
         /// Label29 control.
@@ -294,13 +294,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label29;
 
         /// <summary>
-        /// Label30 control.
+        /// KBSmallDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label30;
+        protected global::System.Web.UI.WebControls.Label KBSmallDelivered;
 
         /// <summary>
         /// Label31 control.
@@ -330,13 +330,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label33;
 
         /// <summary>
-        /// Label34 control.
+        /// KBMediumPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label34;
+        protected global::System.Web.UI.WebControls.Label KBMediumPO;
 
         /// <summary>
         /// Label35 control.
@@ -384,13 +384,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label39;
 
         /// <summary>
-        /// Label40 control.
+        /// KBLARGEPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label40;
+        protected global::System.Web.UI.WebControls.Label KBLARGEPO;
 
         /// <summary>
         /// Label41 control.
@@ -438,13 +438,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label45;
 
         /// <summary>
-        /// Label46 control.
+        /// KBXLPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label46;
+        protected global::System.Web.UI.WebControls.Label KBXLPO;
 
         /// <summary>
         /// Label47 control.
@@ -492,13 +492,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label51;
 
         /// <summary>
-        /// Label52 control.
+        /// NPSMALL42DPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label52;
+        protected global::System.Web.UI.WebControls.Label NPSMALL42DPO;
 
         /// <summary>
         /// Label53 control.
@@ -546,13 +546,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label57;
 
         /// <summary>
-        /// Label58 control.
+        /// NPSM4NONPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label58;
+        protected global::System.Web.UI.WebControls.Label NPSM4NONPO;
 
         /// <summary>
         /// Label59 control.
