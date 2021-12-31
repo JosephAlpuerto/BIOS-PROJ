@@ -11,8 +11,8 @@
             width: 16%;
             float: left;
             padding: 10px;
-            border: 1px solid red;
-            background-color: darkorange;
+            /*border: 1px solid red;*/
+            background-color: #d00149;
         }
         .whole .menu2 {
             width: 16%;
@@ -113,24 +113,24 @@
         
     <div class="menuu">
         <div class="menu1">
-        <asp:Label ID="Label2" runat="server" Text="Material" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="Material" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
     
     <div class="menu1">
-        <asp:Label ID="Label11" runat="server" Text="PO Qty" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label11" runat="server" Text="PO Qty" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
     
     <div class="menu1">
-        <asp:Label ID="Label12" runat="server" Text="Produced" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label12" runat="server" Text="Produced" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label13" runat="server" Text="Delivered" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label13" runat="server" Text="Delivered" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label14" runat="server" Text="On Hand" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label14" runat="server" Text="On Hand" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label15" runat="server" Text="PO Balance" CssClass="lblTtl"></asp:Label>
+        <asp:Label ID="Label15" runat="server" Text="PO Balance" CssClass="lblTtl" ForeColor="#ffffff"></asp:Label>
         </div>
 
     </div>
