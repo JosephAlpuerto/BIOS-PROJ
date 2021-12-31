@@ -61,15 +61,16 @@ namespace BIOSproject
                 conn.Open();
                 string numRec = sqlData.ExecuteScalar().ToString();
                 POQtKBMini.Text = numRec.ToString();
+                conn.Close();
             }
 
             SqlConnection con = new SqlConnection(ConnectionString);
-            SqlCommand sq = new SqlCommand("KBMiniDelivered", con);
-            sqlData.CommandType = CommandType.StoredProcedure;
-            sqlData.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            SqlCommand sql = new SqlCommand("KBMiniDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             {
-                conn.Open();
-                string numRec = sq.ExecuteScalar().ToString();
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
                 KBMiniDelivered.Text = numRec.ToString();
             }
 
@@ -91,16 +92,17 @@ namespace BIOSproject
                 conn.Open();
                 string numRec = sqlData.ExecuteScalar().ToString();
                 KBSLIMPO.Text = numRec.ToString();
+                conn.Close();
             }
 
 
             SqlConnection con = new SqlConnection(ConnectionString);
-            SqlCommand sq = new SqlCommand("KBSlimDelivered", con);
-            sqlData.CommandType = CommandType.StoredProcedure;
-            sqlData.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            SqlCommand sql = new SqlCommand("KBSlimDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             {
-                conn.Open();
-                string numRec = sq.ExecuteScalar().ToString();
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
                 SlimDelivered.Text = numRec.ToString();
             }
         }
@@ -116,14 +118,17 @@ namespace BIOSproject
                 conn.Open();
                 string numRec = sqlData.ExecuteScalar().ToString();
                 KBSMALLPO.Text = numRec.ToString();
+                conn.Close();
             }
+
+
             SqlConnection con = new SqlConnection(ConnectionString);
-            SqlCommand sq = new SqlCommand("KBSmallDelivered", con);
-            sqlData.CommandType = CommandType.StoredProcedure;
-            sqlData.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            SqlCommand sql = new SqlCommand("KBSmallDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             {
-                conn.Open();
-                string numRec = sq.ExecuteScalar().ToString();
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
                 KBSmallDelivered.Text = numRec.ToString();
             }
         }
