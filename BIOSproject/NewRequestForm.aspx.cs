@@ -35,7 +35,7 @@ namespace BIOSproject
             //int rid = Convert.ToInt32(dr[0]);
             //rid++;
             //txtRequestNo.Text = rid.ToString();
-            if (!Page.IsPostBack)
+            if (!IsPostBack)
             {
                 //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 //string sqlquery = "select * from Reference where VendorName != '"+null+"'";
@@ -308,6 +308,7 @@ namespace BIOSproject
                 txtTotalQuantity.Text = txtTotal.Text;
                 txtRequest.Text = txtRequestNo.Text;
                 txtSupplier.Text = dropSupplier.SelectedItem.Text;
+                txtEmail.Text = DropFIE.SelectedItem.Text;
                 lblerrorTicket.Text = "";
                 lblerrorDrop.Text = "";
                 FillGridView1();
@@ -495,7 +496,7 @@ namespace BIOSproject
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (TicketNo.Text != "" && txtTotal.Text != "")
+            if (txtTicketNo.Text != "" && txtPONumber.Text != "")
             {
                 try
                 {
@@ -503,10 +504,10 @@ namespace BIOSproject
                     {
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
-                        mail.To.Add(dropSupplier.SelectedValue);
-                        mail.Subject = "Request for Barcode Series" + "<br />" + dropSupplier.Text + " " + PONumber.Text;
-                        mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/><br/>" +
-                            "Product & Quantity: " + "<br/>" + TxtAllProduct.Text + " - " + txtTotalQuantity.Text + " pcs " + "<br/><br/>Starting Series - Ending Series<br/><br/>" +
+                        mail.To.Add(txtEmail.Text);
+                        mail.Subject = "Request for Barcode Series" + "<br />" + txtEmail.Text + " " + txtPONumber.Text;
+                        mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/>" +
+                             "<br/><br/>Starting Series - Ending Series<br/><br/>" +
                             "Thanks,";
                         mail.IsBodyHtml = true;
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
@@ -515,8 +516,6 @@ namespace BIOSproject
                             smtp.EnableSsl = true;
                             smtp.Send(mail);
                         }
-
-
                     }
                 }
                 catch (Exception ex)
@@ -529,11 +528,11 @@ namespace BIOSproject
                 foreach (GridViewRow gr in gvlist.Rows)
                 {
                     string sqlquery = "insert into SSPNewRequest values (@TicketNo,@PONumber,@Supplier,@ProductQuantity,@TotalQuantity,@StartingSeries,@EndingSeries,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedBy,@DeletedDate,@IsActive,@CancelRequest," +
-                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo)";
+                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName)";
                     SqlCommand sqlComm = new SqlCommand(sqlquery, Sqlconn);
                     sqlComm.Parameters.AddWithValue("@TicketNo", gr.Cells[0].Text);
                     sqlComm.Parameters.AddWithValue("@PONumber", gr.Cells[1].Text);
-                    sqlComm.Parameters.AddWithValue("@Supplier", gr.Cells[2].Text);
+                    sqlComm.Parameters.AddWithValue("@Supplier", DropFIE.SelectedItem.Text);
                     sqlComm.Parameters.AddWithValue("@ProductQuantity", gr.Cells[3].Text);
                     sqlComm.Parameters.AddWithValue("@TotalQuantity", txtTotalQuantity.Text.Trim());
                     sqlComm.Parameters.AddWithValue("@StartingSeries", Convert.DBNull);
@@ -562,12 +561,10 @@ namespace BIOSproject
                     sqlComm.Parameters.AddWithValue("@WHcheck", "0");
                     sqlComm.Parameters.AddWithValue("@Quantity", gr.Cells[4].Text);
                     sqlComm.Parameters.AddWithValue("@RequestNo", txtRequest.Text.Trim());
+                    sqlComm.Parameters.AddWithValue("@SupplierName", gr.Cells[2].Text);
                     Sqlconn.Open();
                     sqlComm.ExecuteNonQuery();
                     Sqlconn.Close();
-
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Add Request Successfully!')", true);
-
 
                 }
 
@@ -576,97 +573,48 @@ namespace BIOSproject
                     SqlCommand sqlComma = new SqlCommand(qry, conn);
                     conn.Open();
                     sqlComma.ExecuteNonQuery();
-                    conn.Close();
                     TicketNo.Text = "";
                     PONumber.Text = "";
                     TxtQuantity.Text = "";
                     txtTotal.Text = "";
                     DDL.Items.Clear();
+                    DropFIE.Items.Clear();
                     DDLQuantity.Items.Clear();
-                    Response.Redirect(Request.Url.AbsoluteUri);
                     FillGridView();
                     FillGridView2();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage",
+                    "alert('Add Request Successfully! ')", true);
+                    conn.Close();
+                    Response.Redirect(Request.Url.AbsoluteUri);
 
-
-
-
-
-
-                //SqlConnection sql = new SqlConnection(@"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios");
-
-                //for (int i = 0; i < GridView1.Rows.Count - 1; i++)
-                //{
-                //    SqlCommand cmd = new SqlCommand(@"INSERT INTO SSPNewRequest (TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,StartingSeries,EndingSeries,CreatedBy,CreatedDate,UpdatedBy,UpdatedDate,DeletedBy,DeletedDate,IsActive,CancelRequest,IsRejected,SequenceSeries,DateRequested,forHitCheck,Branch,Team,Area,Hub,Warehouse,DestinationTo,IfDownload,ScheduledDate,IfProcess,WHcheck,Quantity,RequestNo)VALUES('"+gvlist.Rows[i].Cells[0].Text+ "','" + gvlist.Rows[i].Cells[1].Text + "','" + gvlist.Rows[i].Cells[3].Text + "','" + gvlist.Rows[i].Cells[4].Text + "','"+ txtTotalQuantity.Text + "','"+ Convert.DBNull + "','" + Convert.DBNull + "','"+ Session["Username"].ToString() + "','"+ txtDate.Text + "','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','0','0','0','" + Convert.DBNull + "','" + txtDate.Text + "','0','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','" + Convert.DBNull + "','0','" + Convert.DBNull + "','0','0')", sql);
-
-                //    sql.Open();
-                //    cmd.ExecuteNonQuery();
-                //    sql.Close();
-                //}
-
-
-                //var Ticket = TicketNo.Text.Trim();
-                //var PO = PONumber.Text.Trim();
-                //var Product = DropProduct.Text.Trim();
-                //var Quantity = txtTotal.Text.Trim();
-
-
-                //SqlConnection sqlCon = new SqlConnection(ConnectionString);
-                //if (sqlCon.State == ConnectionState.Closed)
-                //    sqlCon.Open();
-                //SqlCommand sqlCmd = new SqlCommand("NewRequest", sqlCon);
-                //sqlCmd.CommandType = CommandType.StoredProcedure;
-                //sqlCmd.Parameters.AddWithValue("@Id", (HiddenField1.Value == "" ? 0 : Convert.ToInt32(HiddenField1.Value)));
-                //sqlCmd.Parameters.AddWithValue("@TicketNo", txtTicketNo.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@PONumber", txtPONumber.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@Supplier", txtSupplier.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@Product", TxtAllProduct.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@Quantity", txtTotalQuantity.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-                //sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
-                //sqlCmd.Parameters.AddWithValue("@IsActive", "0");
-                //sqlCmd.Parameters.AddWithValue("@CancelRequest", "0");
-                //sqlCmd.Parameters.AddWithValue("@IsRejected", "0");
-                //sqlCmd.Parameters.AddWithValue("@DateRequested", txtDate.Text.Trim());
-                //sqlCmd.Parameters.AddWithValue("@forHitCheck", "0");
-                //sqlCmd.Parameters.AddWithValue("@IfDownload", "0");
-                //sqlCmd.Parameters.AddWithValue("@IfProcess", "0");
-                //sqlCmd.Parameters.AddWithValue("@WHcheck", "0");
-                //string Id = HiddenField1.Value;
-
-
-                //if (Ticket == "")
-                //{
-                //    lblError1.Text = "Please Enter Ticket No.!";
-                //}
-                //else if (PO == "")
-                //{
-                //    lblError1.Text = "Please Enter PO No.!";
-                //}
-                //else if (Product == "")
-                //{
-                //    lblError1.Text = "Please Enter Product Name!";
-                //}
-                //else if (Quantity == "")
-                //{
-                //    lblError1.Text = "Please Enter Quantity!";
-                //}
-
-                //else if (Id == "")
-                //{
-                //    sqlCmd.ExecuteNonQuery();
-                //    DataTable dt = ViewState["Records"] as DataTable;
-
-                //    Clear();
-                //    sqlCon.Close();
-                //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('New Request added Successfully!')", true);
-                //}
-                //else
-                //{
-                //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Error!')", true);
-                //}
             }
+
 
         }
 
+        //protected void cascadingdropdown()
+        //{
+        //    SqlConnection sqlcon = new SqlConnection(ConnectionString);
+        //    sqlcon.Open();
+        //    SqlCommand sqlcom = new SqlCommand("SELECT * FROM [Reference] where VendorName != 'NULL'", sqlcon);
+        //    sqlcom.CommandType = CommandType.Text;
+        //    dropSupplier.DataSource = sqlcom.ExecuteReader();
+        //    dropSupplier.DataTextField = "VendorName";
+        //    dropSupplier.DataValueField = "VendorEmail";
+        //    dropSupplier.DataBind();
+        //}
+
+        protected void dropSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string EmailID = dropSupplier.SelectedItem.Text;
+            SqlConnection con = new SqlConnection(ConnectionString);
+            con.Open();
+            SqlCommand comm = new SqlCommand("select [VendorEmail] from Reference where VendorName = '"+ EmailID +"' ", con);
+            comm.CommandType = CommandType.Text;
+            DropFIE.DataSource = comm.ExecuteReader();
+            DropFIE.DataTextField = "VendorEmail";
+            DropFIE.DataValueField = "VendorEmail";
+            DropFIE.DataBind();
+        }
     }
 }

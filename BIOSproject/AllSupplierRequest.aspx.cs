@@ -505,7 +505,7 @@ namespace BIOSproject
             DropTeam.DataSource = sqlcmd.ExecuteReader();
             DropTeam.DataTextField = "TeamDescr";
             DropTeam.DataValueField = "AreaID";
-            DropTeam.DataBind();
+            DropTeam.DataBind(); 
 
             int TeamID = Convert.ToInt32(DropTeam.SelectedValue);
             SqlConnection sqlcon2 = new SqlConnection(mainconn);
