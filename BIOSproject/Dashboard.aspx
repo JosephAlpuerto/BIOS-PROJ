@@ -12,15 +12,15 @@
             width: 16%;
             float: left;
             padding: 10px;
-            border: 1px solid red;
-            background-color: darkorange;
+            /*border: 1px solid red;*/
+            background-color: #d00149;
         }
         .whole .menu2 {
             width: 16%;
             height: 80px;
             padding: 10px;
             float: left;
-            border: 1px solid red;
+            border: 1px solid black;
         }
         .whole .menu2 .lblTxt{
         padding: 30px 20px;
@@ -107,24 +107,24 @@
         
     <div class="menuu">
         <div class="menu1">
-        <asp:Label ID="Label1" runat="server" Text="Supplier"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Supplier" ForeColor="#ffffff"></asp:Label>
         </div>
     
     <div class="menu1">
-        <asp:Label ID="Label2" runat="server" Text="No of PO"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="No of PO" ForeColor="#ffffff"></asp:Label>
         </div>
     
     <div class="menu1">
-        <asp:Label ID="Label3" runat="server" Text="No of Delivered"></asp:Label>
+        <asp:Label ID="Label3" runat="server" Text="No of Delivered" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label4" runat="server" Text="Fulfilment"></asp:Label>
+        <asp:Label ID="Label4" runat="server" Text="Fulfilment" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label5" runat="server" Text="Produced"></asp:Label>
+        <asp:Label ID="Label5" runat="server" Text="Produced" ForeColor="#ffffff"></asp:Label>
         </div>
     <div class="menu1">
-        <asp:Label ID="Label6" runat="server" Text="Availability"></asp:Label>
+        <asp:Label ID="Label6" runat="server" Text="Availability" ForeColor="#ffffff"></asp:Label>
         </div>
 
     </div>
