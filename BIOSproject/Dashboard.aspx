@@ -22,7 +22,7 @@
             float: left;
             border: 1px solid black;
         }
-        .whole .menu2 .lblTxt{
+        .whole .menu2 .lblTxt {
         padding: 30px 20px;
         font-size: 25px;
         }
