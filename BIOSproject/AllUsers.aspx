@@ -58,7 +58,7 @@
                                 </button>
                             </div>
                             <div class="table-responsive">
-                                <asp:GridView runat="server" ID="gvAllAdmin" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvAllAdmin" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
@@ -103,7 +103,7 @@
                                 </button>
                             </div>
                             <div class="table-responsive">
-                                <asp:GridView runat="server" ID="gvAllUser" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvAllUser" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
@@ -233,7 +233,7 @@
                                 </button>
                             </div>
                             <div class="table-responsive">
-                                <asp:GridView runat="server" ID="gvActive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvActive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
@@ -274,7 +274,7 @@
                                 </button>
                             </div>
                             <div class="table-responsive">
-                                <asp:GridView runat="server" ID="gvAllDeactive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvAllDeactive" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
@@ -473,7 +473,7 @@
                             <div class="table-responsive">
 
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />

@@ -52,7 +52,7 @@ namespace BIOSproject
             gvList1.DataBind();
             gvList1.UseAccessibleHeader = true;
             gvList1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         protected void btnPrint2_Click(object sender, EventArgs e)
@@ -450,7 +450,7 @@ namespace BIOSproject
             sqlCon.Close();
             gvActive.DataSource = dtbl;
             gvActive.DataBind();
-            gvActive.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvActive.FooterRow.TableSection = TableRowSection.TableFooter;
             FillGridView();
             ModalAllActive.Show();
            
@@ -475,7 +475,7 @@ namespace BIOSproject
             sqlCon.Close();
             gvAllDeactive.DataSource = dtbl;
             gvAllDeactive.DataBind();
-            gvAllDeactive.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvAllDeactive.FooterRow.TableSection = TableRowSection.TableFooter;
             FillGridView();
             ModalAllDeactive.Show();
             
@@ -500,7 +500,7 @@ namespace BIOSproject
             sqlCon.Close();
             gvAllAdmin.DataSource = dtbl;
             gvAllAdmin.DataBind();
-            gvAllAdmin.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvAllAdmin.FooterRow.TableSection = TableRowSection.TableFooter;
             FillGridView();
             ModalAllAdmin.Show();
            
@@ -525,7 +525,7 @@ namespace BIOSproject
             sqlCon.Close();
             gvAllUser.DataSource = dtbl;
             gvAllUser.DataBind();
-            gvAllUser.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvAllUser.FooterRow.TableSection = TableRowSection.TableFooter;
             FillGridView();
             ModalAllUser.Show();
            

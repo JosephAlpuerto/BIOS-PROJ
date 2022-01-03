@@ -123,8 +123,7 @@
                                                            <ItemTemplate>
                                                                <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>
-          
+                                                       </asp:TemplateField>          
                                     </Columns>
 
                                 </asp:GridView>
