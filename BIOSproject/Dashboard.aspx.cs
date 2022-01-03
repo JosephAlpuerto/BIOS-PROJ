@@ -201,7 +201,7 @@ namespace BIOSproject
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
 
-            string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRe quest where SupplierName = 'CHRISMOND PRINTING SERVICES CORP.'";
+            string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRequest where SupplierName = 'CHRISMOND PRINTING SERVICES CORP.'";
             SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
             sqlCon.Open();
             int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
