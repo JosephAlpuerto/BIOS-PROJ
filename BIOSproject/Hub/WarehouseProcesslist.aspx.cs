@@ -154,5 +154,6 @@ namespace BIOSproject.Hub
             ModalDownloadView.Hide();
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+
     }
 }

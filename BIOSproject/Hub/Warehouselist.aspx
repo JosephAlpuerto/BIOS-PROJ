@@ -228,7 +228,7 @@
                                 <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False">
                                     <Columns>
-                                         <asp:ButtonField DataTextField="ID" HeaderText="Request No." />
+                                         <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PoNumber" HeaderText="PO No." />
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
