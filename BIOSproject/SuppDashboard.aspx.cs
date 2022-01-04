@@ -74,7 +74,15 @@ namespace BIOSproject
                 KBMiniDelivered.Text = numRec.ToString();
             }
 
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
 
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX MINI%' and Supplier = '"+Session["Username"].ToString()+"' and DestinationTo IS NULL";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBMINIBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
 
 
 
@@ -105,6 +113,19 @@ namespace BIOSproject
                 string numRec = sql.ExecuteScalar().ToString();
                 SlimDelivered.Text = numRec.ToString();
             }
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX SLIM%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBSLIMBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
+
         }
 
         private void KBSmall()
@@ -131,6 +152,19 @@ namespace BIOSproject
                 string numRec = sql.ExecuteScalar().ToString();
                 KBSmallDelivered.Text = numRec.ToString();
             }
+
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX SMALL%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBSMALLBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
         }
 
         private void KBMedium()
@@ -145,6 +179,30 @@ namespace BIOSproject
                 KBMediumPO.Text = numRec.ToString();
             }
 
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sql = new SqlCommand("KBMediumDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            {
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
+                KBMediumDelivered.Text = numRec.ToString();
+            }
+
+
+
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX MEDIUM%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+            
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBMEDIUMBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
 
         }
         private void KBLarge()
@@ -158,6 +216,29 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 KBLARGEPO.Text = numRec.ToString();
             }
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sql = new SqlCommand("KBLargeDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            {
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
+                KBLargeDelivered.Text = numRec.ToString();
+            }
+
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX LARGE%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBLARGEBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
         }
 
         private void KBXL()
@@ -171,6 +252,31 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 KBXLPO.Text = numRec.ToString();
             }
+
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sql = new SqlCommand("KBXLDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            {
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
+                KBXLDelivered.Text = numRec.ToString();
+            }
+
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%KILOBOX XL%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+           
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KBXLBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
         }
 
 
@@ -187,6 +293,30 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 NPSMALL42DPO.Text = numRec.ToString();
             }
+
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sql = new SqlCommand("NPS42DLDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            {
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
+                NPSMALL42DDelivered.Text = numRec.ToString();
+            }
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%N-PACK LARGE FOR 2D PRINTER%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            NPS42DBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
         }
 
 
@@ -201,14 +331,27 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 NPSM4NONPO.Text = numRec.ToString();
             }
-            //string cmdText = "SELECT COUNT(ProductQuantity) FROM SSPNewRequest where ProductQuantity LIKE '%N-PACK SMALL FOR 2D PRINTER%'", con;
-            //SqlConnection conDatabase = new SqlConnection(ConnectionString);
-            //SqlCommand cmd = new SqlCommand(cmdText, conDatabase);
-            //{
-            //    conDatabase.Open();
-            //    int numRec = Convert.ToInt32(cmd.ExecuteScalar());
-            //    NPSM4NONPO.Text = numRec.ToString();
-            //}
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand sql = new SqlCommand("NPS4NON2DLDelivered", con);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            {
+                con.Open();
+                string numRec = sql.ExecuteScalar().ToString();
+                NPSM4NONDelivered.Text = numRec.ToString();
+            }
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) FROM SSPNewRequest where ProductQuantity LIKE '%N-PACK SMAL 4 NON 2D PRNTER%' and Supplier = '" + Session["Username"].ToString() + "' and DestinationTo IS NULL";
+
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            NPS4NON2DBALANCE.Text = numRecC.ToString();
+
+            sqlCon.Close();
         }
 
 

@@ -217,6 +217,65 @@
     </div>
 
 
+    
+     <div class="whole">
+        
+    <div class="menuu">
+        <div class="menu2">
+        <asp:Label ID="Label8" runat="server" Text="DTM Print & Labels Specialist Inc."></asp:Label>
+        </div>
+    
+    <div class="menu2">
+        <asp:Label ID="DTMNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    
+    <div class="menu2">
+        <asp:Label ID="Label20" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label26" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label32" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label38" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+
+    </div>
+
+    </div>
+
+
+    
+     <div class="whole">
+        
+    <div class="menuu">
+        <div class="menu2">
+        <asp:Label ID="Label50" runat="server" Text="PRINTSUNLIMITED COMPANY INC."></asp:Label>
+        </div>
+    
+    <div class="menu2">
+        <asp:Label ID="PCINoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    
+    <div class="menu2">
+        <asp:Label ID="Label62" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label68" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label74" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+    <div class="menu2">
+        <asp:Label ID="Label87" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        </div>
+
+    </div>
+
+    </div>
+
     <div class="whole">
         
     <div class="menuu">

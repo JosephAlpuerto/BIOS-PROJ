@@ -19,18 +19,11 @@
             height: 80px;
             padding: 10px;
             float: left;
-            border: 1px solid;
+            border: 1px solid black;
         }
-        .whole .menu2 .lblTxt{
+        .whole .menu2 .lblTxt {
         padding: 30px 20px;
         font-size: 25px;
-        color: black;
-        }
-        .whole .menu2 .lblTtl{
-        padding: 30px 20px;
-        color: black;
-        font-size: 15px;
-        position: center;
         }
     </style>
     
@@ -158,7 +151,7 @@
         <asp:Label ID="Label20" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label21" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBMINIBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -187,7 +180,7 @@
         <asp:Label ID="Label25" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label26" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBSLIMBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -215,7 +208,7 @@
         <asp:Label ID="Label31" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label32" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBSMALLBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -238,13 +231,13 @@
         <asp:Label ID="Label35" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label36" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBMediumDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label37" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label38" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBMEDIUMBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -266,13 +259,13 @@
         <asp:Label ID="Label41" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label42" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBLargeDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label43" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label44" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBLARGEBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -294,13 +287,13 @@
         <asp:Label ID="Label47" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label48" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBXLDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label49" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label50" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KBXLBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -322,13 +315,13 @@
         <asp:Label ID="Label53" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label54" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPSMALL42DDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label55" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label56" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPS42DBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>
@@ -350,13 +343,13 @@
         <asp:Label ID="Label59" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label60" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPSM4NONDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label61" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
-        <asp:Label ID="Label62" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="NPS4NON2DBALANCE" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
 
     </div>

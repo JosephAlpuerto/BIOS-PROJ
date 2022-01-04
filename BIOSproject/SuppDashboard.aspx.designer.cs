@@ -204,13 +204,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label20;
 
         /// <summary>
-        /// Label21 control.
+        /// KBMINIBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label21;
+        protected global::System.Web.UI.WebControls.Label KBMINIBALANCE;
 
         /// <summary>
         /// Label22 control.
@@ -258,13 +258,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label25;
 
         /// <summary>
-        /// Label26 control.
+        /// KBSLIMBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label26;
+        protected global::System.Web.UI.WebControls.Label KBSLIMBALANCE;
 
         /// <summary>
         /// Label27 control.
@@ -312,13 +312,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label31;
 
         /// <summary>
-        /// Label32 control.
+        /// KBSMALLBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label32;
+        protected global::System.Web.UI.WebControls.Label KBSMALLBALANCE;
 
         /// <summary>
         /// Label33 control.
@@ -348,13 +348,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label35;
 
         /// <summary>
-        /// Label36 control.
+        /// KBMediumDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label36;
+        protected global::System.Web.UI.WebControls.Label KBMediumDelivered;
 
         /// <summary>
         /// Label37 control.
@@ -366,13 +366,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label37;
 
         /// <summary>
-        /// Label38 control.
+        /// KBMEDIUMBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label38;
+        protected global::System.Web.UI.WebControls.Label KBMEDIUMBALANCE;
 
         /// <summary>
         /// Label39 control.
@@ -402,13 +402,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label41;
 
         /// <summary>
-        /// Label42 control.
+        /// KBLargeDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label42;
+        protected global::System.Web.UI.WebControls.Label KBLargeDelivered;
 
         /// <summary>
         /// Label43 control.
@@ -420,13 +420,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label43;
 
         /// <summary>
-        /// Label44 control.
+        /// KBLARGEBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label44;
+        protected global::System.Web.UI.WebControls.Label KBLARGEBALANCE;
 
         /// <summary>
         /// Label45 control.
@@ -456,13 +456,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label47;
 
         /// <summary>
-        /// Label48 control.
+        /// KBXLDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label48;
+        protected global::System.Web.UI.WebControls.Label KBXLDelivered;
 
         /// <summary>
         /// Label49 control.
@@ -474,13 +474,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label49;
 
         /// <summary>
-        /// Label50 control.
+        /// KBXLBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label50;
+        protected global::System.Web.UI.WebControls.Label KBXLBALANCE;
 
         /// <summary>
         /// Label51 control.
@@ -510,13 +510,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label53;
 
         /// <summary>
-        /// Label54 control.
+        /// NPSMALL42DDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label54;
+        protected global::System.Web.UI.WebControls.Label NPSMALL42DDelivered;
 
         /// <summary>
         /// Label55 control.
@@ -528,13 +528,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label55;
 
         /// <summary>
-        /// Label56 control.
+        /// NPS42DBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label56;
+        protected global::System.Web.UI.WebControls.Label NPS42DBALANCE;
 
         /// <summary>
         /// Label57 control.
@@ -564,13 +564,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label59;
 
         /// <summary>
-        /// Label60 control.
+        /// NPSM4NONDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label60;
+        protected global::System.Web.UI.WebControls.Label NPSM4NONDelivered;
 
         /// <summary>
         /// Label61 control.
@@ -582,13 +582,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label61;
 
         /// <summary>
-        /// Label62 control.
+        /// NPS4NON2DBALANCE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label62;
+        protected global::System.Web.UI.WebControls.Label NPS4NON2DBALANCE;
 
         /// <summary>
         /// Label63 control.

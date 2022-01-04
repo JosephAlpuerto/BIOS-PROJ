@@ -53,6 +53,8 @@ namespace BIOSproject
             TCC();
             SPMPC();
             AGPTI();
+            DTM();
+            PCI();
         }
 
         private void Hitcheck()
@@ -129,6 +131,34 @@ namespace BIOSproject
             }
         }
         
+
+        private void DTM()
+
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRequest where SupplierName = 'DTM Print & Labels Specialist Inc.'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
+            DTMNoPO.Text = numRec.ToString();
+
+            sqlCon.Close();
+        }
+
+        private void PCI()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRequest where SupplierName = 'PRINTSUNLIMITED COMPANY INC.'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
+            PCINoPO.Text = numRec.ToString();
+
+            sqlCon.Close();
+        }
+
         private void JRD()
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
