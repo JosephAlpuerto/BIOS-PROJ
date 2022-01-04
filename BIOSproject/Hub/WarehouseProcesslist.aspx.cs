@@ -42,7 +42,7 @@ namespace BIOSproject.Hub
             gvlist.DataBind();
             gvlist.UseAccessibleHeader = true;
             gvlist.HeaderRow.TableSection = TableRowSection.TableHeader;
-            gvlist.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvlist.FooterRow.TableSection = TableRowSection.TableFooter;
 
         }
 

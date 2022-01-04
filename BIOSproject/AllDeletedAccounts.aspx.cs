@@ -73,7 +73,7 @@ namespace BIOSproject
             gvList.DataBind();
             gvList.UseAccessibleHeader = true;
             gvList.HeaderRow.TableSection = TableRowSection.TableHeader;
-            gvList.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvList.FooterRow.TableSection = TableRowSection.TableFooter;
         }
         void FillGridView1()
         {
@@ -89,7 +89,7 @@ namespace BIOSproject
             gvList1.DataBind();
             gvList1.UseAccessibleHeader = true;
             gvList1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
+            //gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         protected void Activate_Click(object sender, EventArgs e)

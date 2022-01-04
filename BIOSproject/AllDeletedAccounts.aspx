@@ -86,7 +86,7 @@
                             <div class="table-responsive">
                            <asp:Label ID="lblSuccess1" runat="server" Text="" ForeColor="Green"></asp:Label>
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="gvList" CssClass="table table-bordered dataTable1" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvList" CssClass="table table-bordered dataTable1" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                                     <Columns>
                                                         <asp:ButtonField DataTextField="Id" HeaderText="Admin ID" />
                                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />
@@ -189,7 +189,7 @@
                             <div class="table-responsive">
                             <asp:Label ID="lblSuccess2" runat="server" Text="" ForeColor="Green"></asp:Label>
                             <asp:HiddenField ID="gvModal1" runat="server" />
-                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered dataTable1" width="100%" AutoGenerateColumns="false">
+                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered dataTable1" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                                     <Columns>
                                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />

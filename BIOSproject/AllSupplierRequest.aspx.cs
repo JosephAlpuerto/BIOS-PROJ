@@ -44,7 +44,7 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
+            //Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
         protected void btnRequest_Click(object sender, EventArgs e)
         {
