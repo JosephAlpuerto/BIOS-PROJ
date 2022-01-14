@@ -177,13 +177,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label FIENoOfPO;
 
         /// <summary>
-        /// Label9 control.
+        /// FIEDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label FIEDelivered;
 
         /// <summary>
         /// Label10 control.
@@ -231,13 +231,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label WellNoPO;
 
         /// <summary>
-        /// Label15 control.
+        /// WellDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
+        protected global::System.Web.UI.WebControls.Label WellDelivered;
 
         /// <summary>
         /// Label16 control.
@@ -285,13 +285,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label ACFNoPO;
 
         /// <summary>
-        /// Label21 control.
+        /// ACFDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label21;
+        protected global::System.Web.UI.WebControls.Label ACFDeliver;
 
         /// <summary>
         /// Label22 control.
@@ -339,13 +339,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label DTMNoPO;
 
         /// <summary>
-        /// Label20 control.
+        /// DTMDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label20;
+        protected global::System.Web.UI.WebControls.Label DTMDeliver;
 
         /// <summary>
         /// Label26 control.
@@ -393,13 +393,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label PCINoPO;
 
         /// <summary>
-        /// Label62 control.
+        /// PCIDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label62;
+        protected global::System.Web.UI.WebControls.Label PCIDeliver;
 
         /// <summary>
         /// Label68 control.
@@ -447,13 +447,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label JRDNoPO;
 
         /// <summary>
-        /// Label27 control.
+        /// JRDDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label27;
+        protected global::System.Web.UI.WebControls.Label JRDDeliver;
 
         /// <summary>
         /// Label28 control.
@@ -501,13 +501,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label TFTNoPO;
 
         /// <summary>
-        /// Label33 control.
+        /// TFTDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label33;
+        protected global::System.Web.UI.WebControls.Label TFTDeliver;
 
         /// <summary>
         /// Label34 control.
@@ -555,13 +555,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label kimwinNoPO;
 
         /// <summary>
-        /// Label39 control.
+        /// KimwinDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label39;
+        protected global::System.Web.UI.WebControls.Label KimwinDeliver;
 
         /// <summary>
         /// Label40 control.
@@ -600,22 +600,22 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label43;
 
         /// <summary>
-        /// Label44 control.
+        /// UPINoPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label44;
+        protected global::System.Web.UI.WebControls.Label UPINoPO;
 
         /// <summary>
-        /// Label45 control.
+        /// UPIDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label45;
+        protected global::System.Web.UI.WebControls.Label UPIDeliver;
 
         /// <summary>
         /// Label46 control.
@@ -663,13 +663,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label HFPCNoPO;
 
         /// <summary>
-        /// Label51 control.
+        /// HFPCDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label51;
+        protected global::System.Web.UI.WebControls.Label HFPCDeliver;
 
         /// <summary>
         /// Label52 control.
@@ -708,22 +708,22 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label55;
 
         /// <summary>
-        /// CPSPNoPO control.
+        /// CPSCNoPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CPSPNoPO;
+        protected global::System.Web.UI.WebControls.Label CPSCNoPO;
 
         /// <summary>
-        /// Label57 control.
+        /// CPSCDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label57;
+        protected global::System.Web.UI.WebControls.Label CPSCDeliver;
 
         /// <summary>
         /// Label58 control.
@@ -771,13 +771,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label TCCNoPO;
 
         /// <summary>
-        /// Label63 control.
+        /// TCCDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label63;
+        protected global::System.Web.UI.WebControls.Label TCCDeliver;
 
         /// <summary>
         /// Label64 control.
@@ -825,13 +825,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label SPMPCNoPO;
 
         /// <summary>
-        /// Label69 control.
+        /// SPMPDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label69;
+        protected global::System.Web.UI.WebControls.Label SPMPDeliver;
 
         /// <summary>
         /// Label70 control.
@@ -879,13 +879,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label AGPTINoPO;
 
         /// <summary>
-        /// Label75 control.
+        /// AGPDeliver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label75;
+        protected global::System.Web.UI.WebControls.Label AGPDeliver;
 
         /// <summary>
         /// Label76 control.

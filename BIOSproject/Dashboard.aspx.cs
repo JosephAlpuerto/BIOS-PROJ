@@ -103,6 +103,20 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 FIENoOfPO.Text = numRec.ToString();
             }
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'Forms International Enterprises'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            FIEDelivered.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
+
+
         }
 
         private void WPCC()
@@ -117,6 +131,16 @@ namespace BIOSproject
                 WellNoPO.Text = numRec.ToString();
             }
 
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'Well-Pack Container Corporation'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            WellDelivered.Text = numRecC.ToString();
+
+            sqlCon.Close();
         }
 
         private void ACF()
@@ -129,21 +153,47 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 ACFNoPO.Text = numRec.ToString();
             }
+
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'ADVANCE COMPUTER FORMS, INC.'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            ACFDeliver.Text = numRecC.ToString();
+
+            sqlCon.Close();
         }
         
 
         private void DTM()
 
         {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            {
+                SqlConnection sqlCon = new SqlConnection(ConnectionString);
 
-            string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRequest where SupplierName = 'DTM Print & Labels Specialist Inc.'";
-            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
-            sqlCon.Open();
-            int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
-            DTMNoPO.Text = numRec.ToString();
+                string sqlquery = "SELECT COUNT(SupplierName) FROM SSPNewRequest where SupplierName = 'DTM Print & Labels Specialist Inc.'";
+                SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+                sqlCon.Open();
+                int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
+                DTMNoPO.Text = numRec.ToString();
 
-            sqlCon.Close();
+                sqlCon.Close();
+            }
+           
+
+
+
+            SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+            string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'ADVANCE COMPUTER FORMS, INC.'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+            sqlConn.Open();
+            int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+            DTMDeliver.Text = numRecC.ToString();
+
+            sqlConn.Close();
         }
 
         private void PCI()
@@ -157,6 +207,19 @@ namespace BIOSproject
             PCINoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+            {
+                SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+                string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'PRINTSUNLIMITED COMPANY INC.'  and DestinationTo != 'NULL'";
+                SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+                sqlConn.Open();
+                int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+                PCIDeliver.Text = numRecC.ToString();
+
+                sqlConn.Close();
+            }
         }
 
         private void JRD()
@@ -170,6 +233,20 @@ namespace BIOSproject
             JRDNoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+
+            {
+                SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+                string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'JRD Manufacturing Corp.'  and DestinationTo != 'NULL'";
+                SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+                sqlConn.Open();
+                int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+                JRDDeliver.Text = numRecC.ToString();
+
+                sqlConn.Close();
+            }
         }
         
 
@@ -183,6 +260,18 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 TFTNoPO.Text = numRec.ToString();
             }
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'TFT Express Printing Co. Inc.'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            TFTDeliver.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
+
         }
 
         private void Kimwin()
@@ -196,6 +285,16 @@ namespace BIOSproject
                 kimwinNoPO.Text = numRec.ToString();
             }
 
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+
+            string sqlquery = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'KIMWIN CORPORATION'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
+            sqlCon.Open();
+            int numRecC = Convert.ToInt32(sqlcom.ExecuteScalar());
+            KimwinDeliver.Text = numRecC.ToString();
+
+            sqlCon.Close();
+
 
         }
 
@@ -207,9 +306,22 @@ namespace BIOSproject
             SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
             sqlCon.Open();
             int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
-            WellNoPO.Text = numRec.ToString();
+            UPINoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+            {
+                SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+                string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'United Polyresins Inc.'  and DestinationTo != 'NULL'";
+                SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+                sqlConn.Open();
+                int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+                UPIDeliver.Text = numRecC.ToString();
+
+                sqlConn.Close();
+            }
         }
 
         private void HFPC()
@@ -225,6 +337,18 @@ namespace BIOSproject
 
             sqlCon.Close();
 
+            {
+                SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+                string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'Holy Family Printing Corporation'  and DestinationTo != 'NULL'";
+                SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+                sqlConn.Open();
+                int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+                HFPCDeliver.Text = numRecC.ToString();
+
+                sqlConn.Close();
+            }
+
         }
 
         private void CPSP()
@@ -235,9 +359,23 @@ namespace BIOSproject
             SqlCommand sqlcom = new SqlCommand(sqlquery, sqlCon);
             sqlCon.Open();
             int numRec = Convert.ToInt32(sqlcom.ExecuteScalar());
-            HFPCNoPO.Text = numRec.ToString();
+            CPSCNoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+
+            {
+                SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+                string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'CHRISMOND PRINTING SERVICES CORP.'  and DestinationTo != 'NULL'";
+                SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+                sqlConn.Open();
+                int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+                CPSCDeliver.Text = numRecC.ToString();
+
+                sqlConn.Close();
+            }
         }
 
         private void TCC()
@@ -252,6 +390,17 @@ namespace BIOSproject
 
             sqlCon.Close();
 
+
+            SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+            string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'TWINPACK CONTAINER CORPORATION'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+            sqlConn.Open();
+            int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+            TCCDeliver.Text = numRecC.ToString();
+
+            sqlConn.Close();
+
         }
 
         private void SPMPC()
@@ -265,6 +414,17 @@ namespace BIOSproject
             SPMPCNoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+            SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+            string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'S.P. Mamplasan Packaging Corp.'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+            sqlConn.Open();
+            int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+            SPMPDeliver.Text = numRecC.ToString();
+
+            sqlConn.Close();
         }
         private void AGPTI()
         {
@@ -277,6 +437,18 @@ namespace BIOSproject
             AGPTINoPO.Text = numRec.ToString();
 
             sqlCon.Close();
+
+
+
+            SqlConnection sqlConn = new SqlConnection(ConnectionString);
+
+            string sqlqueryy = "SELECT COUNT(*) from [lbcbios].[SSPNewRequest] where SupplierName = 'AGP Trading Inc.'  and DestinationTo != 'NULL'";
+            SqlCommand sqlcomm = new SqlCommand(sqlqueryy, sqlConn);
+            sqlConn.Open();
+            int numRecC = Convert.ToInt32(sqlcomm.ExecuteScalar());
+            AGPDeliver.Text = numRecC.ToString();
+
+            sqlConn.Close();
         }
 
 

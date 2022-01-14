@@ -143,7 +143,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label9" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="FIEDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label10" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -172,7 +172,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label15" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="WellDelivered" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label16" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -200,7 +200,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label21" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="ACFDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label22" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -230,7 +230,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label20" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="DTMDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label26" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -260,7 +260,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label62" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="PCIDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label68" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -288,7 +288,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label27" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="JRDDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label28" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -316,7 +316,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label33" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="TFTDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label34" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -344,7 +344,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label39" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="KimwinDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label40" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -368,11 +368,11 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label44" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="UPINoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label45" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="UPIDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label46" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -400,7 +400,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label51" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="HFPCDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label52" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -424,11 +424,11 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="CPSPNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="CPSCNoPO" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label57" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="CPSCDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label58" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -455,7 +455,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label63" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="TCCDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label64" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -483,7 +483,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label69" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="SPMPDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label70" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
@@ -511,7 +511,7 @@
         </div>
     
     <div class="menu2">
-        <asp:Label ID="Label75" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
+        <asp:Label ID="AGPDeliver" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
         </div>
     <div class="menu2">
         <asp:Label ID="Label76" runat="server" Text="0" CssClass="lblTxt"></asp:Label>
