@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using BIOSproject.FolConnectionDB;
 using Microsoft.Reporting.WebForms;
 
@@ -37,7 +40,35 @@ namespace BIOSproject
             gvList1.HeaderRow.TableSection = TableRowSection.TableHeader;
             gvList1.FooterRow.TableSection = TableRowSection.TableFooter;
         }*/
+        public static string EncryptData(string simpleString)
+        {
+            byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(simpleString);
+            string encrypted = Convert.ToBase64String(b);
+            return encrypted;
 
+            //MD5 md5 = new MD5CryptoServiceProvider();
+
+            //byte[] passHash = Encoding.UTF8.GetBytes(simpleString);
+
+            //return Encoding.UTF8.GetString(md5.ComputeHash(passHash));
+        }
+        public static string DecryptData(string encrString)
+        {
+            byte[] b;
+            string decrypted;
+
+            try
+            {
+                b = Convert.FromBase64String(encrString);
+                decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
+
+            }
+            catch (FormatException fe)
+            {
+                decrypted = "";
+            }
+            return decrypted;
+        }
         void FillGridView()
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
@@ -268,7 +299,7 @@ namespace BIOSproject
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@Username", txtUEmail1.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Password ", txtUPassword1.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@Password ", EncryptData(txtUPassword1.Text.Trim()));
             sqlCmd.Parameters.AddWithValue("@FirstName", txtUFirstName1.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@LastName", txtULastName1.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@MobileNumber", txtUNumber1.Text.Trim());
@@ -276,9 +307,9 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@CreatedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@RoleType", DropDownList.SelectedItem.Value);
-            //sqlCmd.Parameters.AddWithValue("@UpdatedBy", "Admin");
-            //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DateTimeOffset.UtcNow);
-            //sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
+            //sqlCmd.Parameters.AddWithValue("@UpdatedBy", DBNull.Value);
+            //sqlCmd.Parameters.AddWithValue("@UpdatedDate", DBNull.Value);
+            //sqlCmd.Parameters.AddWithValue("@DeletedDate", DBNull.Value);
             string Id = hfId1.Value;
             // validations
 
@@ -547,5 +578,10 @@ namespace BIOSproject
         {
             
         }
+
+        protected void sample_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('"+ EncryptData(txtUPassword1.Text) +"')", true);
+        }
     }
-}
+} 

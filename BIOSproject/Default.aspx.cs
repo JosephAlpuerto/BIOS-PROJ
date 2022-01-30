@@ -26,43 +26,62 @@ namespace BIOSproject
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("select * from Users where Username='" + txtUsername.Text + "' and Password='" + txtPassword.Text + "' and IsActive = 1",con);
-                con.Open();
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                //SqlCommand cmd = new SqlCommand("select * from Users where Username='" + txtUsername.Text + "' and Password='" + AllUsers.EncryptData(txtPassword.Text) + "' and IsActive = 1",con);
+                //con.Open();
+                //SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
-                if(dt.Rows.Count != 0)
+                using (SqlCommand cmd = new SqlCommand("Users_Verify", con))
                 {
-                   
-                    string roleType;
-                    roleType = dt.Rows[0][13].ToString().Trim();
-                    if (roleType == "Sourcing")
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserName", txtUsername.Text);
+                    cmd.Parameters.AddWithValue("@Password", AllUsers.EncryptData(txtPassword.Text));
+
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+
+                    DataTable dt = new DataTable();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    if(sdr.HasRows)
                     {
-                        Session["Username"] = txtUsername.Text.ToString();
-                        Response.Redirect("~/AllUsers.aspx");
+                        dt.Load(sdr);
+
+                        if (dt.Rows.Count != 0)
+                        {
+                            string roleType;
+                            roleType = dt.Rows[0][13].ToString().Trim();
+                            if (roleType == "Sourcing")
+                            {
+                                Session["Username"] = txtUsername.Text.ToString();
+                                Response.Redirect("~/AllUsers.aspx");
+                            }
+                            if (roleType == "Supplier")
+                            {
+                                Session["Username"] = txtUsername.Text.ToString();
+                                Response.Redirect("~/AllSupplierRequest.aspx");
+                            }
+                            if (roleType == "Hub")
+                            {
+                                Session["Username"] = txtUsername.Text.ToString();
+                                Response.Redirect("~/Hub/HubList.aspx");
+                            }
+                            if (roleType == "Warehouse")
+                            {
+                                Session["Username"] = txtUsername.Text.ToString();
+                                Response.Redirect("~/Hub/Warehouselist.aspx");
+                            }
+                        }
+ 
                     }
-                    if (roleType == "Supplier")
+                    else
                     {
-                        Session["Username"] = txtUsername.Text.ToString();
-                        Response.Redirect("~/AllSupplierRequest.aspx");
+                        lblError.Text = "Invalid Username or Password ";
                     }
-                    if (roleType == "Hub")
-                    {
-                        Session["Username"] = txtUsername.Text.ToString();
-                        Response.Redirect("~/Hub/HubList.aspx");
-                    }
-                    if (roleType == "Warehouse")
-                    {
-                        Session["Username"] = txtUsername.Text.ToString();
-                        Response.Redirect("~/Hub/Warehouselist.aspx");
-                    }
+
+
                 }
-          
-                else
-                {
-                    lblError.Text = "Invalid Username or Password ";
-                }
+                
             }
 
         }
@@ -82,8 +101,8 @@ namespace BIOSproject
                     string email = dr["Username"].ToString();
                     string pw = dr["Password"].ToString();
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("Username:-" + email);
-                    sb.AppendLine("Password:-" + pw);
+                    sb.AppendLine("Username: " + email);
+                    sb.AppendLine("Password: " + AllUsers.DecryptData(pw));
                     SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                     client.EnableSsl = true;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;

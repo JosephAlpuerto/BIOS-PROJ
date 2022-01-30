@@ -198,13 +198,13 @@
                                                  <asp:DropDownList ID="DropDownList" runat="server" OnSelectedIndexChanged="DropDownList_SelectedIndexChanged">
                                                     <asp:ListItem Value="Sourcing">Sourcing</asp:ListItem>
                                                     <asp:ListItem>Supplier</asp:ListItem>
-                                                     <asp:ListItem Value="Hub">Hub</asp:ListItem>
                                                      <asp:ListItem Value="Warehouse">Warehouse</asp:ListItem>
                                                 </asp:DropDownList>
 
                                  </div>
 
                                 <asp:Button Text="Add Account" ID="buttonAddUser1" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="buttonAddUser1_Click"/>
+                                <asp:Button Visible="false" Text="Encrypt" ID="sample" CssClass="btn btn-primary btn-user btn-block" runat="server" Onclick="sample_Click"/>
                                 <hr>    
                             </div>
                                  </ContentTemplate></asp:UpdatePanel>     

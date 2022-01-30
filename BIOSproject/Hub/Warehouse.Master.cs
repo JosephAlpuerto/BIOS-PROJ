@@ -43,8 +43,8 @@ namespace BIOSproject.Hub
                     string email = dr["Username"].ToString();
                     string pw = dr["Password"].ToString();
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("Username:-" + email);
-                    sb.AppendLine("Password:-" + pw);
+                    sb.AppendLine("Username: " + email);
+                    sb.AppendLine("Password: " + AllUsers.DecryptData(pw));
                     SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                     client.EnableSsl = true;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
