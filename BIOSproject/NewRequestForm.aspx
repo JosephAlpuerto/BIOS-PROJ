@@ -219,7 +219,7 @@
                 </asp:GridView><asp:Label ID="lblGridview" runat="server" ForeColor="Green" CssClass="label"></asp:Label><asp:Label ID="lblerrorGV" runat="server" ForeColor="Red" CssClass="label"></asp:Label>
 
         <div>
-            <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
+            <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Check" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
        
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [TicketNo], [PONumber], [Supplier], [Products], [Quantity], [DateRequested], [RequestNo] FROM [TempRequest]"></asp:SqlDataSource>
                 <asp:GridView ID="gvlist" runat="server" AutoGenerateColumns="False">

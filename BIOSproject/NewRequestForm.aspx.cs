@@ -505,14 +505,15 @@ namespace BIOSproject
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add(txtEmail.Text);
-                        mail.Subject = "Request for Barcode Series" + "<br />" + txtEmail.Text + " " + txtPONumber.Text;
+                        mail.Subject = "Request for Barcode Series" + "<br />" + txtEmail.Text + " PO# " + txtPONumber.Text;
                         mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/>" +
                              "<br/><br/>Starting Series - Ending Series<br/><br/>" +
                             "Thanks,";
                         mail.IsBodyHtml = true;
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                         {
-                            smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
                             smtp.EnableSsl = true;
                             smtp.Send(mail);
                         }

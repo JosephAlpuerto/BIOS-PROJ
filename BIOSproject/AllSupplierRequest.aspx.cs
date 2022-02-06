@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
-using System.Windows.Forms;
 using System.Net.Mail;
 
 namespace BIOSproject
@@ -168,7 +167,7 @@ namespace BIOSproject
 
                     mail.From = new MailAddress("lbcbios08@gmail.com");
                     mail.To.Add(hfSourcing1.Value);
-                    mail.Subject = "Rejected of Request By: " + hfSupplier1.Value + " " + txtPONo1.Text + " " + txtRequestID1.Text;
+                    mail.Subject = "Rejected of Request By: " + hfSupplier1.Value + " PO# " + txtPONo1.Text + " " + txtRequestID1.Text;
                     mail.Body = "This PONumber have duplicate series of barcodes <hr>Ticket#:</hr> " + txtTicketNo1.Text + "<hr>PONumber:</hr>"
                         + txtPONo1.Text + "<hr> Request NO.: </hr>" + txtRequestID1.Text + "<hr> Product: </hr>" + hfProduct1.Value + "<hr>Quantity:</hr>" + hfQuantity1.Value +
                         "<hr>Starting Series:</hr>" + hfStart1.Value + "<hr>Ending Series:</hr>" + hfEnd1.Value +
@@ -176,7 +175,8 @@ namespace BIOSproject
                     mail.IsBodyHtml = true;
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                     {
-                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }
@@ -397,6 +397,7 @@ namespace BIOSproject
             }
 
             sqlCon.Close();
+
         }
 
         protected void DropDesti_SelectedIndexChanged(object sender, EventArgs e)
@@ -523,6 +524,99 @@ namespace BIOSproject
             ModalDownloadView.Hide();
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+
+        protected void Check_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkstatus = (CheckBox)sender;
+            GridViewRow row = (GridViewRow)checkstatus.NamingContainer;
+            if (checkstatus.Checked == true)
+            {
+                AllHitcheck.Visible = true;
+            }
+            else
+            {
+                AllHitcheck.Visible = false;
+            }
+        }
+
+        protected void CheckAll_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkheader = (CheckBox)Gridview1.HeaderRow.FindControl("CheckAll");
+            foreach (GridViewRow row in Gridview1.Rows)
+            {
+                CheckBox checkrow = (CheckBox)row.FindControl("Check");
+                if(checkheader.Checked == true)
+                {
+                    checkrow.Checked = true;
+                    AllHitcheck.Visible = true;
+                }
+                else
+                {
+                    checkrow.Checked = false;
+                    AllHitcheck.Visible = false;
+                }
+            }
+        }
+
+        protected void HitCheck_Click1(object sender, EventArgs e)
+        {
+                for (int i = 0; i < Gridview1.Rows.Count; i++)
+                {
+                    CheckBox HitCheck = (CheckBox)Gridview1.Rows[i].Cells[0].FindControl("Check");
+                    if (HitCheck.Checked)
+                    {
+                        int Requestid = Convert.ToInt32(Gridview1.Rows[i].Cells[1].Text);
+                        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString))
+                        {
+                            con.Open();
+                            SqlCommand cmd = new SqlCommand("Delete SSPNewRequest where ID ='" + Requestid + "'", con);
+                            cmd.ExecuteNonQuery();
+                            Gridview1.EditIndex = -1;
+                            con.Close();
+                        }
+                    }
+                }
+                FillGridView();
+        }
+
+        protected void AllHitcheck_Click(object sender, EventArgs e)
+        {
+            //for (int i = 0; i < Gridview1.Rows.Count; i++)
+            //{
+            //    CheckBox HitCheck = (CheckBox)Gridview1.Rows[i].Cells[0].FindControl("Check");
+            //    if (HitCheck.Checked == true)
+            //    {
+            //        int Requestid = Convert.ToInt32(Gridview1.Rows[i].Cells[1].Text);
+            //        con.Open();
+            //            SqlCommand cmd = new SqlCommand("DELETE FROM SSPNewRequest WHERE ID ='" + Requestid + "'", con);
+            //            cmd.ExecuteNonQuery();
+            //            Gridview1.EditIndex = -1;
+            //            con.Close();
+            //            FillGridView();
+            //    }
+            //}
+
+            if (Gridview1.Rows.Count > 0)
+            {
+                for (int i = 0; i < Gridview1.Rows.Count; i++)
+                {
+                    CheckBox cbx = (CheckBox)Gridview1.Rows[i].Cells[0].FindControl("Check");
+                    if (cbx != null)
+                    {
+                        if (cbx.Checked)
+                        {
+                            int ColumnValue;
+                            string str = Gridview1.Rows[i].Cells[5].Text;
+                            int.TryParse(str, out ColumnValue);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('"+ ColumnValue + "')", true);
+                        }
+                    }
+                }
+            }
+
+        }
+
+
 
 
 

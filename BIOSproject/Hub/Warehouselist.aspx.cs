@@ -137,7 +137,7 @@ namespace BIOSproject.Hub
 
                     mail.From = new MailAddress("lbcbios08@gmail.com");
                     mail.To.Add(txtSuppName.Text);
-                    mail.Subject = "Request for Process" + txtSuppName.Text + " " + txtPO.Text;
+                    mail.Subject = "On Process" + txtSuppName.Text + " " + txtPO.Text;
                     mail.Body = "This Item Proceed to the Delivery with Ticket#: " + txtTicket.Text + "<hr>PONumber:</hr>"
                         + txtPO.Text + 
                         "<hr> Product list: </hr>" + txtProduct.Text + "<hr>Total Quantity:</hr>" + txtQuantity.Text + "<hr>StartingSeries:</hr>" + txtStart.Text + "<hr>EndingSeries:</hr>" + txtEnd.Text +
@@ -145,7 +145,8 @@ namespace BIOSproject.Hub
                     mail.IsBodyHtml = true;
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                     {
-                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "lolipop312");
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }

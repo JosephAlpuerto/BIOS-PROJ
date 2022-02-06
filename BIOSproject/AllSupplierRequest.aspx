@@ -8,14 +8,14 @@
 
     <div id="wrapper">
                     <div class="container-fluid">
-                    <%--<div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tables</h1>--%>
-                        <%--<asp:Button Text="HitCheck" ID="btnValidate" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidate_Click"  runat="server"></asp:Button>--%>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <%--<h1 class="h3 mb-0 text-gray-800">Requested list</h1>--%>
+                        <asp:Button Text="Hitcheck" ID="AllHitcheck" Visible="false" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" OnClick="AllHitcheck_Click"></asp:Button>
                         <%--<asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>--%>
                          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             </div>
                         </div>
-                     <%--</div>--%>
+                     </div>
 
     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
@@ -459,6 +459,15 @@
                                 <asp:HiddenField ID="gvModal" runat="server"/>
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
                                     <Columns>
+                                        <asp:TemplateField>
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"/>
+                                                <asp:LinkButton ID="HitCheck2" Visible="false" runat="server" CssClass="btn btn-primary btn-user btn-block" OnClick="HitCheck_Click1">HitCheck</asp:LinkButton>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                 <asp:CheckBox ID="Check" runat="server" AutoPostBack="true" Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnCheckedChanged="Check_CheckedChanged"/>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
