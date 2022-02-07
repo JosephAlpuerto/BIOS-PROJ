@@ -687,7 +687,7 @@ namespace BIOSproject
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Download;
+        protected global::System.Web.UI.WebControls.LinkButton Download;
 
         /// <summary>
         /// btnCloseDownloadView control.

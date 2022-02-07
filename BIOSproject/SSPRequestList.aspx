@@ -345,6 +345,13 @@
                                        <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
                                         <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
                                         
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate> 
+                                                               <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
+                                                               <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-user btn-block" />
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>

@@ -240,6 +240,43 @@ namespace BIOSproject
             con.Close();
         }
 
-      
+        protected void HitCheck_Click(object sender, EventArgs e)
+        {
+            LinkButton HitCheck = (sender as LinkButton);
+            string[] commandArguments = HitCheck.CommandArgument.Split(',');
+
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("CheckDuplicate", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", commandArguments[0]);
+            sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", commandArguments[1]);
+            sqlData.SelectCommand.Parameters.AddWithValue("@EndingSeries", commandArguments[2]);
+            FillGridView();
+
+            SqlDataReader sdr = sqlData.SelectCommand.ExecuteReader();
+            if (sdr.Read())
+            {
+                SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+                if (sqlCon2.State == ConnectionState.Closed)
+                    sqlCon2.Open();
+                SqlCommand sqlCmd = new SqlCommand("CheckDuplicate2", sqlCon2);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
+                sqlCmd.Parameters.AddWithValue("@forHitCheck", "1");
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series has not been used.')", true);
+                sqlCmd.ExecuteNonQuery();
+                sqlCon2.Close();
+                FillGridView();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series is used by another PONumber!!')", true);
+            }
+
+            sqlCon.Close();
+        }
     }
 }

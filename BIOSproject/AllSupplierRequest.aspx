@@ -433,7 +433,7 @@
                    <asp:HiddenField ID="hfQuantity" runat="server" />  
 
                </table>
-         <asp:Button ID="Download" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Download Now" OnClick="Download_Click" />
+         <asp:LinkButton ID="Download" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Download Now" OnClick="Download_Click1"/>
          <asp:Button ID="btnCloseDownloadView" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" Text="Close" OnClick="btnCloseDownloadView_Click"/>
     </div>
                             </div>

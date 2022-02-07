@@ -165,6 +165,7 @@
     <Content Include="Hub\HubList.aspx" />
     <Content Include="SuppDashboard.aspx" />
     <Content Include="SuppValidate.aspx" />
+    <Content Include="TextFile\123.txt" />
     <Content Include="TextFile\Download.txt" />
     <Content Include="TextFile\NEW.txt" />
     <Content Include="Validate.aspx" />
