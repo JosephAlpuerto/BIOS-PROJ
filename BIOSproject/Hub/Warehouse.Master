@@ -23,6 +23,7 @@
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="../css/BIssuer.css" rel="stylesheet" />
+    <link href="../css/warehouseform.css" rel="stylesheet" />
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -78,6 +79,12 @@
                     <a class="nav-link" href="WarehouseProcessList.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Process list</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="../WareHouseform.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Form</span></a>
                 </li>
                 <%--<li class="nav-item active">
                     <a class="nav-link" href="ValidationForm.aspx">

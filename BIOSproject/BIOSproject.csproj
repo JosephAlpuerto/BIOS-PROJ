@@ -132,6 +132,7 @@
     <Content Include="css\Dashboard.css" />
     <Content Include="css\NewRequest.css" />
     <Content Include="css\sorcedb.css" />
+    <Content Include="css\warehouseform.css" />
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
@@ -1855,6 +1856,7 @@
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\jquery\jquery.slim.js" />
     <Content Include="vendor\jquery\jquery.slim.min.js" />
+    <Content Include="WareHouseform.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2148,6 +2150,13 @@
     </Compile>
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WareHouseform.aspx.cs">
+      <DependentUpon>WareHouseform.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WareHouseform.aspx.designer.cs">
+      <DependentUpon>WareHouseform.aspx</DependentUpon>
     </Compile>
     <Compile Include="_LBC_BIOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,0 +1,114 @@
+﻿.big {
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+    .big .container1 {
+        width: 350px;
+        margin-left: 10px;
+        background: white;
+    }
+    .big .container {
+        width: 700px;
+        background: white;
+    }
+
+    .big .container1 .forms {
+        width: 100%;
+    }
+
+
+        .big .container1 .forms .input_field1 .input1 {
+            width: 100%;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .big .container1 .forms .input_field1 .label {
+            width: 200px;
+            color: #757575;
+            margin-right: 10px;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .big .container1 .forms .input_field1 .btn {
+            width: 25%;
+            padding: 8px 10px;
+            margin-left: 55px;
+            font-size: 15px;
+            border: 1px;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+            background-color: #d00149;
+            color: White;
+        }
+
+
+        .big .container .forms .input_field1 .input {
+            width: 25%;
+            outline: none;
+            margin-left: 5px;
+        }
+
+        .big .container .forms .input_field1 .label1 {
+            width: 200px;
+            color: #757575;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+    .big .container .forms .input_field1 .btn {
+        width: 15%;
+        margin-left: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        outline: none;
+        background-color: gray;
+        color: White;
+        margin-bottom: 10px;
+    }
+
+
+
+
+
+
+/*
+    .big .gridcontainer {
+        max-width: 500px;
+        width: 50%;
+        background-color: white;
+        margin: 20px auto;
+        padding: 30px;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+    }*/
+
+/*
+.container2 {
+    width: 50%;
+    background-color: white;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+    margin-left: 800px;
+    position: relative;
+}*/
+/*
+    .container1 .form {
+        width: 100%;
+    }
+
+        .container1 .form .input_field .input {
+            width: 100%;
+            outline: none;
+        }
+
+        .container1 .form .input_field .label1 {
+            width: 200px;
+            color: #757575;
+            margin-right: 10px;
+            font-size: 14px;
+        }*/
