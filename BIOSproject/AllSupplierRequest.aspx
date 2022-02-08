@@ -457,7 +457,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server"/>
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !" DataKeyNames="link">
                                     <Columns>
                                         <asp:TemplateField>
                                             <HeaderTemplate>

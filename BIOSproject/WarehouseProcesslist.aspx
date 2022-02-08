@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Hub/Warehouse.Master" AutoEventWireup="true" CodeBehind="WarehouseProcesslist.aspx.cs" Inherits="BIOSproject.Hub.WarehouseProcesslist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Hub/Warehouse.Master" AutoEventWireup="true" CodeBehind="WarehouseProcesslist.aspx.cs" Inherits="BIOSproject.Hub.WarehouseProcesslist" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
@@ -94,7 +94,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="gvlist" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
+                                <asp:GridView runat="server" ID="gvlist" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !" DataKeyNames="link">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />

@@ -68,27 +68,34 @@ namespace BIOSproject.Hub
 
         protected void DownloadView_Click(object sender, EventArgs e)
         {
-            int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ViewtoDownload", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            txtId.Text = Id.ToString();
-            hfTicketNo.Value = dtbl.Rows[0]["TicketNo"].ToString();
-            hfPONumber.Value = dtbl.Rows[0]["PONumber"].ToString();
-            hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
-            hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
-            hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
-            hfProduct.Value = dtbl.Rows[0]["ProductQuantity"].ToString();
-            hfQuantity.Value = dtbl.Rows[0]["TotalQuantity"].ToString();
-            hfSchedule.Value = dtbl.Rows[0]["ScheduleDate"].ToString();
-            ModalDownloadView.Show();
-            FillGridView();
+            LinkButton linkdownload = sender as LinkButton;
+            GridViewRow gridrow = linkdownload.NamingContainer as GridViewRow;
+            string downloadfile = gvlist.DataKeys[gridrow.RowIndex].Value.ToString();
+            Response.ContentType = "Text/txt";
+            Response.AddHeader("Content-Disposition", "attachment;filename=\"" + downloadfile + "\"");
+            Response.TransmitFile(Server.MapPath(downloadfile));
+            Response.End();
+            //int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
+            //SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            //if (sqlCon.State == ConnectionState.Closed)
+            //    sqlCon.Open();
+            //SqlDataAdapter sqlData = new SqlDataAdapter("ViewtoDownload", sqlCon);
+            //sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            //sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
+            //DataTable dtbl = new DataTable();
+            //sqlData.Fill(dtbl);
+            //sqlCon.Close();
+            //txtId.Text = Id.ToString();
+            //hfTicketNo.Value = dtbl.Rows[0]["TicketNo"].ToString();
+            //hfPONumber.Value = dtbl.Rows[0]["PONumber"].ToString();
+            //hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
+            //hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
+            //hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
+            //hfProduct.Value = dtbl.Rows[0]["ProductQuantity"].ToString();
+            //hfQuantity.Value = dtbl.Rows[0]["TotalQuantity"].ToString();
+            //hfSchedule.Value = dtbl.Rows[0]["ScheduleDate"].ToString();
+            //ModalDownloadView.Show();
+            //FillGridView();
         }
 
         protected void Download_Click(object sender, EventArgs e)

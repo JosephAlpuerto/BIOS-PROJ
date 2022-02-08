@@ -137,7 +137,7 @@
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
     <Content Include="Hub\Warehouselist.aspx" />
-    <Content Include="Hub\WarehouseProcesslist.aspx" />
+    <Content Include="WarehouseProcesslist.aspx" />
     <Content Include="img\download.png" />
     <Content Include="img\EditIcon.png" />
     <Content Include="img\ExitIcon.png" />
@@ -1943,11 +1943,11 @@
     <Compile Include="Hub\Warehouselist.aspx.designer.cs">
       <DependentUpon>Warehouselist.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Hub\WarehouseProcesslist.aspx.cs">
+    <Compile Include="WarehouseProcesslist.aspx.cs">
       <DependentUpon>WarehouseProcesslist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Hub\WarehouseProcesslist.aspx.designer.cs">
+    <Compile Include="WarehouseProcesslist.aspx.designer.cs">
       <DependentUpon>WarehouseProcesslist.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyRejectedRequestSupp.aspx.cs">
