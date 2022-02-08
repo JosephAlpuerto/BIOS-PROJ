@@ -6,6 +6,27 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>    
+        function Hitcheck() {
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+            )
+        }
+        function Hiterror() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        }
+    </script>
+
+
+
      <div id="wrapper">
                     <div class="container-fluid">
                    <%-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -329,7 +350,7 @@
     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">New Request</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -366,6 +387,51 @@
                                 </div>
                             </div>
                      </div>
+
+
+
+
+    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">OnProcess</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <asp:HiddenField ID="HiddenField1" runat="server" />
+                                <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
+                                    <Columns>
+                                        <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
+                                        <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
+                                         <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
+                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
+                                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
+                                        <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier Name" />
+                                       <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
+                                        <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
+                                        
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate> 
+                                                               <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-user btn-block" />
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
+
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate>
+
+                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
+                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>       
+                                    </Columns>
+                                </asp:GridView>
+
+                                </div>
+                            </div>
+                     </div>
+
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>

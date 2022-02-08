@@ -13,7 +13,29 @@
     <title>LBC   - Admin</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript" ></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet"/>--%>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+<%--    <script src="js/sweetAlert.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>--%>
+    <script>    
+        function Hitcheck() {
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+            )
+        }
+        function Hiterror() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        }
+    </script>
     <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
 
     <!-- Custom fonts for this template-->
@@ -278,11 +300,11 @@
                         <span>Request</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <%--<li class="nav-item active">
                     <a class="nav-link" href="RejectedBySupplierlist.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Rejected list By Supplier </span></a>
-                </li>
+                </li>--%>
                 <%--<li class="nav-item active">
                     <a class="nav-link" href="Validate.aspx">
                         <i class="fas fa-fw fa-folder"></i>

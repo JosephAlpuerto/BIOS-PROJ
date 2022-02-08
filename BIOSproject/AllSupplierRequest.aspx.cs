@@ -24,6 +24,7 @@ namespace BIOSproject
             if (!IsPostBack)
             {
                 FillGridView();
+                FillGridView2();
                 cascadingdropdown();
             }
 
@@ -43,6 +44,24 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            //Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
+        }
+
+        void FillGridView2()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("SSPRequestSupplierShow2", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview2.DataSource = dtbl;
+            Gridview2.DataBind();
+            Gridview2.UseAccessibleHeader = true;
+            Gridview2.HeaderRow.TableSection = TableRowSection.TableHeader;
             //Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
         protected void btnRequest_Click(object sender, EventArgs e)

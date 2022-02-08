@@ -19,7 +19,7 @@ namespace BIOSproject
         protected void Page_Load(object sender, EventArgs e)
         {
             FillGridView();
-            
+            FillGridView2();
         }
 
 
@@ -38,6 +38,22 @@ namespace BIOSproject
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
             Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
+        }
+        void FillGridView2()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("SSPNewRequestShow2", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview2.DataSource = dtbl;
+            Gridview2.DataBind();
+            Gridview2.UseAccessibleHeader = true;
+            Gridview2.HeaderRow.TableSection = TableRowSection.TableHeader;
+            Gridview2.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         protected void Gridview1_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,18 +278,20 @@ namespace BIOSproject
                 if (sqlCon2.State == ConnectionState.Closed)
                     sqlCon2.Open();
                 SqlCommand sqlCmd = new SqlCommand("CheckDuplicate2", sqlCon2);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandType = CommandType.StoredProcedure;   
                 sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
                 sqlCmd.Parameters.AddWithValue("@forHitCheck", "1");
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series has not been used.')", true);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series has not been used.')", true);
                 sqlCmd.ExecuteNonQuery();
                 sqlCon2.Close();
                 FillGridView();
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series is used by another PONumber!!')", true);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Duplicate Record','You clicked the button!', 'warning')", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('')", true);
             }
 
             sqlCon.Close();

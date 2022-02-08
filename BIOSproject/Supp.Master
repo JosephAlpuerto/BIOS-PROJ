@@ -132,11 +132,11 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Validate</span></a>
                 </li>--%>
-                <li class="nav-item active">
+                <%--<li class="nav-item active">
                     <a class="nav-link" href="MyRejectedRequestSupp.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>My Rejected Request</span></a>
-                </li>
+                </li>--%>
 
 
 
