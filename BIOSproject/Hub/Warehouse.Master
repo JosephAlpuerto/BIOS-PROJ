@@ -69,13 +69,13 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Validate</span></a>
                 </li>--%>
-                <li class="nav-item active">
-                    <a class="nav-link" href="Warehouselist.aspx">
+                <%--<li class="nav-item active">
+                    <a class="nav-link" href="Hub/Warehouselist.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Supplier Request List</span></a>
-                </li>
+                </li>--%>
                 <li class="nav-item active">
-                    <a class="nav-link" href="WarehouseProcessList.aspx">
+                    <a class="nav-link" href="../WarehouseProcessList.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Process list</span></a>
                 </li>

@@ -529,7 +529,7 @@ namespace BIOSproject
                 foreach (GridViewRow gr in gvlist.Rows)
                 {
                     string sqlquery = "insert into SSPNewRequest values (@TicketNo,@PONumber,@Supplier,@ProductQuantity,@TotalQuantity,@StartingSeries,@EndingSeries,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedBy,@DeletedDate,@IsActive,@CancelRequest," +
-                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName)";
+                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName,@link)";
                     SqlCommand sqlComm = new SqlCommand(sqlquery, Sqlconn);
                     sqlComm.Parameters.AddWithValue("@TicketNo", gr.Cells[0].Text);
                     sqlComm.Parameters.AddWithValue("@PONumber", gr.Cells[1].Text);
@@ -563,6 +563,7 @@ namespace BIOSproject
                     sqlComm.Parameters.AddWithValue("@Quantity", gr.Cells[4].Text);
                     sqlComm.Parameters.AddWithValue("@RequestNo", txtRequest.Text.Trim());
                     sqlComm.Parameters.AddWithValue("@SupplierName", gr.Cells[2].Text);
+                    sqlComm.Parameters.AddWithValue("@link", Convert.DBNull);
                     Sqlconn.Open();
                     sqlComm.ExecuteNonQuery();
                     Sqlconn.Close();
