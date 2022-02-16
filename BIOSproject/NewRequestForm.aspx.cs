@@ -505,7 +505,7 @@ namespace BIOSproject
 
                         mail.From = new MailAddress("lbcbios08@gmail.com");
                         mail.To.Add(txtEmail.Text);
-                        mail.Subject = "Request for Barcode Series" + "<br />" + txtEmail.Text + " PO# " + txtPONumber.Text;
+                        mail.Subject = "'FOR TESTING ONLY' Request for Barcode Series" + "<br />" + txtEmail.Text + " PO# " + txtPONumber.Text;
                         mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/>" +
                              "<br/><br/>Starting Series - Ending Series<br/><br/>" +
                             "Thanks,";
@@ -529,7 +529,7 @@ namespace BIOSproject
                 foreach (GridViewRow gr in gvlist.Rows)
                 {
                     string sqlquery = "insert into SSPNewRequest values (@TicketNo,@PONumber,@Supplier,@ProductQuantity,@TotalQuantity,@StartingSeries,@EndingSeries,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedBy,@DeletedDate,@IsActive,@CancelRequest," +
-                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName,@link)";
+                        "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName,@link,@ifSend)";
                     SqlCommand sqlComm = new SqlCommand(sqlquery, Sqlconn);
                     sqlComm.Parameters.AddWithValue("@TicketNo", gr.Cells[0].Text);
                     sqlComm.Parameters.AddWithValue("@PONumber", gr.Cells[1].Text);
@@ -564,6 +564,7 @@ namespace BIOSproject
                     sqlComm.Parameters.AddWithValue("@RequestNo", txtRequest.Text.Trim());
                     sqlComm.Parameters.AddWithValue("@SupplierName", gr.Cells[2].Text);
                     sqlComm.Parameters.AddWithValue("@link", Convert.DBNull);
+                    sqlComm.Parameters.AddWithValue("@ifSend", "0");
                     Sqlconn.Open();
                     sqlComm.ExecuteNonQuery();
                     Sqlconn.Close();
@@ -584,8 +585,7 @@ namespace BIOSproject
                     DDLQuantity.Items.Clear();
                     FillGridView();
                     FillGridView2();
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage",
-                    "alert('Add Request Successfully! ')", true);
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
                     conn.Close();
                     Response.Redirect(Request.Url.AbsoluteUri);
 

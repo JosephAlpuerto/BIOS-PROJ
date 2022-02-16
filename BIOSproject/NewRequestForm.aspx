@@ -11,7 +11,9 @@
             <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <script src="js/SA.js"></script>
 
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
        $(document).ready(function () {
            $("#TicketNo").keypress(function (e) {

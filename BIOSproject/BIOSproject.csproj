@@ -132,11 +132,18 @@
     <Content Include="css\Dashboard.css" />
     <Content Include="css\NewRequest.css" />
     <Content Include="css\sorcedb.css" />
+    <Content Include="css\SuppTaggingForm.css" />
     <Content Include="css\warehouseform.css" />
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
-    <Content Include="Hub\Warehouselist.aspx" />
+    <Content Include="SupplierTaggingForm.aspx" />
+    <Content Include="TextFile\100.txt" />
+    <Content Include="TextFile\200.txt" />
+    <Content Include="TextFile\300.txt" />
+    <Content Include="Warehouselist.aspx" />
+    <Content Include="js\SA.js" />
+    <Content Include="TextFile\Series.txt" />
     <Content Include="WarehouseProcesslist.aspx" />
     <Content Include="img\download.png" />
     <Content Include="img\EditIcon.png" />
@@ -1929,18 +1936,25 @@
     <Compile Include="Hub\ValidationForm.aspx.designer.cs">
       <DependentUpon>ValidationForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Hub\Warehouse.Master.cs">
+    <Compile Include="SupplierTaggingForm.aspx.cs">
+      <DependentUpon>SupplierTaggingForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupplierTaggingForm.aspx.designer.cs">
+      <DependentUpon>SupplierTaggingForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse.Master.cs">
       <DependentUpon>Warehouse.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Hub\Warehouse.Master.designer.cs">
+    <Compile Include="Warehouse.Master.designer.cs">
       <DependentUpon>Warehouse.Master</DependentUpon>
     </Compile>
-    <Compile Include="Hub\Warehouselist.aspx.cs">
+    <Compile Include="Warehouselist.aspx.cs">
       <DependentUpon>Warehouselist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Hub\Warehouselist.aspx.designer.cs">
+    <Compile Include="Warehouselist.aspx.designer.cs">
       <DependentUpon>Warehouselist.aspx</DependentUpon>
     </Compile>
     <Compile Include="WarehouseProcesslist.aspx.cs">
@@ -2163,6 +2177,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="_LBC_BIOSDataSetSuppPrint.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LBC_BIOSDataSetSuppPrint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_LBC_BIOSDataSetWarehouse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LBC_BIOSDataSetWarehouse.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_LBC_BIOSDataSetWarehousePrint.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_LBC_BIOSDataSetWarehousePrint2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint2.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MainMaster.Master" />
@@ -2204,7 +2238,7 @@
       <DependentUpon>DataSetAdmin.xsd</DependentUpon>
     </Content>
     <Content Include="Hub\Hub.Master" />
-    <Content Include="Hub\Warehouse.Master" />
+    <Content Include="Warehouse.Master" />
     <None Include="packages.config" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
@@ -2423,6 +2457,50 @@
     <Content Include="_LBC_BIOSDataSet.xss">
       <DependentUpon>_LBC_BIOSDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="_LBC_BIOSDataSetSuppPrint.xsc">
+      <DependentUpon>_LBC_BIOSDataSetSuppPrint.xsd</DependentUpon>
+    </Content>
+    <None Include="_LBC_BIOSDataSetSuppPrint.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_LBC_BIOSDataSetSuppPrint.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_LBC_BIOSDataSetSuppPrint.xss">
+      <DependentUpon>_LBC_BIOSDataSetSuppPrint.xsd</DependentUpon>
+    </Content>
+    <Content Include="_LBC_BIOSDataSetWarehousePrint.xsc">
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint.xsd</DependentUpon>
+    </Content>
+    <Content Include="_LBC_BIOSDataSetWarehouse.xsc">
+      <DependentUpon>_LBC_BIOSDataSetWarehouse.xsd</DependentUpon>
+    </Content>
+    <None Include="_LBC_BIOSDataSetWarehouse.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_LBC_BIOSDataSetWarehouse.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_LBC_BIOSDataSetWarehouse.xss">
+      <DependentUpon>_LBC_BIOSDataSetWarehouse.xsd</DependentUpon>
+    </Content>
+    <None Include="_LBC_BIOSDataSetWarehousePrint.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_LBC_BIOSDataSetWarehousePrint.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_LBC_BIOSDataSetWarehousePrint.xss">
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint.xsd</DependentUpon>
+    </Content>
+    <Content Include="_LBC_BIOSDataSetWarehousePrint2.xsc">
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint2.xsd</DependentUpon>
+    </Content>
+    <None Include="_LBC_BIOSDataSetWarehousePrint2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_LBC_BIOSDataSetWarehousePrint2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_LBC_BIOSDataSetWarehousePrint2.xss">
+      <DependentUpon>_LBC_BIOSDataSetWarehousePrint2.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectionDB\ConnectionDB.csproj">
@@ -2441,9 +2519,11 @@
     </Content>
     <EmbeddedResource Include="Report\ReportRequest.rdlc" />
     <EmbeddedResource Include="Report\ReportRequest2.rdlc" />
+    <EmbeddedResource Include="Report\ReportSuppPrint.rdlc" />
     <EmbeddedResource Include="Report\ReportUsers.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\ReportWarehousePrint.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -457,7 +457,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server"/>
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !" DataKeyNames="link">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !" DataKeyNames="link">
                                     <Columns>
                                         <%--<asp:TemplateField>
                                             <HeaderTemplate>
@@ -483,9 +483,16 @@
                                                            </ItemTemplate>
                                                        </asp:TemplateField>--%>
 
+                                                       <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
+
                                                        <%--<asp:TemplateField >
                                                            <ItemTemplate>
-                                                               <asp:Button ID="btnRequest" runat="server" Text="Destination" Enabled='<%# Eval("StartingSeries") != DBNull.Value %>' Visible='<%# Eval("forHitCheck").ToString() == "True" && Eval("IsActive").ToString() == "False" %>' CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
+                                                               <asp:Button ID="btnRequest" runat="server" Text="SEND" Enabled='<%# Eval("StartingSeries") != DBNull.Value %>' Visible='<%# Eval("forHitCheck").ToString() == "True" && Eval("IsActive").ToString() == "False" %>' CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                                <asp:Button ID="Button3" runat="server" Text="Destination" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
@@ -497,15 +504,6 @@
                                                                <asp:Button runat="server" Text="Disabled" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True" || Eval("IfDownload").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>--%>
-
-                                                       <asp:TemplateField>
-                                                           <ItemTemplate>
-
-                                                              <%-- <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>--%>
-                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
-                                                             
-                                                           </ItemTemplate>
-                                                       </asp:TemplateField>
 
                                     </Columns>
                                 </asp:GridView>
@@ -520,16 +518,16 @@
 
 
      <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                       <%-- <div class="card-header py-3">
+                   <%-- <div class="card shadow mb-4">
+                        <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"></h6>
-                        </div>--%>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="HiddenField2" runat="server"/>
-                                <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !" DataKeyNames="link">
+                                <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !" DataKeyNames="link">
                                     <Columns>
-                                        <%--<asp:TemplateField>
+                                        <asp:TemplateField>
                                             <HeaderTemplate>
                                                 <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"/>
                                                 <asp:LinkButton ID="HitCheck2" Visible="false" runat="server" CssClass="btn btn-primary btn-user btn-block" OnClick="HitCheck_Click1">HitCheck</asp:LinkButton>
@@ -537,7 +535,7 @@
                                             <ItemTemplate>
                                                  <asp:CheckBox ID="Check" runat="server" AutoPostBack="true" Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnCheckedChanged="Check_CheckedChanged"/>
                                             </ItemTemplate>
-                                        </asp:TemplateField>--%>
+                                        </asp:TemplateField>
                                         <asp:ButtonField DataTextField="ID" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
@@ -545,28 +543,28 @@
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
 
-                                                   <%--    <asp:TemplateField>
+                                                       <asp:TemplateField>
                                                            <ItemTemplate> 
                                                                <asp:LinkButton ID="HitCheck" runat="server" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnClick="HitCheck_Click">HitCheck</asp:LinkButton>
                                                                <asp:Button runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                                <asp:Button runat="server" Text="HitCheck" Enabled="false"  Visible='<%# Eval("StartingSeries") == DBNull.Value %>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
+                                                       </asp:TemplateField>
 
-                                                       <%--<asp:TemplateField >
+                                                       <asp:TemplateField >
                                                            <ItemTemplate>
                                                                <asp:Button ID="btnRequest" runat="server" Text="Destination" Enabled='<%# Eval("StartingSeries") != DBNull.Value %>' Visible='<%# Eval("forHitCheck").ToString() == "True" && Eval("IsActive").ToString() == "False" %>' CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-primary btn-user btn-block" OnClick="btnRequest_Click"/>
                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                                <asp:Button ID="Button3" runat="server" Text="Destination" Enabled="false"  Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
+                                                       </asp:TemplateField>
 
-                                                      <%--  <asp:TemplateField>
+                                                        <asp:TemplateField>
                                                            <ItemTemplate>
                                                                <asp:LinkButton ID="btnViewReject" runat="server" Text="Reject" CssClass="btn btn-primary btn-user btn-block"  CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsRejected").ToString() == "False" && Eval("IsActive").ToString() == "False" && Eval("IfDownload").ToString() == "False"%>' OnClick="btnViewReject_Click"/>
                                                                <asp:Button runat="server" Text="Disabled" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True" || Eval("IfDownload").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
+                                                       </asp:TemplateField>
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
@@ -582,7 +580,7 @@
 
                                 </div>
                             </div>
-                     </div>
+                     </div>--%>
 
 
 </asp:Content>

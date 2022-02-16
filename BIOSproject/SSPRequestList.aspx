@@ -5,26 +5,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script src="js/SA.js"></script>
 
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>    
-        function Hitcheck() {
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            )
-        }
-        function Hiterror() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
-            })
-        }
-    </script>
-
+   <script>
+       function submitForm() {
+           swal({
+               title: "Are you sure?",
+               text: "you want to reject this request!",
+               icon: "success",
+           })
+               .then(function (isOkay) {
+                   if (isOkay) {
+                       form.submit();
+                   }
+               });
+           return false;
+       }
+   </script>
 
 
      <div id="wrapper">
@@ -242,6 +240,18 @@
                });
            </script>
 
+               <script type="text/javascript">
+                   function changeState() {
+                       var val = document.getElementById('txtForHitCheck').value;
+                       if (val.text == 'True') {
+                           document.getElementById('btnSend').disabled = '';
+                       }
+                       else {
+                           document.getElementById('btnSend').disabled = 'disabled';
+                       }
+                   }
+               </script>
+
                        
                              
         <div class="card o-hidden border-0 shadow-lg my-2">
@@ -260,9 +270,11 @@
                     
                     <div class="col-lg-10">
                         <div class="p-5">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
+                            <%--<asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>--%>
                              <div class="form3">
                              <asp:HiddenField ID="hfId" runat="server" />
+                             <asp:TextBox ID="txtForHitCheck" runat="server" Visible="false"></asp:TextBox>
+                             <asp:TextBox ID="txtifSend" runat="server" Visible="false"></asp:TextBox>
                              <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
                              <asp:Label ID="lblSuccess" runat="server" ForeColor="Green"></asp:Label>
                   
@@ -272,7 +284,7 @@
                     <asp:Label ID="Label8" runat="server" Text="Ticket No." CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtTicketNoView" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
-                                 <div class="input_field1">
+                                 <div class="input_field1"> 
 
                     <asp:Label ID="Label2" runat="server" Text="Request ID" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtRequestIDView" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
@@ -314,12 +326,14 @@
                 </div>
                 <div class="input_field1">
                     <%--<asp:Button ID="btnUpdateView" runat="server" Text="Update" CssClass="btn btn-primary btn-user btn-block" OnClick="btnUpdateView_Click" />--%>
-                <asp:Button ID="btnCancelRequest" runat="server" Text="CancelRequest" CssClass="btn btn-primary btn-user btn-block" OnClick="btnCancelRequest_Click" />
+                <asp:Button ID="btnCancelRequest" runat="server" Text="REJECT REQUEST" CssClass="btn btn-primary btn-user btn-block" OnClick="btnCancelRequest_Click" />
+                    <asp:Button ID="btnSend" runat="server" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSend_Click"/>
                     </div> 
+                  
 
                                     
         </div>
-                           </ContentTemplate></asp:UpdatePanel>        
+                           <%--</ContentTemplate></asp:UpdatePanel>--%> 
         </div>
    </div>
 </div>
@@ -355,7 +369,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
@@ -377,8 +391,8 @@
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
 
-                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
-                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ifSend").ToString() == "False"%>' OnClick="btnView_Click"/>
+                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("ifSend").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
                                                            </ItemTemplate>
                                                        </asp:TemplateField>       
                                     </Columns>
@@ -399,7 +413,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="HiddenField1" runat="server" />
-                                <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
+                                <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered dataTable2" ShowHeaderWhenEmpty="true" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
@@ -420,8 +434,8 @@
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
 
-                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("IsActive").ToString() == "False"%>' OnClick="btnView_Click"/>
-                                                                <asp:Button ID="Button1" runat="server" Text="DONE" Enabled="false"  Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
+                                                               <asp:LinkButton ID="btnView" runat="server" Text="View" CssClass="btn btn-primary btn-user btn-block" CommandArgument='<%# Eval("Id") %>'  OnClick="btnView_Click"/>
+                                                               <%-- <asp:Button ID="Button1" runat="server" Text=" " Enabled="false"  Visible='<%# Eval("ifSend").ToString() == "True"%>' CssClass="btn btn-user btn-block" />--%>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>       
                                     </Columns>

@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace BIOSproject
 {
@@ -37,7 +38,6 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
         void FillGridView2()
         {
@@ -53,7 +53,7 @@ namespace BIOSproject
             Gridview2.DataBind();
             Gridview2.UseAccessibleHeader = true;
             Gridview2.HeaderRow.TableSection = TableRowSection.TableHeader;
-            Gridview2.FooterRow.TableSection = TableRowSection.TableFooter;
+           
         }
 
         protected void Gridview1_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,6 +121,22 @@ namespace BIOSproject
             txtSupplierView.Text = dtbl.Rows[0]["Supplier"].ToString();
             txtProductView.Text = dtbl.Rows[0]["ProductQuantity"].ToString();
             txtQuantityView.Text = dtbl.Rows[0]["TotalQuantity"].ToString();
+            txtForHitCheck.Text = dtbl.Rows[0]["forHitCheck"].ToString();
+            txtifSend.Text = dtbl.Rows[0]["ifSend"].ToString();
+
+            btnSend.Enabled = false;
+            btnSend.Text = "SEND";
+            if (txtForHitCheck.Text.Trim().ToLower() == "true" )
+            {
+                btnSend.Enabled = true;
+                if (txtifSend.Text.Trim().ToLower() == "true")
+                {
+                    btnCancelRequest.Enabled = false;
+                    btnSend.Enabled = false;
+                    btnSend.Text = "DONE";
+                }
+            }
+
             ModalView.Show();
             FillGridView();
         }
@@ -160,6 +176,7 @@ namespace BIOSproject
             {
                 Clear();
                 FillGridView();
+                FillGridView2();
                 lblSuccess.Text = "Updated Successfully!";
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
@@ -182,6 +199,7 @@ namespace BIOSproject
 
         protected void btnCancelRequest_Click(object sender, EventArgs e)
         {
+            //ClientScript.RegisterClientScriptBlock(this.GetType(),"randomtext", "submitForm()", true);
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
@@ -191,13 +209,15 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@DeletedBy", Session["Username"].ToString());
             sqlCmd.Parameters.AddWithValue("@DeletedDate", DateTimeOffset.UtcNow);
             sqlCmd.Parameters.AddWithValue("@CancelRequest", "1");
+
+            Clear();
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','you have successfully rejected the request!', 'success')", true);
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
-            Clear();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Cancel Request Successfully!')", true);
             ModalView.Hide();
             FillGridView();
-            Response.Redirect(Request.Url.AbsoluteUri);
+            FillGridView2();
+            //Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         //protected void hitCheckClose_Click(object sender, EventArgs e)
@@ -270,6 +290,7 @@ namespace BIOSproject
             sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", commandArguments[1]);
             sqlData.SelectCommand.Parameters.AddWithValue("@EndingSeries", commandArguments[2]);
             FillGridView();
+            FillGridView2();
 
             SqlDataReader sdr = sqlData.SelectCommand.ExecuteReader();
             if (sdr.Read())
@@ -287,6 +308,7 @@ namespace BIOSproject
                 sqlCmd.ExecuteNonQuery();
                 sqlCon2.Close();
                 FillGridView();
+                FillGridView2();
             }
             else
             {
@@ -295,6 +317,57 @@ namespace BIOSproject
             }
 
             sqlCon.Close();
+        }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("SendRequestSSP", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
+            sqlCmd.Parameters.AddWithValue("@ifSend", "1");
+
+            Clear();
+            
+            string Id = hfId.Value;
+            if (Id == "")
+            {
+                using (MailMessage mail = new MailMessage())
+                {
+
+
+
+                    mail.From = new MailAddress("lbcbios08@gmail.com");
+                    mail.To.Add(txtSupplierView.Text);
+                    mail.Subject = "Sent of Request By: " + Session["Username"].ToString() + " PO# " + txtPONumberView.Text + " " + txtRequestIDView.Text;
+                    mail.Body = "BARCODE SERIES REQUEST. <hr>BIOS TICKET NO:</hr> " + txtTicketNoView.Text + "<hr>PONumber:</hr>"
+                        + txtPONumberView.Text + "<hr> Request NO.: </hr>" + txtRequestIDView.Text + "<hr> Product: </hr>" + txtProductView.Text + "<hr>Quantity:</hr>" + txtQuantityView.Text +
+                        "<hr>Starting Series:</hr>" + txtStartingSeriesView.Text + "<hr>Ending Series:</hr>" + txtEndingSeriesView.Text +
+                         "<hr> Supplier: </hr>" + txtSupplierView.Text +  "<br/><br/>Thanks,";
+                    mail.IsBodyHtml = true;
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+
+
+                }
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','you have successfully sent request to supplier!', 'success')", true);
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+                ModalView.Hide();
+                FillGridView();
+                FillGridView2();
+            }
+            else
+            {
+                lblSuccess.Text = "Please Cornfirm your Details!";
+            }
         }
     }
 }

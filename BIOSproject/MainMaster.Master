@@ -17,23 +17,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet"/>--%>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/SA.js"></script>
+
 <%--    <script src="js/sweetAlert.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>--%>
-    <script>    
-        function Hitcheck() {
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            )
-        }
-        function Hiterror() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
+    <script>
+        function submitForm() {
+            swal({
+                title: "Are you sure?",
+                text: "you want to reject this request!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
+                .then(function (isOkay) {
+                    if (isOkay) {
+                        form.submit();
+                    }
+                });
+            return false;
         }
     </script>
     <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />

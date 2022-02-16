@@ -6,14 +6,46 @@
     flex-wrap: wrap;
 }
 
+
     .big .container1 {
         width: 350px;
-        margin-left: 10px;
         background: white;
+        border-color: lightgrey;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        border-radius: 25px;
     }
+        .big .container1 .input_field1 {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
     .big .container {
         width: 700px;
         background: white;
+        border-color: lightgrey;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        border-radius: 25px;
+    }
+    .big .container2 {
+        width: 500px;
+        margin-left: 10px;
+        background: white;
+        border-color: lightgrey;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        border-radius: 25px;
+    }
+        .big .container2 .input_field1 {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+    .big .container2 #header{
+        width: 500px;
     }
 
     .big .container1 .forms {

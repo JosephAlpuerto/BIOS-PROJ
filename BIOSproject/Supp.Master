@@ -26,8 +26,10 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/BIssuer.css" rel="stylesheet" />
     <link href="css/Dashboard.css" rel="stylesheet" />
-
-
+    <link href="../css/SuppTaggingForm.css" rel="stylesheet" />
+    <script src="js/SA.js"></script>
+    <script src="js/jquery.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -125,6 +127,11 @@
                     <a class="nav-link" href="AllSupplierRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>All SSP Requested</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="SupplierTaggingForm.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Tagging Form</span></a>
                 </li>
 
                 <%--<li class="nav-item active">

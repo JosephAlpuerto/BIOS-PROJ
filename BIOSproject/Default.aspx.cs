@@ -69,7 +69,7 @@ namespace BIOSproject
                             if (roleType == "Warehouse")
                             {
                                 Session["Username"] = txtUsername.Text.ToString();
-                                Response.Redirect("~/Hub/Warehouselist.aspx");
+                                Response.Redirect("Warehouselist.aspx");
                             }
                         }
  
