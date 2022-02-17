@@ -137,6 +137,7 @@
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
+    <Content Include="sample1.aspx" />
     <Content Include="SupplierTaggingForm.aspx" />
     <Content Include="TextFile\100.txt" />
     <Content Include="TextFile\200.txt" />
@@ -1935,6 +1936,13 @@
     </Compile>
     <Compile Include="Hub\ValidationForm.aspx.designer.cs">
       <DependentUpon>ValidationForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sample1.aspx.cs">
+      <DependentUpon>sample1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sample1.aspx.designer.cs">
+      <DependentUpon>sample1.aspx</DependentUpon>
     </Compile>
     <Compile Include="SupplierTaggingForm.aspx.cs">
       <DependentUpon>SupplierTaggingForm.aspx</DependentUpon>
