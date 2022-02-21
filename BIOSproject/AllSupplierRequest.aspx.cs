@@ -184,7 +184,7 @@ namespace BIOSproject
 
                     mail.From = new MailAddress("lbcbios08@gmail.com");
                     mail.To.Add(hfSourcing1.Value);
-                    mail.Subject = "Rejected of Request By: " + hfSupplier1.Value + " PO# " + txtPONo1.Text + " " + txtRequestID1.Text;
+                    mail.Subject = "'FOR TESTING' Rejected of Request By: " + hfSupplier1.Value + " PO# " + txtPONo1.Text + " " + txtRequestID1.Text;
                     mail.Body = "This PONumber have duplicate series of barcodes <hr>Ticket#:</hr> " + txtTicketNo1.Text + "<hr>PONumber:</hr>"
                         + txtPONo1.Text + "<hr> Request NO.: </hr>" + txtRequestID1.Text + "<hr> Product: </hr>" + hfProduct1.Value + "<hr>Quantity:</hr>" + hfQuantity1.Value +
                         "<hr>Starting Series:</hr>" + hfStart1.Value + "<hr>Ending Series:</hr>" + hfEnd1.Value +
@@ -300,102 +300,48 @@ namespace BIOSproject
             con.Close();
         }
 
+        public IEnumerable<int> Generate(int start, int end)
+        {
+            int begin = start;
+            while (begin <= end)
+            {
+                yield return begin;
+                begin++;
+            }
+        }
         protected void DownloadView_Click(object sender, EventArgs e)
         {
-            LinkButton linkdownload = sender as LinkButton;
-            GridViewRow gridrow = linkdownload.NamingContainer as GridViewRow;
-            string downloadfile = Gridview1.DataKeys[gridrow.RowIndex].Value.ToString();
-            Response.ContentType = "Text/txt";
-            Response.AddHeader("Content-Disposition", "attachment;filename=\"" + downloadfile + "\"");
-            Response.TransmitFile(Server.MapPath(downloadfile));
-            Response.End();
-            //int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
-            //SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            //if (sqlCon.State == ConnectionState.Closed)
-            //    sqlCon.Open();
-            //SqlDataAdapter sqlData = new SqlDataAdapter("ViewtoDownload", sqlCon);
-            //sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
-            //DataTable dtbl = new DataTable();
-            //sqlData.Fill(dtbl);
-            //sqlCon.Close();
-            //txtId.Text = Id.ToString();
-            //hfTicketNo.Value = dtbl.Rows[0]["TicketNo"].ToString();
-            //hfPONumber.Value = dtbl.Rows[0]["PONumber"].ToString();
-            //hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
-            //hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
-            //hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
-            //hfProduct.Value = dtbl.Rows[0]["ProductQuantity"].ToString();
-            //hfQuantity.Value = dtbl.Rows[0]["TotalQuantity"].ToString();
-            //ModalDownloadView.Show();
-            //FillGridView();
+            try
+            {
+                int start = int.Parse(txtStartScan.Text);
+                int end = int.Parse(txtEndScan.Text);
+
+                string series = "";
+                for (int i = start; i <= end; i++)
+                {
+                    series += i.ToString() + System.Environment.NewLine;
+                }
+
+
+                string text = Convert.ToString(series);
+                Response.Clear();
+                Response.ClearHeaders();
+                Response.AddHeader("Content-Length", text.Length.ToString());
+                Response.ContentType = "text/plain";
+                Response.AppendHeader("content-disposition", "attachment;filename=\"" + lblID.Text + ".txt\"");
+                Response.Write(text);
+                Response.End();
+                FillGridView();
+            }
+            catch (Exception ex) { }
+
+           
+
         }
 
-        //protected void Download_Click(object sender, EventArgs e)
-        //{
-        //    SqlConnection sqlCon = new SqlConnection(ConnectionString);
-        //    if (sqlCon.State == ConnectionState.Closed)
-        //        sqlCon.Open();
-        //    SqlCommand sqlCmd = new SqlCommand("DownloadbySupp", sqlCon);
-        //    sqlCmd.CommandType = CommandType.StoredProcedure;
-        //    sqlCmd.Parameters.AddWithValue("@ID", txtId.Text);
-        //    sqlCmd.Parameters.AddWithValue("@IfDownload", "1");
-        //    sqlCmd.ExecuteNonQuery();
-        //    sqlCon.Close();
-        //    Clear();
-        //    FillGridView();
-        //    try
-        //    {
-        //        LinkButton linkdownload = sender as LinkButton;
-        //        GridViewRow gridrow = linkdownload.NamingContainer as GridViewRow;
-        //        string downloadfile = Gridview1.DataKeys[gridrow.RowIndex].Value.ToString();
-        //        Response.ContentType = "Text/txt";
-        //        Response.AddHeader("Content-Disposition", "attachment;filename=\"" + downloadfile + "\"");
-        //        Response.TransmitFile(Server.MapPath(downloadfile));
-        //        Response.End();
+    
 
-
-
-
-        //        string Id = txtId.Text;
-        //        string TicketNo = hfTicketNo.Value;
-        //        string PONumber = hfPONumber.Value;
-        //        string StartingSeries = hfStartingSeries.Value;
-        //        string EndingSeries = hfEndingSeries.Value;
-        //        string Supplier = hfSupplier.Value;
-        //        string Product = hfProduct.Value;
-        //        string Quantity = hfQuantity.Value;
-        //        Response.Clear();
-        //        Response.ClearHeaders();
-        //        Response.AddHeader("Content-Length", Id.Length.ToString());
-        //        Response.AddHeader("Content-Length", TicketNo.Length.ToString());
-        //        Response.AddHeader("Content-Length", PONumber.Length.ToString());
-        //        Response.AddHeader("Content-Length", StartingSeries.Length.ToString());
-        //        Response.AddHeader("Content-Length", EndingSeries.Length.ToString());
-        //        Response.AddHeader("Content-Length", Supplier.Length.ToString());
-        //        Response.AddHeader("Content-Length", Product.Length.ToString());
-        //        Response.AddHeader("Content-Length", Quantity.Length.ToString());
-        //        Response.ContentType = "text/plain";
-        //        Response.AppendHeader("content-disposition", "attachment;filename=\"" + txtId.Text + ".txt\"");
-        //        Response.Write("RequestID: " + Id + " \r \n");
-        //        Response.Write("Ticket Number: " + TicketNo + " \r \n");
-        //        Response.Write("PO Number: " + PONumber + " \r \n");
-        //        Response.Write("Starting Series: " + StartingSeries + " \r \n");
-        //        Response.Write("Ending Series: " + EndingSeries + " \r \n");
-        //        Response.Write("Supplier Name: " + Supplier + " \r \n");
-        //        Response.Write("Product Name: " + Product + " \r \n");
-        //        Response.Write("Quantity: " + Quantity);
-        //        Response.End();
-        //        FillGridView();
-        //        Response.Redirect(Request.Url.AbsoluteUri);
-        //    }
-        //    catch (Exception ex) { }
-            
-            
-
-        //}
-
-        protected void HitCheck_Click(object sender, EventArgs e)
+            protected void HitCheck_Click(object sender, EventArgs e)
         {
             LinkButton HitCheck = (sender as LinkButton);
             string[] commandArguments = HitCheck.CommandArgument.Split(',');
@@ -710,6 +656,153 @@ namespace BIOSproject
                 //Response.Redirect(Request.Url.AbsoluteUri);
             //}
             //catch (Exception ex) { }
+        }
+
+        protected void ScanSupplier_Click(object sender, EventArgs e)
+        {
+            LinkButton HitCheck = (sender as LinkButton);
+            string[] commandArguments = HitCheck.CommandArgument.Split(',');
+
+            SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
+            if (sqlCon3.State == ConnectionState.Closed)
+                sqlCon3.Open();
+            SqlDataAdapter sqlData3 = new SqlDataAdapter("ViewAllByIdSSPRequest", sqlCon3);
+            sqlData3.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData3.SelectCommand.Parameters.AddWithValue("@Id", commandArguments[0]);
+
+            DataTable dtbl = new DataTable();
+            sqlData3.Fill(dtbl);
+            sqlCon3.Close();
+            hfIdScan.Value = commandArguments[0];
+            lblID.Text = commandArguments[0];
+            hfIdHIT.Value = commandArguments[0];
+            txtStartScan.Text = dtbl.Rows[0]["StartingSeries"].ToString();
+            hfEnd.Value = dtbl.Rows[0]["EndingSeries"].ToString();
+
+            lblUnits.Text = "0";
+            lblseries.Text = "0";
+            txtSeries.Text = "";
+            Hitcheck();
+            if (hfIdHIT.Value == "")
+            {
+                ModalScanSupplier.Show();
+            }
+
+
+        }
+        public void adding()
+        {
+            lblUnits.Text = "0";
+            lblseries.Text = "0";
+            double start, end, answer;
+            double.TryParse(txtStartScan.Text, out start);
+            double.TryParse(txtEndScan.Text, out end);
+
+
+            answer = end - start + 1;
+            if (answer > 0 && txtStartScan.Text != "" && txtEndScan.Text != "")
+                lblUnits.Text = answer.ToString();
+                lblseries.Text = answer.ToString();
+        }
+        public void Hitcheck()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("CheckDuplicate", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", hfIdScan.Value);
+            sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", txtStartScan.Text);
+            sqlData.SelectCommand.Parameters.AddWithValue("@EndingSeries", hfEnd.Value);
+
+            SqlDataReader sdr = sqlData.SelectCommand.ExecuteReader();
+            if (sdr.Read())
+            {
+                SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+                if (sqlCon2.State == ConnectionState.Closed)
+                    sqlCon2.Open();
+                SqlCommand sqlCmd = new SqlCommand("CheckDuplicate2", sqlCon2);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@Id", hfIdScan.Value);
+                sqlCmd.Parameters.AddWithValue("@forHitCheck", "1");
+
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Hitcheck()", true);
+                //ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
+                hfIdHIT.Value = "";
+                sqlCmd.ExecuteNonQuery();
+                sqlCon2.Close();
+
+            }
+
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Duplicate Record','You clicked the button!', 'warning')", true);
+            }
+
+            sqlCon.Close();
+
+        }
+
+        protected void btnCheck_Click(object sender, EventArgs e)
+        {
+          
+            SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
+            sqlCon3.Open();
+            if (txtStartScan.Text != "")
+            {
+                SqlCommand cmd = new SqlCommand("Select EndingSeries, ProductQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and ID = @ID", sqlCon3);
+                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartScan.Text));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+                cmd.Parameters.AddWithValue("@ID", hfIdScan.Value);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtEndScan.Text = dr.GetValue(0).ToString();
+                    txtProduct.Text = dr.GetValue(1).ToString();
+                    lblUnits.ForeColor = System.Drawing.Color.Blue;
+                    lblseries.ForeColor = System.Drawing.Color.Blue;
+
+                    if (txtStartScan.Text != "" && txtEndScan.Text != "")
+                    {
+                        int start = int.Parse(txtStartScan.Text);
+                        int end = int.Parse(txtEndScan.Text);
+
+                        string series = "";
+                        for (int i = start; i <= end; i++)
+                        {
+                            series += i.ToString() + System.Environment.NewLine;
+
+                        }
+                        string text = Convert.ToString(series);
+                        txtSeries.Text = text;
+                        DownloadView.Visible = true;
+
+                    }
+                    else
+                    {
+                        txtSeries.Text = "No Record!";
+                    }
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                    txtEndScan.Text = "";
+                    txtProduct.Text = "";
+                    lblUnits.ForeColor = System.Drawing.Color.Red;
+                }
+                sqlCon3.Close();
+            }
+            adding();
+        }
+
+        protected void btnCloseScanSupplier_Click(object sender, EventArgs e)
+        {
+            txtEndScan.Text = "";
+            txtProduct.Text = "";
+            lblUnits.ForeColor = System.Drawing.Color.Red;
+            DownloadView.Visible = false;
+            ModalScanSupplier.Hide();
         }
 
 

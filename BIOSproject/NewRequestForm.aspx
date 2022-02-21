@@ -111,6 +111,7 @@
                     <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
              
                     <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
+                        <asp:ListItem Selected="True" Text="-- SELECT --"></asp:ListItem>
                 </asp:DropDownList>
                   <%--  <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" CssClass="drop1" Width="300px" >
                 </asp:DropDownList>--%>

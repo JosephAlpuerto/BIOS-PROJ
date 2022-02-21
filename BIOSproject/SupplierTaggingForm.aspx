@@ -194,7 +194,7 @@
 
 
         <ajaxtoolkit:modalpopupextender ID="ModalScan" PopupControlID="PanelScan" TargetControlID="gvModal" CancelControlID="btnCloseScan" runat="server"></ajaxtoolkit:modalpopupextender>
-       <asp:Panel ID="PanelScan" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
+       <asp:Panel ID="PanelScan" runat="server" TabIndex="1" CssClass="Modal">
  
            <div id="Div2" runat="server" style="max-height: 500px; overflow: auto;">
           

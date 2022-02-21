@@ -48,10 +48,10 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <%--<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">--%>
     <link href="css/Validate.css" rel="stylesheet" />
     <link href="css/Dashboard.css" rel="stylesheet" />
-    
+    <link href="css/ViewSeries.css" rel="stylesheet" />
     <%--<script>
         $(document).ready(function () {
             $("#9").keypress(function (e) {
@@ -302,11 +302,11 @@
                         <span>Request</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <%--<li class="nav-item active">
                     <a class="nav-link" href="sample1.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>sample</span></a>
-                </li>
+                </li>--%>
                 <%--<li class="nav-item active">
                     <a class="nav-link" href="RejectedBySupplierlist.aspx">
                         <i class="fas fa-fw fa-folder"></i>

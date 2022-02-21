@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" width="100%" AutoGenerateColumns="False" >
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" width="100%" AutoGenerateColumns="False" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />

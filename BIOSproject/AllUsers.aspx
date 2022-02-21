@@ -473,7 +473,7 @@
                             <div class="table-responsive">
 
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" ShowFooter="True" EmptyDataText="No Records !">
+                                <asp:GridView runat="server" ID="gvList1" CssClass="table table-bordered" width="100%" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Users ID" />
                                         <asp:ButtonField DataTextField="Username" HeaderText="Username" />

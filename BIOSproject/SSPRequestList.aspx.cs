@@ -17,6 +17,8 @@ namespace BIOSproject
         String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             FillGridView();
@@ -55,6 +57,7 @@ namespace BIOSproject
             Gridview2.HeaderRow.TableSection = TableRowSection.TableHeader;
            
         }
+
 
         protected void Gridview1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -96,10 +99,32 @@ namespace BIOSproject
             TxtSearchSeries.Text =  "";
             //TxtStart.Text = TxtEnd.Text = "";
         }
+        public void adding()
+        {
+            txtQuantityView.Text = "0";
+            double start, end, answer;
+            double.TryParse(txtStartingSeriesView.Text, out start);
+            double.TryParse(txtEndingSeriesView.Text, out end);
 
+            if (txtStartingSeriesView.Text != "" && txtEndingSeriesView.Text != "")
+            {
+                answer = end - start + 1;
+                if (answer > 0 && txtStartingSeriesView.Text != "" && txtEndingSeriesView.Text != "")
+                    txtQuantityView.Text = answer.ToString();
+                lblseries.Text = answer.ToString();
+                DownloadSeries.Enabled = true;
+            }
+            else
+            {
+                lblseries.Text = 0.ToString();
+                txtQuantityView.Text = 0.ToString();
+            }
+            
+        }
 
         protected void btnView_Click(object sender, EventArgs e)
         {
+
             int Id = Convert.ToInt32((sender as LinkButton).CommandArgument);
 
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
@@ -120,7 +145,6 @@ namespace BIOSproject
             txtEndingSeriesView.Text = dtbl.Rows[0]["EndingSeries"].ToString();
             txtSupplierView.Text = dtbl.Rows[0]["Supplier"].ToString();
             txtProductView.Text = dtbl.Rows[0]["ProductQuantity"].ToString();
-            txtQuantityView.Text = dtbl.Rows[0]["TotalQuantity"].ToString();
             txtForHitCheck.Text = dtbl.Rows[0]["forHitCheck"].ToString();
             txtifSend.Text = dtbl.Rows[0]["ifSend"].ToString();
 
@@ -133,12 +157,35 @@ namespace BIOSproject
                 {
                     btnCancelRequest.Enabled = false;
                     btnSend.Enabled = false;
+                    
                     btnSend.Text = "DONE";
                 }
             }
+            if (txtStartingSeriesView.Text != "" && txtEndingSeriesView.Text != "")
+            {
+                int start = int.Parse(txtStartingSeriesView.Text);
+                int end = int.Parse(txtEndingSeriesView.Text);
 
-            ModalView.Show();
+                string series = "";
+                for (int i = start; i <= end; i++)
+                {
+                    series += i.ToString() + System.Environment.NewLine;
+                    
+                }
+                string text = Convert.ToString(series);
+                txtSeries.Text = text;
+                DownloadSeries.Enabled = true;
+            }
+            else
+            {
+                txtSeries.Text = "No Record!";
+            }
+            
+            adding();
             FillGridView();
+            FillGridView2();
+            ModalViewSeries.Show();
+
         }
 
         protected void btnUpdateView_Click(object sender, EventArgs e)
@@ -194,6 +241,12 @@ namespace BIOSproject
 
         protected void btnCloseView_Click1(object sender, EventArgs e)
         {
+            FillGridView();
+            FillGridView2();
+            txtifSend.Text = "";
+            txtForHitCheck.Text = "";
+            hfId.Value = "";
+            ModalViewSeries.Hide();
             Response.Redirect(Request.Url.AbsoluteUri);
         }
 
@@ -367,6 +420,54 @@ namespace BIOSproject
             else
             {
                 lblSuccess.Text = "Please Cornfirm your Details!";
+            }
+        }
+
+        protected void DownloadView_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                int start = int.Parse(txtStartingSeriesView.Text);
+                int end = int.Parse(txtEndingSeriesView.Text);
+
+                string series = "";
+                for (int i = start; i <= end; i++)
+                {
+                    series += i.ToString() + System.Environment.NewLine;
+                }
+
+
+                string text = Convert.ToString(series);
+                Response.Clear();
+                Response.ClearHeaders();
+                Response.AddHeader("Content-Length", text.Length.ToString());
+                Response.ContentType = "text/plain";
+                Response.AppendHeader("content-disposition", "attachment;filename=\"" + hfId.Value + ".txt\"");
+                Response.Write(text);
+                Response.End();
+                FillGridView();
+
+
+
+            }
+            catch (Exception ex) { }
+        }
+
+
+        protected void Gridview2_RowDataBound1(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var forhitcheck = ((System.Web.UI.WebControls.Label)e.Row.FindControl("WHcheck")).Text;
+                var ifSend = ((System.Web.UI.WebControls.Label)e.Row.FindControl("ifSend")).Text;
+                string tf = Convert.ToString(forhitcheck);
+                string sd = Convert.ToString(ifSend);
+                if (tf.Trim().ToLower() == "true" || sd.Trim().ToLower() == "true")
+                {
+                    e.Row.BackColor = System.Drawing.Color.LightGreen;
+                    e.Row.ForeColor = System.Drawing.Color.Black;
+                }
             }
         }
     }

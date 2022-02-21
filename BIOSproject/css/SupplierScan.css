@@ -1,0 +1,60 @@
+﻿.container2 {
+    width:max-content;
+    background: white;
+    border-color: lightgrey;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    border-radius: 25px;
+}
+.container3 {
+    width: max-content;
+    background: white;
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+    .container3 .forms {
+        padding: 20px;
+        border-color: lightgrey;
+        border: 1px solid;
+        border-radius: 20px;
+    }
+    .container3 .forms .input_field1 {
+        padding: 5px;
+    }
+    .container3 .forms .input_field1 .labelend{
+        padding-right: 8px;
+    }
+    .container3 .formsSeries {
+        width: 230px;
+        height: 100%;
+        background: white;
+        border-color: lightgrey;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        border-left: 1px solid;
+        border-top: 1px solid;
+        border-radius: 25px;
+        margin-left: 20px;
+        padding: 20px;
+    }
+
+
+    .container3 .formsSeries .input_field1 .input1 {
+        resize: none !important;
+        height: 200px !important;
+    }
+/*.container2 .input_field2{
+    margin-left: 580px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+.container2 .input_field2 .btn {
+    width: 100px !important;
+}*/
+
+.my-swal {
+    z-index: 100000;
+}

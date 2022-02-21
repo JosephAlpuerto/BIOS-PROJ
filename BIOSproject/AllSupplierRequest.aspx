@@ -446,7 +446,78 @@
            </asp:Panel>
 
 
+     <ajaxtoolkit:modalpopupextender ID="ModalScanSupplier" PopupControlID="PanelScanSupplier" TargetControlID="gvModal" PopupDragHandleControlID="header" runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelScanSupplier" runat="server" CssClass="Modal" Height="500px">
+ 
+           <div id="Div2" runat="server" style="max-height: 500px; overflow: auto;">
+          
+           <div class="container2"> 
+               <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
+                    <div id="header" class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <asp:LinkButton runat="server" id="btnCloseScanSupplier" Text="x" OnClick="btnCloseScanSupplier_Click" class="close" type="button" data-dismiss="modal" aria-label="Close"/>
+                        
 
+                    </div>
+               <div class="container3">
+    
+                            <div class="forms">
+                                <asp:HiddenField ID="hfStart" runat="server" />
+                                <asp:HiddenField ID="hfEnd" runat="server" />
+                                <asp:HiddenField ID="hfIdScan" runat="server" />
+                                <asp:HiddenField ID="hfIdHIT" runat="server" />
+                <div class="input_field1">
+                    <asp:Label ID="Label1" runat="server" Text="Request No:" CssClass="label"></asp:Label>
+                    <asp:Label ID="lblID" runat="server" CssClass="label" ForeColor="Blue"></asp:Label>
+                </div>
+                <div class="input_field1">
+                    <asp:Label ID="Label17" runat="server" Text="StartingSeries:" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtStartScan" runat="server" Enabled="false" CssClass="input1" AutoPostBack="true"  Width="315px"></asp:TextBox>
+                </div>
+
+                <div class="input_field1">
+                    <asp:Label ID="LabelEnd" runat="server" Text="EndingSeries:" CssClass="labelend"></asp:Label>
+                    <asp:TextBox ID="txtEndScan" runat="server" CssClass="input1" Enabled="false" AutoPostBack="true" Width="315px"></asp:TextBox>
+                </div>
+            <div class="input_field1">
+                    <asp:Label ID="Label19" runat="server" Text="No. Of Units:" CssClass="label"></asp:Label>
+                    <asp:Label ID="lblUnits" runat="server" CssClass="input1" ForeColor="Red"></asp:Label>
+                </div>
+                 <div class="input_field1">
+                   <%-- <label>Product</label>--%>
+                    <asp:Label ID="Label20" runat="server" Text="Product:" CssClass="label"></asp:Label>
+                     <asp:TextBox ID="txtProduct" runat="server"  Enabled="false" CssClass="input1" Width="315px"></asp:TextBox>
+                </div>
+
+                <div class="input_field1">
+                    <asp:Button ID="btnCheck" runat="server" Text="CHECK" CssClass="btn btn-primary btn-user btn-block" OnClick="btnCheck_Click"/>
+                </div>
+                                </div>
+
+               <div class="formsSeries">
+                    <div class="input_field1">
+                        <asp:Label ID="Label3" runat="server" CssClass="label" Text="Series Quantity:"></asp:Label>
+                        <asp:Label ID="lblseries" runat="server" CssClass="label" ForeColor="Red"></asp:Label>
+                    </div>
+                    <div class="input_field1">
+                        <asp:TextBox ID="txtSeries" runat="server" CssClass="input1" Enabled="false" TextMode="MultiLine"></asp:TextBox>
+                    </div>
+                   <div class="input_field1">
+                       <asp:Button ID="DownloadView" runat="server" Text="Download" Visible="false"  OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"/>
+                    </div>
+
+              </div>
+                    </div>
+                    
+                   </ContentTemplate>
+                   <Triggers>
+                            <asp:PostBackTrigger ControlID="DownloadView" />
+                    </Triggers>
+               </asp:UpdatePanel>
+
+            </div>
+               </div>
+        </asp:Panel>
 
 
     <!-- DataTales Example -->
@@ -457,6 +528,10 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server"/>
+                                <asp:HiddenField ID="hfIDdl" runat="server"/>
+                                <asp:HiddenField ID="hfStartdl" runat="server"/>
+                                <asp:HiddenField ID="hfEnddl" runat="server"/>
+
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !" DataKeyNames="link">
                                     <Columns>
                                         <%--<asp:TemplateField>
@@ -483,10 +558,17 @@
                                                            </ItemTemplate>
                                                        </asp:TemplateField>--%>
 
-                                                       <asp:TemplateField>
+                                                     <%--  <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                              
                                                                <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>--%>
+
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate>
+                                                               <asp:LinkButton ID="ScanSupplier" runat="server" Text="SCAN" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="ScanSupplier_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                              
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
 

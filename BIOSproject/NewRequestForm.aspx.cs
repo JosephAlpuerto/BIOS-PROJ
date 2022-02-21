@@ -345,8 +345,9 @@ namespace BIOSproject
                     SqlCommand sqlcmda = new SqlCommand(cnt, sqlcon);
                     int count = (int)sqlcmda.ExecuteScalar();
                     if (count > 0)
-                    { 
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected Product already Used!')", true);
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Alert','Selected Product already Used!', 'warning')", true);
+                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('')", true);
                         GridView.EditIndex = -1;
                         FillGridView();
                         FillGridView2();
@@ -357,7 +358,8 @@ namespace BIOSproject
                         GridView.EditIndex = -1;
                         FillGridView();
                         FillGridView2();
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Updated!')", true);
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','Selected list Updated!', 'success')", true);
+                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Updated!')", true);
                         lblerrorGV.Text = "";
                     }
                 }
@@ -387,7 +389,8 @@ namespace BIOSproject
                     sqlcmd.ExecuteNonQuery();
                     FillGridView();
                     FillGridView2();
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Deleted!')", true);
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','Selected list Deleted!', 'success')", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Deleted!')", true);
                     lblerrorGV.Text = "";
 
                     //int index = Convert.ToInt32(e.RowIndex);
