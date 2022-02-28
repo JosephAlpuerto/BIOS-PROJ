@@ -131,6 +131,7 @@
     <Content Include="AllUsers.aspx" />
     <Content Include="css\Dashboard.css" />
     <Content Include="css\NewRequest.css" />
+    <Content Include="css\Scanfinishgood.css" />
     <Content Include="css\sorcedb.css" />
     <Content Include="css\SupplierScan.css" />
     <Content Include="css\SuppTaggingForm.css" />
@@ -2535,6 +2536,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportWarehousePrint.rdlc" />
+    <EmbeddedResource Include="Report\SeriesReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

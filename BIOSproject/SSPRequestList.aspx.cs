@@ -356,7 +356,7 @@ namespace BIOSproject
                 sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
                 sqlCmd.Parameters.AddWithValue("@forHitCheck", "1");
 
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Hitcheck()", true);
                 //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('This series has not been used.')", true);
                 sqlCmd.ExecuteNonQuery();
                 sqlCon2.Close();

@@ -212,7 +212,7 @@ namespace BIOSproject
                 sqlCon.Open();
                 if (txtStart.Text != "")
                 {
-                    SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, ProductQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
+                    SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, ProductQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0' and ifFinish = '1'", sqlCon);
                     cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStart.Text));
                     cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
@@ -310,8 +310,8 @@ namespace BIOSproject
             sqlCmd.Parameters.AddWithValue("@WHcheck", "1");
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
-            Clear();
-            FillGridView();
+            tagging();
+            
             string Id = hfId1.Value;
 
             // validations
@@ -340,6 +340,7 @@ namespace BIOSproject
                 lblUnits.Text = Convert.ToString(0);
                 product();
                 cascadingdropdown();
+                FillGridView();
                 btnUpdate.Enabled = false;
                 DropProduct.Enabled = true;
                 hfId1.Value = "";
@@ -350,6 +351,24 @@ namespace BIOSproject
                 //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Cornfirm your Details!')", true);
                 //lblSuccess.Text = "Please Cornfirm your Details!";
             }
+        }
+        public void tagging()
+        {
+            SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+            if (sqlCon2.State == ConnectionState.Closed)
+                sqlCon2.Open();
+            SqlCommand sqlCmd = new SqlCommand("TaggingFinished", sqlCon2);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@RequestID", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
+            sqlCmd.Parameters.AddWithValue("@Branch", DropBranch.SelectedItem.Text);
+            sqlCmd.Parameters.AddWithValue("@Team", DropTeam.SelectedItem.Text);
+            sqlCmd.Parameters.AddWithValue("@Area", DropArea.SelectedItem.Text);
+            sqlCmd.Parameters.AddWithValue("@Hub", DropHub.SelectedItem.Text);
+            sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now);
+            sqlCmd.Parameters.AddWithValue("@DestinationTo", DropDesti.SelectedItem.Text);
+            sqlCmd.ExecuteNonQuery();
+            sqlCon2.Close();
+            Clear();
         }
         private void Clear()
         {
@@ -457,66 +476,11 @@ namespace BIOSproject
             ModalPrint.Show();
         }
 
-        protected void btnScan_Click(object sender, EventArgs e)
-        {
-            ModalScan.Show();
-        }
-
-        public void addingScan()
-        {
-            lblUnits.Text = "0";
-            double start, end, answer;
-            double.TryParse(txtStartingScan.Text, out start);
-            double.TryParse(hfEndingSeries.Value, out end);
 
 
-            answer = end - start + 1;
-            if (answer > 0 && txtStartingScan.Text != "" && hfEndingSeries.Value != "")
-                lblScanUnits.Text = answer.ToString();
-        }
-        protected void txtStartingScan_TextChanged(object sender, EventArgs e)
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            sqlCon.Open();
-            if (txtStartingScan.Text != "")
-            {
-                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
-                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartingScan.Text));
-                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    hfId1.Value = dr.GetValue(0).ToString();
-                    hfEndingSeries.Value = dr.GetValue(1).ToString();
-                    lblTotal.Text = dr.GetValue(2).ToString();
-                    txtStart.Enabled = true;
-                    btnOkay.Visible = true;
-                }
-                else
-                {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
-                }
-                sqlCon.Close();
-            }
-            else if (txtStart.Text == "")
-            {
-                btnUpdate.Enabled = false;
-                txtEnd.Text = "";
-                product();
-                DropProduct.Enabled = true;
-            }
-            addingScan();
-        }
+       
 
-        protected void btnOkay_Click(object sender, EventArgs e)
-        {
-            txtStartingScan.Text = "";
-            hfEndingSeries.Value = "";
-            lblScanUnits.Text = "";
-            txtStart.Enabled = true;
-            Response.Redirect(Request.Url.AbsoluteUri);
-            ModalScan.Hide();
-        }
+
     }
 }

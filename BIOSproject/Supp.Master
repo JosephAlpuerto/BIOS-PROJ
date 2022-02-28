@@ -28,6 +28,8 @@
     <link href="css/Dashboard.css" rel="stylesheet" />
     <link href="../css/SuppTaggingForm.css" rel="stylesheet" />
     <link href="css/SupplierScan.css" rel="stylesheet" />
+    <link href="css/Scanfinishgood.css" rel="stylesheet" />
+
     <script src="js/sweetAlert.js" type="text/javascript"></script>
     <script src="js/SA.js" type="text/javascript"></script>
     <script src="js/jquery.js"></script>
@@ -45,9 +47,43 @@
                 }
             })
         }
+
+       function Scan() {
+            Swal.fire({
+                title: "This series are equal quantities.",
+                text: "Proceed to saving this data!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function Saved() {
+            Swal.fire({
+                title: "Saved Successfully!",
+                text: "You clicked the button!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                window.location = "AllSupplierRequest.aspx";
+            })
+        }
+       
+
     </script>
     <style type="text/css">
         .my-swal {
+            z-index: 100000;
+        }
+        .my-swal-scan {
             z-index: 100000;
         }
     </style>
@@ -149,6 +185,10 @@
                     <a class="nav-link" href="AllSupplierRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>All SSP Requested</span></a>
+                </li>
+                  <li class="nav-item active">
+                     <a class="nav-link" href="#" data-toggle="modal" data-target="#ScanModal">
+                       <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Scan</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="SupplierTaggingForm.aspx">
@@ -501,6 +541,74 @@
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                 <asp:Button id="btnSend" Text="Send" class="btn btn-primary" OnClick="btnSend_Click" runat="server"></asp:Button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="ScanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel3">Scanning of Finished Goods</h5>
+                                <asp:Button ID="btnclose" runat="server" Text="x" class="close" type="button" data-dismiss="modal" aria-label="Close" OnClick="btnclose_Click"/>
+                            </div>
+                            <div class="modal-header">
+                               <asp:UpdatePanel ID="UpdatePanel4" runat="server"><ContentTemplate>
+                <div class="input_field1">
+                    <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="labelName"></asp:Label>
+                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>
+                    <asp:HiddenField ID="hfEndingSeries" runat="server" />
+                    <asp:HiddenField ID="ID" runat="server" />
+                    <asp:HiddenField ID="TicketNo" runat="server" />
+                    <asp:HiddenField ID="PONumber" runat="server" />
+                    <asp:HiddenField ID="Supplier" runat="server" />
+                    <asp:HiddenField ID="ProductQuantity" runat="server" />
+                    <asp:HiddenField ID="TotalQuantity" runat="server" />
+                    <asp:HiddenField ID="Quantity" runat="server" />
+                    <asp:HiddenField ID="StartingSeries" runat="server" />
+                    <asp:HiddenField ID="EndingSeries" runat="server" />
+                    <asp:HiddenField ID="RequestNo" runat="server" />
+                    <asp:HiddenField ID="SupplierName" runat="server" />
+
+                    <asp:HiddenField ID="hfIDScan2" runat="server" />
+                    <asp:HiddenField ID="hfEndingSeries2" runat="server" />
+                </div>
+            <div class="contain1">
+              <div class="forms">
+                  <div class="input_field1">
+                       <asp:Label ID="lblUnitsScan" runat="server" Text="No. of Units:" CssClass="label" ></asp:Label> 
+                   </div>
+                  <div class="input_field2">
+                      <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                   </div>
+              </div>
+              <div class="forms">
+                  <div class="input_field1">
+                       <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label> 
+                       
+                   </div>
+                  <div class="input_field2">
+                      <asp:Label ID="lblTotal" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
+                   </div>
+                  
+              </div>
+               
+            </div>
+                  <div class="input_field1">
+                     <asp:Button ID="btnOkay" runat="server" Text="Save" CssClass="btn2" Visible="false" OnClick="btnOkay_Click" />     
+                   </div>
+                         </ContentTemplate>
+                                     <Triggers>
+                            <asp:PostBackTrigger ControlID="btnOkay" />
+                            <asp:PostBackTrigger ControlID="txtStartingScan"/>
+                                    </Triggers>
+                                </asp:UpdatePanel> 
+                            </div>
+ <%--                           <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <asp:Button id="Button1" Text="Send" class="btn btn-primary" OnClick="btnSend_Click" runat="server"></asp:Button>
+                            </div>--%>
                         </div>
                     </div>
                 </div>

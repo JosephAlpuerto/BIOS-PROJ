@@ -19,25 +19,42 @@
     <script src="js/jquery.js"></script>
     <script src="js/SA.js"></script>
 
-<%--    <script src="js/sweetAlert.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>--%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        function submitForm() {
-            swal({
-                title: "Are you sure?",
-                text: "you want to reject this request!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
+
+        function Hitcheck() {
+            Swal.fire({
+                title: "There are no duplicates in this series.",
+                text: "You clicked the button!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
             })
-                .then(function (isOkay) {
-                    if (isOkay) {
-                        form.submit();
-                    }
-                });
-            return false;
         }
+
+        //function Error() {
+        //    Swal.fire({
+        //        title: "Duplicate Record",
+        //        text: "Saved Successfully!",
+        //        icon: "warning",
+        //        confirmButtonText: "Okay",
+        //        customClass: {
+        //            container: 'my-swal-scan'
+        //        }
+        //    })
+        //}
+
     </script>
+<%--    <style type="text/css">
+        .my-swal {
+            z-index: 100000;
+        }
+        .my-swal-scan {
+            z-index: 100000;
+        }
+    </style>--%>
     <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
 
     <!-- Custom fonts for this template-->

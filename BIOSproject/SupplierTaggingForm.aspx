@@ -27,7 +27,7 @@
    </script>
 
 
-    <asp:Button ID="btnScan" Text="SCAN" CssClass="btnScan" runat="server" OnClick="btnScan_Click"/>
+  
     <div class="big">
         
         
@@ -125,7 +125,7 @@
 
          
 
-         <ajaxtoolkit:modalpopupextender ID="ModalInquiry" PopupControlID="PanelInquiry" TargetControlID="gvModal" CancelControlID="btnClose" runat="server"></ajaxtoolkit:modalpopupextender>
+         <ajaxtoolkit:modalpopupextender ID="ModalInquiry" PopupControlID="PanelInquiry" TargetControlID="gvModal" CancelControlID="btnCloseInquiry" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelInquiry" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
  
            <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
@@ -134,7 +134,7 @@
                     <div id="header" class="modal-header">
                                 <h5 class="modal-title" id=""> 
                                     Series Inquiry</h5>
-                                <button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <button id="btnCloseInquiry" class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
@@ -193,62 +193,7 @@
 
 
 
-        <ajaxtoolkit:modalpopupextender ID="ModalScan" PopupControlID="PanelScan" TargetControlID="gvModal" CancelControlID="btnCloseScan" runat="server"></ajaxtoolkit:modalpopupextender>
-       <asp:Panel ID="PanelScan" runat="server" TabIndex="1" CssClass="Modal">
- 
-           <div id="Div2" runat="server" style="max-height: 500px; overflow: auto;">
-          
-           <div class="container2"> 
-                    <div id="header1" class="modal-header">
-                                <h5 class="modal-title" id=""> 
-                                    Scanning of Finished Goods</h5>
-                                <button id="btnCloseScan" class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-
-                            <div class="forms">
-                                
-                                <asp:HiddenField ID="hfIdScan" runat="server" />
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
-                <div class="input_field1">
-                    <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="300px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>
-                    <asp:HiddenField ID="hfEndingSeries" runat="server" />
-                </div>
-                                
-
-            <div class="container3">
-              <div class="forms">
-                  <div class="input_field1">
-                       <asp:Label ID="lblUnitsScan" runat="server" Text="No. of Units:" CssClass="label" ></asp:Label> 
-                       
-                   </div>
-                  <div class="input_field2">
-                      <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
-                   </div>
-              </div>
-
-
-              <div class="forms">
-                  <div class="input_field1">
-                       <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label> 
-                       
-                   </div>
-                  <div class="input_field2">
-                      <asp:Label ID="lblTotal" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
-                   </div>
-              </div>
-            </div>
-                 <asp:Button ID="btnOkay" runat="server" Text="Okay" Visible="false" CssClass="btn" OnClick="btnOkay_Click"/>     
- </ContentTemplate></asp:UpdatePanel> 
-              
-                          
-            
-        </div>
-            </div>
-               </div>
-        </asp:Panel>
+     
 
 
 

@@ -495,28 +495,165 @@
                                 </div>
 
                <div class="formsSeries">
-                    <div class="input_field1">
+                    <%--<div class="input_field1">
                         <asp:Label ID="Label3" runat="server" CssClass="label" Text="Series Quantity:"></asp:Label>
                         <asp:Label ID="lblseries" runat="server" CssClass="label" ForeColor="Red"></asp:Label>
-                    </div>
+                    </div>--%>
                     <div class="input_field1">
                         <asp:TextBox ID="txtSeries" runat="server" CssClass="input1" Enabled="false" TextMode="MultiLine"></asp:TextBox>
                     </div>
-                   <div class="input_field1">
-                       <asp:Button ID="DownloadView" runat="server" Text="Download" Visible="false"  OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"/>
-                    </div>
 
+                    <%--<div class="input_field1">
+                        <asp:Button ID="btnScan" Text="SCAN" Visible="false" CssClass="btnScan" runat="server" OnClick="btnScan_Click"/>
+                    </div>--%>
+                    <div class="input_field1">
+                        <asp:HiddenField runat="server" ID="hfisRejected"/>
+                        <asp:Button ID="btnPrint" Text="Print" Visible="false" CssClass="btnScan" runat="server" OnClick="btnPrint_Click"/>
+                    </div>
+                     
               </div>
                     </div>
                     
                    </ContentTemplate>
                    <Triggers>
-                            <asp:PostBackTrigger ControlID="DownloadView" />
+                            <asp:PostBackTrigger ControlID="btnCheck" />
+                            <asp:PostBackTrigger ControlID="btnPrint" />
                     </Triggers>
                </asp:UpdatePanel>
-
+               
             </div>
                </div>
+        </asp:Panel>
+
+    <ajaxtoolkit:modalpopupextender ID="ModalPrint" PopupControlID="PanelPrint" TargetControlID="gvModal" CancelControlID="btnClosePrint" runat="server"></ajaxtoolkit:modalpopupextender>
+                        <asp:Panel ID="PanelPrint" CssClass="Print"  runat="server">
+                        
+                            <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div class="modal-header" >
+                                <h5 class="modal-title" id="">Print Report</h5>
+                                <button id="btnClosePrint" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                       
+                       <rsweb:ReportViewer ID="RvSeries" runat="server" BackColor="White" CssClass="bg-white" Height="4.21875in" Width="730px">
+                           <LocalReport ReportPath="Report/SeriesReport.rdlc">
+
+                            </LocalReport>
+                       </rsweb:ReportViewer>
+                       </div></div>
+                            </asp:Panel>
+
+
+       <ajaxtoolkit:modalpopupextender ID="ModalScan" PopupControlID="PanelScan" TargetControlID="gvModal" CancelControlID="btnCloseScan" runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelScan" runat="server" TabIndex="1" CssClass="Modal">
+ 
+           <div id="Div3" runat="server" style="max-height: 500px; overflow: auto;">
+          
+           <div class="contain"> 
+                    <div id="header1" class="modal-header">
+                                <h5 class="modal-title" id=""> 
+                                    Scanning of Finished Goods</h5>
+                                <asp:LinkButton runat="server" id="btnCloseScan" Text="x" OnClick="btnCloseScan_Click"/>
+<%--                                    <span aria-hidden="true">×</span>
+                                </asp:Button>--%>
+                            </div>
+
+                                
+                                <asp:HiddenField ID="hfIDScan2" runat="server" />
+                                <asp:HiddenField ID="ID" runat="server" />
+                                <asp:HiddenField ID="TicketNo" runat="server" />
+                                <asp:HiddenField ID="PONumber" runat="server" />
+                                <asp:HiddenField ID="Supplier" runat="server" />
+                                <asp:HiddenField ID="ProductQuantity" runat="server" />
+                                <asp:HiddenField ID="TotalQuantity" runat="server" />
+                                <asp:HiddenField ID="Quantity2" runat="server" />
+                                <asp:HiddenField ID="StartingSeries" runat="server" />
+                                <asp:HiddenField ID="EndingSeries" runat="server" />
+                                <asp:HiddenField ID="RequestNo" runat="server" />
+                                <asp:HiddenField ID="SupplierName" runat="server" />
+
+                                <asp:UpdatePanel ID="UpdatePanel4" runat="server"><ContentTemplate>
+                <div class="input_field1">
+                    <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="label"></asp:Label>
+                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="200px" AutoPostBack="true"></asp:TextBox>
+                    <asp:HiddenField ID="hfEndingSeries2" runat="server" />
+                </div>
+                                
+
+            <div class="contain1">
+              <div class="forms">
+                  <div class="input_field1">
+                       <asp:Label ID="lblUnitsScan" runat="server" Text="No. of Units:" CssClass="label" ></asp:Label> 
+                       
+                   </div>
+                  <div class="input_field2">
+                      <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                   </div>
+              </div>
+
+              <div class="forms">
+                  <div class="input_field1">
+                       <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label> 
+                       
+                   </div>
+                  <div class="input_field2">
+                      <asp:Label ID="lblTotal" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
+                   </div>
+                  
+              </div>
+               
+            </div>
+                  <div class="input_field1">
+                     <asp:Button ID="btnOkay" runat="server" Text="SCAN" CssClass="btn" OnClick="btnOkay_Click"/>     
+                   </div>
+                 
+                         </ContentTemplate>
+                                     <Triggers>
+                            <asp:PostBackTrigger ControlID="btnOkay" />
+                                    </Triggers>
+                                </asp:UpdatePanel> 
+              
+                          
+            
+            </div>
+               </div>
+        </asp:Panel>
+
+
+
+       <ajaxtoolkit:modalpopupextender ID="ModalPass" PopupControlID="PanelPass" TargetControlID="gvModal" CancelControlID="btnClosePass" runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelPass" runat="server" TabIndex="1" CssClass="ModalPass">
+            <div class="card shadow mb-4">
+
+                            <div class="card-body p-0">
+                            <div class="modal-header" >
+                                <h5 class="modal-title" id=""></h5>
+                                <button id="btnClosePass" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                                <asp:UpdatePanel ID="UpdatePanel5" runat="server"><ContentTemplate>
+               <div class="input_field1">
+                    <asp:Label ID="Label3" runat="server" Text="Enter Password:" CssClass="label"></asp:Label> 
+                    <asp:TextBox ID="txtPass" runat="server" CssClass="input1" Width="200px" AutoPostBack="true" TextMode="Password"></asp:TextBox>
+                </div> 
+<%--                <div class="input_field1">
+                    <asp:Label ID="lblwrong" runat="server" ForeColor="Red" Visible="false" CssClass="label"></asp:Label> 
+                </div>--%>
+                   <div class="input_field2">
+                     <asp:Button ID="btnConfirm" runat="server" Text="Confirm" CssClass="btn" OnClick="btnConfirm_Click"/>     
+                   </div>
+                                  </ContentTemplate>
+                                     <Triggers>
+                            <asp:PostBackTrigger ControlID="btnConfirm" />
+                                    </Triggers>
+                                </asp:UpdatePanel> 
+                       </div>             
+            </div>
+          
         </asp:Panel>
 
 
@@ -524,19 +661,21 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Pending list</h6>
+                            <asp:Image runat="server" ImageUrl="~/img/greenBox.png" Width="15px" Height="15px"/>
+                            <asp:Label runat="server" Text="DONE 'Already Saved'"></asp:Label>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <asp:HiddenField ID="gvModal" runat="server"/>
+                                
                                 <asp:HiddenField ID="hfIDdl" runat="server"/>
                                 <asp:HiddenField ID="hfStartdl" runat="server"/>
                                 <asp:HiddenField ID="hfEnddl" runat="server"/>
 
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !" DataKeyNames="link">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !" DataKeyNames="link" OnRowDataBound="Gridview1_RowDataBound">
                                     <Columns>
                                         <%--<asp:TemplateField>
                                             <HeaderTemplate>
-                                                <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"/>
+                                                <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"/> 
                                                 <asp:LinkButton ID="HitCheck2" Visible="false" runat="server" CssClass="btn btn-primary btn-user btn-block" OnClick="HitCheck_Click1">HitCheck</asp:LinkButton>
                                             </HeaderTemplate>
                                             <ItemTemplate>
@@ -558,16 +697,20 @@
                                                            </ItemTemplate>
                                                        </asp:TemplateField>--%>
 
-                                                     <%--  <asp:TemplateField>
+                                                       <asp:TemplateField>
                                                            <ItemTemplate>
-                                                              
-                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
+                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"/>
+                                                              <%-- <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>--%>
                                                            </ItemTemplate>
-                                                       </asp:TemplateField>--%>
-
+                                                       </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                           <ItemTemplate> 
+                                                               <asp:Label ID="ifFinish" runat="server" Text='<%# Eval("ifFinish") %>' Visible="false"></asp:Label>
+                                                           </ItemTemplate>
+                                                       </asp:TemplateField>
                                                         <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="ScanSupplier" runat="server" Text="SCAN" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="ScanSupplier_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                               <asp:LinkButton ID="ScanSupplier" runat="server" Text="HitCheck" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' Visible='<%# Eval("StartingSeries") != DBNull.Value && Eval("forHitCheck").ToString() == "True" %>' OnClick="ScanSupplier_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
                                                               
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
@@ -589,7 +732,7 @@
 
                                     </Columns>
                                 </asp:GridView>
-
+                                <asp:HiddenField ID="gvModal" runat="server"/>
                                 </div>
                             </div>
                      </div>

@@ -1,0 +1,55 @@
+﻿/*.contain {
+    width: 400px;
+    background-color: white !important;
+    border-color: lightgrey;
+    border: 2px solid;
+    border-radius: 25px;
+}*/
+    .input_field1 .labelName {
+        margin-left: 40px;
+    }
+    .contain1 {
+        width: max-content;
+        background: white;
+        display: flex;
+        border-radius: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        margin-left: 30px;
+    }
+.contain1 .forms {
+    padding: 20px;
+    border-color: lightgrey;
+    border: 1px solid;
+    border-radius: 20px;
+    margin-left: 40px;
+}
+    .modal .btn2 {
+        width: 25%;
+        padding: 8px 10px;
+        margin-left: 180px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        border: 1px;
+        cursor: pointer;
+        border-radius: 3px;
+        outline: none;
+        background-color: #d00149;
+        color: White;
+    }
+
+.ModalPass .card .input_field1 {
+    padding: 20px;
+}
+.ModalPass .card .btn {
+    margin-left: 270px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    background-color: #d00149;
+    color: White;
+}

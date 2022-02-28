@@ -1,7 +1,7 @@
 ﻿.btnScan {
-    width: 10%;
-    padding: 8px 10px;
-    margin-left: 12%;
+    width: max-content;
+    padding: 12px 10px;
+    margin-left: 50px;
     font-size: 15px;
     border: 1px;
     cursor: pointer;
@@ -111,6 +111,7 @@
         margin-right: 20px;
         margin-bottom: 20px;
         }
+
     .big .container3 .input_field1 {
         margin-left: 30px;
         margin-top: 30px;
@@ -209,38 +210,3 @@
 
 
 
-
-/*
-    .big .gridcontainer {
-        max-width: 500px;
-        width: 50%;
-        background-color: white;
-        margin: 20px auto;
-        padding: 30px;
-        box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
-    }*/
-
-/*
-.container2 {
-    width: 50%;
-    background-color: white;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
-    margin-left: 800px;
-    position: relative;
-}*/
-/*
-    .container1 .form {
-        width: 100%;
-    }
-
-        .container1 .form .input_field .input {
-            width: 100%;
-            outline: none;
-        }
-
-        .container1 .form .input_field .label1 {
-            width: 200px;
-            color: #757575;
-            margin-right: 10px;
-            font-size: 14px;
-        }*/

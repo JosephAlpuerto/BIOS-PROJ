@@ -10,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Net.Mail;
+using System.Net.Mime;
+using Microsoft.Reporting.WebForms;
 
 namespace BIOSproject
 {
@@ -311,10 +313,12 @@ namespace BIOSproject
         }
         protected void DownloadView_Click(object sender, EventArgs e)
         {
+            LinkButton HitCheck = (sender as LinkButton);
+            string[] commandArguments = HitCheck.CommandArgument.Split(',');
             try
             {
-                int start = int.Parse(txtStartScan.Text);
-                int end = int.Parse(txtEndScan.Text);
+                int start = int.Parse(commandArguments[1]);
+                int end = int.Parse(commandArguments[2]);
 
                 string series = "";
                 for (int i = start; i <= end; i++)
@@ -328,7 +332,7 @@ namespace BIOSproject
                 Response.ClearHeaders();
                 Response.AddHeader("Content-Length", text.Length.ToString());
                 Response.ContentType = "text/plain";
-                Response.AppendHeader("content-disposition", "attachment;filename=\"" + lblID.Text + ".txt\"");
+                Response.AppendHeader("content-disposition", "attachment;filename=\"" + commandArguments[0] + ".txt\"");
                 Response.Write(text);
                 Response.End();
                 FillGridView();
@@ -680,20 +684,23 @@ namespace BIOSproject
             hfEnd.Value = dtbl.Rows[0]["EndingSeries"].ToString();
 
             lblUnits.Text = "0";
-            lblseries.Text = "0";
+            //lblseries.Text = "0";
             txtSeries.Text = "";
-            Hitcheck();
-            if (hfIdHIT.Value == "")
-            {
-                ModalScanSupplier.Show();
-            }
+            btnPrint.Visible = false;
+            txtEndScan.Text = "";
+            txtProduct.Text = "";
+            ModalScanSupplier.Show();
+            //if (hfIdHIT.Value == "")
+            //{
+            //    
+            //}
 
 
         }
         public void adding()
         {
             lblUnits.Text = "0";
-            lblseries.Text = "0";
+            //lblseries.Text = "0";
             double start, end, answer;
             double.TryParse(txtStartScan.Text, out start);
             double.TryParse(txtEndScan.Text, out end);
@@ -702,7 +709,7 @@ namespace BIOSproject
             answer = end - start + 1;
             if (answer > 0 && txtStartScan.Text != "" && txtEndScan.Text != "")
                 lblUnits.Text = answer.ToString();
-                lblseries.Text = answer.ToString();
+                //lblseries.Text = answer.ToString();
         }
         public void Hitcheck()
         {
@@ -729,6 +736,7 @@ namespace BIOSproject
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Hitcheck()", true);
                 //ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
                 hfIdHIT.Value = "";
+                btnPrint.Visible = true;
                 sqlCmd.ExecuteNonQuery();
                 sqlCon2.Close();
 
@@ -745,55 +753,63 @@ namespace BIOSproject
 
         protected void btnCheck_Click(object sender, EventArgs e)
         {
-          
-            SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
-            sqlCon3.Open();
-            if (txtStartScan.Text != "")
+            Hitcheck();
+            if (hfIdHIT.Value == "")
             {
-                SqlCommand cmd = new SqlCommand("Select EndingSeries, ProductQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and ID = @ID", sqlCon3);
-                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartScan.Text));
-                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-                cmd.Parameters.AddWithValue("@ID", hfIdScan.Value);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
+                ModalScanSupplier.Show();
+                SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
+                sqlCon3.Open();
+                if (txtStartScan.Text != "")
                 {
-                    txtEndScan.Text = dr.GetValue(0).ToString();
-                    txtProduct.Text = dr.GetValue(1).ToString();
-                    lblUnits.ForeColor = System.Drawing.Color.Blue;
-                    lblseries.ForeColor = System.Drawing.Color.Blue;
+                    SqlCommand cmd = new SqlCommand("Select EndingSeries, ProductQuantity From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and ID = @ID", sqlCon3);
+                    cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartScan.Text));
+                    cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+                    cmd.Parameters.AddWithValue("@ID", hfIdScan.Value);
 
-                    if (txtStartScan.Text != "" && txtEndScan.Text != "")
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
                     {
-                        int start = int.Parse(txtStartScan.Text);
-                        int end = int.Parse(txtEndScan.Text);
+                        txtEndScan.Text = dr.GetValue(0).ToString();
+                        txtProduct.Text = dr.GetValue(1).ToString();
+                        lblUnits.ForeColor = System.Drawing.Color.Blue;
+                        //lblseries.ForeColor = System.Drawing.Color.Blue;
 
-                        string series = "";
-                        for (int i = start; i <= end; i++)
+                        if (txtStartScan.Text != "" && txtEndScan.Text != "")
                         {
-                            series += i.ToString() + System.Environment.NewLine;
+                            int start = int.Parse(txtStartScan.Text);
+                            int end = int.Parse(txtEndScan.Text);
+
+                            string series = "";
+                            for (int i = start; i <= end; i++)
+                            {
+                                series += i.ToString() + System.Environment.NewLine;
+
+                            }
+                            string text = Convert.ToString(series);
+                            txtSeries.Text = text;
+                            btnPrint.Visible = true;
 
                         }
-                        string text = Convert.ToString(series);
-                        txtSeries.Text = text;
-                        DownloadView.Visible = true;
-
+                        else
+                        {
+                            txtSeries.Text = "No Record!";
+                        }
                     }
                     else
                     {
-                        txtSeries.Text = "No Record!";
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                        txtEndScan.Text = "";
+                        txtProduct.Text = "";
+                        lblUnits.ForeColor = System.Drawing.Color.Red;
+                        btnPrint.Visible = false;
                     }
+                    sqlCon3.Close();
                 }
-                else
-                {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
-                    txtEndScan.Text = "";
-                    txtProduct.Text = "";
-                    lblUnits.ForeColor = System.Drawing.Color.Red;
-                }
-                sqlCon3.Close();
+                adding();
             }
-            adding();
+
+           
+            
         }
 
         protected void btnCloseScanSupplier_Click(object sender, EventArgs e)
@@ -801,12 +817,256 @@ namespace BIOSproject
             txtEndScan.Text = "";
             txtProduct.Text = "";
             lblUnits.ForeColor = System.Drawing.Color.Red;
-            DownloadView.Visible = false;
+            btnPrint.Visible = false;
             ModalScanSupplier.Hide();
+
+        }
+        protected void btnScan_Click(object sender, EventArgs e)
+        {
+            txtStartingScan.Text = txtStartScan.Text;
+            hfIDScan2.Value = hfIdScan.Value;
+            txtEndScan.Text = "";
+            txtProduct.Text = "";
+            lblUnits.ForeColor = System.Drawing.Color.Red;
+            btnPrint.Visible = false;
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
+                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartingScan.Text));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                ID.Value = dr.GetValue(0).ToString();
+                TicketNo.Value = dr.GetValue(1).ToString();
+                PONumber.Value = dr.GetValue(2).ToString();
+                Supplier.Value = dr.GetValue(3).ToString();
+                ProductQuantity.Value = dr.GetValue(4).ToString();
+                TotalQuantity.Value = dr.GetValue(5).ToString();
+                Quantity2.Value = dr.GetValue(6).ToString();
+                StartingSeries.Value = dr.GetValue(7).ToString();
+                EndingSeries.Value = dr.GetValue(8).ToString();
+                RequestNo.Value = dr.GetValue(9).ToString();
+                SupplierName.Value = dr.GetValue(10).ToString();
+
+                lblTotal.Text = dr.GetValue(5).ToString();
+                lblScanUnits.Text = "0"; 
+
+                btnOkay.Text = "SCAN";
+                btnOkay.Enabled = true;
+
+                ModalScan.Show();
+                }
+                sqlCon.Close();
+
+            
+        }
+        public void addingScan()
+        {
+            //lblUnits.Text = "0";
+            double start, end, answer;
+            double.TryParse(txtStartingScan.Text, out start);
+            double.TryParse(hfEndingSeries2.Value, out end);
+
+
+            answer = end - start + 1;
+            if (answer > 0 && txtStartingScan.Text != "" && hfEndingSeries2.Value != "")
+                lblScanUnits.Text = answer.ToString();
+        }
+
+        protected void btnOkay_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+            if (txtStartingScan.Text != "")
+            {
+                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
+                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartingScan.Text));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                    txtStart.Enabled = true;
+                    addingScan();
+                    InsertDB();
+                    FillGridView();
+                    Scan();
+                }
+
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                }
+                sqlCon.Close();
+            }
+            else if (txtStart.Text == "")
+            {
+                txtEnd.Text = "";
+            }
+            
+        }
+        public void Scan()
+        {
+        if (lblScanUnits.Text == lblTotal.Text)
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Scan()", true);
+                btnOkay.Text = "DONE";
+                btnOkay.Enabled = false;
+                ModalScan.Show();
+            }
+        }
+        public void clearScan()
+        {
+            ID.Value = "";
+            TicketNo.Value = "";
+            PONumber.Value = "";
+            Supplier.Value = "";
+            ProductQuantity.Value = "";
+            TotalQuantity.Value = "";
+            Quantity2.Value = "";
+            StartingSeries.Value = "";
+            EndingSeries.Value = "";
+            RequestNo.Value = "";
+            SupplierName.Value = "";
+        }
+        public void InsertDB()
+        {
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+            SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@TicketNo",TicketNo.Value);
+            cmd.Parameters.AddWithValue("@PONumber",PONumber.Value);
+            cmd.Parameters.AddWithValue("@Supplier",Supplier.Value);
+            cmd.Parameters.AddWithValue("@Product",ProductQuantity.Value);
+            cmd.Parameters.AddWithValue("@TotalQuantity",TotalQuantity.Value);
+            cmd.Parameters.AddWithValue("@Quantity",Quantity2.Value);
+            cmd.Parameters.AddWithValue("@StartingSeries",StartingSeries.Value);
+            cmd.Parameters.AddWithValue("@EndingSeries",EndingSeries.Value);
+            cmd.Parameters.AddWithValue("@RequestNo",RequestNo.Value);
+            cmd.Parameters.AddWithValue("@SupplierName",SupplierName.Value);
+            cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
+            cmd.Parameters.AddWithValue("@CreatedDate",DateTime.Now);
+            cmd.Parameters.AddWithValue("@RequestID",ID.Value);
+            cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
+            cmd.ExecuteNonQuery();
+            con.Close();
+            finish();
+            clearScan();
+
+        }
+        public void finish()
+        {
+            SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+            if (sqlCon2.State == ConnectionState.Closed)
+                sqlCon2.Open();
+            SqlCommand sqlCmd = new SqlCommand("ScanFinish", sqlCon2);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Id", ID.Value);
+            sqlCmd.Parameters.AddWithValue("@ifFinish", "1");
+            sqlCmd.ExecuteNonQuery();
+            sqlCon2.Close();
+        }
+
+        protected void btnCloseScan_Click(object sender, EventArgs e)
+        {
+            txtStartingScan.Text = "";
+            hfEndingSeries.Value = "";
+            lblScanUnits.Text = "";
+
+            Response.Redirect(Request.Url.AbsoluteUri);
+            ModalScan.Hide();
+        }
+
+        protected void Gridview1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var ifFinish = ((System.Web.UI.WebControls.Label)e.Row.FindControl("ifFinish")).Text;
+                string ff = Convert.ToString(ifFinish);
+                if (ff.Trim().ToLower() == "true")
+                {
+                    e.Row.BackColor = System.Drawing.Color.LightGreen;
+                    e.Row.ForeColor = System.Drawing.Color.Black;
+                }
+            }
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+           
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+            if (hfIdScan.Value != "")
+            {
+                SqlCommand cmd = new SqlCommand("Select IsRejected From SSPNewRequest Where  ID = @ID and Supplier = @Supplier", sqlCon);
+                cmd.Parameters.AddWithValue("@ID", int.Parse(hfIdScan.Value));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    hfisRejected.Value = dr.GetValue(0).ToString();
+                    if (hfisRejected.Value == "False")
+                    {
+                        ReportParameter series = new ReportParameter("SeriesReport", txtSeries.Text, true);
+                        this.RvSeries.LocalReport.SetParameters(new ReportParameter[] { series });
+                        Print();
+                        ModalPrint.Show();
+                    }
+                    else
+                    {
+                        ModalPass.Show();
+                        
+                    }
+                }
+                sqlCon.Close();
+            }
+        }
+        public void Print()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("IfPrint", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Id", (hfIdScan.Value == "" ? 0 : Convert.ToInt32(hfIdScan.Value)));
+            sqlCmd.Parameters.AddWithValue("@IsRejected", "1");
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+            FillGridView();
+
         }
 
 
-
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd2 = new SqlCommand("Users_Verify", con))
+            {
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@UserName", Session["Username"].ToString());
+                cmd2.Parameters.AddWithValue("@Password", AllUsers.EncryptData(txtPass.Text));
+                if (con.State != ConnectionState.Open)
+                    con.Open();
+                SqlDataReader sdr = cmd2.ExecuteReader();
+                if (sdr.Read())
+                {
+                    ReportParameter series = new ReportParameter("SeriesReport", txtSeries.Text, true);
+                    this.RvSeries.LocalReport.SetParameters(new ReportParameter[] { series });
+                    ModalPass.Hide();
+                    ModalPrint.Show();
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Invalid Password!','You clicked the button!', 'warning')", true);
+                }
+            }
+        }
 
 
 

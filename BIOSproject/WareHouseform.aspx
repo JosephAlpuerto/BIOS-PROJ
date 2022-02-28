@@ -43,27 +43,43 @@
                     <asp:TextBox ID="txtDate" Enabled="false" runat="server" CssClass="input1" TextMode="Date" ReadOnly="True"  Width="265px"></asp:TextBox>
                 </div>
 
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
+                <div id="Destination" class="input_field1">
+                <asp:Label ID="Label14" runat="server" Text="Destination To:" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropDesti" runat="server" CssClass="input1" AutoPostBack="true"  OnSelectedIndexChanged="DropDesti_SelectedIndexChanged">
+                        <asp:ListItem Value="S">~Select~</asp:ListItem>
+                        <asp:ListItem Value="B">Branches</asp:ListItem>
+                        <asp:ListItem Value="W">Warehouse</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
 
                  <div class="input_field1">
-                <asp:Label ID="lblBranch" runat="server" Text="Branch:" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropBranch" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropBranch_SelectedIndexChanged" CssClass="input1" Width="250px">
+                <asp:Label ID="lblBranch" runat="server" Visible="false" Text="Branch:" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropBranch" Visible="false" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropBranch_SelectedIndexChanged" CssClass="input1" Width="250px">
                         <asp:ListItem Selected="True" Text=""></asp:ListItem>
                         </asp:DropDownList>
                 </div>
 
                 <div class="input_field1">
-                <asp:Label ID="lblTeam" runat="server" Text="Team:" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropTeam" runat="server" AutoPostBack="true" CssClass="input1"  Width="261px">
+                <asp:Label ID="lblTeam" runat="server" Visible="false" Text="Team:" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropTeam" Visible="false" runat="server" AutoPostBack="true" CssClass="input1"  Width="261px">
                         <asp:ListItem Selected="True" Text=""></asp:ListItem>
                     </asp:DropDownList>
                 </div>
 
                 <div class="input_field1">
-                    <asp:Label ID="lblArea" runat="server" Text="Area:" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropArea" runat="server" AutoPostBack="true" CssClass="input1"  Width="265px">
+                    <asp:Label ID="lblArea" runat="server" Visible="false" Text="Area:" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropArea" Visible="false" runat="server" AutoPostBack="true" CssClass="input1"  Width="265px">
                         <asp:ListItem Selected="True" Text=""></asp:ListItem>
                     </asp:DropDownList>
                 </div>
+                 <div class="input_field1">
+                    <asp:Label ID="lblWare" runat="server" Visible="false" Text="WAREHOUSE" CssClass="label"></asp:Label>
+                    <asp:DropDownList ID="DropWare" Visible="False" runat="server" CssClass="input1">
+                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                                     </ContentTemplate></asp:UpdatePanel> 
 
                 <div class="input_field1">
                     <asp:Label ID="Label7" runat="server" Text="StartingSeries:" CssClass="label"></asp:Label>
