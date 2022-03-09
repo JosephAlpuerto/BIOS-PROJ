@@ -63,7 +63,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label82" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="lblOnProduction" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 
@@ -76,7 +76,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label84" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="lblOnStock" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 
@@ -89,7 +89,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label86" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="lblCompleted" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 

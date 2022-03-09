@@ -8,6 +8,13 @@
     .input_field1 .labelName {
         margin-left: 40px;
     }
+.input_field1 .labelEnd {
+    margin-left: 40px;
+    margin-right: 8px;
+}
+.input_field1 .inputProduct {
+    margin-left: 40px;
+}
     .contain1 {
         width: max-content;
         background: white;

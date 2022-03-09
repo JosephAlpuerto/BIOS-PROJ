@@ -47,10 +47,36 @@
                 }
             })
         }
+        function Hitcheck2() {
+            Swal.fire({
+                title: "All Details are compatible in this series.",
+                text: "You clicked the button!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
 
        function Scan() {
             Swal.fire({
-                title: "This series are equal quantities.",
+                title: "This series are equal quantities and product.",
+                text: "Proceed to saving this data!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function Scan2() {
+            Swal.fire({
+                title: "This series are equal quantities and product.",
                 text: "Proceed to saving this data!",
                 icon: "success",
                 confirmButtonText: "Okay",
@@ -545,19 +571,26 @@
                     </div>
                 </div>
 
+
+
+
                 <div class="modal fade" id="ScanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel3">Scanning of Finished Goods</h5>
-                                <asp:Button ID="btnclose" runat="server" Text="x" class="close" type="button" data-dismiss="modal" aria-label="Close" OnClick="btnclose_Click"/>
-                            </div>
+                                <asp:Button ID="btnclose" runat="server" Text="x" class="close" data-dismiss="modal" OnClick="btnclose_Click"/>
+                                     </div>
                             <div class="modal-header">
                                <asp:UpdatePanel ID="UpdatePanel4" runat="server"><ContentTemplate>
+                                   
                 <div class="input_field1">
                     <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="labelName"></asp:Label>
                     <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>
+                    <asp:Label ID="Label2" runat="server" Text="Enter Ending Series:" CssClass="labelEnd"></asp:Label>
+                    <asp:TextBox ID="txtEndingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtEndingScan_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtProduct" runat="server" CssClass="inputProduct" Visible="false" Enabled="false" Width="407px"></asp:TextBox>
                     <asp:HiddenField ID="hfEndingSeries" runat="server" />
                     <asp:HiddenField ID="ID" runat="server" />
                     <asp:HiddenField ID="TicketNo" runat="server" />
@@ -602,6 +635,8 @@
                                      <Triggers>
                             <asp:PostBackTrigger ControlID="btnOkay" />
                             <asp:PostBackTrigger ControlID="txtStartingScan"/>
+                            <asp:PostBackTrigger ControlID="btnclose"/>
+                            <asp:PostBackTrigger ControlID="txtEndingScan"/>
                                     </Triggers>
                                 </asp:UpdatePanel> 
                             </div>

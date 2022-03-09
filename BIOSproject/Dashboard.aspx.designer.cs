@@ -60,13 +60,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label81;
 
         /// <summary>
-        /// Label82 control.
+        /// lblOnProduction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label82;
+        protected global::System.Web.UI.WebControls.Label lblOnProduction;
 
         /// <summary>
         /// Label83 control.
@@ -78,13 +78,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label83;
 
         /// <summary>
-        /// Label84 control.
+        /// lblOnStock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label84;
+        protected global::System.Web.UI.WebControls.Label lblOnStock;
 
         /// <summary>
         /// Label85 control.
@@ -96,13 +96,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label85;
 
         /// <summary>
-        /// Label86 control.
+        /// lblCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label86;
+        protected global::System.Web.UI.WebControls.Label lblCompleted;
 
         /// <summary>
         /// Label1 control.

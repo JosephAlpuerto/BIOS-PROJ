@@ -311,40 +311,53 @@ namespace BIOSproject
                 begin++;
             }
         }
-        protected void DownloadView_Click(object sender, EventArgs e)
+        public void dl()
         {
-            LinkButton HitCheck = (sender as LinkButton);
-            string[] commandArguments = HitCheck.CommandArgument.Split(',');
-            try
+            int start = int.Parse(hfStartdl.Value);
+            int end = int.Parse(hfEnddl.Value);
+            string series = "";
+            if (hfIDdl.Value != "")
             {
-                int start = int.Parse(commandArguments[1]);
-                int end = int.Parse(commandArguments[2]);
-
-                string series = "";
                 for (int i = start; i <= end; i++)
                 {
                     series += i.ToString() + System.Environment.NewLine;
                 }
-
-
                 string text = Convert.ToString(series);
                 Response.Clear();
                 Response.ClearHeaders();
                 Response.AddHeader("Content-Length", text.Length.ToString());
                 Response.ContentType = "text/plain";
-                Response.AppendHeader("content-disposition", "attachment;filename=\"" + commandArguments[0] + ".txt\"");
+                Response.AppendHeader("content-disposition", "attachment;filename=\"" + hfIDdl.Value + ".txt\"");
                 Response.Write(text);
                 Response.End();
-                FillGridView();
             }
-            catch (Exception ex) { }
-
-           
-
+        } 
+        protected void DownloadView_Click(object sender, EventArgs e)
+        {
+            Button Download = (sender as Button);
+            string[] commandArguments = Download.CommandArgument.Split(',');
+            lblNumber.Text = commandArguments[0];
+            
+            hfIDdl.Value = commandArguments[0];
+            hfStartdl.Value = commandArguments[1];
+            hfEnddl.Value = commandArguments[2];
+            
+            ModalDL.Show();
         }
 
-    
-
+        protected void btnDL_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("IfPrint", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Id", hfIDdl.Value);
+            sqlCmd.Parameters.AddWithValue("@IsRejected", "1");
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+            dl();
+        }   
             protected void HitCheck_Click(object sender, EventArgs e)
         {
             LinkButton HitCheck = (sender as LinkButton);
@@ -683,12 +696,14 @@ namespace BIOSproject
             txtStartScan.Text = dtbl.Rows[0]["StartingSeries"].ToString();
             hfEnd.Value = dtbl.Rows[0]["EndingSeries"].ToString();
 
+            btnHitcheck.Visible = false;
             lblUnits.Text = "0";
             //lblseries.Text = "0";
             txtSeries.Text = "";
-            btnPrint.Visible = false;
+            //btnPrint.Visible = false;
             txtEndScan.Text = "";
             txtProduct.Text = "";
+            btnCheck.Enabled = true;
             ModalScanSupplier.Show();
             //if (hfIdHIT.Value == "")
             //{
@@ -728,15 +743,56 @@ namespace BIOSproject
                 SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
                 if (sqlCon2.State == ConnectionState.Closed)
                     sqlCon2.Open();
-                SqlCommand sqlCmd = new SqlCommand("CheckDuplicate2", sqlCon2);
+                SqlCommand sqlCmd = new SqlCommand("OnProduction", sqlCon2);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@Id", hfIdScan.Value);
-                sqlCmd.Parameters.AddWithValue("@forHitCheck", "1");
+                sqlCmd.Parameters.AddWithValue("@ifProcess", "1");
 
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Hitcheck()", true);
                 //ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
                 hfIdHIT.Value = "";
-                btnPrint.Visible = true;
+                btnHitcheck.Visible = true;
+                btnCheck.Enabled = false;
+                sqlCmd.ExecuteNonQuery();
+                sqlCon2.Close();
+
+            }
+
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Duplicate Record','You clicked the button!', 'warning')", true);
+            }
+
+            sqlCon.Close();
+
+        }
+        public void Hitcheck2()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("CheckDuplicate", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Id", hfIdScan.Value);
+            sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", txtStartScan.Text);
+            sqlData.SelectCommand.Parameters.AddWithValue("@EndingSeries", hfEnd.Value);
+
+            SqlDataReader sdr = sqlData.SelectCommand.ExecuteReader();
+            if (sdr.Read())
+            {
+                SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
+                if (sqlCon2.State == ConnectionState.Closed)
+                    sqlCon2.Open();
+                SqlCommand sqlCmd = new SqlCommand("OnProduction", sqlCon2);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@Id", hfIdScan.Value);
+                sqlCmd.Parameters.AddWithValue("@ifProcess", "1");
+
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Hitcheck2()", true);
+                //ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('There are no duplicates in this series.','You clicked the button!', 'success')", true);
+                hfIdHIT.Value = "";
+                btnHitcheck.Visible = true;
+                btnCheck.Enabled = false;
                 sqlCmd.ExecuteNonQuery();
                 sqlCon2.Close();
 
@@ -787,7 +843,8 @@ namespace BIOSproject
                             }
                             string text = Convert.ToString(series);
                             txtSeries.Text = text;
-                            btnPrint.Visible = true;
+                            btnHitcheck.Visible = true;
+                            btnCheck.Enabled = false;
 
                         }
                         else
@@ -801,15 +858,17 @@ namespace BIOSproject
                         txtEndScan.Text = "";
                         txtProduct.Text = "";
                         lblUnits.ForeColor = System.Drawing.Color.Red;
-                        btnPrint.Visible = false;
+                        btnHitcheck.Visible = false;
+                        btnCheck.Enabled = true;
                     }
                     sqlCon3.Close();
                 }
                 adding();
             }
-
-           
-            
+        }
+        protected void btnHitcheck_Click(object sender, EventArgs e)
+        {
+            Hitcheck2();
         }
 
         protected void btnCloseScanSupplier_Click(object sender, EventArgs e)
@@ -817,7 +876,7 @@ namespace BIOSproject
             txtEndScan.Text = "";
             txtProduct.Text = "";
             lblUnits.ForeColor = System.Drawing.Color.Red;
-            btnPrint.Visible = false;
+            //btnPrint.Visible = false;
             ModalScanSupplier.Hide();
 
         }
@@ -828,7 +887,7 @@ namespace BIOSproject
             txtEndScan.Text = "";
             txtProduct.Text = "";
             lblUnits.ForeColor = System.Drawing.Color.Red;
-            btnPrint.Visible = false;
+            //btnPrint.Visible = false;
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
@@ -978,8 +1037,8 @@ namespace BIOSproject
             hfEndingSeries.Value = "";
             lblScanUnits.Text = "";
 
-            Response.Redirect(Request.Url.AbsoluteUri);
             ModalScan.Hide();
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         protected void Gridview1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -996,51 +1055,52 @@ namespace BIOSproject
             }
         }
 
-        protected void btnPrint_Click(object sender, EventArgs e)
-        {
-           
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            sqlCon.Open();
-            if (hfIdScan.Value != "")
-            {
-                SqlCommand cmd = new SqlCommand("Select IsRejected From SSPNewRequest Where  ID = @ID and Supplier = @Supplier", sqlCon);
-                cmd.Parameters.AddWithValue("@ID", int.Parse(hfIdScan.Value));
-                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+        //protected void btnPrint_Click(object sender, EventArgs e)
+        //{
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    hfisRejected.Value = dr.GetValue(0).ToString();
-                    if (hfisRejected.Value == "False")
-                    {
-                        ReportParameter series = new ReportParameter("SeriesReport", txtSeries.Text, true);
-                        this.RvSeries.LocalReport.SetParameters(new ReportParameter[] { series });
-                        Print();
-                        ModalPrint.Show();
-                    }
-                    else
-                    {
-                        ModalPass.Show();
-                        
-                    }
-                }
-                sqlCon.Close();
-            }
-        }
-        public void Print()
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("IfPrint", sqlCon);
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@Id", (hfIdScan.Value == "" ? 0 : Convert.ToInt32(hfIdScan.Value)));
-            sqlCmd.Parameters.AddWithValue("@IsRejected", "1");
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
-            FillGridView();
+        //    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        //    sqlCon.Open();
+        //    if (hfIdScan.Value != "")
+        //    {
+        //        SqlCommand cmd = new SqlCommand("Select IsRejected From SSPNewRequest Where  ID = @ID and Supplier = @Supplier", sqlCon);
+        //        cmd.Parameters.AddWithValue("@ID", int.Parse(hfIdScan.Value));
+        //        cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
-        }
+        //        SqlDataReader dr = cmd.ExecuteReader();
+        //        if (dr.Read())
+        //        {
+        //            hfisRejected.Value = dr.GetValue(0).ToString();
+        //            if (hfisRejected.Value == "False")
+        //            {
+        //                ReportParameter series = new ReportParameter("SeriesReport", txtSeries.Text, true);
+        //                this.RvSeries.LocalReport.SetParameters(new ReportParameter[] { series });
+        //                Print();
+        //                ModalPrint.Show();
+        //            }
+        //            else
+        //            {
+        //                ModalPass.Show();
+
+        //            }
+        //        }
+        //        sqlCon.Close();
+        //    }
+        //}
+        //public void Print()
+        //{
+        //    LinkButton HitCheck = (sender as LinkButton);
+        //    string[] commandArguments = HitCheck.CommandArgument.Split(',');
+        //    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        //    if (sqlCon.State == ConnectionState.Closed)
+        //        sqlCon.Open();
+        //    SqlCommand sqlCmd = new SqlCommand("IfPrint", sqlCon);
+        //    sqlCmd.CommandType = CommandType.StoredProcedure;
+        //    sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
+        //    sqlCmd.Parameters.AddWithValue("@IsRejected", "1");
+        //    sqlCmd.ExecuteNonQuery();
+        //    sqlCon.Close();
+        //    FillGridView();
+        //}
 
 
         protected void btnConfirm_Click(object sender, EventArgs e)
@@ -1068,18 +1128,12 @@ namespace BIOSproject
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        protected void btnCloseDL_Click(object sender, EventArgs e)
+        {
+            FillGridView();
+            ModalDL.Hide();
+            //Response.Redirect(Request.Url.AbsoluteUri);
+        }
 
 
 

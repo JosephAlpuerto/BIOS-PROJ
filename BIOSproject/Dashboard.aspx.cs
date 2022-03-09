@@ -40,6 +40,9 @@ namespace BIOSproject
 
             Count();
 
+            Completed();
+            OnStock();
+            OnProduction();
             Hitcheck();
             FIE();
             WPCC();
@@ -69,10 +72,47 @@ namespace BIOSproject
             int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
             lblHitcheck.Text = numRec.ToString();
             sqlCon.Close();
-
-
-
         }
+        public void OnProduction()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("OnProductionCount", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+
+
+            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+            lblOnProduction.Text = numRec.ToString();
+            sqlCon.Close();
+        }
+        public void OnStock()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("OnStockCount", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+
+
+            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+            lblOnStock.Text = numRec.ToString();
+            sqlCon.Close();
+        }
+        public void Completed()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("OnCompletedCount", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+
+
+            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+            lblCompleted.Text = numRec.ToString();
+            sqlCon.Close();
+        }
+
         private void Count()
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString);

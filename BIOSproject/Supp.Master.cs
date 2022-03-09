@@ -108,14 +108,22 @@ namespace BIOSproject
                     SupplierName.Value = dr.GetValue(10).ToString();
 
                     hfEndingSeries2.Value = dr.GetValue(8).ToString();
+                    txtEndingScan.Text = dr.GetValue(8).ToString();
                     addingScan();
 
                     lblTotal.Text = dr.GetValue(6).ToString();
                     btnOkay.Visible = true;
 
+                    txtProduct.Text = dr.GetValue(4).ToString();
+                    txtProduct.Visible = true;
+
+
                     if (lblScanUnits.Text == lblTotal.Text)
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Scan()", true);
+                    }
+                    else {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This series are not equal quantities.','You clicked the button!', 'warning')", true);
                     }
                 }
                 else
@@ -124,24 +132,127 @@ namespace BIOSproject
                 }
                 sqlCon3.Close();
             }
+            else
+            {
+                ID.Value = "";
+                TicketNo.Value = "";
+                PONumber.Value = "";
+                Supplier.Value = "";
+                ProductQuantity.Value = "";
+                TotalQuantity.Value = "";
+                Quantity.Value = "";
+                StartingSeries.Value = "";
+                EndingSeries.Value = "";
+                RequestNo.Value = "";
+                SupplierName.Value = "";
+
+                hfEndingSeries2.Value = "";
+                txtStartingScan.Text = "";
+                txtEndingScan.Text = "";
+                lblScanUnits.Text = "0";
+
+                lblTotal.Text = "0";
+                btnOkay.Visible = false;
+
+                txtProduct.Text = "";
+                txtProduct.Visible = false;
+            }
+        }
+        protected void txtEndingScan_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon4 = new SqlConnection(ConnectionString);
+            sqlCon4.Open();
+            if (txtEndingScan.Text != "")
+            {
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where  EndingSeries = @EndingSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon4);
+                cmd.Parameters.AddWithValue("@EndingSeries", int.Parse(txtEndingScan.Text));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    ID.Value = dr.GetValue(0).ToString();
+                    TicketNo.Value = dr.GetValue(1).ToString();
+                    PONumber.Value = dr.GetValue(2).ToString();
+                    Supplier.Value = dr.GetValue(3).ToString();
+                    ProductQuantity.Value = dr.GetValue(4).ToString();
+                    TotalQuantity.Value = dr.GetValue(5).ToString();
+                    Quantity.Value = dr.GetValue(6).ToString();
+                    StartingSeries.Value = dr.GetValue(7).ToString();
+                    EndingSeries.Value = dr.GetValue(8).ToString();
+                    RequestNo.Value = dr.GetValue(9).ToString();
+                    SupplierName.Value = dr.GetValue(10).ToString();
+
+                    hfEndingSeries2.Value = dr.GetValue(8).ToString();
+                    txtStartingScan.Text = dr.GetValue(7).ToString();
+                    addingScan();
+
+                    lblTotal.Text = dr.GetValue(6).ToString();
+                    btnOkay.Visible = true;
+
+                    txtProduct.Text = dr.GetValue(4).ToString();
+                    txtProduct.Visible = true;
+
+                    if (lblScanUnits.Text == lblTotal.Text)
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Scan2()", true);
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This series are not equal quantities.','You clicked the button!', 'warning')", true);
+                    }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                }
+                sqlCon4.Close();
+            }
+            else
+            {
+                ID.Value = "";
+                TicketNo.Value = "";
+                PONumber.Value = "";
+                Supplier.Value = "";
+                ProductQuantity.Value = "";
+                TotalQuantity.Value = "";
+                Quantity.Value = "";
+                StartingSeries.Value = "";
+                EndingSeries.Value = "";
+                RequestNo.Value = "";
+                SupplierName.Value = "";
+
+                hfEndingSeries2.Value = "";
+                txtStartingScan.Text = "";
+                txtEndingScan.Text = "";
+                lblScanUnits.Text = "0";
+
+                lblTotal.Text = "0";
+                btnOkay.Visible = false;
+
+                txtProduct.Text = "";
+                txtProduct.Visible = false;
+            }
         }
 
         protected void btnclose_Click(object sender, EventArgs e)
         {
             txtStartingScan.Text = "";
-            lblTotal.Text = "";
+            txtEndingScan.Text = "";
+            lblTotal.Text = "0";
+            lblScanUnits.Text = "0";
             btnOkay.Visible = false;
         }
         public void addingScan()
         {
             //lblUnits.Text = "0";
             double start, end, answer;
-            double.TryParse(txtStartingScan.Text, out start);
-            double.TryParse(hfEndingSeries2.Value, out end);
+            double.TryParse(StartingSeries.Value, out start);
+            double.TryParse(EndingSeries.Value, out end);
 
 
             answer = end - start + 1;
-            if (answer > 0 && txtStartingScan.Text != "" && hfEndingSeries2.Value != "")
+            if (answer > 0 && StartingSeries.Value != "" && EndingSeries.Value != "")
                 lblScanUnits.Text = answer.ToString();        
         }
         public void InsertDB()
@@ -241,5 +352,7 @@ namespace BIOSproject
                 txtStartingScan.Text = "";
             }
         }
+
+
     }
 }

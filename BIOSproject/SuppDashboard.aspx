@@ -27,6 +27,8 @@
         }
     </style>
     
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
         <div class="content">
             <div class="cards">
                 <div class="card">

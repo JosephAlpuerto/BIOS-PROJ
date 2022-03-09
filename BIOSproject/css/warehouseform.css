@@ -104,6 +104,39 @@
         color: White;
         margin-bottom: 10px;
     }
+    .big .contain {
+        width: 500px;
+        margin-left: 10px;
+        background: white;
+        border-color: lightgrey;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        border-radius: 25px;
+    }
+        .big .contain .input_field1 {
+            margin-top: 15px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+    .big .container .forms .input_field1 .labelSearch {
+        margin-left: 33%;
+        width: 25%;
+    }
+
+    .big .container .forms .input_field1 .btnSearch {
+        width: 10%;
+        height: 8%;
+        margin-left: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        outline: none;
+        background-color: #d00149;
+        color: White;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 3px;
+    }
 
 
 

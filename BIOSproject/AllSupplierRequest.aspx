@@ -506,9 +506,12 @@
                     <%--<div class="input_field1">
                         <asp:Button ID="btnScan" Text="SCAN" Visible="false" CssClass="btnScan" runat="server" OnClick="btnScan_Click"/>
                     </div>--%>
-                    <div class="input_field1">
+                  <%--  <div class="input_field1">
                         <asp:HiddenField runat="server" ID="hfisRejected"/>
                         <asp:Button ID="btnPrint" Text="Print" Visible="false" CssClass="btnScan" runat="server" OnClick="btnPrint_Click"/>
+                    </div>--%>
+                     <div class="input_field1">
+                        <asp:Button ID="btnHitcheck" Text="HitCheck" Visible="false" CssClass="btnScan" runat="server" OnClick="btnHitcheck_Click"/>
                     </div>
                      
               </div>
@@ -517,7 +520,7 @@
                    </ContentTemplate>
                    <Triggers>
                             <asp:PostBackTrigger ControlID="btnCheck" />
-                            <asp:PostBackTrigger ControlID="btnPrint" />
+                            <asp:PostBackTrigger ControlID="btnHitcheck" />
                     </Triggers>
                </asp:UpdatePanel>
                
@@ -615,9 +618,6 @@
                             <asp:PostBackTrigger ControlID="btnOkay" />
                                     </Triggers>
                                 </asp:UpdatePanel> 
-              
-                          
-            
             </div>
                </div>
         </asp:Panel>
@@ -654,6 +654,36 @@
                        </div>             
             </div>
           
+        </asp:Panel>
+    <ajaxtoolkit:modalpopupextender ID="ModalDL" PopupControlID="PanelDL" TargetControlID="gvModal" runat="server"></ajaxtoolkit:modalpopupextender>
+       <asp:Panel ID="PanelDL" runat="server" TabIndex="1" CssClass="Modal">
+          
+           <div class="containDL"> 
+                <asp:UpdatePanel ID="UpdatePanel6" runat="server"><ContentTemplate>
+                    <div id="header2" class="modal-header">
+                                <h5 class="modal-title" id=""> 
+                                    Download</h5>
+                        <asp:Button runat="server" ID="btnCloseDL" Text="x" CssClass="btn" OnClick="btnCloseDL_Click"/>
+                            </div>
+              
+                <div class="input_field1">
+                    <asp:Label ID="Label12" runat="server" Text="Request Number:" CssClass="label"></asp:Label>
+                     <asp:Label ID="lblNumber" runat="server" ForeColor="Blue" CssClass="label" ></asp:Label> 
+                </div>
+                <div class="input_field1">
+                     <asp:Button ID="btnDL" runat="server" Text="Download" CssClass="btn" OnClick="btnDL_Click"/>
+                     
+
+                </div>
+
+                             </ContentTemplate>
+                                     <Triggers>
+                            <asp:PostBackTrigger ControlID="btnDL" />
+                            <asp:PostBackTrigger ControlID="btnCloseDL" />
+                                    </Triggers>
+                                </asp:UpdatePanel> 
+                
+            </div>
         </asp:Panel>
 
 
@@ -699,8 +729,8 @@
 
                                                        <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")%>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"/>
-                                                              <%-- <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("forHitCheck").ToString() == "False"%>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>--%>
+                                                               <asp:Button ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries") + "," + Eval("IsRejected")%>' Visible='<%# Eval("IsRejected").ToString() == "False" %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:Button>
+                                                               <asp:Button ID="LinkButton2" runat="server" Text="Download" Enabled="false" Visible='<%# Eval("IsRejected").ToString() == "True" %>' CssClass="btn btn-primary btn-user btn-block"></asp:Button>
                                                            </ItemTemplate>
                                                        </asp:TemplateField>
                                                         <asp:TemplateField>
