@@ -206,8 +206,11 @@
         margin-bottom: 10px;
     }
     .big .container .forms .input_field1 .labelSearch {
-        margin-left: 33%;
-        width: 25%;
+        margin-left: 45%;
+        width: 25%; 
+    }
+    .big .container .forms .input_field1 .inputSearch {
+        margin-bottom: 10px;
     }
     .big .container .forms .input_field1 .btnSearch {
         width: 10%;

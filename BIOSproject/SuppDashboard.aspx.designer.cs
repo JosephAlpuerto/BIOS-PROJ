@@ -69,13 +69,31 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// Label6 control.
+        /// hfNoPO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.HiddenField hfNoPO;
+
+        /// <summary>
+        /// hfNoDel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfNoDel;
+
+        /// <summary>
+        /// lblFulfilment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFulfilment;
 
         /// <summary>
         /// Label7 control.
@@ -87,13 +105,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// Label8 control.
+        /// lblProduced control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label lblProduced;
 
         /// <summary>
         /// Label9 control.
@@ -105,13 +123,13 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
-        /// Label10 control.
+        /// lblAvailability control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.WebControls.Label lblAvailability;
 
         /// <summary>
         /// Label2 control.

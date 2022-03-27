@@ -12,9 +12,32 @@
     margin-left: 40px;
     margin-right: 8px;
 }
-.input_field1 .inputProduct {
+.input_field1 .labelUnits {
+    margin-top: 10px;
+    margin-left: 81px;
+    margin-right: 18px;
+}
+.input_field1 .labelRS {
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 18px;
+}
+.input_field1 .labelStart {
+    margin-top: 10px;
+    margin-left: 81px;
+}
+.input_field1 .labelProduct {
     margin-left: 40px;
 }
+.input_field1 .inputProduct {
+    margin-bottom: 10px;
+}
+.input_field1 .inputSeries {
+    margin-left: 130px;
+    resize: none !important;
+    height: 100px !important;
+}
+
     .contain1 {
         width: max-content;
         background: white;

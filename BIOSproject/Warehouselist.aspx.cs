@@ -305,8 +305,8 @@ namespace BIOSproject.Hub
             hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
             hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
             hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
-            hfProduct.Value = dtbl.Rows[0]["ProductQuantity"].ToString();
-            hfQuantity.Value = dtbl.Rows[0]["TotalQuantity"].ToString();
+            hfProduct.Value = dtbl.Rows[0]["Product"].ToString();
+            hfQuantity.Value = dtbl.Rows[0]["Quantity"].ToString();
             ModalDownloadView.Show();
             FillGridView();
         }

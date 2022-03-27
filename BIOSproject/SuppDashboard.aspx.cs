@@ -20,9 +20,10 @@ namespace BIOSproject
         protected void Page_Load(object sender, EventArgs e)
         {
              
-            string cmdText = "select count( DISTINCT PONumber) from [LBC.BIOS].[lbcbios].[SSPNewRequest]", con;
+            string cmdText = "select count(*) from [LBC.BIOS].[lbcbios].[SSPNewRequest] where Supplier = @Supplier", con;
             SqlConnection conDatabase = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand(cmdText, conDatabase);
+            cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             {
                 conDatabase.Open();
                 int numRec = Convert.ToInt32(cmd.ExecuteScalar());
@@ -39,6 +40,9 @@ namespace BIOSproject
                 string numRec = sqlData.ExecuteScalar().ToString();
                 NoOfdlver.Text = numRec.ToString();
             }
+            Availability();
+            Produced();
+            Fulfilment();
 
             KiloboxMini();
             KBSlim();
@@ -49,7 +53,54 @@ namespace BIOSproject
             NPSMALL42D();
             NPSMALL4NON();
         }
+        public void Fulfilment()
+        {
+            hfNoDel.Value = LblPO.Text;
+            hfNoPO.Value = NoOfdlver.Text;
+            if (hfNoPO.Value != "0" || hfNoDel.Value != "0")
+            {
+                double PO, DEL, answer;
+                double.TryParse(hfNoDel.Value, out PO);
+                double.TryParse(hfNoPO.Value, out DEL);
 
+                answer = (DEL / PO) * 100;
+                decimal value = Convert.ToDecimal(answer);
+                decimal round = Decimal.Round(value);
+                lblFulfilment.Text = round + "%";
+            }
+            else
+            {
+                lblFulfilment.Text = "0";
+            }
+            
+        }
+        public void Produced()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("ProducedCount", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+            lblProduced.Text = numRec.ToString();
+            sqlCon.Close();
+        }
+        public void Availability()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("AvailabilityCount", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+
+            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+            lblAvailability.Text = numRec.ToString();
+            sqlCon.Close();
+        }
         private void KiloboxMini()
         {
 

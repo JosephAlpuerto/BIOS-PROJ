@@ -64,7 +64,9 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label6" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:HiddenField runat="server" ID="hfNoPO"/>
+                        <asp:HiddenField runat="server" ID="hfNoDel"/>
+                        <asp:Label ID="lblFulfilment" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 
@@ -77,7 +79,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label8" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="lblProduced" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 
@@ -90,7 +92,7 @@
                     </div>
                     <br />
                     <div class="box1">
-                        <asp:Label ID="Label10" runat="server" Text="0" CssClass="label2"></asp:Label>
+                        <asp:Label ID="lblAvailability" runat="server" Text="0" CssClass="label2"></asp:Label>
                     </div>
 
 

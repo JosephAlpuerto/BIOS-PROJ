@@ -151,9 +151,7 @@
                      <asp:Label ID="Label9" runat="server" Text="Total Quantity" CssClass="label"></asp:Label>
                 </div>
                  <div class="input-box6">
-                     
-                <asp:TextBox ID="TxtAllProduct" runat="server" Visible="false" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox>
-                     
+                <asp:TextBox ID="TxtAllProduct" runat="server" Visible="false" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox> 
                 </div>
                 <div class="input-box6">
                     <asp:TextBox ID="txtTotal" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>

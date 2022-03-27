@@ -10,7 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LBC   - Supplier</title>
+    <title>LBC - Supplier</title>
+    
      <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
             <script src="js/jquery.js"></script>
@@ -33,7 +34,8 @@
     <script src="js/sweetAlert.js" type="text/javascript"></script>
     <script src="js/SA.js" type="text/javascript"></script>
     <script src="js/jquery.js"></script>
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
     <script>
 
         function Hitcheck() {
@@ -47,6 +49,81 @@
                 }
             })
         }
+        function HitcheckSuccess() {
+            Swal.fire({
+                title: "There are no duplicates in this series.",
+                text: "You clicked the button!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function HitcheckError() {
+            Swal.fire({
+                title: "Duplicate Record.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function HitcheckDuplicate() {
+            Swal.fire({
+                title: "Already in the list!.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function HitcheckSame() {
+            Swal.fire({
+                title: "No Record for this Series.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        //function HitcheckEqual() {
+        //    Swal.fire({
+        //        title: "This series are ready!.",
+        //        text: "Proceed to saved!",
+        //        icon: "warning",
+        //        confirmButtonText: "Okay",
+        //        customClass: {
+        //            container: 'my-swal'
+        //        }
+        //    }).then((result) => {
+        //        if (result.isConfirmed) {
+        //            $('#ScanModal').modal('show');
+        //        }
+        //    })
+        //}
         function Hitcheck2() {
             Swal.fire({
                 title: "All Details are compatible in this series.",
@@ -62,7 +139,7 @@
        function Scan() {
             Swal.fire({
                 title: "This series are equal quantities and product.",
-                text: "Proceed to saving this data!",
+                text: "Proceed to Seperate this data!",
                 icon: "success",
                 confirmButtonText: "Okay",
                 customClass: {
@@ -89,6 +166,66 @@
                 }
             })
         }
+        function Unit() {
+            Swal.fire({
+                title: "Error.",
+                text: "Please Enter No. of Units!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function Series() {
+            Swal.fire({
+                title: "Error.",
+                text: "Please Input Start Series!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function CheckUnit() {
+            Swal.fire({
+                title: "Error.",
+                text: "Please Check No. of Units!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function CheckUnitSuccess() {
+            Swal.fire({
+                title: "Good!",
+                text: "Proceed to saving this data!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
         function Saved() {
             Swal.fire({
                 title: "Saved Successfully!",
@@ -99,12 +236,63 @@
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function AllSaved() {
+            Swal.fire({
+                title: "All Bundling are Saved Successfully!",
+                text: "Proceed to Tagging Form!",
+                icon: "success",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
                 window.location = "AllSupplierRequest.aspx";
             })
         }
        
+        $(document).ready(function () {
+            $("#txtUnits").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+        });
+        $(document).ready(function () {
+            $("#txtStartSeries").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+        });
+        $(document).ready(function () {
+            $("#txtUnits").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+        });
+        $(document).ready(function () {
+            $("#txtStart").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+        });
 
+        
     </script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+ 
+     
     <style type="text/css">
         .my-swal {
             z-index: 100000;
@@ -118,6 +306,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
+    
 <body id="page-top">
     <form id="form1" runat="server">
         <div id="wrapper">
@@ -513,7 +702,7 @@
                     </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
                     </asp:ContentPlaceHolder>
-
+                     
                 </div>
                 <!-- End of Page Wrapper -->
 
@@ -584,13 +773,52 @@
                                      </div>
                             <div class="modal-header">
                                <asp:UpdatePanel ID="UpdatePanel4" runat="server"><ContentTemplate>
-                                   
+                                        
                 <div class="input_field1">
-                    <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="labelName"></asp:Label>
-                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>
-                    <asp:Label ID="Label2" runat="server" Text="Enter Ending Series:" CssClass="labelEnd"></asp:Label>
-                    <asp:TextBox ID="txtEndingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtEndingScan_TextChanged"></asp:TextBox>
-                    <asp:TextBox ID="txtProduct" runat="server" CssClass="inputProduct" Visible="false" Enabled="false" Width="407px"></asp:TextBox>
+                   <%-- <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="labelName"></asp:Label>
+                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>--%>
+                    <%--<asp:Label ID="Label2" runat="server" Text="Enter Ending Series:" CssClass="labelEnd"></asp:Label>
+                    <asp:TextBox ID="txtEndingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtEndingScan_TextChanged"></asp:TextBox>--%>
+                   
+
+
+                    <asp:Label ID="Label3" runat="server" Text="Enter Series:" CssClass="labelName"></asp:Label>
+                    <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtStartSeries_TextChanged"></asp:TextBox>
+                    
+                     <div class="input_field1">
+                         <asp:Label ID="start" runat="server" Text="Start Series:" CssClass="labelName" Visible="false"></asp:Label>
+                         <asp:Label ID="lblStart" runat="server" CssClass="labelName" Visible="false"></asp:Label>
+                     </div>
+                     <div class="input_field1">
+                         <asp:Label ID="end" runat="server" Text="End Series:" CssClass="labelEnd" Visible="false"></asp:Label>
+                         <asp:Label ID="lblEnd" runat="server" CssClass="labelEnd" Visible="false"></asp:Label>
+                     </div>
+                     <div class="input_field1">
+                         <asp:Label ID="lblProduct" runat="server" Text="Product:" Visible="false" CssClass="labelProduct"></asp:Label>
+                         <asp:TextBox ID="txtProduct" runat="server" CssClass="inputProduct" Visible="false" Enabled="false" Width="343px"></asp:TextBox>
+                     </div>
+                    <div class="input_field1">
+                         <asp:Label ID="Units" runat="server" Text="Enter Units:" CssClass="labelUnits" Visible="false"></asp:Label>
+                         <asp:TextBox ID="txtUnits" runat="server" CssClass="input1" Width="200px" Visible="false" AutoPostBack="true" OnTextChanged="txtUnits_TextChanged"></asp:TextBox>
+                    </div>
+                     <div class="input_field1">
+                         <asp:Label ID="StartSeries" runat="server" Text="Scan Barcode:" CssClass="labelStart" Visible="false"></asp:Label>
+                         <asp:TextBox ID="txtStart" runat="server" CssClass="input1" Width="200px" Visible="false" AutoPostBack="true" OnTextChanged="txtStart_TextChanged"></asp:TextBox>
+                         <asp:HiddenField runat="server" ID="hfend" />
+                         <asp:HiddenField runat="server" ID="hfstart" />
+                    </div>
+                    <div class="input_field1">
+                         <asp:Label ID="LabelSeries" runat="server" Text="Series:" CssClass="labelUnits" Visible="false"></asp:Label>
+                         <asp:Label ID="lblSeries" runat="server" ForeColor="Blue" Visible="false"></asp:Label>
+                         <asp:Label ID="lblSeries2" runat="server" ForeColor="Green" CssClass="labelRS" Visible="false"></asp:Label>
+                    </div>
+                    <div class="input_field1">
+                        <asp:TextBox ID="txtSeries" runat="server" CssClass="inputSeries" Width="250px" TextMode="MultiLine" Enabled="false" Visible="false"></asp:TextBox>
+                    </div>
+
+                   <%-- <asp:Label ID="lblBundle" Text="Available to Bundle:" CssClass="labelName" Visible="false" runat="server"  ></asp:Label>
+                    <asp:Label ID="lblBundleNo" runat="server" Visible="false" ForeColor="Blue"></asp:Label>--%>
+
                     <asp:HiddenField ID="hfEndingSeries" runat="server" />
                     <asp:HiddenField ID="ID" runat="server" />
                     <asp:HiddenField ID="TicketNo" runat="server" />
@@ -613,18 +841,16 @@
                        <asp:Label ID="lblUnitsScan" runat="server" Text="No. of Units:" CssClass="label" ></asp:Label> 
                    </div>
                   <div class="input_field2">
-                      <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
                    </div>
               </div>
               <div class="forms">
                   <div class="input_field1">
-                       <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label> 
-                       
+                       <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label>   
                    </div>
                   <div class="input_field2">
                       <asp:Label ID="lblTotal" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
-                   </div>
-                  
+                  </div>
               </div>
                
             </div>
@@ -634,9 +860,12 @@
                          </ContentTemplate>
                                      <Triggers>
                             <asp:PostBackTrigger ControlID="btnOkay" />
-                            <asp:PostBackTrigger ControlID="txtStartingScan"/>
+                            <asp:PostBackTrigger ControlID="txtStartSeries" />
+                            <asp:PostBackTrigger ControlID="txtUnits" />
+                            <asp:PostBackTrigger ControlID="txtStart" />
+                            <%--<asp:PostBackTrigger ControlID="txtStartingScan"/>--%>
                             <asp:PostBackTrigger ControlID="btnclose"/>
-                            <asp:PostBackTrigger ControlID="txtEndingScan"/>
+                           <%-- <asp:PostBackTrigger ControlID="txtEndingScan"/>--%>
                                     </Triggers>
                                 </asp:UpdatePanel> 
                             </div>
@@ -700,14 +929,15 @@
                             }
                         </style>
 
-
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
 
 
             </div>
         </div>
+     
     </form>
+
 </body>
 </html>
 
