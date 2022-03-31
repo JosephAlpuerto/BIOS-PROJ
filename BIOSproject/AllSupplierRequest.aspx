@@ -18,7 +18,7 @@
                      </div>
 
     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
-        <asp:Panel ID="PanelValidateSeries"  runat="server">
+        <asp:Panel ID="PanelValidateSeries" runat="server">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
             <script src="js/jquery.js"></script>

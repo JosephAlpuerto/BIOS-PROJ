@@ -316,6 +316,7 @@ namespace BIOSproject
 
                 txtStartSeries.Text = "";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "AllSaved()", true);
+                lblScanUnitsCount.Text = "0";
                 clearScan();
             }
         }
@@ -351,8 +352,8 @@ namespace BIOSproject
             sqlCon.Open();
             if (txtStartSeries.Text != "" && txtUnits.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
-                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartSeries.Text));
+                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries From SSPNewRequest Where  StartingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0' or EndingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
+                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -385,8 +386,8 @@ namespace BIOSproject
             sqlCon3.Open();
             if (txtStartSeries.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where  StartingSeries = @StartingSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
-                cmd.Parameters.AddWithValue("@StartingSeries", int.Parse(txtStartSeries.Text));
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries = @SearchSeries and Supplier = @Supplier and ifFinish = '0' or EndingSeries = @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
+                cmd.Parameters.AddWithValue("@SearchSeries", int.Parse(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -485,6 +486,7 @@ namespace BIOSproject
             answer = txUnit + lbUnit;
             if (answer > 0)
                 lblScanUnits.Text = answer.ToString();
+
         }
         protected void txtUnits_TextChanged(object sender, EventArgs e)
         {
@@ -531,6 +533,89 @@ namespace BIOSproject
                     txtStart.Text = "";
                 }
                 
+            }else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+            {
+                if (txtUnits.Text != "")
+                {
+                    if (Convert.ToInt32(txtUnits.Text) < 100)
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) > Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) == 100 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnitSuccess()", true);
+                        StartSeries.Visible = true;
+                        txtStart.Visible = true;
+                        txtSeries.Text = "";
+                        lblSeries.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) != Convert.ToInt32(lblTotal.Text) || Convert.ToInt32(txtUnits.Text) != 100 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                    StartSeries.Visible = false;
+                    txtStart.Visible = false;
+                    txtStart.Text = "";
+                }
+            }
+            else if(Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+            {
+                if (txtUnits.Text != "")
+                {
+                    if (Convert.ToInt32(txtUnits.Text) < 20)
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) > Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) == 20 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnitSuccess()", true);
+                        StartSeries.Visible = true;
+                        txtStart.Visible = true;
+                        txtSeries.Text = "";
+                        lblSeries.Text = "";
+                    }
+                    else if (Convert.ToInt32(txtUnits.Text) != Convert.ToInt32(lblTotal.Text) || Convert.ToInt32(txtUnits.Text) != 20 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                        StartSeries.Visible = false;
+                        txtStart.Visible = false;
+                        txtStart.Text = "";
+                    }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
+                    StartSeries.Visible = false;
+                    txtStart.Visible = false;
+                    txtStart.Text = "";
+                }
             }
             else
             {
@@ -568,9 +653,8 @@ namespace BIOSproject
             }
             else
             {
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                Hitcheck2();
             }
-
             con.Close();
             //SqlConnection sqlCon = new SqlConnection(ConnectionString);
             //if (sqlCon.State == ConnectionState.Closed)
@@ -610,6 +694,65 @@ namespace BIOSproject
             }
             
         }
+        public void Hitcheck2()
+        {
+            if (txtSeries.Text == "")
+            {
+                SqlConnection conn = new SqlConnection(ConnectionString);
+                conn.Open();
+                SqlCommand sql = new SqlCommand();
+                string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
+                sql.CommandText = sqlquery;
+                sql.Connection = conn;
+                sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStart.Text));
+                sql.Parameters.AddWithValue("@ID", Convert.ToInt64(ID.Value));
+
+                SqlDataReader sdr = sql.ExecuteReader();
+                if (sdr.Read())
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                    CountSeries();
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckError2()", true);
+                    txtStart.Text = "";
+                }
+                conn.Close();
+            }
+            else
+            {
+                if (!txtSeries.Text.Contains(txtStart.Text.Trim()))
+                {
+                    SqlConnection conn = new SqlConnection(ConnectionString);
+                    conn.Open();
+                    SqlCommand sql = new SqlCommand();
+                    string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
+                    sql.CommandText = sqlquery;
+                    sql.Connection = conn;
+                    sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStart.Text));
+                    sql.Parameters.AddWithValue("@ID", Convert.ToInt64(ID.Value));
+
+                    SqlDataReader sdr = sql.ExecuteReader();
+                    if (sdr.Read())
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                        CountSeries();
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckError2()", true);
+                        txtStart.Text = "";
+                    }
+                    conn.Close();
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckDuplicate()", true);
+                }
+            }
+            
+        }
         protected void txtStart_TextChanged(object sender, EventArgs e)
         {
             if (txtStart.Text == "")
@@ -628,13 +771,12 @@ namespace BIOSproject
                     txtUnits.Enabled = false;
                     txtSeries.Visible = true;
                     LabelSeries.Visible = true;
-                    lblSeries.Visible = true;
+                    //lblSeries.Visible = true;
                 }
             }
             else
             {
                 Hitcheck();
-                CountSeries();
             }
             
         }
@@ -684,7 +826,13 @@ namespace BIOSproject
                             int anss;
                             anss = no + count;
                             lblSeries.Text = Convert.ToString(anss);
-                            lblSeries.Visible = true;
+
+                            int no2 = 1;
+                            int count2 = Convert.ToInt32(lblScanUnitsCount.Text);
+                            int anss2;
+                            anss2 = no2 + count2;
+                            lblScanUnitsCount.Text = Convert.ToString(anss2);
+                            //lblSeries.Visible = true;
                         }
                         else
                         {
@@ -700,7 +848,13 @@ namespace BIOSproject
                             int anss;
                             anss = no + count;
                             lblSeries.Text = Convert.ToString(anss);
-                            lblSeries.Visible = true;
+
+                            int no2 = 1;
+                            int count2 = Convert.ToInt32(lblScanUnitsCount.Text);
+                            int anss2;
+                            anss2 = no2 + count2;
+                            lblScanUnitsCount.Text = Convert.ToString(anss2);
+                            //lblSeries.Visible = true;
                             equals();
                         }
                     }

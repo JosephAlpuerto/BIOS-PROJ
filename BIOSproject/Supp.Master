@@ -79,6 +79,21 @@
                 }
             })
         }
+        function HitcheckError2() {
+            Swal.fire({
+                title: "No Record, Not include in this PO.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
         function HitcheckDuplicate() {
             Swal.fire({
                 title: "Already in the list!.",
@@ -841,7 +856,8 @@
                        <asp:Label ID="lblUnitsScan" runat="server" Text="No. of Units:" CssClass="label" ></asp:Label> 
                    </div>
                   <div class="input_field2">
-                       <asp:Label ID="lblScanUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblScanUnits" runat="server" Visible="false" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblScanUnitsCount" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
                    </div>
               </div>
               <div class="forms">

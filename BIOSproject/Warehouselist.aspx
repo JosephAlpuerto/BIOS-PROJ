@@ -281,7 +281,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="gvModal" runat="server" />
-                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered dataTable2" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
+                                <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
                                          <asp:ButtonField DataTextField="ID" HeaderText="Request ID" />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />

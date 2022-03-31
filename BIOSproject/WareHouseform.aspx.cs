@@ -802,7 +802,7 @@ namespace BIOSproject
                         using (SqlConnection conn = new SqlConnection(ConnectionString))
                         {
                             conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DropBranch.Text + "','" + DropTeam.SelectedItem.Text + "','" + DropArea.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "')", conn);
+                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DropBranch.Text + "','" + DropTeam.SelectedItem.Text + "','" + DropArea.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
                             int insert = cmd.ExecuteNonQuery();
                             DDLlistseries.Items.Add(new ListItem(LabelStart.Text, LabelStart.Text));
                             DDLlistseries.Items.Add(new ListItem(LabelEnd.Text, LabelEnd.Text));
@@ -843,7 +843,7 @@ namespace BIOSproject
                         using (SqlConnection conn = new SqlConnection(ConnectionString))
                         {
                             conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropHub.SelectedItem.Text + "','" + txtDate.Text + "','" + lblUnits.Text + "')", conn);
+                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropHub.SelectedItem.Text + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
                             int insert = cmd.ExecuteNonQuery();
                             if (insert > 0)
                             {
@@ -880,7 +880,7 @@ namespace BIOSproject
                         using (SqlConnection conn = new SqlConnection(ConnectionString))
                         {
                             conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropWare.SelectedItem.Text + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "')", conn);
+                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropWare.SelectedItem.Text + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
                             int insert = cmd.ExecuteNonQuery();
                             if (insert > 0)
                             {
@@ -1255,9 +1255,9 @@ namespace BIOSproject
                     SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
                     sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
                     sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
-                    sqlCmd.Parameters.AddWithValue("@Branch", gr.Cells[4].Text);
-                    sqlCmd.Parameters.AddWithValue("@Team", gr.Cells[5].Text);
-                    sqlCmd.Parameters.AddWithValue("@Area", gr.Cells[6].Text);
+                    sqlCmd.Parameters.AddWithValue("@Branch", gr.Cells[5].Text);
+                    sqlCmd.Parameters.AddWithValue("@Team", gr.Cells[6].Text);
+                    sqlCmd.Parameters.AddWithValue("@Area", gr.Cells[7].Text);
                     sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
                     sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
@@ -1268,10 +1268,10 @@ namespace BIOSproject
                     //tagging();
 
                     // validations
-                    if (gr.Cells[9].Text != "")
+                    if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[9].Text + "'";
+                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
@@ -1299,7 +1299,7 @@ namespace BIOSproject
                     sqlCmd.Parameters.AddWithValue("@Team", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
-                    sqlCmd.Parameters.AddWithValue("@Warehouse", gr.Cells[7].Text);
+                    sqlCmd.Parameters.AddWithValue("@Warehouse", gr.Cells[8].Text);
                     sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
                     sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
                     Sqlcon.Open();
@@ -1308,10 +1308,10 @@ namespace BIOSproject
                     //tagging();
 
                     // validations
-                    if (gr.Cells[9].Text != "")
+                    if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[9].Text + "'";
+                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
@@ -1338,7 +1338,7 @@ namespace BIOSproject
                     sqlCmd.Parameters.AddWithValue("@Branch", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Team", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
-                    sqlCmd.Parameters.AddWithValue("@Hub", gr.Cells[8].Text);
+                    sqlCmd.Parameters.AddWithValue("@Hub", gr.Cells[9].Text);
                     sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
                     sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
                     sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
@@ -1348,10 +1348,10 @@ namespace BIOSproject
                     //tagging();
 
                     // validations
-                    if (gr.Cells[9].Text != "")
+                    if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[9].Text + "'";
+                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();

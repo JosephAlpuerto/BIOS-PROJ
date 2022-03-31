@@ -110,8 +110,8 @@
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
                     <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
              
-                    <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
-                        <asp:ListItem Selected="True" Text="-- SELECT --"></asp:ListItem>
+                    <asp:DropDownList ID="dropSupplier" runat="server" AppendDataBoundItems="True" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
+                        <asp:ListItem Selected="True" Value="S" Text="--SELECT--"></asp:ListItem>
                 </asp:DropDownList>
                   <%--  <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" CssClass="drop1" Width="300px" >
                 </asp:DropDownList>--%>
@@ -130,8 +130,9 @@
                 <div class="input-box">
                     <span class="details">Product:</span>
                      <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
-                    <asp:DropDownList ID="DropProduct" runat="server" AutoPostBack="true" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px"> 
-                </asp:DropDownList><asp:Label ID="lblerrorDrop" runat="server" ForeColor="Red" CssClass="label"></asp:Label> 
+                    <asp:DropDownList ID="DropProduct" AppendDataBoundItems="True" runat="server" AutoPostBack="true" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px"> 
+                        <asp:ListItem Selected="True" Value="S" Text="--SELECT--"></asp:ListItem>
+                    </asp:DropDownList><asp:Label ID="lblerrorDrop" runat="server" ForeColor="Red" CssClass="label"></asp:Label> 
 
                   
                 </div>
@@ -148,13 +149,13 @@
                      <span class="details" ></span>
                 </div>
                 <div class="input-box7">
-                     <asp:Label ID="Label9" runat="server" Text="Total Quantity" CssClass="label"></asp:Label>
+                     <asp:Label ID="Label9" runat="server" Visible="false" Text="Total Quantity" CssClass="label"></asp:Label>
                 </div>
                  <div class="input-box6">
                 <asp:TextBox ID="TxtAllProduct" runat="server" Visible="false" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox> 
                 </div>
                 <div class="input-box6">
-                    <asp:TextBox ID="txtTotal" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
+                    <asp:TextBox ID="txtTotal" Visible="false" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
                 </div>
                     
                 <asp:DropDownList ID="DDL" runat="server" Visible="false"></asp:DropDownList>
@@ -183,7 +184,9 @@
                             </ItemTemplate>
                             <EditItemTemplate>
                                <%-- <asp:TextBox runat="server" ID="txtProduct" Text='<%#Eval("Products") %>'></asp:TextBox>--%>
-                              <asp:DropDownList ID="DropProdGV" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product"></asp:DropDownList>
+                              <asp:DropDownList ID="DropProdGV" runat="server" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" AppendDataBoundItems="True">
+                                  <asp:ListItem Selected="True" Value="0" Text="~~Select~~"></asp:ListItem>
+                              </asp:DropDownList>
                             </EditItemTemplate>
                             <%--<FooterTemplate>
                                 <asp:TextBox runat="server" ID="txtProductFooter"></asp:TextBox>

@@ -346,8 +346,7 @@
                                         </asp:TemplateField>--%>
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="StartSeries" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="EndSeries" />
-                                        <%-- <asp:ButtonField DataTextField="CreatedDate" HeaderText="Date" />--%>
-                                        <asp:ButtonField DataTextField="DestinationTo" HeaderText="" />
+                                        <asp:ButtonField DataTextField="Quantity" HeaderText="Units" />
                                         <asp:TemplateField HeaderText="Destination">
                                             <ItemTemplate>
                                                <asp:TextBox runat="server" Text='<%# Eval("Branch") %>' Width="100%" ForeColor="Black" Enabled="false" BorderColor="White" Visible='<%# Eval("DestinationTo").ToString() == "Branch" %>'></asp:TextBox>
@@ -471,7 +470,8 @@
                                         <asp:BoundField DataField="StartingSeries" HeaderText="StartingSeries" SortExpression="StartingSeries" />
                                         <asp:BoundField DataField="EndingSeries" HeaderText="EndingSeries" SortExpression="EndingSeries" />
                                         <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" />
-                                        <asp:BoundField DataField="DestinationTo" HeaderText="DestinationTo" SortExpression="DestinationTo" />
+                                        <asp:BoundField DataField="DestinationTo" HeaderText="DestinationTo" SortExpression="DestinationTo"/>
+                                        <asp:BoundField DataField="Products" HeaderText="Products" SortExpression="Products" />
                                         <asp:BoundField DataField="Branch" HeaderText="Branch" SortExpression="Branch" />
                                         <asp:BoundField DataField="Team" HeaderText="Team" SortExpression="Team" />
                                         <asp:BoundField DataField="Area" HeaderText="Area" SortExpression="Area" />
@@ -557,14 +557,18 @@
                                                 <asp:ImageButton runat="server" ImageUrl="~/img/ExitIcon.png" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px" />
                                             </EditItemTemplate>--%>
                                         </asp:TemplateField>
-                                         <asp:TemplateField HeaderText=" ">
-                                          <ItemTemplate>
-                                              <asp:Button runat="server" ID="btnSavedGV" Text="SAVE" CssClass="btn" ForeColor="White" BackColor="#333333" OnClick="btnSavedGV_Click" />
-                                          </ItemTemplate>
+                                         <asp:TemplateField>
+                                             <HeaderTemplate>
+                                                  <asp:Button runat="server" ID="btnSavedGV" Text="Submit" CssClass="btn" ForeColor="White" BackColor="#333333" OnClick="btnSavedGV_Click" />
+                                             </HeaderTemplate>
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" Text="Ready" ForeColor="DarkRed"></asp:Label>
+                                             </ItemTemplate>
                                       </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                                 <br />
+                                
                                 <asp:Label ID="lblSuccess" runat="server" Text="" ForeColor="Green"></asp:Label><asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
               <%--     </div>
             </div>--%>

@@ -193,78 +193,92 @@ namespace BIOSproject
             {
                 if (PONumber.Text != "")
                 {
-                    if (TxtQuantity.Text != "")
+                    if (dropSupplier.SelectedItem.Value != "S")
                     {
-                        if (DDL.Items.FindByText(DropProduct.SelectedItem.Text) == null)
+                        if (DropProduct.SelectedItem.Value != "S")
                         {
-                            if (txtTotal.Text == "")
+                            if (TxtQuantity.Text != "")
                             {
-                                txtTotal.Text = TxtQuantity.Text;
-                                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                if (DDL.Items.FindByText(DropProduct.SelectedItem.Text) == null)
                                 {
-                                    conn.Open();
-                                    SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
-                                    int insert = cmd.ExecuteNonQuery();
-                                    DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
-                                    DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
-                                    FillGridView();
-                                    FillGridView2();
-                                    
+                                    if (txtTotal.Text == "")
+                                    {
+                                        txtTotal.Text = TxtQuantity.Text;
+                                        using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                        {
+                                            conn.Open();
+                                            SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
+                                            int insert = cmd.ExecuteNonQuery();
+                                            DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
+                                            DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
+                                            FillGridView();
+                                            FillGridView2();
 
+
+                                        }
+                                        allClear();
+                                        PONumber.Enabled = false;
+                                        dropSupplier.Enabled = false;
+                                        lblerrorTicket.Text = "";
+                                        lblerror.Text = "";
+                                        lblerrorDrop.Text = "";
+                                    }
+                                    else
+                                    {
+                                        using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                        {
+                                            conn.Open();
+                                            SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
+                                            int insert = cmd.ExecuteNonQuery();
+                                            DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
+                                            DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
+                                            if (insert > 0)
+                                            {
+                                                int num1, num2, num3;
+                                                num1 = Convert.ToInt32(txtTotal.Text);
+                                                num2 = Convert.ToInt32(TxtQuantity.Text);
+                                                num3 = num1 + num2;
+                                                txtTotal.Text = num3.ToString();
+                                                FillGridView();
+                                                FillGridView2();
+                                            }
+                                            allClear();
+                                            lblerrorTicket.Text = "";
+                                            lblerror.Text = "";
+                                            lblGridview.Text = "";
+                                            lblerrorDrop.Text = "";
+                                            lblError1.Text = "";
+                                        }
+                                    }
                                 }
-                                allClear();
-                                PONumber.Enabled = false;
-                                dropSupplier.Enabled = false;
-                                lblerrorTicket.Text = "";
-                                lblerror.Text = "";
-                                lblerrorDrop.Text = "";
+                                else
+                                {
+                                    lblerrorTicket.Text = "";
+                                    lblerror.Text = "";
+                                    lblerrorDrop.Text = "Product already used!";
+                                    lblGridview.Text = "";
+                                    lblError1.Text = "";
+                                }
+
                             }
                             else
                             {
-                                using (SqlConnection conn = new SqlConnection(ConnectionString))
-                                {
-                                    conn.Open();
-                                    SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
-                                    int insert = cmd.ExecuteNonQuery();
-                                    DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
-                                    DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
-                                    if (insert > 0)
-                                    {
-                                        int num1, num2, num3;
-                                        num1 = Convert.ToInt32(txtTotal.Text);
-                                        num2 = Convert.ToInt32(TxtQuantity.Text);
-                                        num3 = num1 + num2;
-                                        txtTotal.Text = num3.ToString();
-                                        FillGridView();
-                                        FillGridView2();
-                                    }
-                                    allClear();
-                                    lblerrorTicket.Text = "";
-                                    lblerror.Text = "";
-                                    lblGridview.Text = "";
-                                    lblerrorDrop.Text = "";
-                                    lblError1.Text = "";
-                                }
+                                lblerrorTicket.Text = "";
+                                lblError1.Text = "";
+                                lblerror.Text = "Please Input Quantity!";
+                                lblGridview.Text = "";
                             }
                         }
                         else
                         {
-                            lblerrorTicket.Text = "";
-                            lblerror.Text = "";
-                            lblerrorDrop.Text = "Product already used!";
-                            lblGridview.Text = "";
-                            lblError1.Text = "";
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Select Product.','You clicked the button!', 'warning')", true);
                         }
-
+                        
                     }
                     else
                     {
-                        lblerrorTicket.Text = "";
-                        lblError1.Text = "";
-                        lblerror.Text = "Please Input Quantity!";
-                        lblGridview.Text = "";
-                    }
-                    
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Select supplier.','You clicked the button!', 'warning')", true);
+                    } 
                 }
                 else
                 {
@@ -305,12 +319,17 @@ namespace BIOSproject
                 txtDate.Text = ReqDate.Text;
                 txtTicketNo.Text = TicketNo.Text;
                 txtPONumber.Text = PONumber.Text;
-                txtTotalQuantity.Text = txtTotal.Text;
+                
                 txtRequest.Text = txtRequestNo.Text;
                 txtSupplier.Text = dropSupplier.SelectedItem.Text;
                 txtEmail.Text = DropFIE.SelectedItem.Text;
                 lblerrorTicket.Text = "";
                 lblerrorDrop.Text = "";
+                txtTotalQuantity.Text = "0";
+                for (int i = 0; i < Convert.ToInt32(gvlist.Rows.Count); i++)
+                {
+                    txtTotalQuantity.Text = Convert.ToString(double.Parse(txtTotalQuantity.Text) + double.Parse(gvlist.Rows[i].Cells[4].Text));
+                }
                 FillGridView1();
                 FillGridView2();
             }
@@ -329,46 +348,49 @@ namespace BIOSproject
             FillGridView2();
         }
         protected void GridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-           
-            try
-            {
-                using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
+        {  
+                try
                 {
-                    sqlcon.Open();
-                    string cnt = @"(select count(*) from TempRequest where Products='"+ (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim() +"')";
-                    string qry = "UPDATE TempRequest SET Products=@Products,Quantity=@Quantity WHERE ID=@ID";
-                    SqlCommand sqlcmd = new SqlCommand(qry, sqlcon);
-                    sqlcmd.Parameters.AddWithValue("@Products", (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim());
-                    sqlcmd.Parameters.AddWithValue("@Quantity",(GridView.Rows[e.RowIndex].FindControl("txtQuantity") as TextBox).Text.Trim());
-                    sqlcmd.Parameters.AddWithValue("@ID", Convert.ToInt32(GridView.DataKeys[e.RowIndex].Value.ToString()));
-                    SqlCommand sqlcmda = new SqlCommand(cnt, sqlcon);
-                    int count = (int)sqlcmda.ExecuteScalar();
-                    if (count > 0)
+                    using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
                     {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Alert','Selected Product already Used!', 'warning')", true);
-                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('')", true);
-                        GridView.EditIndex = -1;
-                        FillGridView();
-                        FillGridView2();
-                    }
-                    else
-                    {
+                        sqlcon.Open();
+                        string Product = (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim();
+                        string cnt = "select COUNT(*) from TempRequest where Products='" + Product + "'";
+                        string qry = "UPDATE TempRequest SET Products=@Products,Quantity=@Quantity WHERE ID=@ID";
+                        SqlCommand sqlcmd = new SqlCommand(qry, sqlcon);
+                        sqlcmd.Parameters.AddWithValue("@Products", (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim());
+                        sqlcmd.Parameters.AddWithValue("@Quantity", (GridView.Rows[e.RowIndex].FindControl("txtQuantity") as TextBox).Text.Trim());
+                        sqlcmd.Parameters.AddWithValue("@ID", Convert.ToInt32(GridView.DataKeys[e.RowIndex].Value.ToString()));
+                        SqlCommand sqlcmda = new SqlCommand(cnt, sqlcon);
+                        int count = Convert.ToInt32(sqlcmda.ExecuteScalar());
+                        if (count == 1)
+                        {
                         sqlcmd.ExecuteNonQuery();
-                        GridView.EditIndex = -1;
-                        FillGridView();
-                        FillGridView2();
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','Selected list Updated!', 'success')", true);
-                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Updated!')", true);
-                        lblerrorGV.Text = "";
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Alert','Selected Product already Used!', 'warning')", true);
+                            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('')", true);
+                            GridView.EditIndex = -1;
+                            FillGridView();
+                            FillGridView2();
+                        }
+                        else
+                        {
+                            sqlcmd.ExecuteNonQuery();
+                            GridView.EditIndex = -1;
+                            FillGridView();
+                            FillGridView2();
+
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('DONE','Selected list Updated!', 'success')", true);
+                            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Selected list Updated!')", true);
+                            lblerrorGV.Text = "";
+                        }
                     }
                 }
-            }
-            catch(Exception ex)
-            {
-                lblGridview.Text = "";
-                lblerrorGV.Text = ex.Message;
-            }
+                catch (Exception ex)
+                {
+                    lblGridview.Text = "";
+                    lblerrorGV.Text = ex.Message;
+                }
+            
         }
         protected void GridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -622,5 +644,6 @@ namespace BIOSproject
             DropFIE.DataValueField = "VendorEmail";
             DropFIE.DataBind();
         }
+        
     }
 }
