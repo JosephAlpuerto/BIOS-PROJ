@@ -50,6 +50,8 @@
             })
         }
         function HitcheckSuccess() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "There are no duplicates in this series.",
                 text: "You clicked the button!",
@@ -65,6 +67,8 @@
             })
         }
         function HitcheckError() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "Duplicate Record.",
                 text: "You clicked the button!",
@@ -80,6 +84,8 @@
             })
         }
         function HitcheckError2() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "No Record, Not include in this PO.",
                 text: "You clicked the button!",
@@ -94,7 +100,60 @@
                 }
             })
         }
+        function NoRecord() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "No Record.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function blank() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Please enter series.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function Invalid() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Invalid Series!.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
         function HitcheckDuplicate() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "Already in the list!.",
                 text: "You clicked the button!",
@@ -110,6 +169,8 @@
             })
         }
         function HitcheckSame() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "No Record for this Series.",
                 text: "You clicked the button!",
@@ -140,6 +201,8 @@
         //    })
         //}
         function Hitcheck2() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "All Details are compatible in this series.",
                 text: "You clicked the button!",
@@ -151,7 +214,9 @@
             })
         }
 
-       function Scan() {
+        function Scan() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "This series are equal quantities and product.",
                 text: "Proceed to Seperate this data!",
@@ -167,6 +232,8 @@
             })
         }
         function Scan2() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "This series are equal quantities and product.",
                 text: "Proceed to saving this data!",
@@ -182,6 +249,8 @@
             })
         }
         function Unit() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "Error.",
                 text: "Please Enter No. of Units!",
@@ -197,6 +266,8 @@
             })
         }
         function Series() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "Error.",
                 text: "Please Input Start Series!",
@@ -212,6 +283,8 @@
             })
         }
         function CheckUnit() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
             Swal.fire({
                 title: "Error.",
                 text: "Please Check No. of Units!",
@@ -227,6 +300,8 @@
             })
         }
         function CheckUnitSuccess() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "Good!",
                 text: "Proceed to saving this data!",
@@ -242,6 +317,8 @@
             })
         }
         function Saved() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "Saved Successfully!",
                 text: "You clicked the button!",
@@ -257,6 +334,8 @@
             })
         }
         function AllSaved() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
             Swal.fire({
                 title: "All Bundling are Saved Successfully!",
                 text: "Proceed to Tagging Form!",
@@ -790,15 +869,11 @@
                                <asp:UpdatePanel ID="UpdatePanel4" runat="server"><ContentTemplate>
                                         
                 <div class="input_field1">
-                   <%-- <asp:Label ID="Label15" runat="server" Text="Enter Starting Series:" CssClass="labelName"></asp:Label>
-                    <asp:TextBox ID="txtStartingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtStartingScan_TextChanged"></asp:TextBox>--%>
-                    <%--<asp:Label ID="Label2" runat="server" Text="Enter Ending Series:" CssClass="labelEnd"></asp:Label>
-                    <asp:TextBox ID="txtEndingScan" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtEndingScan_TextChanged"></asp:TextBox>--%>
-                   
 
-
-                    <asp:Label ID="Label3" runat="server" Text="Enter Series:" CssClass="labelName"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Enter StartSeries:" CssClass="labelName"></asp:Label>
                     <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtStartSeries_TextChanged"></asp:TextBox>
+                     <asp:Label ID="Label2" runat="server" Text="Enter EndSeries:" CssClass="labelName2"></asp:Label>
+                    <asp:TextBox ID="txtEndSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtEndSeries_TextChanged"></asp:TextBox>
                     
                      <div class="input_field1">
                          <asp:Label ID="start" runat="server" Text="Start Series:" CssClass="labelName" Visible="false"></asp:Label>
@@ -831,9 +906,6 @@
                         <asp:TextBox ID="txtSeries" runat="server" CssClass="inputSeries" Width="250px" TextMode="MultiLine" Enabled="false" Visible="false"></asp:TextBox>
                     </div>
 
-                   <%-- <asp:Label ID="lblBundle" Text="Available to Bundle:" CssClass="labelName" Visible="false" runat="server"  ></asp:Label>
-                    <asp:Label ID="lblBundleNo" runat="server" Visible="false" ForeColor="Blue"></asp:Label>--%>
-
                     <asp:HiddenField ID="hfEndingSeries" runat="server" />
                     <asp:HiddenField ID="ID" runat="server" />
                     <asp:HiddenField ID="TicketNo" runat="server" />
@@ -857,7 +929,8 @@
                    </div>
                   <div class="input_field2">
                        <asp:Label ID="lblScanUnits" runat="server" Visible="false" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
-                       <asp:Label ID="lblScanUnitsCount" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblScanUnitsCount" runat="server" Text="0" ForeColor="Red" Visible="false" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblCountUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
                    </div>
               </div>
               <div class="forms">
@@ -865,7 +938,8 @@
                        <asp:Label ID="Label16" runat="server" Text="Total Quantity" CssClass="label" ></asp:Label>   
                    </div>
                   <div class="input_field2">
-                      <asp:Label ID="lblTotal" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
+                      <asp:Label ID="lblTotal" runat="server" Text="0" Visible="false" ForeColor="Green" CssClass="label"></asp:Label>
+                      <asp:Label ID="lblTotalCount" runat="server" Text="0" ForeColor="Green" CssClass="label"></asp:Label>
                   </div>
               </div>
                
@@ -877,23 +951,16 @@
                                      <Triggers>
                             <asp:PostBackTrigger ControlID="btnOkay" />
                             <asp:PostBackTrigger ControlID="txtStartSeries" />
+                            <asp:PostBackTrigger ControlID="txtEndSeries" />
                             <asp:PostBackTrigger ControlID="txtUnits" />
                             <asp:PostBackTrigger ControlID="txtStart" />
-                            <%--<asp:PostBackTrigger ControlID="txtStartingScan"/>--%>
                             <asp:PostBackTrigger ControlID="btnclose"/>
-                           <%-- <asp:PostBackTrigger ControlID="txtEndingScan"/>--%>
                                     </Triggers>
                                 </asp:UpdatePanel> 
                             </div>
- <%--                           <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <asp:Button id="Button1" Text="Send" class="btn btn-primary" OnClick="btnSend_Click" runat="server"></asp:Button>
-                            </div>--%>
                         </div>
                     </div>
                 </div>
-
-
 
 
                 <!-- Bootstrap core JavaScript-->

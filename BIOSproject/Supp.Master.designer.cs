@@ -141,6 +141,24 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.TextBox txtStartSeries;
 
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// txtEndSeries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEndSeries;
+
+        /// <summary>
         /// start control.
         /// </summary>
         /// <remarks>
@@ -438,6 +456,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Label lblScanUnitsCount;
 
         /// <summary>
+        /// lblCountUnits control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCountUnits;
+
+        /// <summary>
         /// Label16 control.
         /// </summary>
         /// <remarks>
@@ -454,6 +481,15 @@ namespace BIOSproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotal;
+
+        /// <summary>
+        /// lblTotalCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalCount;
 
         /// <summary>
         /// btnOkay control.

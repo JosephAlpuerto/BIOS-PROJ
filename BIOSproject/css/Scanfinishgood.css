@@ -5,9 +5,18 @@
     border: 2px solid;
     border-radius: 25px;
 }*/
+.input_field1 .labelName2 {
+    margin-left: 40px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+}
     .input_field1 .labelName {
         margin-left: 40px;
+        margin-bottom: 10px;
     }
+.input_field1 .input1 {
+    margin-bottom: 10px;
+}
 .input_field1 .labelEnd {
     margin-left: 40px;
     margin-right: 8px;

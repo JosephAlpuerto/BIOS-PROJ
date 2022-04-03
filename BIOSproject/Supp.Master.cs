@@ -23,6 +23,61 @@ namespace BIOSproject
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (txtStartSeries.Text != "" && txtEndSeries.Text != "")
+            {
+                double start, end, answer;
+                double.TryParse(txtStartSeries.Text, out start);
+                double.TryParse(txtEndSeries.Text, out end);
+                answer = end - start + 1;
+                if (answer > 0)
+                {
+                    lblCountUnits.Text = answer.ToString();
+                    string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
+                    if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
+                    {
+                        if (lblCountUnits.Text == "10")
+                        {
+                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                            sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                                }
+                            sqlCon.Close();
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                        }
+                    }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                }
+                    
+            }
+            else
+            {
+                lblCountUnits.Text = "0";
+            }
+           
             try
             {
                 txtUserName.Text = Session["Username"].ToString();
@@ -268,9 +323,9 @@ namespace BIOSproject
             cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
             cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
             cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
-            cmd.Parameters.AddWithValue("@Quantity", txtUnits.Text);
-            cmd.Parameters.AddWithValue("@StartingSeries", hfstart.Value);
-            cmd.Parameters.AddWithValue("@EndingSeries", hfend.Value);
+            cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
+            cmd.Parameters.AddWithValue("@StartingSeries", txtStartSeries.Text);
+            cmd.Parameters.AddWithValue("@EndingSeries", txtEndSeries.Text);
             cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
             cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
             cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
@@ -279,21 +334,22 @@ namespace BIOSproject
             cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
             cmd.ExecuteNonQuery();
             con.Close();
-            finish();
+            
         }
         public void Scan()
         {
             addingScan();
-            if (lblScanUnits.Text != lblTotal.Text)
+            addingScanTotal();
+            if (lblTotalCount.Text != lblTotal.Text)
             {
                 StartSeries.Visible = false;
                 txtStart.Visible = false;
                 txtStart.Text = "";
 
-                Units.Visible = true;
-                txtUnits.Visible = true;
-                txtUnits.Enabled = true;
-                txtUnits.Text = "";
+                //Units.Visible = true;
+                //txtUnits.Visible = true;
+                //txtUnits.Enabled = true;
+                //txtUnits.Text = "";
 
                 LabelSeries.Visible = false;
                 lblSeries.Visible = false;
@@ -302,21 +358,28 @@ namespace BIOSproject
 
                 hfend.Value = "";
                 hfstart.Value = "";
+                txtStartSeries.Text = "";
+                txtEndSeries.Text = "";
 
-                if (txtStart.Text == "")
+                if (txtStartSeries.Text == "")
                 {
+                    lblCountUnits.Text = "0";
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Saved()", true);
                 }
             }
             else
             {
+                finish();
                 txtSeries.Text = "";
                 hfend.Value = "";
                 hfstart.Value = "";
+                txtStartSeries.Text = "";
+                txtEndSeries.Text = "";
 
                 txtStartSeries.Text = "";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "AllSaved()", true);
                 lblScanUnitsCount.Text = "0";
+                lblCountUnits.Text = "0";
                 clearScan();
             }
         }
@@ -386,18 +449,18 @@ namespace BIOSproject
             sqlCon3.Open();
             if (txtStartSeries.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries = @SearchSeries and Supplier = @Supplier and ifFinish = '0' or EndingSeries = @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
                 cmd.Parameters.AddWithValue("@SearchSeries", int.Parse(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-
                 SqlDataReader dr = cmd.ExecuteReader();
+
                 if (dr.Read())
                 {
                     lblStart.Text = dr.GetValue(7).ToString();
                     lblEnd.Text = dr.GetValue(8).ToString();
                     
-                    Units.Visible = true;
-                    txtUnits.Visible = true;
+                    //Units.Visible = true;
+                    //txtUnits.Visible = true;
                     
 
                     ID.Value = dr.GetValue(0).ToString();
@@ -424,30 +487,22 @@ namespace BIOSproject
                     lblProduct.Visible = true;
                     //lblBundle.Visible = true;
                     //lblBundleNo.Visible = true;
-
-
-                    if (Quantity.Value == lblTotal.Text)
-                    {
-                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Scan()", true);
-                    }
-                    else
-                    {
-                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This series are not equal quantities.','You clicked the button!', 'warning')", true);
-                    }
+                    FinishedGoodCheck();
+                    //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Scan()", true);
                 }
                 else
                 {
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord()", true);
                 }
                 sqlCon3.Close();
             }
-            else
+            else if(txtEndSeries.Text == "" && txtStartSeries.Text == "")
             {
                 lblStart.Text = "";
                 lblEnd.Text = "";
                 
-                Units.Visible = false;
-                txtUnits.Visible = false;
+                //Units.Visible = false;
+                //txtUnits.Visible = false;
 
                 ID.Value = "";
                 TicketNo.Value = "";
@@ -474,6 +529,104 @@ namespace BIOSproject
                 lblProduct.Visible = false;
                 //lblBundle.Visible = false;
                 //lblBundleNo.Visible = false;
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
+            }
+            else if (txtEndSeries.Text != "" && txtStartSeries.Text == "")
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
+            }
+        }
+        protected void txtEndSeries_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
+            sqlCon3.Open();
+            if (txtEndSeries.Text != "")
+            {
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
+                cmd.Parameters.AddWithValue("@SearchSeries", int.Parse(txtEndSeries.Text));
+                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    lblStart.Text = dr.GetValue(7).ToString();
+                    lblEnd.Text = dr.GetValue(8).ToString();
+
+                    //Units.Visible = true;
+                    //txtUnits.Visible = true;
+
+
+                    ID.Value = dr.GetValue(0).ToString();
+                    TicketNo.Value = dr.GetValue(1).ToString();
+                    PONumber.Value = dr.GetValue(2).ToString();
+                    Supplier.Value = dr.GetValue(3).ToString();
+                    ProductQuantity.Value = dr.GetValue(4).ToString();
+                    TotalQuantity.Value = dr.GetValue(5).ToString();
+                    Quantity.Value = dr.GetValue(6).ToString();
+                    StartingSeries.Value = dr.GetValue(7).ToString(); 
+                    EndingSeries.Value = dr.GetValue(8).ToString();
+                    RequestNo.Value = dr.GetValue(9).ToString();
+                    SupplierName.Value = dr.GetValue(10).ToString();
+
+                    hfEndingSeries2.Value = dr.GetValue(8).ToString();
+                    //txtEndingScan.Text = dr.GetValue(8).ToString();
+
+
+                    lblTotal.Text = dr.GetValue(6).ToString();
+
+
+                    txtProduct.Text = dr.GetValue(4).ToString().Trim();
+                    txtProduct.Visible = true;
+                    lblProduct.Visible = true;
+                    //lblBundle.Visible = true;
+                    //lblBundleNo.Visible = true;
+                    FinishedGoodCheck2();
+                    //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord()", true);
+                }
+                sqlCon3.Close();
+            }
+            else if (txtEndSeries.Text == "" && txtStartSeries.Text == "")
+            {
+                lblStart.Text = "";
+                lblEnd.Text = "";
+
+                //Units.Visible = false;
+                //txtUnits.Visible = false;
+
+                ID.Value = "";
+                TicketNo.Value = "";
+                PONumber.Value = "";
+                Supplier.Value = "";
+                ProductQuantity.Value = "";
+                TotalQuantity.Value = "";
+                Quantity.Value = "";
+                StartingSeries.Value = "";
+                EndingSeries.Value = "";
+                RequestNo.Value = "";
+                SupplierName.Value = "";
+
+                hfEndingSeries2.Value = "";
+                txtStartSeries.Text = "";
+                //txtEndingScan.Text = "";
+                lblScanUnits.Text = "0";
+
+                lblTotal.Text = "0";
+                btnOkay.Visible = false;
+
+                txtProduct.Text = "";
+                txtProduct.Visible = false;
+                lblProduct.Visible = false;
+                //lblBundle.Visible = false;
+                //lblBundleNo.Visible = false;
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
+            }
+            else if (txtEndSeries.Text == "" && txtStartSeries.Text != "")
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
             }
         }
         public void addingScan()
@@ -486,6 +639,18 @@ namespace BIOSproject
             answer = txUnit + lbUnit;
             if (answer > 0)
                 lblScanUnits.Text = answer.ToString();
+
+        }
+        public void addingScanTotal()
+        {
+            //lblUnits.Text = "0";
+            double txUnit, lbUnit, answer;
+            double.TryParse(lblCountUnits.Text, out txUnit);
+            double.TryParse(lblTotalCount.Text, out lbUnit);
+
+            answer = txUnit + lbUnit;
+            if (answer > 0)
+                lblTotalCount.Text = answer.ToString();
 
         }
         protected void txtUnits_TextChanged(object sender, EventArgs e)
@@ -753,6 +918,108 @@ namespace BIOSproject
             }
             
         }
+        public void FinishedGoodCheck()
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            SqlCommand sql = new SqlCommand();
+            string sqlquery = "select * from FinishedGood where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
+            sql.CommandText = sqlquery;
+            sql.Connection = conn;
+            sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStartSeries.Text));
+            sql.Parameters.AddWithValue("@ID", Convert.ToInt64(ID.Value));
+
+            SqlDataReader sdr = sql.ExecuteReader();
+            if (sdr.Read())
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckError()", true);
+                if (txtStartSeries.Text != "" && txtEndSeries.Text == "")
+                {
+                    lblStart.Text = "";
+                    lblEnd.Text = "";
+
+                    ID.Value = "";
+                    TicketNo.Value = "";
+                    PONumber.Value = "";
+                    Supplier.Value = "";
+                    ProductQuantity.Value = "";
+                    TotalQuantity.Value = "";
+                    Quantity.Value = "";
+                    StartingSeries.Value = "";
+                    EndingSeries.Value = "";
+                    RequestNo.Value = "";
+                    SupplierName.Value = "";
+
+                    hfEndingSeries2.Value = "";
+                    txtStartSeries.Text = "";
+                    lblScanUnits.Text = "0";
+
+                    lblTotal.Text = "0";
+                    btnOkay.Visible = false;
+
+                    txtProduct.Text = "";
+                    txtProduct.Visible = false;
+                    lblProduct.Visible = false;
+                }
+            }
+            else
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+            }
+            conn.Close();
+        }
+        public void FinishedGoodCheck2()
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            SqlCommand sql = new SqlCommand();
+            string sqlquery = "select * from FinishedGood where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
+            sql.CommandText = sqlquery;
+            sql.Connection = conn;
+            sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtEndSeries.Text));
+            sql.Parameters.AddWithValue("@ID", Convert.ToInt64(ID.Value));
+
+            SqlDataReader sdr = sql.ExecuteReader();
+            if (sdr.Read())
+            {
+
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckError()", true);
+                if (txtStartSeries.Text == "" && txtEndSeries.Text != "")
+                {
+                    lblStart.Text = "";
+                    lblEnd.Text = "";
+
+                    ID.Value = "";
+                    TicketNo.Value = "";
+                    PONumber.Value = "";
+                    Supplier.Value = "";
+                    ProductQuantity.Value = "";
+                    TotalQuantity.Value = "";
+                    Quantity.Value = "";
+                    StartingSeries.Value = "";
+                    EndingSeries.Value = "";
+                    RequestNo.Value = "";
+                    SupplierName.Value = "";
+
+                    hfEndingSeries2.Value = "";
+                    txtEndSeries.Text = "";
+                    lblScanUnits.Text = "0";
+
+                    lblTotal.Text = "0";
+                    btnOkay.Visible = false;
+
+                    txtProduct.Text = "";
+                    txtProduct.Visible = false;
+                    lblProduct.Visible = false;
+                }
+
+            }
+            else
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+            }
+            conn.Close();
+        }
         protected void txtStart_TextChanged(object sender, EventArgs e)
         {
             if (txtStart.Text == "")
@@ -897,5 +1164,7 @@ namespace BIOSproject
                 
             }
         }
+
+        
     }
 }

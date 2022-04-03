@@ -163,6 +163,8 @@
     <Content Include="select2\select2.js" />
     <Content Include="select2\select2.png" />
     <Content Include="select2\select2x2.png" />
+    <Content Include="Sounds\correct-sound-effect_2ravtBqv.mp3" />
+    <Content Include="Sounds\wrong-sound-effect_TfPLyWdb.mp3" />
     <Content Include="SupplierTaggingForm.aspx" />
     <Content Include="TextFile\100.txt" />
     <Content Include="TextFile\200.txt" />
