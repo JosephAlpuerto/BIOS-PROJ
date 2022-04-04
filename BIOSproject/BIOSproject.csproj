@@ -1890,6 +1890,7 @@
     <Content Include="vendor\jquery\jquery.slim.js" />
     <Content Include="vendor\jquery\jquery.slim.min.js" />
     <Content Include="WareHouseform.aspx" />
+    <Content Include="WarehouseReport.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2204,6 +2205,13 @@
     </Compile>
     <Compile Include="WareHouseform.aspx.designer.cs">
       <DependentUpon>WareHouseform.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseReport.aspx.cs">
+      <DependentUpon>WarehouseReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WarehouseReport.aspx.designer.cs">
+      <DependentUpon>WarehouseReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>

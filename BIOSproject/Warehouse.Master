@@ -93,6 +93,11 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Validate List</span></a>
                 </li>--%>
+                 <li class="nav-item active">
+                    <a class="nav-link" href="WarehouseReport.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Report</span></a>
+                </li>
 
                
                 
