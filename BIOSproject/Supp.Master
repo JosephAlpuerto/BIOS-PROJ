@@ -117,6 +117,23 @@
                 }
             })
         }
+        function NoRecord2() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "No Record.",
+                text: "You clicked the button!",
+                icon: "warning",
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
         function blank() {
             var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
             audio.play();

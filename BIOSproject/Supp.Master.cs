@@ -57,7 +57,7 @@ namespace BIOSproject
                                 }
                                 else
                                 {
-                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
                                 }
                             sqlCon.Close();
                         }
@@ -66,6 +66,77 @@ namespace BIOSproject
                             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
                         }
                     }
+                    else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+                    {
+                        if (lblCountUnits.Text == "100")
+                        {
+                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                            sqlCon.Open();
+                            SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                            cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                            cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                            SqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read())
+                            {
+                                hfIDScan2.Value = dr.GetValue(0).ToString();
+                                hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                TotalQuantity.Value = dr.GetValue(2).ToString();
+                                //addingScan();
+                                InsertDB();
+                                Scan();
+                                lblSeries2.Visible = false;
+                                txtStart.Enabled = true;
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                            }
+                            sqlCon.Close();
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                        }
+                    }
+                    else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+                    {
+                        if (lblCountUnits.Text == "20")
+                        {
+                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                            sqlCon.Open();
+                            SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                            cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                            cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                            SqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read())
+                            {
+                                hfIDScan2.Value = dr.GetValue(0).ToString();
+                                hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                TotalQuantity.Value = dr.GetValue(2).ToString();
+                                //addingScan();
+                                InsertDB();
+                                Scan();
+                                lblSeries2.Visible = false;
+                                txtStart.Enabled = true;
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                            }
+                            sqlCon.Close();
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                        }
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                    }
+
                 }
                 else
                 {
