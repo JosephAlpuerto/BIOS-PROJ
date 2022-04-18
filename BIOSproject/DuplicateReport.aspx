@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Warehouse.Master" AutoEventWireup="true" CodeBehind="WarehouseReport.aspx.cs" Inherits="BIOSproject.WarehouseReport" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Warehouse.Master" AutoEventWireup="true" CodeBehind="DuplicateReport.aspx.cs" Inherits="BIOSproject.DuplicateReport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -6,16 +6,13 @@
 
 
 
-
     <div>
-        <asp:Label ID="Label1" runat="server" Text="Tracking Series:"></asp:Label>
-        <asp:TextBox ID="TxtSearch" runat="server"></asp:TextBox>
-        <asp:Button ID="BtnSearch" runat="server" Text="Search" OnClick="BtnSearch_Click"/>
+        
         <asp:Label ID="Label2" runat="server" Text="From:"></asp:Label>
         <asp:TextBox ID="TxtFromDate" runat="server" TextMode="Date"></asp:TextBox>
         <asp:Label ID="Label3" runat="server" Text="To"></asp:Label>
         <asp:TextBox ID="TxtToDate" runat="server" TextMode="Date"></asp:TextBox>
-        <asp:Button ID="BtnDateDisplay" runat="server" Text="Search By Date" />
+        <asp:Button ID="BtnDateDisplay" runat="server" Text="Search By Date" OnClick="BtnDateDisplay_Click"/>
 
         <asp:GridView runat="server" ID="Gridview1" CssClass="gridview" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
@@ -32,18 +29,6 @@
 
 
     </div>
-    
-
-
-
-
-
-
-
-
-
-
-
 
 
 

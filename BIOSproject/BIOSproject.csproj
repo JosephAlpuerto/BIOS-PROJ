@@ -140,6 +140,7 @@
     <Content Include="css\SuppTaggingForm.css" />
     <Content Include="css\ViewSeries.css" />
     <Content Include="css\warehouseform.css" />
+    <Content Include="DuplicateReport.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Hub\ProcessList.aspx" />
     <Content Include="Hub\ValidationForm.aspx" />
@@ -1940,6 +1941,13 @@
     </Compile>
     <Compile Include="DataSetAdmin.cs">
       <DependentUpon>DataSetAdmin.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DuplicateReport.aspx.cs">
+      <DependentUpon>DuplicateReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DuplicateReport.aspx.designer.cs">
+      <DependentUpon>DuplicateReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
