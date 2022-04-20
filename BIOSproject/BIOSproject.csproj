@@ -166,6 +166,8 @@
     <Content Include="select2\select2x2.png" />
     <Content Include="Sounds\correct-sound-effect_2ravtBqv.mp3" />
     <Content Include="Sounds\wrong-sound-effect_TfPLyWdb.mp3" />
+    <Content Include="SourcingReports.aspx" />
+    <Content Include="SupplierReports.aspx" />
     <Content Include="SupplierTaggingForm.aspx" />
     <Content Include="TextFile\100.txt" />
     <Content Include="TextFile\200.txt" />
@@ -1979,6 +1981,20 @@
     </Compile>
     <Compile Include="sample1.aspx.designer.cs">
       <DependentUpon>sample1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SourcingReports.aspx.cs">
+      <DependentUpon>SourcingReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SourcingReports.aspx.designer.cs">
+      <DependentUpon>SourcingReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierReports.aspx.cs">
+      <DependentUpon>SupplierReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupplierReports.aspx.designer.cs">
+      <DependentUpon>SupplierReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="SupplierTaggingForm.aspx.cs">
       <DependentUpon>SupplierTaggingForm.aspx</DependentUpon>

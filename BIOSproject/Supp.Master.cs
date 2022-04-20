@@ -25,20 +25,22 @@ namespace BIOSproject
         {
             if (txtStartSeries.Text != "" && txtEndSeries.Text != "")
             {
-                double start, end, answer;
-                double.TryParse(txtStartSeries.Text, out start);
-                double.TryParse(txtEndSeries.Text, out end);
-                answer = end - start + 1;
-                if (answer > 0)
+                if (Convert.ToInt64(txtStartSeries.Text) < Convert.ToInt64(txtEndSeries.Text))
                 {
-                    lblCountUnits.Text = answer.ToString();
-                    string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
-                    if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
+                    double start, end, answer;
+                    double.TryParse(txtStartSeries.Text, out start);
+                    double.TryParse(txtEndSeries.Text, out end);
+                    answer = end - start + 1;
+                    if (answer > 0)
                     {
-                        if (lblCountUnits.Text == "10")
+                        lblCountUnits.Text = answer.ToString();
+                        string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
+                        if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
                         {
-                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-                            sqlCon.Open();
+                            if (lblCountUnits.Text == "10")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
                                 SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
                                 cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
@@ -59,89 +61,277 @@ namespace BIOSproject
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
                                 }
-                            sqlCon.Close();
-                        }
-                        else
-                        {
-                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
-                        }
-                    }
-                    else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
-                    {
-                        if (lblCountUnits.Text == "100")
-                        {
-                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-                            sqlCon.Open();
-                            SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                            cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
-                            cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-
-                            SqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read())
-                            {
-                                hfIDScan2.Value = dr.GetValue(0).ToString();
-                                hfEndingSeries2.Value = dr.GetValue(1).ToString();
-                                TotalQuantity.Value = dr.GetValue(2).ToString();
-                                //addingScan();
-                                InsertDB();
-                                Scan();
-                                lblSeries2.Visible = false;
-                                txtStart.Enabled = true;
+                                sqlCon.Close();
                             }
                             else
                             {
-                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
                             }
-                            sqlCon.Close();
                         }
-                        else
+                        else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
                         {
-                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
-                        }
-                    }
-                    else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
-                    {
-                        if (lblCountUnits.Text == "20")
-                        {
-                            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-                            sqlCon.Open();
-                            SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                            cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
-                            cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-
-                            SqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read())
+                            if (lblCountUnits.Text == "100")
                             {
-                                hfIDScan2.Value = dr.GetValue(0).ToString();
-                                hfEndingSeries2.Value = dr.GetValue(1).ToString();
-                                TotalQuantity.Value = dr.GetValue(2).ToString();
-                                //addingScan();
-                                InsertDB();
-                                Scan();
-                                lblSeries2.Visible = false;
-                                txtStart.Enabled = true;
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
                             }
                             else
                             {
-                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
                             }
-                            sqlCon.Close();
+                        }
+                        else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+                        {
+                            if (lblCountUnits.Text == "20")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
+                        }
+                        else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
+                        {
+                            if (lblCountUnits.Text == "1000")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
                         }
                         else
                         {
-                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
                         }
+
                     }
                     else
                     {
-                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
                     }
-
                 }
                 else
                 {
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                    double start, end, answer;
+                    double.TryParse(txtStartSeries.Text, out end);
+                    double.TryParse(txtEndSeries.Text, out start);
+                    answer = end - start + 1;
+                    if (answer > 0)
+                    {
+                        lblCountUnits.Text = answer.ToString();
+                        string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
+                        if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
+                        {
+                            if (lblCountUnits.Text == "10")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
+                        }
+                        else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+                        {
+                            if (lblCountUnits.Text == "100")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
+                        }
+                        else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+                        {
+                            if (lblCountUnits.Text == "20")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
+                        }
+                        else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
+                        {
+                            if (lblCountUnits.Text == "1000")
+                            {
+                                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                                sqlCon.Open();
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                                SqlDataReader dr = cmd.ExecuteReader();
+                                if (dr.Read())
+                                {
+                                    hfIDScan2.Value = dr.GetValue(0).ToString();
+                                    hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                                    TotalQuantity.Value = dr.GetValue(2).ToString();
+                                    //addingScan();
+                                    InsertDB();
+                                    Scan();
+                                    lblSeries2.Visible = false;
+                                    txtStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                }
+                                sqlCon.Close();
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
+                            }
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                        }
+
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
+                    }
                 }
+                
                     
             }
             else
@@ -385,27 +575,52 @@ namespace BIOSproject
         
         public void InsertDB()
         {
-            if (con.State == ConnectionState.Closed)
-                con.Open();
-            SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@TicketNo", TicketNo.Value);
-            cmd.Parameters.AddWithValue("@Supplier", Supplier.Value);
-            cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
-            cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
-            cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
-            cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
-            cmd.Parameters.AddWithValue("@StartingSeries", txtStartSeries.Text);
-            cmd.Parameters.AddWithValue("@EndingSeries", txtEndSeries.Text);
-            cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
-            cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
-            cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-            cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
-            cmd.Parameters.AddWithValue("@RequestID", ID.Value);
-            cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
-            cmd.ExecuteNonQuery();
-            con.Close();
-            
+            if (Convert.ToInt64(txtStartSeries.Text) < Convert.ToInt64(txtEndSeries.Text))
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@TicketNo", TicketNo.Value);
+                cmd.Parameters.AddWithValue("@Supplier", Supplier.Value);
+                cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
+                cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
+                cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
+                cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
+                cmd.Parameters.AddWithValue("@StartingSeries", txtStartSeries.Text);
+                cmd.Parameters.AddWithValue("@EndingSeries", txtEndSeries.Text);
+                cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
+                cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
+                cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
+                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@RequestID", ID.Value);
+                cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            else
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@TicketNo", TicketNo.Value);
+                cmd.Parameters.AddWithValue("@Supplier", Supplier.Value);
+                cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
+                cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
+                cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
+                cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
+                cmd.Parameters.AddWithValue("@StartingSeries", txtEndSeries.Text);
+                cmd.Parameters.AddWithValue("@EndingSeries", txtStartSeries.Text);
+                cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
+                cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
+                cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
+                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@RequestID", ID.Value);
+                cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
         }
         public void Scan()
         {
@@ -444,14 +659,32 @@ namespace BIOSproject
                 txtSeries.Text = "";
                 hfend.Value = "";
                 hfstart.Value = "";
-                txtStartSeries.Text = "";
-                txtEndSeries.Text = "";
 
-                txtStartSeries.Text = "";
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "AllSaved()", true);
                 lblScanUnitsCount.Text = "0";
                 lblCountUnits.Text = "0";
+                //txtStartSeries.Text = "";
+                //txtEndSeries.Text = "";
                 clearScan();
+                if (txtStartSeries.Text != "")
+                {
+                    StartSeries.Visible = false;
+                    txtStart.Visible = false;
+                    txtStart.Text = "";
+
+                    LabelSeries.Visible = false;
+                    lblSeries.Visible = false;
+                    txtSeries.Visible = false;
+                    txtSeries.Text = "";
+
+                    hfend.Value = "";
+                    hfstart.Value = "";
+                    txtStartSeries.Text = "";
+                    txtEndSeries.Text = "";
+                    lblScanUnitsCount.Text = "0";
+                    lblCountUnits.Text = "0";
+                    lblTotalCount.Text = "0";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "AllSaved()", true);
+                }
             }
         }
         public void finish()
@@ -556,6 +789,7 @@ namespace BIOSproject
                     txtProduct.Text = dr.GetValue(4).ToString().Trim();
                     txtProduct.Visible = true;
                     lblProduct.Visible = true;
+
                     //lblBundle.Visible = true;
                     //lblBundleNo.Visible = true;
                     FinishedGoodCheck();
@@ -567,11 +801,15 @@ namespace BIOSproject
                 }
                 sqlCon3.Close();
             }
-            else if(txtEndSeries.Text == "" && txtStartSeries.Text == "")
+            else if (txtStartSeries.Text == "" && txtEndSeries.Text != "")
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
+            }
+            else if (txtEndSeries.Text == "" && txtStartSeries.Text == "")
             {
                 lblStart.Text = "";
                 lblEnd.Text = "";
-                
+
                 //Units.Visible = false;
                 //txtUnits.Visible = false;
 
@@ -598,12 +836,10 @@ namespace BIOSproject
                 txtProduct.Text = "";
                 txtProduct.Visible = false;
                 lblProduct.Visible = false;
+
                 //lblBundle.Visible = false;
                 //lblBundleNo.Visible = false;
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
-            }
-            else if (txtEndSeries.Text != "" && txtStartSeries.Text == "")
-            {
+                lblCountUnits2.Text = "0";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
             }
         }
@@ -649,6 +885,7 @@ namespace BIOSproject
                     txtProduct.Text = dr.GetValue(4).ToString().Trim();
                     txtProduct.Visible = true;
                     lblProduct.Visible = true;
+
                     //lblBundle.Visible = true;
                     //lblBundleNo.Visible = true;
                     FinishedGoodCheck2();
@@ -659,6 +896,10 @@ namespace BIOSproject
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord()", true);
                 }
                 sqlCon3.Close();
+            }
+            else if (txtStartSeries.Text != "" && txtEndSeries.Text == "")
+            {
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
             }
             else if (txtEndSeries.Text == "" && txtStartSeries.Text == "")
             {
@@ -691,12 +932,10 @@ namespace BIOSproject
                 txtProduct.Text = "";
                 txtProduct.Visible = false;
                 lblProduct.Visible = false;
+
                 //lblBundle.Visible = false;
                 //lblBundleNo.Visible = false;
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
-            }
-            else if (txtEndSeries.Text == "" && txtStartSeries.Text != "")
-            {
+                lblCountUnits2.Text = "0";
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "blank()", true);
             }
         }
@@ -851,6 +1090,39 @@ namespace BIOSproject
                     StartSeries.Visible = false;
                     txtStart.Visible = false;
                     txtStart.Text = "";
+                }
+            }
+            else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
+            {
+                if (lblCountUnits.Text == "1000")
+                {
+                    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                    sqlCon.Open();
+                    SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                    cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                    cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        hfIDScan2.Value = dr.GetValue(0).ToString();
+                        hfEndingSeries2.Value = dr.GetValue(1).ToString();
+                        TotalQuantity.Value = dr.GetValue(2).ToString();
+                        //addingScan();
+                        InsertDB();
+                        Scan();
+                        lblSeries2.Visible = false;
+                        txtStart.Enabled = true;
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                    }
+                    sqlCon.Close();
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
                 }
             }
             else
@@ -1031,11 +1303,35 @@ namespace BIOSproject
                     txtProduct.Text = "";
                     txtProduct.Visible = false;
                     lblProduct.Visible = false;
+
                 }
             }
             else
             {
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
+                if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
+                {
+                    lblCountUnits2.Text = "10";
+                }
+                else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+                {
+                    lblCountUnits2.Text = "100";
+                }
+                else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+                {
+                    lblCountUnits2.Text = "20";
+                }
+                else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
+                {
+                    lblCountUnits2.Text = "1000";
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                    lblCountUnits2.Text = "0";
+                }
+
             }
             conn.Close();
         }
@@ -1082,12 +1378,35 @@ namespace BIOSproject
                     txtProduct.Text = "";
                     txtProduct.Visible = false;
                     lblProduct.Visible = false;
+
                 }
 
             }
             else
             {
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "HitcheckSuccess()", true);
+                string Product = txtProduct.Text.Replace("\r", "").Replace("\n", "");
+                if (Product == Convert.ToString("KILOBOX MINI W/1 BARCODE /10-101603") || Product == Convert.ToString("KILOBOX SLIM W/1 BARCODE /10-101641") || Product == Convert.ToString("KILOBOX SMALL W/1 BARCODE /10-101712") || Product == Convert.ToString("KILOBOX MEDIUM W/1 BARCODE /10-101713") || Product == Convert.ToString("KILOBOX LARGE W/1 BARCODE /10-101714") || Product == Convert.ToString("KILOBOX XL W/1 BARCODE /10-101715") || Product == Convert.ToString("V-POUCH /10-101711"))
+                {
+                    lblCountUnits2.Text = "10";
+                }
+                else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+                {
+                    lblCountUnits2.Text = "100";
+                }
+                else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
+                {
+                    lblCountUnits2.Text = "20";
+                }
+                else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
+                {
+                    lblCountUnits2.Text = "1000";
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                    lblCountUnits2.Text = "0";
+                }
             }
             conn.Close();
         }

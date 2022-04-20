@@ -37,10 +37,31 @@
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
     <script>
-
+        function filltextbox() {
+            Swal.fire({
+                title: "Please Enter fields to search.",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function Goodd() {
+            Swal.fire({
+                title: "Great!",
+                text: "You clicked the button!",
+                icon: "success",
+                timer: 2000,
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
         function Hitcheck() {
             Swal.fire({
-                title: "There are no duplicates in this series.",
+                title: "Safe, No Duplicate for this series.",
                 text: "You clicked the button!",
                 icon: "success",
                 confirmButtonText: "Okay",
@@ -53,15 +74,40 @@
             var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
             audio.play();
             Swal.fire({
-                title: "There are no duplicates in this series.",
+                title: "Safe, No Duplicate for this series.",
                 text: "You clicked the button!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
+                    $('#ScanModal').modal('show');
+                }
+            })
+        }
+        function ErrorUnits() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Invalid Number of Units.",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -73,12 +119,16 @@
                 title: "Duplicate Record.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -90,12 +140,16 @@
                 title: "No Record, Not include in this PO.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -107,12 +161,16 @@
                 title: "No Record.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -124,12 +182,16 @@
                 title: "No Record.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -141,12 +203,16 @@
                 title: "Please enter series.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -158,12 +224,16 @@
                 title: "Invalid Series!.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -175,12 +245,16 @@
                 title: "Already in the list!.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -192,12 +266,16 @@
                 title: "No Record for this Series.",
                 text: "You clicked the button!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -224,9 +302,17 @@
                 title: "All Details are compatible in this series.",
                 text: "You clicked the button!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
+                    $('#ScanModal').modal('show');
                 }
             })
         }
@@ -238,12 +324,16 @@
                 title: "This series are equal quantities and product.",
                 text: "Proceed to Seperate this data!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -255,12 +345,16 @@
                 title: "This series are equal quantities and product.",
                 text: "Proceed to saving this data!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -272,12 +366,16 @@
                 title: "Error.",
                 text: "Please Enter No. of Units!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -289,12 +387,16 @@
                 title: "Error.",
                 text: "Please Input Start Series!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -306,12 +408,16 @@
                 title: "Error.",
                 text: "Please Check No. of Units!",
                 icon: "warning",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -323,12 +429,16 @@
                 title: "Good!",
                 text: "Proceed to saving this data!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
                     $('#ScanModal').modal('show');
                 }
             })
@@ -340,6 +450,7 @@
                 title: "Saved Successfully!",
                 text: "You clicked the button!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
@@ -348,21 +459,53 @@
                 if (result.isConfirmed) {
                     $('#ScanModal').modal('show');
                 }
+                else {
+                    $('#ScanModal').modal('show');
+                }
             })
         }
         function AllSaved() {
             var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
             audio.play();
             Swal.fire({
-                title: "All Bundling are Saved Successfully!",
+                title: "All Bundled are Saved Successfully!",
                 text: "Proceed to Tagging Form!",
                 icon: "success",
+                timer: 2000,
                 confirmButtonText: "Okay",
                 customClass: {
                     container: 'my-swal-scan'
                 }
             }).then((result) => {
-                window.location = "AllSupplierRequest.aspx";
+                if (result.isConfirmed) {
+                    setTimeout(function () {
+                        $('#ScanModal').modal('show');
+                    }, 1000);
+                }
+                else {
+                    setTimeout(function () {
+                        $('#ScanModal').modal('show');
+                    }, 1000);
+                }
+            })
+        }
+        function Load() {
+            Swal.fire({
+                title: "Success.",
+                text: "Ready for scanning",
+                icon: "success",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal-scan'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#ScanModal').modal('show');
+                }
+                else {
+                    $('#ScanModal').modal('show');
+                }
             })
         }
        
@@ -506,6 +649,11 @@
                     <a class="nav-link" href="SuppDashboard.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="SupplierReports.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Report</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="AllSupplierRequest.aspx">
@@ -887,9 +1035,9 @@
                                         
                 <div class="input_field1">
 
-                    <asp:Label ID="Label3" runat="server" Text="Enter StartSeries:" CssClass="labelName"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Enter Series:" CssClass="labelName"></asp:Label>
                     <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtStartSeries_TextChanged"></asp:TextBox>
-                     <asp:Label ID="Label2" runat="server" Text="Enter EndSeries:" CssClass="labelName2"></asp:Label>
+                     <asp:Label ID="Label2" runat="server" Text="Enter Series:" CssClass="labelName2"></asp:Label>
                     <asp:TextBox ID="txtEndSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtEndSeries_TextChanged"></asp:TextBox>
                     
                      <div class="input_field1">
@@ -948,6 +1096,7 @@
                        <asp:Label ID="lblScanUnits" runat="server" Visible="false" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
                        <asp:Label ID="lblScanUnitsCount" runat="server" Text="0" ForeColor="Red" Visible="false" CssClass="label"></asp:Label>
                        <asp:Label ID="lblCountUnits" runat="server" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
+                       <asp:Label ID="lblCountUnits2" runat="server"  Visible="false" Text="0" ForeColor="Red" CssClass="label"></asp:Label>
                    </div>
               </div>
               <div class="forms">

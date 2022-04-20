@@ -33,6 +33,28 @@
                 }
             })
         }
+        function filltextbox() {
+            Swal.fire({
+                title: "Please Enter fields to search.",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function Goodd() {
+            Swal.fire({
+                title: "Great!",
+                text: "You clicked the button!",
+                icon: "success",
+                timer: 2000,
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
 
         //function Error() {
         //    Swal.fire({
@@ -299,6 +321,11 @@
                     <a class="nav-link" href="Dashboard.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="SourcingReports.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Report</span></a>
                 </li>
 
                 <li class="nav-item active">

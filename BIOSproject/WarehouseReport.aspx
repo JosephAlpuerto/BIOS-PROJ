@@ -4,9 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
 
-
-
-
     <div>
         <asp:Label ID="Label1" runat="server" Text="Tracking Series:"></asp:Label>
         <asp:TextBox ID="TxtSearch" runat="server"></asp:TextBox>
