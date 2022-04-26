@@ -30,7 +30,7 @@
     <link href="../css/SuppTaggingForm.css" rel="stylesheet" />
     <link href="css/SupplierScan.css" rel="stylesheet" />
     <link href="css/Scanfinishgood.css" rel="stylesheet" />
-
+    <link href="css/SupplierReport.css" rel="stylesheet" />
     <script src="js/sweetAlert.js" type="text/javascript"></script>
     <script src="js/SA.js" type="text/javascript"></script>
     <script src="js/jquery.js"></script>

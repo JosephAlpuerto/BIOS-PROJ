@@ -6,11 +6,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div>
+    <div class="Title">
         <asp:Label runat="server" Text="PO MONITORING REPORT" Font-Size="X-Large"></asp:Label>
     </div>
 
-     <div>
+     <div class="Base">
+         <div class="Menu">
         <asp:Label ID="Label1" runat="server" Text="Supplier:"></asp:Label> 
         <asp:TextBox ID="ddlSupplier" runat="server" CssClass="input1"></asp:TextBox>  
                <asp:AutoCompleteExtender ServiceMethod="GetCompletionList1" 
@@ -47,48 +48,48 @@
                    runat="server" 
                    FirstRowSelected="false">    
                 </asp:AutoCompleteExtender>
-        <asp:Button ID="btnSearch" runat="server" Text="SEARCH" OnClick="btnSearch_Click"/>
-        <asp:Button ID="btnClear" runat="server" Text="CLEAR" OnClick="btnClear_Click"/>
-
-        <asp:GridView runat="server" ID="gvlist" CssClass="gridview" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
+        <asp:Button ID="btnSearch" runat="server" CssClass="btnALL" ForeColor="White" BackColor="Gray" Text="SEARCH" OnClick="btnSearch_Click"/>
+        <asp:Button ID="btnClear" runat="server" CssClass="btnALL" ForeColor="White" BackColor="Gray" Text="CLEAR" OnClick="btnClear_Click"/>
+         </div>
+        <asp:GridView runat="server" ID="gvlist" CssClass="gridview" HeaderStyle-CssClass="gvcenter" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
                                       
-                                        <asp:ButtonField DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
-                                        <asp:ButtonField DataTextField="Material" HeaderText="DESCRIPTION" />
-                                        <asp:ButtonField HeaderText="PO NUMBER"/>
-                                        <asp:ButtonField DataTextField="POqty" HeaderText="PO QTY" />
-                                        <asp:ButtonField DataTextField="POproduced" HeaderText="PRODUCED QTY" />
-                                        <asp:ButtonField DataTextField="POissued" HeaderText="ISSUED QTY" />
-                                        <asp:ButtonField DataTextField="PObalance" HeaderText="PO BALANCE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="Material" HeaderText="DESCRIPTION" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" HeaderText="PO NUMBER"/>
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POqty" HeaderText="PO QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POproduced" HeaderText="PRODUCED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POissued" HeaderText="ISSUED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="PObalance" HeaderText="PO BALANCE" />
 
                                     </Columns>
                                 </asp:GridView>
 
-         <asp:GridView runat="server" ID="gvlist2" Visible="false" CssClass="gridview" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
+         <asp:GridView runat="server" ID="gvlist2" Visible="false" CssClass="gridview" HeaderStyle-CssClass="gvcenter" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
                                       
-                                        <asp:ButtonField DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
-                                        <asp:ButtonField DataTextField="Material" HeaderText="DESCRIPTION" />
-                                        <asp:ButtonField DataTextField="POnumber" HeaderText="PO NUMBER"/>
-                                        <asp:ButtonField DataTextField="POqty" HeaderText="PO QTY" />
-                                        <asp:ButtonField DataTextField="POproduced" HeaderText="PRODUCED QTY" />
-                                        <asp:ButtonField DataTextField="POissued" HeaderText="ISSUED QTY" />
-                                        <asp:ButtonField DataTextField="PObalance" HeaderText="PO BALANCE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="Material" HeaderText="DESCRIPTION" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POnumber" HeaderText="PO NUMBER"/>
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POqty" HeaderText="PO QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POproduced" HeaderText="PRODUCED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POissued" HeaderText="ISSUED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="PObalance" HeaderText="PO BALANCE" />
 
                                     </Columns>
                                 </asp:GridView>
 
-          <asp:GridView runat="server" ID="gvlist3" Visible="false" CssClass="gridview" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
+          <asp:GridView runat="server" ID="gvlist3" Visible="false" CssClass="gridview" HeaderStyle-CssClass="gvcenter" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
                                       
-                                        <asp:ButtonField DataTextField="SuppName" HeaderText="SUPPLIER NAME" />
-                                        <asp:ButtonField DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
-                                        <asp:ButtonField DataTextField="Material" HeaderText="DESCRIPTION" />
-                                        <asp:ButtonField DataTextField="POnumber" HeaderText="PO NUMBER"/>
-                                        <asp:ButtonField DataTextField="POqty" HeaderText="PO QTY" />
-                                        <asp:ButtonField DataTextField="POproduced" HeaderText="PRODUCED QTY" />
-                                        <asp:ButtonField DataTextField="POissued" HeaderText="ISSUED QTY" />
-                                        <asp:ButtonField DataTextField="PObalance" HeaderText="PO BALANCE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="SuppName" HeaderText="SUPPLIER NAME" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="ProductCode" HeaderText="PRODUCT CODE" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="Material" HeaderText="DESCRIPTION" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POnumber" HeaderText="PO NUMBER"/>
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POqty" HeaderText="PO QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POproduced" HeaderText="PRODUCED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="POissued" HeaderText="ISSUED QTY" />
+                                        <asp:ButtonField ItemStyle-HorizontalAlign="Center" DataTextField="PObalance" HeaderText="PO BALANCE" />
 
                                     </Columns>
                                 </asp:GridView>

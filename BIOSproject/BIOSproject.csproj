@@ -136,6 +136,8 @@
     <Content Include="css\NewRequest.css" />
     <Content Include="css\Scanfinishgood.css" />
     <Content Include="css\sorcedb.css" />
+    <Content Include="css\SourcingReport.css" />
+    <Content Include="css\SupplierReport.css" />
     <Content Include="css\SupplierScan.css" />
     <Content Include="css\SuppTaggingForm.css" />
     <Content Include="css\ViewSeries.css" />
