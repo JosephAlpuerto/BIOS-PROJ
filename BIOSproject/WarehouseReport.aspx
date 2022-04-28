@@ -10,11 +10,12 @@
         <asp:Label ID="Label1" runat="server" Text="Tracking Series:" CssClass="label"></asp:Label>
         <asp:TextBox ID="TxtSearch" runat="server" CssClass="input1"></asp:TextBox>
         <asp:Button ID="BtnSearch" runat="server" Text="Search" OnClick="BtnSearch_Click"/>
+          <asp:Button ID="BtnClear" runat="server" Text="Clear" OnClick="BtnClear_Click"/>
         <asp:Label ID="Label2" runat="server" Text="From:" CssClass="label"></asp:Label>
         <asp:TextBox ID="TxtFromDate" runat="server" TextMode="Date" CssClass="input1"></asp:TextBox>
         <asp:Label ID="Label3" runat="server" Text="To" CssClass="label" ></asp:Label>
         <asp:TextBox ID="TxtToDate" runat="server" TextMode="Date" CssClass="input1"></asp:TextBox>
-        <asp:Button ID="BtnDateDisplay" runat="server" Text="Search By Date"/>
+        <asp:Button ID="BtnDateDisplay" runat="server" Text="Search By Date" OnClick="BtnDateDisplay_Click1"/>
 
         <asp:GridView runat="server" ID="Gridview1" CssClass="gridview" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>

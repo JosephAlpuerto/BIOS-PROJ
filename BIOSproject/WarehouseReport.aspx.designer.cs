@@ -51,6 +51,15 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.Button BtnSearch;
 
         /// <summary>
+        /// BtnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnClear;
+
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>

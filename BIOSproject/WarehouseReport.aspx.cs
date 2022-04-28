@@ -83,12 +83,25 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-
         }
 
         protected void BtnDateDisplay_Click(object sender, EventArgs e)
         {
-
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("DateFilter1", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Date", TxtFromDate.Text);
+            sqlData.SelectCommand.Parameters.AddWithValue("@Date2", TxtToDate.Text);
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+            Gridview1.UseAccessibleHeader = true;
+            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            TxtSearch.Text = "";
         }
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
@@ -116,6 +129,30 @@ namespace BIOSproject
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
             TxtSearch.Text += ", ";
             
+        }
+
+        protected void BtnClear_Click(object sender, EventArgs e)
+        {
+            TxtSearch.Text = "";
+        }
+
+        protected void BtnDateDisplay_Click1(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("DateFilter1", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@Date", TxtFromDate.Text);
+            sqlData.SelectCommand.Parameters.AddWithValue("@Date2", TxtToDate.Text);
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+            Gridview1.UseAccessibleHeader = true;
+            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            TxtSearch.Text = "";
         }
     }
 }
