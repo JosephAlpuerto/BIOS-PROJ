@@ -152,12 +152,18 @@
                      <asp:Label ID="Label9" runat="server" Visible="false" Text="Total Quantity" CssClass="label"></asp:Label>
                 </div>
                  <div class="input-box6">
-                <asp:TextBox ID="TxtAllProduct" runat="server" Visible="false" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox> 
+                    <asp:TextBox ID="TxtAllProduct" runat="server" Visible="false" TextMode="MultiLine" ReadOnly="true" CssClass="input1" value="=Convert.ToString(info[0])" Width="400px" Height="100px"></asp:TextBox> 
                 </div>
                 <div class="input-box6">
                     <asp:TextBox ID="txtTotal" Visible="false" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
                 </div>
-                    
+
+                <div class="input-box6">
+                    <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:TextBox ID="txtEndSeries" runat="server" CssClass="input1"></asp:TextBox>
+                    <asp:TextBox ID="txtListSeries" runat="server"></asp:TextBox>
+                </div>
+
                 <asp:DropDownList ID="DDL" runat="server" Visible="false"></asp:DropDownList>
                 <asp:DropDownList ID="DDLQuantity" runat="server" Visible="false"></asp:DropDownList>
                 <asp:TextBox ID="txtSupp" Visible="false" runat="server"></asp:TextBox>

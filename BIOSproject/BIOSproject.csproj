@@ -169,6 +169,9 @@
     <Content Include="Sounds\correct-sound-effect_2ravtBqv.mp3" />
     <Content Include="Sounds\wrong-sound-effect_TfPLyWdb.mp3" />
     <Content Include="SourcingReports.aspx" />
+    <Content Include="SSP-DuplicateReport.aspx" />
+    <Content Include="SSPwarehouseReport.aspx" />
+    <Content Include="Supp-DuplicateReport.aspx" />
     <Content Include="SupplierReports.aspx" />
     <Content Include="SupplierTaggingForm.aspx" />
     <Content Include="TextFile\100.txt" />
@@ -1990,6 +1993,27 @@
     </Compile>
     <Compile Include="SourcingReports.aspx.designer.cs">
       <DependentUpon>SourcingReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SSP-DuplicateReport.aspx.cs">
+      <DependentUpon>SSP-DuplicateReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SSP-DuplicateReport.aspx.designer.cs">
+      <DependentUpon>SSP-DuplicateReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SSPwarehouseReport.aspx.cs">
+      <DependentUpon>SSPwarehouseReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SSPwarehouseReport.aspx.designer.cs">
+      <DependentUpon>SSPwarehouseReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Supp-DuplicateReport.aspx.cs">
+      <DependentUpon>Supp-DuplicateReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Supp-DuplicateReport.aspx.designer.cs">
+      <DependentUpon>Supp-DuplicateReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="SupplierReports.aspx.cs">
       <DependentUpon>SupplierReports.aspx</DependentUpon>

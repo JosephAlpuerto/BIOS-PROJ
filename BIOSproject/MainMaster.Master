@@ -325,7 +325,17 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="SourcingReports.aspx">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Report</span></a>
+                        <span>Main-Report</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="SSPwarehouseReport.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Warehouse-Report</span></a>
+                </li>
+                 <li class="nav-item active">
+                    <a class="nav-link" href="SSP-DuplicateReport.aspx">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Duplicate-Report</span></a>
                 </li>
 
                 <li class="nav-item active">
