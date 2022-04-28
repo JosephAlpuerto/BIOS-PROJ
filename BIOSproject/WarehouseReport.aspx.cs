@@ -19,8 +19,10 @@ namespace BIOSproject
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillGridView();
+
+            //FillGridView();
             FilterRecords();
+            //Search();
         }
 
 
@@ -34,6 +36,7 @@ namespace BIOSproject
             SqlDataAdapter sqlData = new SqlDataAdapter("ReportSearch", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@search", TxtSearch.Text);
+            //sqlData.SelectCommand.Parameters.AddWithValue("@search1", TxtSearch.Text);
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
             sqlCon.Close();
@@ -45,13 +48,21 @@ namespace BIOSproject
 
         void Search()
         {
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            conn.Open();
-            SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
-            sql.CommandText = sqlquery;
-            sql.Connection = conn;
-            sql.Parameters.AddWithValue("@search", Convert.ToInt64(TxtSearch.Text));
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("ReportSearch", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlData.SelectCommand.Parameters.AddWithValue("@search", TxtSearch.Text);
+            //sqlData.SelectCommand.Parameters.AddWithValue("@search1", TxtSearch.Text);
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+            Gridview1.UseAccessibleHeader = true;
+            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+
 
         }
 
@@ -75,14 +86,27 @@ namespace BIOSproject
 
         }
 
+        protected void BtnDateDisplay_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
+            if (TxtSearch.Text == "")
+            {
+                LblAlert.Text = "Please input Tracking Series";
+            }
+            
+
+            string series = TxtSearch.Text;
+            string[] num = series.Split(',').Select(n => string.Format("'{0}'", n.Trim())).ToArray();
+            string sql = string.Format("SELECT * FROM FinishedGood WHERE StartingSeries in ({0}) or EndingSeries in ({0})", string.Join(",", num));
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ReportSearch", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlData.SelectCommand.Parameters.AddWithValue("@search", TxtSearch.Text);
+            SqlDataAdapter sqlData = new SqlDataAdapter(sql, sqlCon);
+            //sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            //sqlData.SelectCommand.Parameters.AddWithValue("@search1", TxtSearch.Text);
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
             sqlCon.Close();
@@ -90,7 +114,8 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-
+            TxtSearch.Text += ", ";
+            
         }
     }
 }
