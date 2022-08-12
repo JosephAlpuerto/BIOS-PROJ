@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" CodeBehind="MyRejectedRequestSupp.aspx.cs" Inherits="BIOSproject.MyRejectedRequestSupp" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="MyRejectedRequestSupp.aspx.cs" Inherits="BIOSproject.MyRejectedRequestSupp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

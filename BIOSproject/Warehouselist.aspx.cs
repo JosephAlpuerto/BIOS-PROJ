@@ -24,8 +24,16 @@ namespace BIOSproject.Hub
         {
             if (!IsPostBack)
             {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                    FillGridView();
+                }
 
-                FillGridView();
+                
                 //string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
                 //string sqlquery = "select * from ref_Branches where TeamDescr != '" + null + "'";
                 //SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
@@ -65,7 +73,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("SuppRequestShow", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[SuppRequestShow]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
@@ -84,7 +92,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ViewAllSuppRequest", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[ViewAllSuppRequest]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
             DataTable dtbl = new DataTable();
@@ -118,7 +126,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("HubProcess", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[HubProcess]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
             sqlCmd.Parameters.AddWithValue("@IfProcess", "1");
@@ -197,14 +205,14 @@ namespace BIOSproject.Hub
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "SearchSeries";
+            cmd.CommandText = "[LBC.BIOS].[lbcbios].[SearchSeries]";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Search", TxtSearchSeries.Text);
             cmd.Parameters.AddWithValue("@startmin", start);
             cmd.Parameters.AddWithValue("@endmax", end);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and DestinationTo = 'Warehouse'";
+            string sqlquery = "select * from [LBC.BIOS].[lbcbios].[SSPNewRequest] where StartingSeries <= @search and EndingSeries >= @search and DestinationTo = 'Warehouse'";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(TxtSearchSeries.Text));
@@ -256,7 +264,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("CheckDuplicate", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[CheckDuplicate]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", commandArguments[0]);
             sqlData.SelectCommand.Parameters.AddWithValue("@StartingSeries", commandArguments[1]);
@@ -269,7 +277,7 @@ namespace BIOSproject.Hub
                 SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
                 if (sqlCon2.State == ConnectionState.Closed)
                     sqlCon2.Open();
-                SqlCommand sqlCmd = new SqlCommand("CheckDuplicate3", sqlCon2);
+                SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[CheckDuplicate3]", sqlCon2);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@Id", commandArguments[0]);
                 sqlCmd.Parameters.AddWithValue("@WHcheck", "1");
@@ -293,7 +301,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ViewtoDownload", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[ViewtoDownload]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
             DataTable dtbl = new DataTable();
@@ -304,7 +312,7 @@ namespace BIOSproject.Hub
             hfPONumber.Value = dtbl.Rows[0]["PONumber"].ToString();
             hfStartingSeries.Value = dtbl.Rows[0]["StartingSeries"].ToString();
             hfEndingSeries.Value = dtbl.Rows[0]["EndingSeries"].ToString();
-            hfSupplier.Value = dtbl.Rows[0]["Supplier"].ToString();
+            hfSupplier.Value = dtbl.Rows[0]["SupplierName"].ToString();
             hfProduct.Value = dtbl.Rows[0]["Product"].ToString();
             hfQuantity.Value = dtbl.Rows[0]["Quantity"].ToString();
             ModalDownloadView.Show();
@@ -315,7 +323,7 @@ namespace BIOSproject.Hub
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("DownloadbySupp", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[DownloadbySupp]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@ID", txtId.Text);
             sqlCmd.Parameters.AddWithValue("@IfDownload", "1");

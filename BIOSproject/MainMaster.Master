@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="BIOSproject.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="BIOSproject.MainMaster"%>
 
 <!DOCTYPE html>
 
@@ -239,7 +239,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="SB-Admin.aspx">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard.aspx">
                     <div class="sidebar-brand-icon">
                         <i>
                             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/98/LBC_Express_2013_Logo.svg/1200px-LBC_Express_2013_Logo.svg.png"></i>
@@ -614,7 +614,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="img/undraw_profile.svg">  &nbsp; &nbsp;
                                     <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
                                     <!--<span ID="txtUsername" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>-->
 
@@ -673,7 +673,8 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="Default.aspx">Logout</a>
+                                <%--<a class="btn btn-primary" href="Default.aspx">Logout</a>--%>
+                                 <asp:Button ID="Logout" runat="server" class="btn btn-primary" Text="Logout" OnClick="Logout_Click"/>
                             </div>
                         </div>
                     </div>

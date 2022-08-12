@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" CodeBehind="SuppDashboard.aspx.cs" Inherits="BIOSproject.SuppDashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="SuppDashboard.aspx.cs" Inherits="BIOSproject.SuppDashboard" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

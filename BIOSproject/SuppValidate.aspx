@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" CodeBehind="SuppValidate.aspx.cs" Inherits="BIOSproject.SuppValidate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="SuppValidate.aspx.cs" Inherits="BIOSproject.SuppValidate" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

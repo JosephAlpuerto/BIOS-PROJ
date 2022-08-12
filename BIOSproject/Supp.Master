@@ -36,7 +36,9 @@
     <script src="js/jquery.js"></script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
+
     <script>
+       
         function filltextbox() {
             Swal.fire({
                 title: "Please Enter fields to search.",
@@ -92,7 +94,7 @@
             })
         }
         function ErrorUnits() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Invalid Number of Units.",
@@ -134,7 +136,7 @@
             })
         }
         function HitcheckError2() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "No Record, Not include in this PO.",
@@ -197,7 +199,7 @@
             })
         }
         function blank() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Please enter series.",
@@ -218,7 +220,7 @@
             })
         }
         function Invalid() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Invalid Series!.",
@@ -307,14 +309,15 @@
                 customClass: {
                     container: 'my-swal'
                 }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#ScanModal').modal('show');
-                }
-                else {
-                    $('#ScanModal').modal('show');
-                }
             })
+            //}).then((result) => {
+            //    if (result.isConfirmed) {
+            //        $('#ScanModal').modal('show');
+            //    }
+            //    else {
+            //        $('#ScanModal').modal('show');
+            //    }
+            //})
         }
 
         function Scan() {
@@ -360,7 +363,7 @@
             })
         }
         function Unit() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Error.",
@@ -381,7 +384,7 @@
             })
         }
         function Series() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Error.",
@@ -402,7 +405,7 @@
             })
         }
         function CheckUnit() {
-            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
             audio.play();
             Swal.fire({
                 title: "Error.",
@@ -538,8 +541,101 @@
             });
         });
 
+      
         
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#ScanModal").on('shown.bs.modal', function () {
+                var start = document.getElementById('<%= txtStartSeries.ClientID %>').value;
+                if (start == "") {
+                    $(this).find('input[id="txtStartSeries"]').focus();
+                    return false;
+                }
+                else {
+                    $(this).find('input[id="txtEndSeries"]').focus();
+                    return false;
+                }
+                
+            }); 
+        });
+    </script>
+
+
+   <%-- SupplierTagging Form alert--%>
+    <script>
+        function TaggingScannerSuccess() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Safe, No Duplicate for this series.",
+                text: "You clicked the button!",
+                icon: "success",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TempDuplicate() {
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
+            audio.play();
+            Swal.fire({
+                title: "This Series Already Scanned!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingDuplicate() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Duplicate Record!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingNoRecord() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "No Record!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingDestination() {
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Select Destination!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+    </script>
+
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -563,6 +659,7 @@
     
 <body id="page-top">
     <form id="form1" runat="server">
+
         <div id="wrapper">
 
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -660,24 +757,36 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Duplicate-Report</span></a>
                 </li>
-                 <li class="nav-item active">
-                    <a class="nav-link" href="SampleMulitipleScan.aspx">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>SampleDuplicate-Report</span></a>
-                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="AllSupplierRequest.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>All SSP Requested</span></a>
                 </li>
                   <li class="nav-item active">
-                     <a class="nav-link" href="#" data-toggle="modal" data-target="#ScanModal">
+                     <a class="nav-link" href="#ScanModal" data-toggle="modal"><%--data-toggle="modal" data-target="#ScanModal"--%>
                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Scan</a>
                 </li>
-                <li class="nav-item active">
+              <%--  <li class="nav-item active">
                     <a class="nav-link" href="SupplierTaggingForm.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Tagging Form</span></a>
+                </li>--%>
+                 <li class="nav-item active">
+                    <a class="nav-link collapsed" href="SupplierTaggingForm.aspx" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tagging Tools</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Tools:</h6>
+                             <a style="font-size:medium; font-weight:bolder;" class="collapse-item" href="SupplierTaggingForm.aspx">
+                                 <i class="fas fa-fw fa-folder"></i><span>Scanner</span></a>
+                             <a style="font-size:medium; font-weight:bolder;" class="collapse-item" href="InquiryForm.aspx">
+                                 <i class="fas fa-fw fa-folder"></i><span>Inquiry</span></a>
+                            
+                        </div>
+                    </div>
                 </li>
 
                 <%--<li class="nav-item active">
@@ -935,7 +1044,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="img/undraw_profile.svg"> &nbsp; &nbsp;
                                     <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
                                     <!--<span ID="txtUsername" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>-->
 
@@ -994,7 +1103,8 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="Default.aspx">Logout</a>
+                                <%--<a class="btn btn-primary" href="Default.aspx">Logout</a>--%>
+                                <asp:Button ID="Logout" runat="server" class="btn btn-primary" Text="Logout" OnClick="Logout_Click"/>
                             </div>
                         </div>
                     </div>
@@ -1045,7 +1155,7 @@
                                         
                 <div class="input_field1">
 
-                    <asp:Label ID="Label3" runat="server" Text="Enter Series:" CssClass="labelName"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Enter Series:" CssClass="labelName" ></asp:Label>
                     <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtStartSeries_TextChanged"></asp:TextBox>
                      <asp:Label ID="Label2" runat="server" Text="Enter Series:" CssClass="labelName2"></asp:Label>
                     <asp:TextBox ID="txtEndSeries" runat="server" CssClass="input1" Width="277px" AutoPostBack="true" OnTextChanged="txtEndSeries_TextChanged"></asp:TextBox>

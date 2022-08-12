@@ -32,7 +32,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("IdCreateUsers", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[lbcbios].[IdCreateUsers]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
             sqlCmd.Parameters.AddWithValue("@Username", txtUEmail.Text.Trim());

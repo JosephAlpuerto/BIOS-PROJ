@@ -21,8 +21,16 @@ namespace BIOSproject
             
             if (!IsPostBack)
             {
-                btnDelete.Enabled = false;
-                FillGridView();
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    FillGridView();
+                }
+               
             }
         }
 
@@ -32,7 +40,7 @@ namespace BIOSproject
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "Admin_SelectAll";
+            cmd.CommandText = "[dbo].[Admin_SelectAll]";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             conn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
@@ -66,7 +74,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ContactViewAll", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[dbo].[ContactViewAll]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlData.Fill(dtbl);
@@ -104,7 +112,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("IdCreateOrUpdate", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[dbo].[IdCreateOrUpdate]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
             sqlCmd.Parameters.AddWithValue("@Username", txtEmail.Text.Trim());
@@ -146,7 +154,7 @@ namespace BIOSproject
                     SqlConnection sqlCon = new SqlConnection(ConnectionString);
                     if (sqlCon.State == ConnectionState.Closed)
                         sqlCon.Open();
-                    SqlDataAdapter sqlData = new SqlDataAdapter("ContactViewById", sqlCon);
+                    SqlDataAdapter sqlData = new SqlDataAdapter("[dbo].[ContactViewById]", sqlCon);
                     sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
                     sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
                     DataTable dtbl = new DataTable();
@@ -167,7 +175,7 @@ namespace BIOSproject
                     SqlConnection sqlCon = new SqlConnection(ConnectionString);
                     if (sqlCon.State == ConnectionState.Closed)
                         sqlCon.Open();
-                    SqlCommand sqlCmd = new SqlCommand("ContactDeleteById", sqlCon);
+                    SqlCommand sqlCmd = new SqlCommand("[dbo].[ContactDeleteById]", sqlCon);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
                     sqlCmd.Parameters.AddWithValue("@Id", (hfId.Value == "" ? 0 : Convert.ToInt32(hfId.Value)));
                     sqlCmd.Parameters.AddWithValue("@Username", txtEmail.Text.Trim());
@@ -223,7 +231,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("IdCreateAdmin", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[lbcbios].[IdCreateAdmin]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@Username", txtEmail1.Text.Trim());
@@ -281,7 +289,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("ViewResetAdmin", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[lbcbios].[ViewResetAdmin]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Id", Id);
             //sqlData.SelectCommand.Parameters.AddWithValue("@Password", password);
@@ -317,7 +325,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("ResetPasswordAdmin", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[lbcbios].[ResetPasswordAdmin]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfIdReset.Value == "" ? 0 : Convert.ToInt32(hfIdReset.Value)));
             //sqlCmd.Parameters.AddWithValue("@Username", (hfEmailReset.Value == "" ? 0 : Convert.ToChar(hfEmailReset.Value)));

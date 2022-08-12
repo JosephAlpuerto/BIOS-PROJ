@@ -1,14 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" CodeBehind="AllSupplierRequest.aspx.cs" Inherits="BIOSproject.AllSupplierRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="AllSupplierRequest.aspx.cs" Inherits="BIOSproject.AllSupplierRequest" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+     <script src="js/SA.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <div id="wrapper">
                     <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        
                             <%--<h1 class="h3 mb-0 text-gray-800">Requested list</h1>--%>
                         <asp:Button Text="Hitcheck" ID="AllHitcheck" Visible="false" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" runat="server" OnClick="AllHitcheck_Click"></asp:Button>
                         <%--<asp:Button Text="HitCheck Series" ID="btnValidateSeries" CssClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" OnClick="btnValidateSeries_Click" runat="server"></asp:Button>--%>
@@ -17,103 +20,6 @@
                         </div>
                      </div>
 
-    <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal"  PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
-        <asp:Panel ID="PanelValidateSeries" runat="server">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-            <script src="js/jquery.js"></script>
-            <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-                <script>
-                    $(document).ready(function () {
-                        $("#TxtSearchSeries").keypress(function (e) {
-                            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                                $("#errmsgSeries").html("Numbers Only").show().fadeOut("slow");
-                                return false;
-                            }
-                        });
-                    });
-                </script>
-                        <style>
-                            #errmsgSeries {
-                                color: red;
-                            }
-                        </style>
-
-             <div class="container">
-                        <div class="card o-hidden border-0 shadow-lg my-2">
-                                <div class="card-body p-0">
-                            <div id="headerDivSeries" class="modal-header" >
-                                <h5 class="modal-title" id="">HitCheck Series Number</h5>
-                                <%--<button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>--%>
-                                <asp:LinkButton ID="hitCheckCloseSeries" runat="server" Text="x" OnClick="hitCheckCloseSeries_Click"/>
-
-                            </div>
-
-        <div class="row">
-                    <div class="col-lg-10">
-                        <div class="p-5">
-                            <asp:Label ID="hitcheckerrorSeries" ForeColor="Red" runat="server" Text=""></asp:Label>
-                            <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
-                                
-                                <div class="forms">
-               <div class="input_field1">
-                    <asp:HiddenField ID="HiddenField1" runat="server" />
-                    <%--<label>Date Requested</label>--%>
-                    <asp:Label ID="Label9" runat="server" Text="Enter Series Number" CssClass="label"></asp:Label>
-                    <span id="errmsgSeries"></span>
-                    <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="2" ClientIDMode="Static"></asp:TextBox>
-
-                   <asp:GridView ID="gridview" runat="server" CssClass="table table-bordered dataTable2"  AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="This Series Sequence is already use!">
-                    <Columns>
-                       <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
-                        <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
-                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                         <asp:TemplateField>
-                          <ItemTemplate>
-                                <asp:LinkButton runat="server" Text="OnProcess!" ForeColor="Red" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "False"%>' CssClass="btn btn-user btn-block" />
-                                <asp:Button runat="server" Text="Done" Enabled="false" Visible='<%# Eval("IsActive").ToString() == "True"%>' CssClass="btn btn-user btn-block" />
-                          </ItemTemplate>
-                        </asp:TemplateField> 
-                    </Columns>
-                   </asp:GridView>
-                </div>
-
-                   
-                  <%--<div class="input_field1">
-                    <asp:Label ID="Label5" runat="server" Text="StartingSeries" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtStart" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>     
-                 <div class="input_field1">
-                    <asp:Label ID="Label1" runat="server" Text="EndingSeries" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtEnd" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>
-               <%-- <div class="input_field1">
-                    <asp:Label ID="Label6" runat="server" Text="PONumber" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtPONoSeries" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>  
-
-                    
-                                
-
-                
-                
-
-                <div class="input_field1">
-                    <asp:Button ID="Button2" runat="server" Text="Validate" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click" />
-        </div>           
-        </div>         
-                                     </ContentTemplate></asp:UpdatePanel> 
-        </div>
-                              </div>
-                    </div>
-                </div>
-                       </div>
-                        </div>
-                            
-
-        </asp:Panel>
 
 
    <%--  <ajaxtoolkit:modalpopupextender ID="ModalValidate" PopupControlID="PanelValidate" TargetControlID="gvModal"  PopupDragHandleControlID="headerDiv" runat="server"></ajaxtoolkit:modalpopupextender>
@@ -188,7 +94,7 @@
 
 
 
-    <ajaxtoolkit:modalpopupextender ID="ModalRequest" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
+<%--    <ajaxtoolkit:modalpopupextender ID="ModalRequest" PopupControlID="PanelRequest" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelRequest" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
  
            <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
@@ -213,12 +119,10 @@
 
                                 <asp:Label Text="" ID="lblSuccess" ForeColor="Green" Font-Bold="true" runat="server" />
                 <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
                     <asp:Label ID="Label6" runat="server" Text="Request ID" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtRequestID" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
                 <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
                     <asp:Label ID="Label4" runat="server" Text="Tracking No." CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtTicket" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
                 </div>
@@ -238,18 +142,10 @@
                 </div>
 
                  <div class="input_field1">
-                   <%-- <label>Product</label>--%>
                     <asp:Label ID="Label5" runat="server" Text="Schedule Date" CssClass="label"></asp:Label>
                     <asp:TextBox ID="txtDate" runat="server" CssClass="input1" TextMode="Date"></asp:TextBox>
                 </div>
 
-                <%--<div class="input_field1">
-                    
-                    <asp:Label ID="Label2" runat="server" Text="Team" CssClass="label"></asp:Label>
-                    <asp:DropDownList ID="DropTeam" runat="server" CssClass="input1">
-                      
-                    </asp:DropDownList>
-                </div>--%>
 
             
             <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
@@ -284,18 +180,14 @@
                     </asp:DropDownList>
                 </div>
 
-               <%--IF HUB--%>
-               <%-- <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Hub] FROM [Reference] where [Hub] != 'NULL'"></asp:SqlDataSource>--%>
-                 <div class="input_field1">
+               <div class="input_field1">
                     <asp:Label ID="lblHub" runat="server" Visible="false" Text="HUB" CssClass="label"></asp:Label>
                     <asp:DropDownList ID="DropHub" Visible="False" runat="server" CssClass="input1">
                        <asp:ListItem Selected="True" Text=""></asp:ListItem>
                     </asp:DropDownList>
                 </div>
 
-                <%--IF WAREHOUSE--%>
-               <%-- <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [WareHouse] FROM [Reference] WHERE [WareHouse] != 'NULL'"></asp:SqlDataSource>--%>
-                 <div class="input_field1">
+                <div class="input_field1">
                     <asp:Label ID="lblWare" runat="server" Visible="false" Text="WAREHOUSE" CssClass="label"></asp:Label>
                     <asp:DropDownList ID="DropWare" Visible="False" runat="server" CssClass="input1">
                         <asp:ListItem Selected="True" Text=""></asp:ListItem>
@@ -310,7 +202,7 @@
         </div>
             </div>
                </div>
-        </asp:Panel>
+        </asp:Panel>--%>
 
 
 
@@ -318,7 +210,7 @@
 
 
 
-    <ajaxtoolkit:modalpopupextender ID="ModalViewReject" PopupControlID="PanelViewReject" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
+   <%-- <ajaxtoolkit:modalpopupextender ID="ModalViewReject" PopupControlID="PanelViewReject" TargetControlID="gvModal" CancelControlID="btnClose"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelViewReject" runat="server">
             <div class="container">
                 <div class="card o-hidden border-0 shadow-lg my-2">
@@ -393,16 +285,15 @@
                       </div>
                     </div>
                   </div>
-           </asp:Panel>
+           </asp:Panel>--%>
 
 
 
-    <ajaxtoolkit:modalpopupextender ID="ModalDownloadView" PopupControlID="PanelDownloadView" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
+    <%--<ajaxtoolkit:modalpopupextender ID="ModalDownloadView" PopupControlID="PanelDownloadView" TargetControlID="gvModal"  runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelDownloadView" runat="server">
             <div class="container">
                 <div class="card o-hidden border-0 shadow-lg my-2">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="p-5">
@@ -443,7 +334,7 @@
                       </div>
                     </div>
                   </div>
-           </asp:Panel>
+           </asp:Panel>--%>
 
 
      <ajaxtoolkit:modalpopupextender ID="ModalScanSupplier" PopupControlID="PanelScanSupplier" TargetControlID="gvModal" PopupDragHandleControlID="header" runat="server"></ajaxtoolkit:modalpopupextender>
@@ -484,7 +375,6 @@
                     <asp:Label ID="lblUnits" runat="server" CssClass="input1" ForeColor="Red"></asp:Label>
                 </div>
                  <div class="input_field1">
-                   <%-- <label>Product</label>--%>
                     <asp:Label ID="Label20" runat="server" Text="Product:" CssClass="label"></asp:Label>
                      <asp:TextBox ID="txtProduct" runat="server"  Enabled="false" CssClass="input1" Width="315px"></asp:TextBox>
                 </div>
@@ -495,21 +385,9 @@
                                 </div>
 
                <div class="formsSeries">
-                    <%--<div class="input_field1">
-                        <asp:Label ID="Label3" runat="server" CssClass="label" Text="Series Quantity:"></asp:Label>
-                        <asp:Label ID="lblseries" runat="server" CssClass="label" ForeColor="Red"></asp:Label>
-                    </div>--%>
                     <div class="input_field1">
                         <asp:TextBox ID="txtSeries" runat="server" CssClass="input1" Enabled="false" TextMode="MultiLine"></asp:TextBox>
                     </div>
-
-                    <%--<div class="input_field1">
-                        <asp:Button ID="btnScan" Text="SCAN" Visible="false" CssClass="btnScan" runat="server" OnClick="btnScan_Click"/>
-                    </div>--%>
-                  <%--  <div class="input_field1">
-                        <asp:HiddenField runat="server" ID="hfisRejected"/>
-                        <asp:Button ID="btnPrint" Text="Print" Visible="false" CssClass="btnScan" runat="server" OnClick="btnPrint_Click"/>
-                    </div>--%>
                      <div class="input_field1">
                         <asp:Button ID="btnHitcheck" Text="HitCheck" Visible="false" CssClass="btnScan" runat="server" OnClick="btnHitcheck_Click"/>
                     </div>
@@ -528,7 +406,7 @@
                </div>
         </asp:Panel>
 
-    <ajaxtoolkit:modalpopupextender ID="ModalPrint" PopupControlID="PanelPrint" TargetControlID="gvModal" CancelControlID="btnClosePrint" runat="server"></ajaxtoolkit:modalpopupextender>
+    <%--<ajaxtoolkit:modalpopupextender ID="ModalPrint" PopupControlID="PanelPrint" TargetControlID="gvModal" CancelControlID="btnClosePrint" runat="server"></ajaxtoolkit:modalpopupextender>
                         <asp:Panel ID="PanelPrint" CssClass="Print"  runat="server">
                         
                             <div class="card shadow mb-4">
@@ -547,10 +425,10 @@
                             </LocalReport>
                        </rsweb:ReportViewer>
                        </div></div>
-                            </asp:Panel>
+                            </asp:Panel>--%>
 
 
-       <ajaxtoolkit:modalpopupextender ID="ModalScan" PopupControlID="PanelScan" TargetControlID="gvModal" CancelControlID="btnCloseScan" runat="server"></ajaxtoolkit:modalpopupextender>
+     <%--  <ajaxtoolkit:modalpopupextender ID="ModalScan" PopupControlID="PanelScan" TargetControlID="gvModal" CancelControlID="btnCloseScan" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelScan" runat="server" TabIndex="1" CssClass="Modal">
  
            <div id="Div3" runat="server" style="max-height: 500px; overflow: auto;">
@@ -560,8 +438,8 @@
                                 <h5 class="modal-title" id=""> 
                                     Scanning of Finished Goods</h5>
                                 <asp:LinkButton runat="server" id="btnCloseScan" Text="x" OnClick="btnCloseScan_Click"/>
-<%--                                    <span aria-hidden="true">×</span>
-                                </asp:Button>--%>
+                                  <span aria-hidden="true">×</span>
+                                </asp:Button>
                             </div>
 
                                 
@@ -620,11 +498,11 @@
                                 </asp:UpdatePanel> 
             </div>
                </div>
-        </asp:Panel>
+        </asp:Panel>--%>
 
 
 
-       <ajaxtoolkit:modalpopupextender ID="ModalPass" PopupControlID="PanelPass" TargetControlID="gvModal" CancelControlID="btnClosePass" runat="server"></ajaxtoolkit:modalpopupextender>
+  <%--     <ajaxtoolkit:modalpopupextender ID="ModalPass" PopupControlID="PanelPass" TargetControlID="gvModal" CancelControlID="btnClosePass" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelPass" runat="server" TabIndex="1" CssClass="ModalPass">
             <div class="card shadow mb-4">
 
@@ -640,9 +518,6 @@
                     <asp:Label ID="Label3" runat="server" Text="Enter Password:" CssClass="label"></asp:Label> 
                     <asp:TextBox ID="txtPass" runat="server" CssClass="input1" Width="200px" AutoPostBack="true" TextMode="Password"></asp:TextBox>
                 </div> 
-<%--                <div class="input_field1">
-                    <asp:Label ID="lblwrong" runat="server" ForeColor="Red" Visible="false" CssClass="label"></asp:Label> 
-                </div>--%>
                    <div class="input_field2">
                      <asp:Button ID="btnConfirm" runat="server" Text="Confirm" CssClass="btn" OnClick="btnConfirm_Click"/>     
                    </div>
@@ -654,7 +529,7 @@
                        </div>             
             </div>
           
-        </asp:Panel>
+        </asp:Panel>--%>
     <ajaxtoolkit:modalpopupextender ID="ModalDL" PopupControlID="PanelDL" TargetControlID="gvModal" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelDL" runat="server" TabIndex="1" CssClass="Modal">
           
@@ -663,7 +538,7 @@
                     <div id="header2" class="modal-header">
                                 <h5 class="modal-title" id=""> 
                                     Download</h5>
-                        <asp:Button runat="server" ID="btnCloseDL" Text="x" CssClass="btn" OnClick="btnCloseDL_Click"/>
+                        <asp:Button runat="server" ID="btnCloseDL" Text="X" CssClass="btn" OnClick="btnCloseDL_Click"/>
                             </div>
               
                 <div class="input_field1">
@@ -671,9 +546,8 @@
                      <asp:Label ID="lblNumber" runat="server" ForeColor="Blue" CssClass="label" ></asp:Label> 
                 </div>
                 <div class="input_field1">
-                     <asp:Button ID="btnDL" runat="server" Text="Download" CssClass="btn" OnClick="btnDL_Click"/>
+                     <asp:Button ID="btnDL" runat="server" Text="Download" CssClass="btn" OnClick="btnDL_Click" OnClientClick="this.disabled = true; this.text = 'Done';" UseSubmitBehavior="false"/>
                      
-
                 </div>
 
                              </ContentTemplate>
@@ -685,8 +559,6 @@
                 
             </div>
         </asp:Panel>
-
-
     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -696,7 +568,8 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                
+                                <asp:HiddenField runat="server" ID="hfName" />
+                                <asp:HiddenField runat="server" ID="hfSuppName" />
                                 <asp:HiddenField ID="hfIDdl" runat="server"/>
                                 <asp:HiddenField ID="hfStartdl" runat="server"/>
                                 <asp:HiddenField ID="hfEnddl" runat="server"/>

@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Windows.Forms;
 using Button = System.Web.UI.WebControls.Button;
 using TextBox = System.Web.UI.WebControls.TextBox;
+using System.IO;
 
 namespace BIOSproject
 {
@@ -67,16 +68,25 @@ namespace BIOSproject
                 //DropProduct.DataValueField = "ItemDescr";
                 //DropProduct.DataBind();
                 //con.Close();
-                gvlist.Visible = false;
-                ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
-                GetRequestNo();
-                FillGridView();
-                FillGridView1();
-                FillGridView2();
-                if (ViewState["Records"] == null)
+                if (Session["Username"] == null)
                 {
-                    ViewState["Records"] = dt;
+                    Response.Redirect("~/Default.aspx");
                 }
+                else
+                {
+                    gvlist.Visible = false;
+                                    ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
+                                    GetRequestNo();
+                                    FillGridView();
+                                    FillGridView1();
+                                    FillGridView2();
+                                    GetDBA_Email();
+                                    if (ViewState["Records"] == null)
+                                    {
+                                        ViewState["Records"] = dt;
+                                    }
+                }
+                
             }
         }
         void FillGridView()
@@ -96,7 +106,7 @@ namespace BIOSproject
             using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
             {
                 sqlcon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from TempRequest", sqlcon);
+                SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from [LBC.BIOS].[lbcbios].[TempRequest]", sqlcon);
                 sqlDa.Fill(dtbl);
             }
             GridView.DataSource = dtbl;
@@ -120,7 +130,7 @@ namespace BIOSproject
             using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
             {
                 sqlcon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from TempRequest", sqlcon);
+                SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, RequestNo, Products, Quantity from [LBC.BIOS].[lbcbios].[TempRequest]", sqlcon);
                 sqlDa.Fill(dtbl);
             }
             GridView1.DataSource = dtbl;
@@ -144,7 +154,7 @@ namespace BIOSproject
             using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
             {
                 sqlcon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("Select * from TempRequest", sqlcon);
+                SqlDataAdapter sqlDa = new SqlDataAdapter("Select * from [LBC.BIOS].[lbcbios].[TempRequest]", sqlcon);
                 sqlDa.Fill(dtbl);
             }
             gvlist.DataSource = dtbl;
@@ -157,7 +167,7 @@ namespace BIOSproject
             string proid;
             //string query = "select ID from Request order by ID Desc";
             con.Open();
-            SqlCommand cmd = new SqlCommand("select ID from SSPNewRequest order by ID Desc", con);
+            SqlCommand cmd = new SqlCommand("select ID from [LBC.BIOS].[lbcbios].[SSPNewRequest] order by ID Desc", con);
             SqlDataReader dr = cmd.ExecuteReader();
 
             if (dr.Read())
@@ -175,6 +185,33 @@ namespace BIOSproject
             }
             con.Close();
             txtRequestNo.Text = proid.ToString();
+        }
+        public void GetDBA_Email()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+            if (txtEmailDBA.Text == "")
+            {
+                SqlCommand cmd = new SqlCommand("Select ID, EmailDBA From [LBC.BIOS].[lbcbios].[DBA_Email]", sqlCon);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    txtEmailDBA.Text = dr.GetValue(1).ToString();
+                }
+            }
+            else
+            {
+                SqlCommand cmd = new SqlCommand("Select ID, EmailDBA From [LBC.BIOS].[lbcbios].[DBA_Email]", sqlCon);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    txtEmailDBA.Text = dr.GetValue(1).ToString();
+                }
+            }
         }
 
         public void Clear3()
@@ -207,7 +244,7 @@ namespace BIOSproject
                                         using (SqlConnection conn = new SqlConnection(ConnectionString))
                                         {
                                             conn.Open();
-                                            SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
+                                            SqlCommand cmd = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempRequest] values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
                                             int insert = cmd.ExecuteNonQuery();
                                             DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
                                             DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
@@ -228,7 +265,7 @@ namespace BIOSproject
                                         using (SqlConnection conn = new SqlConnection(ConnectionString))
                                         {
                                             conn.Open();
-                                            SqlCommand cmd = new SqlCommand("Insert into TempRequest values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
+                                            SqlCommand cmd = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempRequest] values('" + TicketNo.Text + "','" + PONumber.Text + "','" + dropSupplier.SelectedItem.Text + "','" + DropProduct.SelectedItem.Text + "','" + TxtQuantity.Text + "','" + ReqDate.Text + "','" + txtRequestNo.Text + "')", conn);
                                             int insert = cmd.ExecuteNonQuery();
                                             DDL.Items.Add(new ListItem(DropProduct.SelectedItem.Text.ToString(), DropProduct.SelectedItem.Text.ToString()));
                                             DDLQuantity.Items.Add(new ListItem(TxtQuantity.Text, TxtQuantity.Text));
@@ -299,6 +336,7 @@ namespace BIOSproject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             if (TicketNo.Text == "")
             {
                 lblerrorTicket.Text = "Please Enter Ticket No.!";
@@ -355,8 +393,8 @@ namespace BIOSproject
                     {
                         sqlcon.Open();
                         string Product = (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim();
-                        string cnt = "select COUNT(*) from TempRequest where Products='" + Product + "'";
-                        string qry = "UPDATE TempRequest SET Products=@Products,Quantity=@Quantity WHERE ID=@ID";
+                        string cnt = "select COUNT(*) from [LBC.BIOS].[lbcbios].[TempRequest] where Products='" + Product + "'";
+                        string qry = "UPDATE [LBC.BIOS].[lbcbios].[TempRequest] SET Products=@Products,Quantity=@Quantity WHERE ID=@ID";
                         SqlCommand sqlcmd = new SqlCommand(qry, sqlcon);
                         sqlcmd.Parameters.AddWithValue("@Products", (GridView.Rows[e.RowIndex].FindControl("DropProdGV") as DropDownList).Text.Trim());
                         sqlcmd.Parameters.AddWithValue("@Quantity", (GridView.Rows[e.RowIndex].FindControl("txtQuantity") as TextBox).Text.Trim());
@@ -400,9 +438,9 @@ namespace BIOSproject
                 {
                     DataTable dtbl = new DataTable();
                     sqlcon.Open();
-                    SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from TempRequest", sqlcon);
+                    SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from [LBC.BIOS].[lbcbios].[TempRequest]", sqlcon);
                     sqlDa.Fill(dtbl);
-                    string qry = "DELETE FROM TempRequest WHERE ID=@ID";
+                    string qry = "DELETE FROM [LBC.BIOS].[lbcbios].[TempRequest] WHERE ID=@ID";
                     SqlCommand sqlcmd = new SqlCommand(qry, sqlcon);
                     sqlcmd.Parameters.AddWithValue("@ID", Convert.ToInt32(GridView.DataKeys[e.RowIndex].Value.ToString()));
                     GridView.EditIndex = -1;
@@ -476,7 +514,7 @@ namespace BIOSproject
         protected void PONumber_TextChanged(object sender, EventArgs e)
         {
             con.Open();
-            SqlCommand comm = new SqlCommand("select * from SSPNewRequest where PONumber = '" + PONumber.Text + "' ", con);
+            SqlCommand comm = new SqlCommand("select * from [LBC.BIOS].[lbcbios].[SSPNewRequest] where PONumber = '" + PONumber.Text + "' ", con);
             SqlDataReader sdr = comm.ExecuteReader();
             if (sdr.Read())
             {
@@ -525,24 +563,49 @@ namespace BIOSproject
             {
                 try
                 {
-                    using (MailMessage mail = new MailMessage())
+                    using (StringWriter sw = new StringWriter())
                     {
-
-                        mail.From = new MailAddress("lbcbios08@gmail.com");
-                        mail.To.Add(txtEmail.Text);
-                        mail.Subject = "'FOR TESTING ONLY' Request for Barcode Series" + "<br />" + txtEmail.Text + " PO# " + txtPONumber.Text;
-                        mail.Body = "Hi Sir/Ma'am,<br/><br/>" + "Please see requested barcode series: <br/>" +
-                             "<br/><br/>Starting Series - Ending Series<br/><br/>" +
-                            "Thanks,";
-                        mail.IsBodyHtml = true;
-                        using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                        using (HtmlTextWriter hw = new HtmlTextWriter(sw))
                         {
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
+                            GridView1.RenderControl(hw);
+                            StringReader sr = new StringReader(sw.ToString());
+                            MailMessage mm = new MailMessage("lbcbios08@gmail.com", txtEmailDBA.Text);
+                            mm.Subject = "'FOR TESTING ONLY' Request for Barcode Series" + " Ticket# " + txtTicketNo.Text + " PO# " + txtPONumber.Text;
+                            mm.Body = "<h1>Product Details</h1><hr/>" + sw.ToString(); 
+                            mm.IsBodyHtml = true;
+                            SmtpClient smtp = new SmtpClient();
+                            smtp.Host = "smtp.gmail.com";
                             smtp.EnableSsl = true;
-                            smtp.Send(mail);
+                            System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+                            NetworkCred.UserName = "lbcbios08@gmail.com";
+                            NetworkCred.Password = "pdlgfieeiiqbcsvf";
+                            smtp.UseDefaultCredentials = true;
+                            smtp.Credentials = NetworkCred;
+                            smtp.Port = 587;
+                            smtp.Send(mm);
                         }
                     }
+                    //using (StringWriter sw2 = new StringWriter())
+                    //{
+                    //    using (HtmlTextWriter hw2 = new HtmlTextWriter(sw2))
+                    //    {
+                    //        GridView1.RenderControl(hw2);
+                    //        MailMessage msg = new MailMessage("lbcbios08@gmail.com", txtEmailDBA.Text);
+                    //        msg.Subject = "'FOR TESTING ONLY' Request for Barcode Series" + " Ticket# " + txtTicketNo.Text + " PO# " + txtPONumber.Text;
+                    //        msg.Body = "<h1>Product Details</h1><hr/>" + sw2.ToString();
+                    //        msg.IsBodyHtml = true;
+
+                    //        SmtpClient client = new SmtpClient();
+                    //        client.UseDefaultCredentials = false;
+                    //        client.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
+                    //        client.Port = 25; // You can use Port 25 if 587 is blocked (mine is!)
+                    //        client.Host = "smtp.office365.com";
+                    //        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //        client.EnableSsl = true;
+                    //        client.Send(msg);
+                    //    }
+                    //}
+                    
                 }
                 catch (Exception ex)
                 {
@@ -553,18 +616,18 @@ namespace BIOSproject
 
                 foreach (GridViewRow gr in gvlist.Rows)
                 {
-                    string sqlquery = "insert into SSPNewRequest values (@TicketNo,@PONumber,@Supplier,@ProductQuantity,@TotalQuantity,@StartingSeries,@EndingSeries,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedBy,@DeletedDate,@IsActive,@CancelRequest," +
+                    string sqlquery = "insert into [LBC.BIOS].[lbcbios].[SSPNewRequest] values (@TicketNo,@PONumber,@Supplier,@ProductQuantity,@TotalQuantity,@StartingSeries,@EndingSeries,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@DeletedBy,@DeletedDate,@IsActive,@CancelRequest," +
                         "@IsRejected,@SequenceSeries,@DateRequested,@forHitCheck,@Branch,@Team,@Area,@Hub,@Warehouse,@DestinationTo,@IfDownload,@ScheduledDate,@IfProcess,@WHcheck,@Quantity,@RequestNo,@SupplierName,@link,@ifSend,@ifFinish)";
                     SqlCommand sqlComm = new SqlCommand(sqlquery, Sqlconn);
                     sqlComm.Parameters.AddWithValue("@TicketNo", gr.Cells[0].Text);
                     sqlComm.Parameters.AddWithValue("@PONumber", gr.Cells[1].Text);
-                    sqlComm.Parameters.AddWithValue("@Supplier", DropFIE.SelectedItem.Text);
+                    sqlComm.Parameters.AddWithValue("@Supplier", dropSupplier.SelectedItem.Value);
                     sqlComm.Parameters.AddWithValue("@ProductQuantity", gr.Cells[3].Text);
                     sqlComm.Parameters.AddWithValue("@TotalQuantity", txtTotalQuantity.Text.Trim());
                     sqlComm.Parameters.AddWithValue("@StartingSeries", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@EndingSeries", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-                    sqlComm.Parameters.AddWithValue("@CreatedDate", txtDate.Text.Trim());
+                    sqlComm.Parameters.AddWithValue("@CreatedDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                     sqlComm.Parameters.AddWithValue("@UpdatedBy", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@UpdatedDate", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@DeletedBy", Convert.DBNull);
@@ -573,7 +636,7 @@ namespace BIOSproject
                     sqlComm.Parameters.AddWithValue("@CancelRequest", "0");
                     sqlComm.Parameters.AddWithValue("@IsRejected", "0");
                     sqlComm.Parameters.AddWithValue("@SequenceSeries", Convert.DBNull);
-                    sqlComm.Parameters.AddWithValue("@DateRequested", txtDate.Text.Trim());
+                    sqlComm.Parameters.AddWithValue("@DateRequested", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                     sqlComm.Parameters.AddWithValue("@forHitCheck", "0");
                     sqlComm.Parameters.AddWithValue("@Branch", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@Team", Convert.DBNull);
@@ -587,7 +650,7 @@ namespace BIOSproject
                     sqlComm.Parameters.AddWithValue("@WHcheck", "0");
                     sqlComm.Parameters.AddWithValue("@Quantity", gr.Cells[4].Text);
                     sqlComm.Parameters.AddWithValue("@RequestNo", txtRequest.Text.Trim());
-                    sqlComm.Parameters.AddWithValue("@SupplierName", gr.Cells[2].Text);
+                    sqlComm.Parameters.AddWithValue("@SupplierName", dropSupplier.SelectedItem.Text);
                     sqlComm.Parameters.AddWithValue("@link", Convert.DBNull);
                     sqlComm.Parameters.AddWithValue("@ifSend", "0");
                     sqlComm.Parameters.AddWithValue("@ifFinish", "0");
@@ -598,7 +661,7 @@ namespace BIOSproject
                 }
 
                     SqlConnection conn = new SqlConnection(main);
-                    string qry = "Delete from [lbcbios].[TempRequest] where RequestNo = '" + txtRequest.Text + "'";
+                    string qry = "Delete from [LBC.BIOS].[lbcbios].[TempRequest] where RequestNo = '" + txtRequest.Text + "'";
                     SqlCommand sqlComma = new SqlCommand(qry, conn);
                     conn.Open();
                     sqlComma.ExecuteNonQuery();
@@ -619,6 +682,9 @@ namespace BIOSproject
 
 
         }
+        public override void VerifyRenderingInServerForm(System.Web.UI.Control control)
+        {
+        }
 
         //protected void cascadingdropdown()
         //{
@@ -637,7 +703,7 @@ namespace BIOSproject
             string EmailID = dropSupplier.SelectedItem.Text;
             SqlConnection con = new SqlConnection(ConnectionString);
             con.Open();
-            SqlCommand comm = new SqlCommand("select [VendorEmail] from Reference where VendorName = '"+ EmailID +"' ", con);
+            SqlCommand comm = new SqlCommand("select VendorEmail from [LBC.BIOS].[lbcbios].[Reference] where VendorName = '" + EmailID +"' ", con);
             comm.CommandType = CommandType.Text;
             DropFIE.DataSource = comm.ExecuteReader();
             DropFIE.DataTextField = "VendorEmail";

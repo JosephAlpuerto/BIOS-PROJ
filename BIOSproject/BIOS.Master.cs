@@ -14,6 +14,10 @@ namespace BIOSproject
 
             try
             {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
                 txtUserName.Text = Session["Username"].ToString();
             }
             catch (Exception ex)

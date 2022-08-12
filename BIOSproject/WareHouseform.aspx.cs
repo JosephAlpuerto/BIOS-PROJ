@@ -15,6 +15,7 @@ namespace BIOSproject
     public partial class WareHouseform : System.Web.UI.Page
     {
         String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
+        String ConnectionString2 = @"Data Source = 172.19.2.140; Initial Catalog = LBC_Tracer; Persist Security Info=True;User ID = nds_user;Password=nds_user";
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString);
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString);
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
@@ -27,26 +28,61 @@ namespace BIOSproject
 
             if (!IsPostBack)
             {
-                FillGridView();
-                FillGridView2();
-                //cascadingdropdown();
-                adding();
-                product();
-
-
-                txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
-                txtDate2.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
-
-                if (ViewState["Records"] == null)
+                if (Session["Username"] == null)
                 {
-                    ViewState["Records"] = dt;
+                    Response.Redirect("~/Default.aspx");
                 }
+                else
+                {
+                    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                    sqlCon.Open();
+                    SqlCommand cmd = new SqlCommand("Select Username From Users Where Username = @Username", sqlCon);
+                    cmd.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        hfWareEmail.Value = dr.GetString(0).ToString();
+                    }
+                    sqlCon.Close();
+                   FillGridView();
+                        FillGridView2();
+                        //cascadingdropdown();
+                        adding();
+                        product();
+
+
+                        txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
+                    ////////txtDated.Text = DateTime.Now.ToString("yyyy-dd-MM").ToString();
+                    lblDated.Text = DateTime.Now.ToString("yyyy-dd-MM").ToString();
+
+                    if (ViewState["Records"] == null)
+                        {
+                            ViewState["Records"] = dt;
+                        }
+                        ////////Calendar1.Visible = false;
+                }
+                
             }
+        }
+        void FillGridView()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[TempSuppCount]", sqlCon);
+            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlData.Fill(dtbl);
+            sqlCon.Close();
+            Gridview1.DataSource = dtbl;
+            Gridview1.DataBind();
+            Gridview1.UseAccessibleHeader = true;
+            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
         protected void product()
         {
             string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-            string sqlqueryy = "select * from Reference";
+            string sqlqueryy = "select * from [LBC.BIOS].[lbcbios].[Reference]";
             SqlCommand sqlcom = new SqlCommand(sqlqueryy, con);
             con.Open();
             SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
@@ -81,7 +117,7 @@ namespace BIOSproject
             {
                 SqlConnection sqlcon = new SqlConnection(ConnectionString);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [Hub] FROM [Reference] WHERE [Hub] != 'NULL'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [Hub] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [Hub] != 'NULL'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropHub.DataSource = sqlcmd.ExecuteReader();
                 DropHub.DataTextField = "Hub";
@@ -99,12 +135,14 @@ namespace BIOSproject
                 lblArea.Visible = false;
                 DropWare.Visible = false;
                 lblWare.Visible = false;
+
+                txtSeries.Focus();
             }
             else if (DropDesti.SelectedValue == "W")
             {
                 SqlConnection sqlcon = new SqlConnection(ConnectionString);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropWare.DataSource = sqlcmd.ExecuteReader();
                 DropWare.DataTextField = "WareHouse";
@@ -122,6 +160,8 @@ namespace BIOSproject
                 lblArea.Visible = false;
                 DropHub.Visible = false;
                 lblHub.Visible = false;
+
+                txtSeries.Focus();
             }
             else
             {
@@ -163,7 +203,7 @@ namespace BIOSproject
                 string CodeDescr = DropBranch.Text;
                 SqlConnection sqlcon = new SqlConnection(mainconn);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("Select * from [ref_Branches] where BranchCode +' - '+ BranchDescr = '" + CodeDescr + "'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("Select * from [LBC_Reference].[dbo].[ref_Branches] where BranchCode +' - '+ BranchDescr = '" + CodeDescr + "'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropTeam.DataSource = sqlcmd.ExecuteReader();
                 DropTeam.DataTextField = "TeamDescr";
@@ -173,12 +213,14 @@ namespace BIOSproject
                 int TeamID = Convert.ToInt32(DropTeam.SelectedValue);
                 SqlConnection sqlcon2 = new SqlConnection(mainconn);
                 sqlcon2.Open();
-                SqlCommand sqlcmd2 = new SqlCommand("Select * from [Areas] where AreaId =" + TeamID, sqlcon2);
+                SqlCommand sqlcmd2 = new SqlCommand("Select * from [LBC_Reference].[dbo].[Areas] where AreaId =" + TeamID, sqlcon2);
                 sqlcmd.CommandType = CommandType.Text;
                 DropArea.DataSource = sqlcmd2.ExecuteReader();
                 DropArea.DataTextField = "AreaDescr";
                 DropArea.DataValueField = "AreaID";
                 DropArea.DataBind();
+
+                txtSeries.Focus();
             }
             else
             {
@@ -211,23 +253,7 @@ namespace BIOSproject
         //    DropArea.DataBind();
         //}
 
-        void FillGridView()
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("WarehouseTagging", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlData.SelectCommand.Parameters.AddWithValue("@Warehouse", Session["Username"].ToString());
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            Gridview1.DataSource = dtbl;
-            Gridview1.DataBind();
-            Gridview1.UseAccessibleHeader = true;
-            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            //Gridview1.FooterRow.TableSection = TableRowSection.TableFooter;
-        }
+       
         public void adding()
         {
             lblUnits.Text = "0";
@@ -240,38 +266,230 @@ namespace BIOSproject
             if (answer > 0 && LabelStart.Text != "" && LabelEnd.Text != "")
                 lblUnits.Text = answer.ToString();
         }
-        protected void txtSeries_TextChanged(object sender, EventArgs e)
+        public void Scanner()
         {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-                sqlCon.Open();
-            if(txtSeries.Text != "")
+            SqlConnection sqlCon = new SqlConnection(ConnectionString2);
+            sqlCon.Open();
+            if (txtSeries.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, Product, StartingSeries From FinishedGood Where  StartingSeries = @Series and DestinationTo = 'Warehouse' or  EndingSeries = @Series and DestinationTo = 'Warehouse'", sqlCon);
-                cmd.Parameters.AddWithValue("@Series", int.Parse(txtSeries.Text));
-                SqlDataReader dr = cmd.ExecuteReader();
-                if(dr.Read())
-                {
-                    LabelStart.Text = dr.GetValue(3).ToString();
-                    LabelEnd.Text = dr.GetValue(1).ToString();
+                SqlCommand cmd = new SqlCommand("Select Top(100) * From [LBC_Tracer].[dbo].[TrackingHistory] Where Trackingno >= @Series and Trackingno <= @Series", sqlCon);
+                cmd.Parameters.AddWithValue("@Series", Convert.ToInt64(txtSeries.Text));
 
-                    hfId1.Value = dr.GetValue(0).ToString();
-                    DropProduct.SelectedItem.Text = dr.GetValue(2).ToString();
-                    DropProduct.Enabled = false;
-                    btnUpdate.Enabled = true;
-                    btnAdd.Enabled = true;
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TaggingDuplicate()", true);
+                    LabelStart.Text = "";
+                    LabelEnd.Text = "";
+                    lblUnits.Text = "0";
+                    txtSeries.Text = "";
+                    txtSeries.Focus();
                 }
                 else
                 {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('No Record!','You clicked the button!', 'warning')", true);
-                    txtSeries.Text = "";
-                    product();
-                    DropProduct.Enabled = true;
-                    btnUpdate.Enabled = false;
-                    btnAdd.Enabled = false;
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TaggingScannerSuccess()", true);
+                    //ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Safe!, No Record!','You clicked the button!', 'success', 2000)", true);
+                    if (DDLlistseries.Items.FindByText(txtSeries.Text) == null)
+                    {
+
+                        if (DropWare.Text == "" && DropHub.Text == "")
+                        {
+                            using (SqlConnection conn = new SqlConnection(ConnectionString))
+                            {
+                                conn.Open();
+                                SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DropBranch.Text + "','" + DropTeam.SelectedItem.Text + "','" + DropArea.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "')", conn);
+                                int insert = cmd2.ExecuteNonQuery();
+                                DDLlistseries.Items.Add(new ListItem(LabelStart.Text, LabelStart.Text));
+                                DDLlistseries.Items.Add(new ListItem(LabelEnd.Text, LabelEnd.Text));
+                                if (insert > 0)
+                                {
+                                    FillGridView();
+                                    FillGridView2();
+                                    //this.DropDesti.SelectedIndex = 0;
+
+                                    //lblBranch.Visible = false;
+                                    //DropBranch.Text = "";
+                                    //DropBranch.Visible = false;
+
+                                    //DropTeam.Visible = false;
+                                    //lblTeam.Visible = false;
+                                    //DropTeam.Items.Clear();
+                                    //DropArea.Visible = false;
+                                    //lblArea.Visible = false;
+                                    //DropArea.Items.Clear();
+                                    lblHub.Visible = false;
+                                    DropHub.Visible = false;
+                                    DropHub.Items.Clear();
+                                    lblWare.Visible = false;
+                                    DropWare.Visible = false;
+                                    DropWare.Items.Clear();
+                                    LabelStart.Text = "";
+                                    LabelEnd.Text = "";
+                                    lblUnits.Text = "0";
+                                    txtSeries.Text = "";
+                                    btnAdd.Enabled = true;
+                                    //DropProduct.Items.Clear();
+                                }
+                            }
+                        }
+                        else if (DropWare.Text == "" && DropBranch.Text == "")
+                        {
+                            using (SqlConnection conn = new SqlConnection(ConnectionString))
+                            {
+                                conn.Open();
+                                SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropHub.SelectedItem.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "')", conn);
+                                int insert = cmd2.ExecuteNonQuery();
+                                if (insert > 0)
+                                {
+                                    FillGridView();
+                                    FillGridView2();
+                                    //this.DropDesti.SelectedIndex = 0;
+
+                                    lblBranch.Visible = false;
+                                    DropBranch.Text = "";
+                                    DropBranch.Visible = false;
+
+                                    DropTeam.Visible = false;
+                                    lblTeam.Visible = false;
+                                    DropTeam.Items.Clear();
+                                    DropArea.Visible = false;
+                                    lblArea.Visible = false;
+                                    DropArea.Items.Clear();
+                                    //lblHub.Visible = false;
+                                    //DropHub.Visible = false;
+                                    //DropHub.Items.Clear();
+                                    lblWare.Visible = false;
+                                    DropWare.Visible = false;
+                                    DropWare.Items.Clear();
+                                    LabelStart.Text = "";
+                                    LabelEnd.Text = "";
+                                    lblUnits.Text = "0";
+                                    txtSeries.Text = "";
+                                    btnAdd.Enabled = true;
+                                    //DropProduct.Items.Clear();
+                                }
+                            }
+                        }
+                        else if (DropHub.Text == "" && DropBranch.Text == "")
+                        {
+                            using (SqlConnection conn = new SqlConnection(ConnectionString))
+                            {
+                                conn.Open();
+                                SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropWare.SelectedItem.Text + "','" + DBNull.Value + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "')", conn);
+                                int insert = cmd2.ExecuteNonQuery();
+                                if (insert > 0)
+                                {
+                                    FillGridView();
+                                    FillGridView2();
+                                    //this.DropDesti.SelectedIndex = 0;
+
+                                    lblBranch.Visible = false;
+                                    DropBranch.Text = "";
+                                    DropBranch.Visible = false;
+
+                                    DropTeam.Visible = false;
+                                    lblTeam.Visible = false;
+                                    DropTeam.Items.Clear();
+                                    DropArea.Visible = false;
+                                    lblArea.Visible = false;
+                                    DropArea.Items.Clear();
+                                    lblHub.Visible = false;
+                                    DropHub.Visible = false;
+                                    DropHub.Items.Clear();
+                                    //lblWare.Visible = false;
+                                    //DropWare.Visible = false;
+                                    //DropWare.Items.Clear();
+                                    LabelStart.Text = "";
+                                    LabelEnd.Text = "";
+                                    lblUnits.Text = "0";
+                                    txtSeries.Text = "";
+                                    btnAdd.Enabled = true;
+                                    //DropProduct.Items.Clear();
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This Series already added in the list.','You clicked the button!', 'warning')", true);
+                    }
                 }
                 sqlCon.Close();
             }
             else if (txtSeries.Text == "")
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Input Series!','You clicked the button!', 'warning')", true);
+            }
+        }
+        protected void txtSeries_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+            if (txtSeries.Text != "")
+            {
+                if (DropDesti.SelectedItem.Value != "S")
+                {
+                    SqlConnection sqlCon1 = new SqlConnection(ConnectionString);
+                    sqlCon1.Open();
+                    SqlCommand cmd1 = new SqlCommand("Select * From [LBC.BIOS].[lbcbios].[TempTagging] Where StartingSeries <= @Series and EndingSeries >= @Series", sqlCon1);
+                    cmd1.Parameters.AddWithValue("@Series", Convert.ToInt64(txtSeries.Text));
+                    SqlDataReader dr1 = cmd1.ExecuteReader();
+                    if (dr1.Read())
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TempDuplicate()", true);
+                        txtSeries.Text = "";
+                        txtSeries.Focus();
+                    }
+                    else
+                    {
+                        if (DropBranch.Text == "" && DropDesti.SelectedItem.Value == "B")
+                        {
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TaggingDestination()", true);
+                            txtSeries.Text = "";
+                            txtSeries.Focus();
+                        }
+                        else
+                        {
+                            SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, Product, StartingSeries From [LBC.BIOS].[lbcbios].[FinishedGood] Where  StartingSeries <= @Series and DestinationTo = 'Warehouse' and EndingSeries >= @Series and DestinationTo = 'Warehouse'", sqlCon);
+                            cmd.Parameters.AddWithValue("@Series", Convert.ToInt64(txtSeries.Text));
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+                            if (dr.Read())
+                            {
+                                LabelStart.Text = dr.GetValue(3).ToString();
+                                LabelEnd.Text = dr.GetValue(1).ToString();
+                                adding();
+                                hfId1.Value = dr.GetValue(0).ToString();
+                                DropProduct.SelectedItem.Text = dr.GetValue(2).ToString();
+                                DropProduct.Enabled = false;
+                                btnUpdate.Enabled = true;
+                                Scanner();
+                                txtSeries.Focus();
+                                btnAdd.Enabled = true;
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TaggingNoRecord()", true);
+                                txtSeries.Text = "";
+                                txtSeries.Focus();
+                                product();
+                                DropProduct.Enabled = true;
+                                btnUpdate.Enabled = false;
+                                btnAdd.Enabled = false;
+                            }
+                            sqlCon.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "TaggingDestination()", true);
+                    txtSeries.Text = "";
+                    txtSeries.Focus();
+                }
+            }
+            else
             {
                 LabelStart.Text = "";
                 LabelEnd.Text = "";
@@ -281,21 +499,20 @@ namespace BIOSproject
                 product();
                 DropProduct.Enabled = true;
             }
-            adding();
         }
 
-        protected void btnInquiry_Click(object sender, EventArgs e)
-        {
-            txtSearch.Text = "";
-            ModalInquiry.Show();
-            txtTracking.Text = "";
-            txtArea.Text = "";
-            txtTeam.Text = "";
-            txtBranch.Text = "";
-            txtDateTracking.Text = "";
-            txtStartTracking.Text = "";
-            txtEndTracking.Text = "";
-        }
+        ////////protected void btnInquiry_Click(object sender, EventArgs e)
+        ////////{
+        ////////    txtSearch.Text = "";
+        ////////    ModalInquiry.Show();
+        ////////    txtTracking.Text = "";
+        ////////    txtArea.Text = "";
+        ////////    txtTeam.Text = "";
+        ////////    txtBranch.Text = "";
+        ////////    txtDateTracking.Text = "";
+        ////////    txtStartTracking.Text = "";
+        ////////    txtEndTracking.Text = "";
+        ////////}
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
@@ -374,7 +591,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("TaggingbySupp", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[TaggingbySupp]", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@IsActive", "1");
@@ -437,7 +654,7 @@ namespace BIOSproject
             SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
             if (sqlCon2.State == ConnectionState.Closed)
                 sqlCon2.Open();
-            SqlCommand sqlCmd = new SqlCommand("TaggingFinished", sqlCon2);
+            SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[TaggingFinished]", sqlCon2);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@RequestID", (hfId1.Value == "" ? 0 : Convert.ToInt32(hfId1.Value)));
             sqlCmd.Parameters.AddWithValue("@Branch", DropBranch.Text);
@@ -455,178 +672,207 @@ namespace BIOSproject
             hfId1.Value = "";
         }
 
-        void FilterRecords()
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("WarehouseDateFilter", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //sqlData.SelectCommand.Parameters.AddWithValue("@Desti", Session["Username"].ToString());
-            sqlData.SelectCommand.Parameters.AddWithValue("@Date", txtDate2.Text);
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            Gridview1.DataSource = dtbl;
-            Gridview1.DataBind();
-            Gridview1.UseAccessibleHeader = true;
-            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
-        protected void btnDisplay_Click(object sender, EventArgs e)
-        {
-            txtSearch.Text = "";
-            FilterRecords();
-        }
+        ////////void FilterRecords()
+        ////////{
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    if (sqlCon.State == ConnectionState.Closed)
+        ////////        sqlCon.Open();
+        ////////    SqlDataAdapter sqlData = new SqlDataAdapter("WarehouseDateFilter", sqlCon);
+        ////////    sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+        ////////    sqlData.SelectCommand.Parameters.AddWithValue("@Date", txtDated.Text);
+        ////////    DataTable dtbl = new DataTable();
+        ////////    sqlData.Fill(dtbl);
+        ////////    sqlCon.Close();
+        ////////    Gridview1.DataSource = dtbl;
+        ////////    Gridview1.DataBind();
+        ////////    Gridview1.UseAccessibleHeader = true;
+        ////////    Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        ////////}
+        ////////protected void btnDisplay_Click(object sender, EventArgs e)
+        ////////{
+        ////////    DDLcode.Visible = false;
+        ////////    txtSearch.Text = "";
+        ////////    FilterRecords();
+        ////////}
 
-        void fill()
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-            sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            Gridview1.DataSource = dtbl;
-            Gridview1.DataBind();
-            Gridview1.UseAccessibleHeader = true;
-            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        ////////void fill()
+        ////////{
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    if (sqlCon.State == ConnectionState.Closed)
+        ////////        sqlCon.Open();
+        ////////    SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
+        ////////    sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+        ////////    sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
+        ////////    DataTable dtbl = new DataTable();
+        ////////    sqlData.Fill(dtbl);
+        ////////    sqlCon.Close();
+        ////////    Gridview1.DataSource = dtbl;
+        ////////    Gridview1.DataBind();
+        ////////    Gridview1.UseAccessibleHeader = true;
+        ////////    Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        ////////}
+        ////////void fill2()
+        ////////{
 
-            //Gridview1.Columns[3].Visible = false;
-            //Gridview1.Columns[4].Visible = true;
-        }
-        void fill2()
-        {
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    if (sqlCon.State == ConnectionState.Closed)
+        ////////        sqlCon.Open();
+        ////////    SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
+        ////////    sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+        ////////    sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
+        ////////    DataTable dtbl = new DataTable();
+        ////////    sqlData.Fill(dtbl);
+        ////////    sqlCon.Close();
+        ////////    Gridview1.DataSource = dtbl;
+        ////////    Gridview1.DataBind();
+        ////////    Gridview1.UseAccessibleHeader = true;
+        ////////    Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
 
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-            sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            Gridview1.DataSource = dtbl;
-            Gridview1.DataBind();
-            Gridview1.UseAccessibleHeader = true;
-            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        ////////}
+        ////////void fill3()
+        ////////{
 
-            //Gridview1.Columns[3].Visible = true;
-            //Gridview1.Columns[4].Visible = false;
-        }
-        void fill3()
-        {
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    if (sqlCon.State == ConnectionState.Closed)
+        ////////        sqlCon.Open();
+        ////////    SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
+        ////////    sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
+        ////////    sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
+        ////////    DataTable dtbl = new DataTable();
+        ////////    sqlData.Fill(dtbl);
+        ////////    sqlCon.Close();
+        ////////    Gridview1.DataSource = dtbl;
+        ////////    Gridview1.DataBind();
+        ////////    Gridview1.UseAccessibleHeader = true;
+        ////////    Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
 
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("WarehousePerFilter", sqlCon);
-            sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
-            sqlData.SelectCommand.Parameters.AddWithValue("@Desti", DropPer.SelectedItem.Text);
-            DataTable dtbl = new DataTable();
-            sqlData.Fill(dtbl);
-            sqlCon.Close();
-            Gridview1.DataSource = dtbl;
-            Gridview1.DataBind();
-            Gridview1.UseAccessibleHeader = true;
-            Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        ////////}
 
-            //Gridview1.Columns[3].Visible = true;
-            //Gridview1.Columns[4].Visible = false;
-        }
+        ////////protected void DropPer_SelectedIndexChanged(object sender, EventArgs e)
+        ////////{
+        ////////    if (DropPer.SelectedItem.Value == "B")
+        ////////    {
+        ////////        txtSearch.Text = "";
+        ////////        DDLcode.Visible = false;
+        ////////        fill();
+        ////////    }
+        ////////    else if (DropPer.SelectedItem.Value == "W")
+        ////////    {
+        ////////        txtSearch.Text = "";
+        ////////        DDLcode.Visible = false;
+        ////////        fill2();
+        ////////    }
+        ////////    else if (DropPer.SelectedItem.Value == "S")
+        ////////    {
+        ////////        txtSearch.Text = "";
+        ////////        DDLcode.Visible = false;
+        ////////        FillGridView();
+        ////////    }
+        ////////    else if (DropPer.SelectedItem.Value == "H")
+        ////////    {
+        ////////        txtSearch.Text = "";
+        ////////        DDLcode.Visible = false;
+        ////////        fill3();
+        ////////    }
+        ////////}
+        ////////protected void txtTracking_TextChanged(object sender, EventArgs e)
+        ////////{
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    sqlCon.Open();
+        ////////    if (txtTracking.Text != "")
+        ////////    {
+        ////////        SqlCommand cmd = new SqlCommand("Select Area, Team, Branch, ScheduleDate, StartingSeries, EndingSeries from FinishedGood where StartingSeries <= @search and EndingSeries >= @search", sqlCon);
+        ////////        cmd.Parameters.AddWithValue("@search", txtTracking.Text);
+        ////////        cmd.Parameters.AddWithValue("@Supplier", hfWareEmail.Value);
 
-        protected void DropPer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DropPer.SelectedItem.Value == "B")
-            {
-                txtSearch.Text = "";
-                fill();
-            }
-            else if (DropPer.SelectedItem.Value == "W")
-            {
-                txtSearch.Text = "";
-                fill2();
-            }
-            else if (DropPer.SelectedItem.Value == "S")
-            {
-                txtSearch.Text = "";
-                FillGridView();
-            }
-            else if (DropPer.SelectedItem.Value == "H")
-            {
-                txtSearch.Text = "";
-                fill3();
-            }
-        }
-        protected void txtTracking_TextChanged(object sender, EventArgs e)
-        {
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            sqlCon.Open();
-            if (txtTracking.Text != "")
-            {
-                SqlCommand cmd = new SqlCommand("Select Area, Team, Branch, ScheduleDate, StartingSeries, EndingSeries from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and Warehouse = 'Blossom Warehouse (Alabang)' and forHitCheck = '1' and ifSend = '1'  and WHcheck = '1'", sqlCon);
-                cmd.Parameters.AddWithValue("@search", txtTracking.Text);
-                //cmd.Parameters.AddWithValue("@Desti", Session["Username"].ToString());
+        ////////        SqlDataReader dr = cmd.ExecuteReader();
+        ////////        if (dr.Read())
+        ////////        {
+        ////////            txtArea.Text = dr.GetValue(0).ToString();
+        ////////            txtTeam.Text = dr.GetValue(1).ToString();
+        ////////            txtBranch.Text = dr.GetValue(2).ToString();
+        ////////            txtDateTracking.Text = dr.GetValue(3).ToString();
+        ////////            txtStartTracking.Text = dr.GetValue(4).ToString();
+        ////////            txtEndTracking.Text = dr.GetValue(5).ToString();
+        ////////        }
+        ////////        else
+        ////////        {
+        ////////            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
+        ////////        }
+        ////////        sqlCon.Close();
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        txtArea.Text = "";
+        ////////        txtTeam.Text = "";
+        ////////        txtBranch.Text = "";
+        ////////        txtDateTracking.Text = "";
+        ////////        txtStartTracking.Text = "";
+        ////////        txtEndTracking.Text = "";
+        ////////    }
+        ////////}
+        //////// protected void btnSearch_Click(object sender, EventArgs e)
+        ////////{
+        ////////    SqlConnection sqlCon = new SqlConnection(ConnectionString);
+        ////////    sqlCon.Open();
+        ////////    if (txtTracking.Text != "")
+        ////////    {
+        ////////        SqlCommand cmd = new SqlCommand("Select Area, Team, Branch, ScheduleDate, StartingSeries, EndingSeries from FinishedGood where StartingSeries <= @search and EndingSeries >= @search", sqlCon);
+        ////////        cmd.Parameters.AddWithValue("@search", txtTracking.Text);
+        ////////        cmd.Parameters.AddWithValue("@Supplier", hfWareEmail.Value);
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    txtArea.Text = dr.GetValue(0).ToString();
-                    txtTeam.Text = dr.GetValue(1).ToString();
-                    txtBranch.Text = dr.GetValue(2).ToString();
-                    txtDateTracking.Text = dr.GetValue(3).ToString();
-                    txtStartTracking.Text = dr.GetValue(4).ToString();
-                    txtEndTracking.Text = dr.GetValue(5).ToString();
-                }
-                else
-                {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
-                }
-                sqlCon.Close();
-            }
-            else
-            {
-                txtArea.Text = "";
-                txtTeam.Text = "";
-                txtBranch.Text = "";
-                txtDateTracking.Text = "";
-                txtStartTracking.Text = "";
-                txtEndTracking.Text = "";
-            }
-        }
+        ////////        SqlDataReader dr = cmd.ExecuteReader();
+        ////////        if (dr.Read())
+        ////////        {
+        ////////            txtArea.Text = dr.GetValue(0).ToString();
+        ////////            txtTeam.Text = dr.GetValue(1).ToString();
+        ////////            txtBranch.Text = dr.GetValue(2).ToString();
+        ////////            txtDateTracking.Text = dr.GetValue(3).ToString();
+        ////////            txtStartTracking.Text = dr.GetValue(4).ToString();
+        ////////            txtEndTracking.Text = dr.GetValue(5).ToString();
+        ////////        }
+        ////////        else
+        ////////        {
+        ////////            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
+        ////////        }
+        ////////        sqlCon.Close();
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        txtArea.Text = "";
+        ////////        txtTeam.Text = "";
+        ////////        txtBranch.Text = "";
+        ////////        txtDateTracking.Text = "";
+        ////////        txtStartTracking.Text = "";
+        ////////        txtEndTracking.Text = "";
+        ////////    }
+        ////////}
 
-        protected void btnPrint_Click(object sender, EventArgs e)
-        {
+        ////////protected void btnPrint_Click(object sender, EventArgs e)
+        ////////{
 
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "WarehousePrint";
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.AddWithValue("@Desti", Session["Username"].ToString());
-            conn.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            conn.Close();
+        ////////    SqlConnection conn = new SqlConnection(ConnectionString);
+        ////////    SqlCommand cmd = new SqlCommand();
+        ////////    cmd.Connection = conn;
+        ////////    cmd.CommandText = "WarehousePrint";
+        ////////    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        ////////    conn.Open();
+        ////////    SqlDataReader dr = cmd.ExecuteReader();
+        ////////    DataTable dt = new DataTable();
+        ////////    dt.Load(dr);
+        ////////    conn.Close();
 
-            RvSuppPrint.LocalReport.DataSources.Add(new ReportDataSource("DataSetWarehousePrint", dt));
-            RvSuppPrint.LocalReport.ReportPath = Server.MapPath("~/Report/ReportWarehousePrint.rdlc");
-            RvSuppPrint.LocalReport.EnableHyperlinks = true;
-            FillGridView();
-            txtSearch.Text = "";
-            ModalPrint.Show();
-        }
-        protected void btnCloseDetails_Click(object sender, EventArgs e)
-        {
-            ModalDetails.Hide();
-        }
+        ////////    RvSuppPrint.LocalReport.DataSources.Add(new ReportDataSource("DataSetWarehousePrint", dt));
+        ////////    RvSuppPrint.LocalReport.ReportPath = Server.MapPath("~/Report/ReportWarehousePrint.rdlc");
+        ////////    RvSuppPrint.LocalReport.EnableHyperlinks = true;
+        ////////    FillGridView();
+        ////////    txtSearch.Text = "";
+        ////////    ModalPrint.Show();
+        ////////}
+        ////////protected void btnCloseDetails_Click(object sender, EventArgs e)
+        ////////{
+        ////////    ModalDetails.Hide();
+        ////////}
         //protected void btnDetails_Click(object sender, EventArgs e)
         //{
         //    Button HitCheck = (sender as Button);
@@ -721,42 +967,47 @@ namespace BIOSproject
         //    Gridview1.DataSource = dt;
         //    Gridview1.DataBind();
         //}
-        protected void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            if (txtSearch.Text == "")
-            {
-                FillGridView();
-            }
-            else
-            {
-                string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-                SqlConnection sqlcon = new SqlConnection(maincon);
-                sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand();
-                string sqlquery = "select * from FinishedGood where Branch like '%'+@BranchCode+'%' and Warehouse = 'Blossom Warehouse(Alabang)' and DestinationTo != ''";
-                sqlcmd.CommandText = sqlquery;
-                sqlcmd.Connection = sqlcon;
-                sqlcmd.Parameters.AddWithValue("@BranchCode", txtSearch.Text);
-                DataTable dt = new DataTable();
-                SqlDataAdapter sda = new SqlDataAdapter(sqlcmd);
-                sda.Fill(dt);
-                Gridview1.DataSource = dt;
-                Gridview1.DataBind();
-            }
-        }
+        ////////protected void txtSearch_TextChanged(object sender, EventArgs e)
+        ////////{
+        ////////    if (txtSearch.Text == "")
+        ////////    {
+        ////////        FillGridView();
+        ////////        DDLcode.Visible = false;
+        ////////        lblCode.Visible = false;
+        ////////        lblCodeNo.Visible = false;
+        ////////        DDLcode.SelectedValue = "S";
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+        ////////        SqlConnection sqlcon = new SqlConnection(maincon);
+        ////////        sqlcon.Open();
+        ////////        SqlCommand sqlcmd = new SqlCommand();
+        ////////        string sqlquery = "select * from FinishedGood where Branch like '%'+@BranchCode+'%' and Warehouse = 'Blossom Warehouse(Alabang)' and DestinationTo != ''";
+        ////////        sqlcmd.CommandText = sqlquery;
+        ////////        sqlcmd.Connection = sqlcon;
+        ////////        sqlcmd.Parameters.AddWithValue("@BranchCode", txtSearch.Text);
+        ////////        DataTable dt = new DataTable();
+        ////////        SqlDataAdapter sda = new SqlDataAdapter(sqlcmd);
+        ////////        sda.Fill(dt);
+        ////////        Gridview1.DataSource = dt;
+        ////////        Gridview1.DataBind();
+        ////////        DDLcode.Visible = true;
+        ////////    }
+        ////////}
 
-        protected void Gridview1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            Gridview1.PageIndex = e.NewPageIndex;
-            this.FillGridView();
-        }
+        ////////protected void Gridview1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        ////////{
+        ////////    Gridview1.PageIndex = e.NewPageIndex;
+        ////////    this.FillGridView();
+        ////////}
         void FillGridView2()
         {
             DataTable dtbl = new DataTable();
             using (SqlConnection sqlcon = new SqlConnection(ConnectionString))
             {
                 sqlcon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("Select * from TempTagging", sqlcon);
+                SqlDataAdapter sqlDa = new SqlDataAdapter("Select * from [LBC.BIOS].[lbcbios].[TempTagging]", sqlcon);
                 sqlDa.Fill(dtbl);
             }
             gvTemp.DataSource = dtbl;
@@ -773,7 +1024,7 @@ namespace BIOSproject
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
                 using (SqlCommand com = new SqlCommand())
                 {
-                    com.CommandText = "select BranchCode +' - '+ BranchDescr as CodeDescr from ref_Branches where BranchCode like @Search + '%'";
+                    com.CommandText = "select BranchCode +' - '+ BranchDescr as CodeDescr from [LBC_Reference].[dbo].[ref_Branches] where BranchCode like @Search + '%'";
 
                     com.Parameters.AddWithValue("@Search", prefixText);
                     com.Connection = con;
@@ -793,137 +1044,160 @@ namespace BIOSproject
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            if (DDLlistseries.Items.FindByText(txtSeries.Text) == null)
+            SqlConnection sqlCon = new SqlConnection(ConnectionString2);
+            sqlCon.Open();
+            if (txtSeries.Text != "")
             {
-                if (DropDesti.SelectedItem.Value != "S")
+                SqlCommand cmd = new SqlCommand("Select Top(100) * From [LBC_Tracer].[dbo].[TrackingHistory] Where Trackingno >= @Series and Trackingno <= @Series", sqlCon);
+                cmd.Parameters.AddWithValue("@Series", Convert.ToInt64(txtSeries.Text));
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    if (DropWare.Text == "" && DropHub.Text == "")
-                    {
-                        using (SqlConnection conn = new SqlConnection(ConnectionString))
-                        {
-                            conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DropBranch.Text + "','" + DropTeam.SelectedItem.Text + "','" + DropArea.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
-                            int insert = cmd.ExecuteNonQuery();
-                            DDLlistseries.Items.Add(new ListItem(LabelStart.Text, LabelStart.Text));
-                            DDLlistseries.Items.Add(new ListItem(LabelEnd.Text, LabelEnd.Text));
-                            if (insert > 0)
-                            {
-                                FillGridView();
-                                FillGridView2();
-                                this.DropDesti.SelectedIndex = 0;
-
-                                lblBranch.Visible = false;
-                                DropBranch.Text = "";
-                                DropBranch.Visible = false;
-
-                                DropTeam.Visible = false;
-                                lblTeam.Visible = false;
-                                DropTeam.Items.Clear();
-                                DropArea.Visible = false;
-                                lblArea.Visible = false;
-                                DropArea.Items.Clear();
-                                lblHub.Visible = false;
-                                DropHub.Visible = false;
-                                DropHub.Items.Clear();
-                                lblWare.Visible = false;
-                                DropWare.Visible = false;
-                                DropWare.Items.Clear();
-                                LabelStart.Text = "";
-                                LabelEnd.Text = "";
-                                lblUnits.Text = "0";
-                                txtSeries.Text = "";
-                                btnAdd.Enabled = true;
-
-                               
-                            }
-                        }
-                    }
-                    else if (DropWare.Text == "" && DropBranch.Text == "")
-                    {
-                        using (SqlConnection conn = new SqlConnection(ConnectionString))
-                        {
-                            conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropHub.SelectedItem.Text + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
-                            int insert = cmd.ExecuteNonQuery();
-                            if (insert > 0)
-                            {
-                                FillGridView();
-                                FillGridView2();
-                                this.DropDesti.SelectedIndex = 0;
-
-                                lblBranch.Visible = false;
-                                DropBranch.Text = "";
-                                DropBranch.Visible = false;
-
-                                DropTeam.Visible = false;
-                                lblTeam.Visible = false;
-                                DropTeam.Items.Clear();
-                                DropArea.Visible = false;
-                                lblArea.Visible = false;
-                                DropArea.Items.Clear();
-                                lblHub.Visible = false;
-                                DropHub.Visible = false;
-                                DropHub.Items.Clear();
-                                lblWare.Visible = false;
-                                DropWare.Visible = false;
-                                DropWare.Items.Clear();
-                                LabelStart.Text = "";
-                                LabelEnd.Text = "";
-                                lblUnits.Text = "0";
-                                txtSeries.Text = "";
-                                btnAdd.Enabled = true;
-                            }
-                        }
-                    }
-                    else if (DropHub.Text == "" && DropBranch.Text == "")
-                    {
-                        using (SqlConnection conn = new SqlConnection(ConnectionString))
-                        {
-                            conn.Open();
-                            SqlCommand cmd = new SqlCommand("Insert into TempTagging values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropWare.SelectedItem.Text + "','" + DBNull.Value + "','" + txtDate.Text + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
-                            int insert = cmd.ExecuteNonQuery();
-                            if (insert > 0)
-                            {
-                                FillGridView();
-                                FillGridView2();
-                                this.DropDesti.SelectedIndex = 0;
-
-                                lblBranch.Visible = false;
-                                DropBranch.Text = "";
-                                DropBranch.Visible = false;
-
-                                DropTeam.Visible = false;
-                                lblTeam.Visible = false;
-                                DropTeam.Items.Clear();
-                                DropArea.Visible = false;
-                                lblArea.Visible = false;
-                                DropArea.Items.Clear();
-                                lblHub.Visible = false;
-                                DropHub.Visible = false;
-                                DropHub.Items.Clear();
-                                lblWare.Visible = false;
-                                DropWare.Visible = false;
-                                DropWare.Items.Clear();
-                                LabelStart.Text = "";
-                                LabelEnd.Text = "";
-                                lblUnits.Text = "0";
-                                txtSeries.Text = "";
-                                btnAdd.Enabled = true;
-                            }
-                        }
-                    }
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Duplicate Record!','You clicked the button!', 'warning')", true);
                 }
                 else
                 {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Select Destination.','You clicked the button!', 'warning')", true);
-                }
-            }
-            else
-            {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This Series already added in the list.','You clicked the button!', 'warning')", true);
-            }
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Safe!, No Record!','You clicked the button!', 'success')", true);
+                    if (DDLlistseries.Items.FindByText(txtSeries.Text) == null)
+                    {
+                        if (DropDesti.SelectedItem.Value != "S")
+                        {
+                            if (DropWare.Text == "" && DropHub.Text == "")
+                            {
+                                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                {
+                                    conn.Open();
+                                    SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DropBranch.Text + "','" + DropTeam.SelectedItem.Text + "','" + DropArea.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
+                                    int insert = cmd2.ExecuteNonQuery();
+                                    DDLlistseries.Items.Add(new ListItem(LabelStart.Text, LabelStart.Text));
+                                    DDLlistseries.Items.Add(new ListItem(LabelEnd.Text, LabelEnd.Text));
+                                    if (insert > 0)
+                                    {
+                                        FillGridView();
+                                        FillGridView2();
+                                        this.DropDesti.SelectedIndex = 0;
 
-                
+                                        lblBranch.Visible = false;
+                                        DropBranch.Text = "";
+                                        DropBranch.Visible = false;
+
+                                        DropTeam.Visible = false;
+                                        lblTeam.Visible = false;
+                                        DropTeam.Items.Clear();
+                                        DropArea.Visible = false;
+                                        lblArea.Visible = false;
+                                        DropArea.Items.Clear();
+                                        lblHub.Visible = false;
+                                        DropHub.Visible = false;
+                                        DropHub.Items.Clear();
+                                        lblWare.Visible = false;
+                                        DropWare.Visible = false;
+                                        DropWare.Items.Clear();
+                                        LabelStart.Text = "";
+                                        LabelEnd.Text = "";
+                                        lblUnits.Text = "0";
+                                        txtSeries.Text = "";
+                                        btnAdd.Enabled = true;
+
+
+                                    }
+                                }
+                            }
+                            else if (DropWare.Text == "" && DropBranch.Text == "")
+                            {
+                                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                {
+                                    conn.Open();
+                                    SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropHub.SelectedItem.Text + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
+                                    int insert = cmd2.ExecuteNonQuery();
+                                    if (insert > 0)
+                                    {
+                                        FillGridView();
+                                        FillGridView2();
+                                        this.DropDesti.SelectedIndex = 0;
+
+                                        lblBranch.Visible = false;
+                                        DropBranch.Text = "";
+                                        DropBranch.Visible = false;
+
+                                        DropTeam.Visible = false;
+                                        lblTeam.Visible = false;
+                                        DropTeam.Items.Clear();
+                                        DropArea.Visible = false;
+                                        lblArea.Visible = false;
+                                        DropArea.Items.Clear();
+                                        lblHub.Visible = false;
+                                        DropHub.Visible = false;
+                                        DropHub.Items.Clear();
+                                        lblWare.Visible = false;
+                                        DropWare.Visible = false;
+                                        DropWare.Items.Clear();
+                                        LabelStart.Text = "";
+                                        LabelEnd.Text = "";
+                                        lblUnits.Text = "0";
+                                        txtSeries.Text = "";
+                                        btnAdd.Enabled = true;
+                                    }
+                                }
+                            }
+                            else if (DropHub.Text == "" && DropBranch.Text == "")
+                            {
+                                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                {
+                                    conn.Open();
+                                    SqlCommand cmd2 = new SqlCommand("Insert into [LBC.BIOS].[lbcbios].[TempTagging] values('" + LabelStart.Text + "','" + LabelEnd.Text + "','" + DropDesti.SelectedItem.Text + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DBNull.Value + "','" + DropWare.SelectedItem.Text + "','" + DBNull.Value + "','" + DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + "','" + lblUnits.Text + "','" + DropProduct.SelectedItem.Text + "')", conn);
+                                    int insert = cmd2.ExecuteNonQuery();
+                                    if (insert > 0)
+                                    {
+                                        FillGridView();
+                                        FillGridView2();
+                                        this.DropDesti.SelectedIndex = 0;
+
+                                        lblBranch.Visible = false;
+                                        DropBranch.Text = "";
+                                        DropBranch.Visible = false;
+
+                                        DropTeam.Visible = false;
+                                        lblTeam.Visible = false;
+                                        DropTeam.Items.Clear();
+                                        DropArea.Visible = false;
+                                        lblArea.Visible = false;
+                                        DropArea.Items.Clear();
+                                        lblHub.Visible = false;
+                                        DropHub.Visible = false;
+                                        DropHub.Items.Clear();
+                                        lblWare.Visible = false;
+                                        DropWare.Visible = false;
+                                        DropWare.Items.Clear();
+                                        LabelStart.Text = "";
+                                        LabelEnd.Text = "";
+                                        lblUnits.Text = "0";
+                                        txtSeries.Text = "";
+                                        btnAdd.Enabled = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Select Destination.','You clicked the button!', 'warning')", true);
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('This Series already added in the list.','You clicked the button!', 'warning')", true);
+                    }
+                }
+                sqlCon.Close();
+            }
+            else if (txtSeries.Text == "")
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Input Series!','You clicked the button!', 'warning')", true);
+            }
+           
+
+
         }
         protected void gvTemp_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -939,9 +1213,9 @@ namespace BIOSproject
                 {
                     DataTable dtbl = new DataTable();
                     sqlcon.Open();
-                    SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from TempRequest", sqlcon);
+                    SqlDataAdapter sqlDa = new SqlDataAdapter("Select ID, Products, Quantity from [LBC.BIOS].[lbcbios].[TempRequest]", sqlcon);
                     sqlDa.Fill(dtbl);
-                    string qry = "DELETE FROM TempTagging WHERE ID=@ID";
+                    string qry = "DELETE FROM [LBC.BIOS].[lbcbios].[TempTagging] WHERE ID=@ID";
                     SqlCommand sqlcmd = new SqlCommand(qry, sqlcon);
                     sqlcmd.Parameters.AddWithValue("@ID", Convert.ToInt32(gvTemp.DataKeys[e.RowIndex].Value.ToString()));
                     gvTemp.EditIndex = -1;
@@ -997,7 +1271,7 @@ namespace BIOSproject
             SqlConnection sqlCon3 = new SqlConnection(ConnectionString);
             if (sqlCon3.State == ConnectionState.Closed)
                 sqlCon3.Open();
-            SqlDataAdapter sqlData3 = new SqlDataAdapter("ViewtempTagging", sqlCon3);
+            SqlDataAdapter sqlData3 = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[ViewtempTagging]", sqlCon3);
             sqlData3.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData3.SelectCommand.Parameters.AddWithValue("@Id", commandArguments[0]);
             DataTable dtbl = new DataTable();
@@ -1038,7 +1312,7 @@ namespace BIOSproject
             {
                 SqlConnection sqlcon = new SqlConnection(ConnectionString);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [Hub] FROM [Reference] WHERE [Hub] != 'NULL'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [Hub] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [Hub] != 'NULL'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropHubEdit.DataSource = sqlcmd.ExecuteReader();
                 DropHubEdit.DataTextField = "Hub";
@@ -1068,7 +1342,7 @@ namespace BIOSproject
             {
                 SqlConnection sqlcon = new SqlConnection(ConnectionString);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropWareEdit.DataSource = sqlcmd.ExecuteReader();
                 DropWareEdit.DataTextField = "WareHouse";
@@ -1126,7 +1400,7 @@ namespace BIOSproject
                 string CodeDescr = DropBranchEdit.Text;
                 SqlConnection sqlcon = new SqlConnection(mainconn);
                 sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("Select * from [ref_Branches] where BranchCode +' - '+ BranchDescr = '" + CodeDescr + "'", sqlcon);
+                SqlCommand sqlcmd = new SqlCommand("Select * from [LBC_Reference].[dbo].[ref_Branches] where BranchCode +' - '+ BranchDescr = '" + CodeDescr + "'", sqlcon);
                 sqlcmd.CommandType = CommandType.Text;
                 DropTeamEdit.DataSource = sqlcmd.ExecuteReader();
                 DropTeamEdit.DataTextField = "TeamDescr";
@@ -1136,7 +1410,7 @@ namespace BIOSproject
                 int TeamID = Convert.ToInt32(DropTeamEdit.SelectedValue);
                 SqlConnection sqlcon2 = new SqlConnection(mainconn);
                 sqlcon2.Open();
-                SqlCommand sqlcmd2 = new SqlCommand("Select * from [Areas] where AreaId =" + TeamID, sqlcon2);
+                SqlCommand sqlcmd2 = new SqlCommand("Select * from [LBC_Reference].[dbo].[Areas] where AreaId =" + TeamID, sqlcon2);
                 sqlcmd.CommandType = CommandType.Text;
                 DropAreaEdit.DataSource = sqlcmd2.ExecuteReader();
                 DropAreaEdit.DataTextField = "AreaDescr";
@@ -1158,7 +1432,7 @@ namespace BIOSproject
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
                 using (SqlCommand com = new SqlCommand())
                 {
-                    com.CommandText = "select BranchCode +' - '+ BranchDescr as CodeDescr from ref_Branches where BranchCode like @Search + '%'";
+                    com.CommandText = "select BranchCode +' - '+ BranchDescr as CodeDescr from [LBC_Reference].[dbo].[ref_Branches] where BranchCode like @Search + '%'";
 
                     com.Parameters.AddWithValue("@Search", prefixText);
                     com.Connection = con;
@@ -1188,7 +1462,7 @@ namespace BIOSproject
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                SqlCommand cmd = new SqlCommand("UpdateTempTagging", con);
+                SqlCommand cmd = new SqlCommand("[LBC.BIOS].[lbcbios].[UpdateTempTagging]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", hfIDedit.Value);
                 cmd.Parameters.AddWithValue("@DestinationTo", DropDestiEdit.SelectedItem.Text);
@@ -1206,7 +1480,7 @@ namespace BIOSproject
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                SqlCommand cmd = new SqlCommand("UpdateTempTagging", con);
+                SqlCommand cmd = new SqlCommand("[LBC.BIOS].[lbcbios].[UpdateTempTagging]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", hfIDedit.Value);
                 cmd.Parameters.AddWithValue("@DestinationTo", DropDestiEdit.SelectedItem.Text);
@@ -1224,7 +1498,7 @@ namespace BIOSproject
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                SqlCommand cmd = new SqlCommand("UpdateTempTagging", con);
+                SqlCommand cmd = new SqlCommand("[LBC.BIOS].[lbcbios].[UpdateTempTagging]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", hfIDedit.Value);
                 cmd.Parameters.AddWithValue("@DestinationTo", DropDestiEdit.SelectedItem.Text);
@@ -1251,7 +1525,7 @@ namespace BIOSproject
             {
                 if (gr.Cells[3].Text == "Branch")
                 {
-                    string sqlquery = "update FinishedGood set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
                     SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
                     sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
                     sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
@@ -1260,7 +1534,7 @@ namespace BIOSproject
                     sqlCmd.Parameters.AddWithValue("@Area", gr.Cells[7].Text);
                     sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
-                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                     sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
                     Sqlcon.Open();
                     sqlCmd.ExecuteNonQuery();
@@ -1271,7 +1545,7 @@ namespace BIOSproject
                     if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
@@ -1291,7 +1565,7 @@ namespace BIOSproject
                 }
                 else if (gr.Cells[3].Text == "Warehouse")
                 {
-                    string sqlquery = "update FinishedGood set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
                     SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
                     sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
                     sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
@@ -1300,7 +1574,7 @@ namespace BIOSproject
                     sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Warehouse", gr.Cells[8].Text);
-                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                     sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
                     Sqlcon.Open();
                     sqlCmd.ExecuteNonQuery();
@@ -1311,7 +1585,7 @@ namespace BIOSproject
                     if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
@@ -1331,7 +1605,7 @@ namespace BIOSproject
                 }
                 else if (gr.Cells[3].Text == "Hub")
                 {
-                    string sqlquery = "update FinishedGood set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
                     SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
                     sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
                     sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
@@ -1340,7 +1614,7 @@ namespace BIOSproject
                     sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     sqlCmd.Parameters.AddWithValue("@Hub", gr.Cells[9].Text);
                     sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
-                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", txtDate.Text);
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                     sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
                     Sqlcon.Open();
                     sqlCmd.ExecuteNonQuery();
@@ -1351,7 +1625,7 @@ namespace BIOSproject
                     if (gr.Cells[10].Text != "")
                     {
                         SqlConnection conn = new SqlConnection(main);
-                        string qry = "Delete from [lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
                         SqlCommand sqlComma = new SqlCommand(qry, conn);
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
@@ -1376,5 +1650,252 @@ namespace BIOSproject
 
 
         }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string main = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+            SqlConnection Sqlcon = new SqlConnection(main);
+
+            foreach (GridViewRow gr in gvTemp.Rows)
+            {
+                if (gr.Cells[3].Text == "Branch")
+                {
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
+                    sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
+                    sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
+                    sqlCmd.Parameters.AddWithValue("@Branch", gr.Cells[5].Text);
+                    sqlCmd.Parameters.AddWithValue("@Team", gr.Cells[6].Text);
+                    sqlCmd.Parameters.AddWithValue("@Area", gr.Cells[7].Text);
+                    sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
+                    sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
+                    Sqlcon.Open();
+                    sqlCmd.ExecuteNonQuery();
+                    Sqlcon.Close();
+                    //tagging();
+
+                    // validations
+                    if (gr.Cells[10].Text != "")
+                    {
+                        SqlConnection conn = new SqlConnection(main);
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        SqlCommand sqlComma = new SqlCommand(qry, conn);
+                        conn.Open();
+                        sqlComma.ExecuteNonQuery();
+                        DDLlistseries.Items.Clear();
+                        FillGridView();
+                        FillGridView2();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
+                        conn.Close();
+                        //Response.Redirect(Request.Url.AbsoluteUri);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
+                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Cornfirm your Details!')", true);
+                        //lblSuccess.Text = "Please Cornfirm your Details!";
+                    }
+                }
+                else if (gr.Cells[3].Text == "Warehouse")
+                {
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
+                    sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
+                    sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
+                    sqlCmd.Parameters.AddWithValue("@Branch", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Team", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Hub", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Warehouse", gr.Cells[8].Text);
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
+                    sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
+                    Sqlcon.Open();
+                    sqlCmd.ExecuteNonQuery();
+                    Sqlcon.Close();
+                    //tagging();
+
+                    // validations
+                    if (gr.Cells[10].Text != "")
+                    {
+                        SqlConnection conn = new SqlConnection(main);
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        SqlCommand sqlComma = new SqlCommand(qry, conn);
+                        conn.Open();
+                        sqlComma.ExecuteNonQuery();
+                        DDLlistseries.Items.Clear();
+                        FillGridView();
+                        FillGridView2();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
+                        conn.Close();
+                        //Response.Redirect(Request.Url.AbsoluteUri);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
+                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Cornfirm your Details!')", true);
+                        //lblSuccess.Text = "Please Cornfirm your Details!";
+                    }
+                }
+                else if (gr.Cells[3].Text == "Hub")
+                {
+                    string sqlquery = "update [LBC.BIOS].[lbcbios].[FinishedGood] set Branch = @Branch, Team = @Team, Area = @Area, Hub = @Hub, Warehouse = @Warehouse, ScheduleDate = @ScheduledDate, DestinationTo = @DestinationTo WHERE StartingSeries = @StartingSeries and EndingSeries = @EndingSeries";
+                    SqlCommand sqlCmd = new SqlCommand(sqlquery, Sqlcon);
+                    sqlCmd.Parameters.AddWithValue("@StartingSeries", gr.Cells[0].Text);
+                    sqlCmd.Parameters.AddWithValue("@EndingSeries", gr.Cells[1].Text);
+                    sqlCmd.Parameters.AddWithValue("@Branch", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Team", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Area", DBNull.Value);
+                    sqlCmd.Parameters.AddWithValue("@Hub", gr.Cells[9].Text);
+                    sqlCmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
+                    sqlCmd.Parameters.AddWithValue("@ScheduledDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
+                    sqlCmd.Parameters.AddWithValue("@DestinationTo", gr.Cells[3].Text);
+                    Sqlcon.Open();
+                    sqlCmd.ExecuteNonQuery();
+                    Sqlcon.Close();
+                    //tagging();
+
+                    // validations
+                    if (gr.Cells[10].Text != "")
+                    {
+                        SqlConnection conn = new SqlConnection(main);
+                        string qry = "Delete from [LBC.BIOS].[lbcbios].[TempTagging] where ID = '" + gr.Cells[10].Text + "'";
+                        SqlCommand sqlComma = new SqlCommand(qry, conn);
+                        conn.Open();
+                        sqlComma.ExecuteNonQuery();
+                        DDLlistseries.Items.Clear();
+                        FillGridView();
+                        FillGridView2();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
+                        conn.Close();
+                        //Response.Redirect(Request.Url.AbsoluteUri);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('Please Cornfirm your Details!','You clicked the button!', 'warning')", true);
+                        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please Cornfirm your Details!')", true);
+                        //lblSuccess.Text = "Please Cornfirm your Details!";
+                    }
+                }
+
+
+
+            }
+        }
+
+        ////////protected void DDLcode_TextChanged(object sender, EventArgs e)
+        ////////{
+        ////////    if (DDLcode.SelectedValue != "S")
+        ////////    {
+        ////////        string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+        ////////        SqlConnection sqlcon = new SqlConnection(maincon);
+        ////////        sqlcon.Open();
+        ////////        SqlCommand sqlcmd = new SqlCommand();
+        ////////        string sqlquery = "select * from FinishedGood where Product like '%'+@Product+'%' and Branch like '%'+@BranchCode+'%' and Warehouse = 'Blossom Warehouse(Alabang)' and DestinationTo != ''";
+        ////////        sqlcmd.CommandText = sqlquery;
+        ////////        sqlcmd.Connection = sqlcon;
+        ////////        sqlcmd.Parameters.AddWithValue("@Product", DDLcode.Text);
+        ////////        sqlcmd.Parameters.AddWithValue("@BranchCode", txtSearch.Text);
+        ////////        SqlDataReader dr = sqlcmd.ExecuteReader();
+        ////////        DataTable dt = new DataTable();
+        ////////        if (dr.Read())
+        ////////        {
+        ////////            sqlcon.Close();
+        ////////            SqlDataAdapter sda = new SqlDataAdapter(sqlcmd);
+        ////////            sda.Fill(dt);
+        ////////            Gridview1.DataSource = dt;
+        ////////            Gridview1.DataBind();
+        ////////            DDLcode.Visible = true;
+
+
+        ////////            SqlConnection sqlCon2 = new SqlConnection(maincon);
+        ////////            sqlCon2.Open();
+        ////////            SqlCommand cmd = new SqlCommand("SELECT Sum(isnull(cast(Quantity as float),0)) FROM FinishedGood where Product like '%'+@Product+'%' and Branch like '%'+@BranchCode+'%' and Warehouse = 'Blossom Warehouse(Alabang)' and DestinationTo != ''", sqlCon2);
+        ////////            cmd.Parameters.AddWithValue("@Product", DDLcode.Text);
+        ////////            cmd.Parameters.AddWithValue("@BranchCode", txtSearch.Text);
+        ////////            SqlDataReader dr2 = cmd.ExecuteReader();
+        ////////            if (dr2.Read())
+        ////////            {
+        ////////                lblCodeNo.Text = dr2.GetValue(0).ToString();
+        ////////            }
+        ////////            else
+        ////////            {
+        ////////                lblCodeNo.Text = "0";
+        ////////            }
+        ////////            sqlCon2.Close();
+
+        ////////            lblCode.Visible = true;
+        ////////            lblCodeNo.Visible = true;
+        ////////        }
+        ////////        else
+        ////////        {
+        ////////            DataTable dt3 = new DataTable();
+        ////////            Gridview1.DataSource = dt3;
+        ////////            Gridview1.DataBind();
+        ////////            lblCode.Visible = false;
+        ////////            lblCodeNo.Visible = false;
+        ////////        }
+
+        ////////    }
+        ////////    else if (DDLcode.SelectedValue == "S")
+        ////////    {
+        ////////        string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+        ////////        SqlConnection sqlcon = new SqlConnection(maincon);
+        ////////        sqlcon.Open();
+        ////////        SqlCommand sqlcmd = new SqlCommand();
+        ////////        string sqlquery = "select * from FinishedGood where Branch like '%'+@BranchCode+'%' and Warehouse = 'Blossom Warehouse(Alabang)' and DestinationTo != '' ";
+        ////////        sqlcmd.CommandText = sqlquery;
+        ////////        sqlcmd.Connection = sqlcon;
+        ////////        sqlcmd.Parameters.AddWithValue("@BranchCode", txtSearch.Text);
+        ////////        DataTable dt = new DataTable();
+        ////////        SqlDataAdapter sda = new SqlDataAdapter(sqlcmd);
+        ////////        sda.Fill(dt);
+        ////////        Gridview1.DataSource = dt;
+        ////////        Gridview1.DataBind();
+        ////////        DDLcode.Visible = true;
+        ////////        lblCode.Visible = false;
+        ////////        lblCodeNo.Visible = false;
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        lblCode.Visible = false;
+        ////////        lblCodeNo.Visible = false;
+        ////////        if (txtSearch.Text == "")
+        ////////        {
+        ////////            FillGridView();
+        ////////            DDLcode.Visible = false;
+        ////////            lblCode.Visible = false;
+        ////////            lblCodeNo.Visible = false;
+        ////////        }
+        ////////        else
+        ////////        {
+        ////////            DataTable dt3 = new DataTable();
+        ////////            Gridview1.DataSource = dt3;
+        ////////            Gridview1.DataBind();
+        ////////        }
+        ////////    }
+        ////////}
+        ////////protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        ////////{
+        ////////    if (Calendar1.Visible)
+        ////////    {
+        ////////        Calendar1.Visible = false;
+        ////////    }
+        ////////    else
+        ////////    {
+        ////////        Calendar1.Visible = true;
+        ////////    }
+        ////////    Calendar1.Attributes.Add("style", "position:absolute");
+        ////////}
+        ////////protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        ////////{
+        ////////    txtDated.Text = Calendar1.SelectedDate.ToString("yyyy-dd-MM");
+        ////////    Calendar1.Visible = false;
+        ////////    txtSearch.Text = "";
+        ////////    FilterRecords();
+        ////////    DDLcode.Visible = false;
+        ////////}
+
     }
 }

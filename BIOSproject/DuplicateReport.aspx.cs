@@ -23,10 +23,20 @@ namespace BIOSproject
         {
             if (!IsPostBack)
             {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                    //Fillgridview();
+                    Search();
+                    TxtFromDate.Text = DateTime.Now.ToString("yyyy-dd-MM").ToString();
+                    TxtToDate.Text = DateTime.Now.ToString("yyyy-dd-MM").ToString();
 
-                //Fillgridview();
-                Search();
-
+                    Calendar1.Visible = false;
+                    Calendar2.Visible = false;
+                }
             }
         }
 
@@ -54,7 +64,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("DateFilter", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[DateFilter]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Date", TxtFromDate.Text);
             sqlData.SelectCommand.Parameters.AddWithValue("@Date2", TxtToDate.Text);
@@ -72,7 +82,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("DateFilter", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[DateFilter]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Date", TxtFromDate.Text);
             sqlData.SelectCommand.Parameters.AddWithValue("@Date2", TxtToDate.Text);
@@ -83,6 +93,42 @@ namespace BIOSproject
             Gridview1.DataBind();
             Gridview1.UseAccessibleHeader = true;
             Gridview1.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Calendar1.Visible)
+            {
+                Calendar1.Visible = false;
+            }
+            else
+            {
+                Calendar1.Visible = true;
+                Calendar2.Visible = false;
+            }
+            Calendar1.Attributes.Add("style", "position:absolute");
+        }
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Calendar2.Visible)
+            {
+                Calendar2.Visible = false;
+            }
+            else
+            {
+                Calendar2.Visible = true;
+                Calendar1.Visible = false;
+            }
+            Calendar2.Attributes.Add("style", "position:absolute");
+        }
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            TxtFromDate.Text = Calendar1.SelectedDate.ToString("yyyy-dd-MM");
+            Calendar1.Visible = false;
+        }
+        protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+        {
+            TxtToDate.Text = Calendar2.SelectedDate.ToString("yyyy-dd-MM");
+            Calendar2.Visible = false;
         }
     }
 }

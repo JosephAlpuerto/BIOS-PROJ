@@ -123,6 +123,11 @@
         margin-left: 45%;
         width: 25%;
     }
+    .big .container .forms .input_field1 .labelSearch2 {
+        margin-left: 45%;
+        margin-bottom: 10px;
+        width: 30%;
+    }
 
     .big .container .forms .input_field1 .inputSearch {
         margin-bottom: 10px;

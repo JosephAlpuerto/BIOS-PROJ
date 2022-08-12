@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="SSPRequestList.aspx.cs" Inherits="BIOSproject.SSPRequestList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="SSPRequestList.aspx.cs" Inherits="BIOSproject.SSPRequestList" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
@@ -105,7 +105,7 @@
 
 
 
-     <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal" PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
+    <%-- <ajaxtoolkit:modalpopupextender ID="ModalValidateSeries" PopupControlID="PanelValidateSeries" TargetControlID="gvModal" PopupDragHandleControlID="headerDivSeries" runat="server"></ajaxtoolkit:modalpopupextender>
         <asp:Panel ID="PanelValidateSeries"  runat="server">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
@@ -132,9 +132,7 @@
                                 <div class="card-body p-0">
                             <div id="headerDivSeries" class="modal-header" >
                                 <h5 class="modal-title" id="">HitCheck Series Number</h5>
-                                <%--<button id="btnClose" class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>--%>
+      
                                 <asp:LinkButton ID="hitCheckCloseSeries" runat="server" Text="x" OnClick="hitCheckCloseSeries_Click"/>
 
                             </div>
@@ -148,7 +146,7 @@
                                 <div class="form3">
                <div class="input_field1">
                     <asp:HiddenField ID="hfId1" runat="server" />
-                    <%--<label>Date Requested</label>--%>
+                  
                     <asp:Label ID="Label3" runat="server" Text="Enter Series Number" CssClass="label"></asp:Label>
                     <span id="errmsgSeries"></span>
                     <asp:TextBox ID="TxtSearchSeries" runat="server" CssClass="input1" AccessKey="2" ClientIDMode="Static"></asp:TextBox>
@@ -168,25 +166,7 @@
                    </asp:GridView>
                 </div>
 
-                   
-                  <%--<div class="input_field1">
-                    <asp:Label ID="Label5" runat="server" Text="StartingSeries" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtStart" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>     
-                 <div class="input_field1">
-                    <asp:Label ID="Label1" runat="server" Text="EndingSeries" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtEnd" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>
-               <%-- <div class="input_field1">
-                    <asp:Label ID="Label6" runat="server" Text="PONumber" CssClass="label"></asp:Label>
-                     <asp:TextBox ID="TxtPONoSeries" Enabled="false" runat="server" CssClass="input1"></asp:TextBox>
-                </div>--%>  
-
-                    
-                                
-
-                
-                
+   
 
                 <div class="input_field1">
                     <asp:Button ID="Button2" runat="server" Text="Validate" CssClass="btn btn-primary btn-user btn-block" OnClick="Button2_Click" />
@@ -201,7 +181,7 @@
                         </div>
                             
 
-        </asp:Panel>
+        </asp:Panel>--%>
 
 
 
@@ -308,6 +288,8 @@
                                 
                             </div>--%>
                               <asp:HiddenField ID="hfId" runat="server" />
+                              <asp:HiddenField ID="hfCtrlID" runat="server" />
+                              <asp:HiddenField ID="hfSuppEmail" runat="server" />
                              <asp:TextBox ID="txtForHitCheck" runat="server" Visible="false"></asp:TextBox>
                              <asp:TextBox ID="txtifSend" runat="server" Visible="false"></asp:TextBox>
                              <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
@@ -412,7 +394,7 @@
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                        <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier Name" />
+                                        <asp:ButtonField DataTextField="SupplierName" HeaderText="Supplier Name" />
                                        <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
                                         <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
                                                     
@@ -452,6 +434,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <asp:HiddenField ID="HiddenField1" runat="server" />
+                                <asp:HiddenField ID="HFUsername" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged" OnRowDataBound="Gridview2_RowDataBound1">
                                     <Columns>
                                         <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
@@ -459,7 +442,7 @@
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                        <asp:ButtonField DataTextField="Supplier" HeaderText="Supplier Name" />
+                                        <asp:ButtonField DataTextField="SupplierName" HeaderText="Supplier Name" />
                                        <%-- <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product & Quantity" />
                                         <asp:ButtonField DataTextField="TotalQuantity" HeaderText="Total Quantity" />--%>
                                                         <asp:TemplateField>
@@ -490,6 +473,49 @@
                                 </div>
                             </div>
                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <asp:GridView ID="GridView3" runat="server" Visible="false" HorizontalAlign="Center" DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False">
+                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                    <HeaderStyle BackColor="#d00149" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                    <RowStyle ForeColor="#000066" />
+                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                    <Columns>
+
+                        <asp:TemplateField HeaderText="RequestNo">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("RequestNo") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Products">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("ProductQuantity") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Quantity">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("Quantity") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+
+                </asp:GridView>
 
 
 </asp:Content>

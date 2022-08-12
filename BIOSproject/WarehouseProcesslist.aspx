@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Hub/Warehouse.Master" AutoEventWireup="true" CodeBehind="WarehouseProcesslist.aspx.cs" Inherits="BIOSproject.Hub.WarehouseProcesslist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Hub/Warehouse.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="WarehouseProcesslist.aspx.cs" Inherits="BIOSproject.Hub.WarehouseProcesslist" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>

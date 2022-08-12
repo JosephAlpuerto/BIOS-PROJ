@@ -24,8 +24,16 @@ namespace BIOSproject.Hub
         {
             if (!IsPostBack)
             {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
 
                 FillGridView();
+                }
+
             }
         }
         void FillGridView()

@@ -20,7 +20,16 @@ namespace BIOSproject
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillGridView();
+            if (Session["Username"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
+                FillGridView();
+
+            }
+            
         }
 
 

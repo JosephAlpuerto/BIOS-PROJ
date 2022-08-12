@@ -149,6 +149,8 @@
     <Content Include="img\arrow-icon-1174.png" />
     <Content Include="img\arrow-icon-1175.png" />
     <Content Include="img\greenBox.png" />
+    <Content Include="img\icons8-calendar-96.png" />
+    <Content Include="InquiryForm.aspx" />
     <Content Include="js\jquery-3.5.1.min.js" />
     <Content Include="js\jquery-ui.css" />
     <Content Include="js\jquery-ui.min.js" />
@@ -167,6 +169,8 @@
     <Content Include="select2\select2.png" />
     <Content Include="select2\select2x2.png" />
     <Content Include="Sounds\correct-sound-effect_2ravtBqv.mp3" />
+    <Content Include="Sounds\mixkit-game-show-wrong-answer-buzz-950.mp3" />
+    <Content Include="Sounds\mixkit-game-show-wrong-answer-buzz-950.mp4" />
     <Content Include="Sounds\wrong-sound-effect_TfPLyWdb.mp3" />
     <Content Include="SourcingReports.aspx" />
     <Content Include="SSP-DuplicateReport.aspx" />
@@ -177,6 +181,7 @@
     <Content Include="TextFile\100.txt" />
     <Content Include="TextFile\200.txt" />
     <Content Include="TextFile\300.txt" />
+    <Content Include="Warehouse-InquiryForm.aspx" />
     <Content Include="Warehouselist.aspx" />
     <Content Include="js\SA.js" />
     <Content Include="TextFile\Series.txt" />
@@ -1980,6 +1985,13 @@
     <Compile Include="Hub\ValidationForm.aspx.designer.cs">
       <DependentUpon>ValidationForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="InquiryForm.aspx.cs">
+      <DependentUpon>InquiryForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InquiryForm.aspx.designer.cs">
+      <DependentUpon>InquiryForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="sample1.aspx.cs">
       <DependentUpon>sample1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2028,6 +2040,13 @@
     </Compile>
     <Compile Include="SupplierTaggingForm.aspx.designer.cs">
       <DependentUpon>SupplierTaggingForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse-InquiryForm.aspx.cs">
+      <DependentUpon>Warehouse-InquiryForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse-InquiryForm.aspx.designer.cs">
+      <DependentUpon>Warehouse-InquiryForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.Master.cs">
       <DependentUpon>Warehouse.Master</DependentUpon>

@@ -20,24 +20,31 @@ namespace BIOSproject
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["Username"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
+                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                if (sqlCon.State == ConnectionState.Closed)
+                    sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand("PONumber", sqlCon);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
 
 
-
-            SqlConnection sqlCon = new SqlConnection(ConnectionString);
-            if (sqlCon.State == ConnectionState.Closed)
-                sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand("PONumber", sqlCon);
-            sqlCmd.CommandType = CommandType.StoredProcedure;
+                int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                LblPO.Text = numRec.ToString();
 
 
-            int numRec = Convert.ToInt32(sqlCmd.ExecuteScalar());
-            LblPO.Text = numRec.ToString();
+                sqlCon.Close();
+
+                Hitcheck();
+                FillGridView();
+            }
 
 
-            sqlCon.Close();
-
-            Hitcheck();
-            FillGridView();
+            
 
         }
 

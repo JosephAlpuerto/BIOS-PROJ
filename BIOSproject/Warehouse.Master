@@ -27,7 +27,79 @@
     <script src="js/SA.js"></script>
 
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+     <%-- WarehouseTagging Form alert--%>
+    <script>
+        function TaggingScannerSuccess() {
+            var audio = new Audio('Sounds/correct-sound-effect_2ravtBqv.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Safe, No Duplicate for this series.",
+                text: "You clicked the button!",
+                icon: "success",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TempDuplicate() {
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
+            audio.play();
+            Swal.fire({
+                title: "This Series Already Scanned!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingDuplicate() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Duplicate Record!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingNoRecord() {
+            var audio = new Audio('Sounds/wrong-sound-effect_TfPLyWdb.mp3');
+            audio.play();
+            Swal.fire({
+                title: "No Record!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+        function TaggingDestination() {
+            var audio = new Audio('Sounds/mixkit-game-show-wrong-answer-buzz-950.mp3');
+            audio.play();
+            Swal.fire({
+                title: "Select Destination!",
+                text: "You clicked the button!",
+                icon: "warning",
+                timer: 2000,
+                confirmButtonText: "Okay",
+                customClass: {
+                    container: 'my-swal'
+                }
+            })
+        }
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -83,10 +155,27 @@
                         <span>Process list</span></a>
                 </li>--%>
 
-                <li class="nav-item active">
+                <%--<li class="nav-item active">
                     <a class="nav-link" href="WareHouseform.aspx">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Tagging Form</span></a>
+                </li>--%>
+                    <li class="nav-item active">
+                    <a class="nav-link collapsed" href="WareHouseform.aspx" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tagging Tools</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Tools:</h6>
+                             <a style="font-size:medium; font-weight:bolder;" class="collapse-item" href="WareHouseform.aspx"> 
+                                 <i class="fas fa-fw fa-folder"></i><span>Scanner</span></a>
+                             <a style="font-size:medium; font-weight:bolder;" class="collapse-item" href="Warehouse-InquiryForm.aspx">
+                                 <i class="fas fa-fw fa-folder"></i><span>Inquiry</span></a>
+                            
+                        </div>
+                    </div>
                 </li>
                 <%--<li class="nav-item active">
                     <a class="nav-link" href="ValidationForm.aspx">
@@ -304,7 +393,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="img-profile rounded-circle"
-                                        src="../img/undraw_profile.svg">
+                                        src="../img/undraw_profile.svg"> &nbsp; &nbsp;
                                     <asp:Label runat="server" ID="txtUserName" class="mr-2 d-none d-lg-inline text-gray-600 small" />
                                     <!--<span ID="txtUsername" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>-->
 
@@ -328,6 +417,7 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
+                                        
                                     </a>
                                 </div>
                             </li>
@@ -360,7 +450,8 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="../Default.aspx">Logout</a>
+                                <%--<a class="btn btn-primary" href="../Default.aspx">Logout</a>--%>
+                                <asp:Button ID="Logout" runat="server" class="btn btn-primary" Text="Logout" OnClick="Logout_Click"/>
                             </div>
                         </div>
                     </div>

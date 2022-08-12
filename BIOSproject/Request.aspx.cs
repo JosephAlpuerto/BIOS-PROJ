@@ -22,7 +22,13 @@ namespace BIOSproject
 
                 if (!IsPostBack)
                 {
-                    FillGridView(); 
+                    if (Session["Username"] == null)
+                    {
+                        Response.Redirect("~/Default.aspx");
+                    }
+                    else
+                    {
+                    FillGridView();
                     string maincon = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
                     string sqlquery = "select * from Areas";
                     SqlCommand sqlcomm = new SqlCommand(sqlquery, conn);
@@ -35,51 +41,53 @@ namespace BIOSproject
                     DropArea.DataValueField = "AreaDescr";
                     DropArea.DataBind();
                     conn.Close();
-                    
 
 
-                string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                string sqlqueryy = "select * from ref_Branches";
-                SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
-                con.Open();
-                SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
-                DataSet ds = new DataSet();
-                sd.Fill(ds);
-                DropTeam.DataSource = ds;
-                DropTeam.DataTextField = "TeamDescr";
-                DropTeam.DataValueField = "TeamDescr";
-                DropTeam.DataBind();
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                   
-                    DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
+
+                    string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                    string sqlqueryy = "select * from ref_Branches";
+                    SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
+                    con.Open();
+                    SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
+                    DataSet ds = new DataSet();
+                    sd.Fill(ds);
+                    DropTeam.DataSource = ds;
+                    DropTeam.DataTextField = "TeamDescr";
+                    DropTeam.DataValueField = "TeamDescr";
+                    DropTeam.DataBind();
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+
+                        DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
+                    }
+
+
+
+
+
+                    //string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                    //string sqlqueryy = "select * from ref_Branches";
+                    //SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
+                    //conn.Open();
+                    //SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
+                    //DataTable dtt = new DataTable();
+                    //DataSet ds = new DataSet();
+                    //sd.Fill(dtt);
+                    //string Team1 = "TeamDescr".ToString();
+                    //string Team2 = "TeamCode".ToString();
+                    //DropTeam.DataSource = dtt;
+                    //DropTeam.DataValueField = "TeamDescr";
+                    //DropTeam.DataTextField = "TeamDescr" + "TeamCode";
+                    //DropTeam.DataBind();
+                    //conn.Close();
+
+                    //sd.Fill(ds);
+                    //DropBranch.DataSource = ds;
+                    //DropBranch.DataValueField = "BranchDescr";
+                    //DropBranch.DataTextField = "BranchDescr";
+                    //DropBranch.DataBind();
                 }
 
-
-
-
-
-                //string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                //string sqlqueryy = "select * from ref_Branches";
-                //SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
-                //conn.Open();
-                //SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
-                //DataTable dtt = new DataTable();
-                //DataSet ds = new DataSet();
-                //sd.Fill(dtt);
-                //string Team1 = "TeamDescr".ToString();
-                //string Team2 = "TeamCode".ToString();
-                //DropTeam.DataSource = dtt;
-                //DropTeam.DataValueField = "TeamDescr";
-                //DropTeam.DataTextField = "TeamDescr" + "TeamCode";
-                //DropTeam.DataBind();
-                //conn.Close();
-
-                //sd.Fill(ds);
-                //DropBranch.DataSource = ds;
-                //DropBranch.DataValueField = "BranchDescr";
-                //DropBranch.DataTextField = "BranchDescr";
-                //DropBranch.DataBind();
 
 
             }

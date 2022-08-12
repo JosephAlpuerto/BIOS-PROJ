@@ -19,16 +19,24 @@ namespace BIOSproject
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Username"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
             FillGridView();
             gvlist.Visible = true;
             gvlist2.Visible = false;
+            }
+            
         }
         void FillGridView()
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("SupplierReport", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[SupplierReport]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
             DataTable dtbl = new DataTable();
@@ -44,7 +52,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("SupplierReport2", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[SupplierReport2]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@SearchPO", ddlPO.Text);
             sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
@@ -61,7 +69,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("SupplierReport3", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[SupplierReport3]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@SearchPro", ddlProduct.Text);
             sqlData.SelectCommand.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
@@ -78,7 +86,7 @@ namespace BIOSproject
             SqlConnection sqlCon = new SqlConnection(ConnectionString);
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
-            SqlDataAdapter sqlData = new SqlDataAdapter("SupplierReport8", sqlCon);
+            SqlDataAdapter sqlData = new SqlDataAdapter("[LBC.BIOS].[lbcbios].[SupplierReport8]", sqlCon);
             sqlData.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlData.SelectCommand.Parameters.AddWithValue("@SearchPro", ddlProduct.Text);
             sqlData.SelectCommand.Parameters.AddWithValue("@SearchPO", ddlPO.Text);
@@ -101,7 +109,7 @@ namespace BIOSproject
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 using (SqlCommand com = new SqlCommand())
                 {
-                    com.CommandText = "select REVERSE(PARSENAME(REPLACE(REVERSE(Product), '-', '.'), 1)) as Material, REVERSE(PARSENAME(REPLACE(REVERSE(Product), '-', '.'), 2)) as ProductCode,COUNT(*) as qty from FinishedGood where Product like @Search + '%' and Supplier = @Supplier group by Product";
+                    com.CommandText = "select REVERSE(PARSENAME(REPLACE(REVERSE(Product), '-', '.'), 1)) as Material, REVERSE(PARSENAME(REPLACE(REVERSE(Product), '-', '.'), 2)) as ProductCode,COUNT(*) as qty from [LBC.BIOS].[lbcbios].[FinishedGood] where Product like @Search + '%' and Supplier = @Supplier group by Product";
 
                     com.Parameters.AddWithValue("@Search", prefixText);
                     com.Parameters.AddWithValue("@Supplier", HttpContext.Current.Session["Username"].ToString());
@@ -129,7 +137,7 @@ namespace BIOSproject
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 using (SqlCommand com = new SqlCommand())
                 {
-                    com.CommandText = "select SupplierName, COUNT(*) as qty from FinishedGood where SupplierName like @Search + '%' and Supplier = @Supplier group by Supplier";
+                    com.CommandText = "select SupplierName, COUNT(*) as qty from [LBC.BIOS].[lbcbios].[FinishedGood] where SupplierName like @Search + '%' and Supplier = @Supplier group by Supplier";
 
                     com.Parameters.AddWithValue("@Search", prefixText);
                     com.Parameters.AddWithValue("@Supplier", HttpContext.Current.Session["Username"].ToString());
@@ -157,7 +165,7 @@ namespace BIOSproject
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
                 using (SqlCommand com = new SqlCommand())
                 {
-                    com.CommandText = "select PONumber,COUNT(*) as PO from FinishedGood where PONumber like @Search + '%' and Supplier = @Supplier group by PONumber";
+                    com.CommandText = "select PONumber,COUNT(*) as PO from [LBC.BIOS].[lbcbios].[FinishedGood] where PONumber like @Search + '%' and Supplier = @Supplier group by PONumber";
 
                     com.Parameters.AddWithValue("@Search", prefixText);
                     com.Parameters.AddWithValue("@Supplier", HttpContext.Current.Session["Username"].ToString());

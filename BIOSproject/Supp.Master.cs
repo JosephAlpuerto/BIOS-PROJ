@@ -23,13 +23,36 @@ namespace BIOSproject
         string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("Select FirstName From Users Where Username = @Username", sqlCon);
+                cmd.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtUserName.Text = dr.GetString(0).ToString();
+                }
+                sqlCon.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            if (IsPostBack)
+            {
             if (txtStartSeries.Text != "" && txtEndSeries.Text != "")
             {
                 if (Convert.ToInt64(txtStartSeries.Text) < Convert.ToInt64(txtEndSeries.Text))
                 {
-                    double start, end, answer;
-                    double.TryParse(txtStartSeries.Text, out start);
-                    double.TryParse(txtEndSeries.Text, out end);
+                    long start, end, answer;
+                    start = Convert.ToInt64(txtStartSeries.Text);
+                    end = Convert.ToInt64(txtEndSeries.Text);
                     answer = end - start + 1;
                     if (answer > 0)
                     {
@@ -41,8 +64,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -60,22 +83,24 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                    txtStartSeries.Text = "";
                                 }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
-                        else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
+                        else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER /100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
                         {
                             if (lblCountUnits.Text == "100")
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -93,13 +118,15 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtStartSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
                         {
@@ -107,8 +134,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -126,13 +153,15 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtStartSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
                         {
@@ -140,8 +169,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -159,30 +188,34 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtStartSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else
                         {
                             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                        }
+                                txtStartSeries.Text = "";
+                            }
 
                     }
                     else
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
-                    }
+                            txtStartSeries.Text = "";
+                        }
                 }
                 else
                 {
-                    double start, end, answer;
-                    double.TryParse(txtStartSeries.Text, out end);
-                    double.TryParse(txtEndSeries.Text, out start);
+                    long start, end, answer;
+                    end = Convert.ToInt64(txtStartSeries.Text);
+                    start = Convert.ToInt64(txtEndSeries.Text);
                     answer = end - start + 1;
                     if (answer > 0)
                     {
@@ -194,8 +227,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -213,13 +246,15 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
+                                    txtEndSeries.Text = "";
                                 }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else if (Product == Convert.ToString("N-PACK SMALL FOR 2D PRINTER /100-100018") || Product == Convert.ToString("N-PACK SMAL 4 NON 2D PRNTER/100_SCS ONLY-100019") || Product == Convert.ToString("N-PACK LARGE FOR 2D PRINTER /100-100020") || Product == Convert.ToString("N-PACK LRGE 4 NON 2D PRNTER/100_SCS ONLY-100021") || Product == Convert.ToString("N-POUCH REGULAR FOR 2D PRINTER /100-100008") || Product == Convert.ToString("N-POUCH XL FOR 2D PRINTER /100-100009") || Product == Convert.ToString("N-POUCH SS FOR 2D PRINTER /100-100010") || Product == Convert.ToString("N-POUCH REG 4 NON 2D PRNTER/100_SCS ONLY-100404") || Product == Convert.ToString("N-POUCH SS 4 NON 2D PRINTER/100_SCS ONLY-100406") || Product == Convert.ToString("N-POUCH XL 4 NON 2D PRNTER/100_SCS ONLY-100407") || Product == Convert.ToString("PESOPAK STICKER BARCODE /100-100044") || Product == Convert.ToString("BARCODE DISPATCH /100-100658") || Product == Convert.ToString("DAY 1 STICKER FOR 2D PRINTER /100-100731"))
                         {
@@ -227,8 +262,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -246,13 +281,15 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtEndSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else if (Product == Convert.ToString("X POUCH FOR 2D PRINTER /20-101716") || Product == Convert.ToString("X PACK FOR 2D PRINTER /20-101717"))
                         {
@@ -260,8 +297,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -279,13 +316,15 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtEndSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else if (Product == Convert.ToString("NEW AIRWAYBILL FORM /1000-101703"))
                         {
@@ -293,8 +332,8 @@ namespace BIOSproject
                             {
                                 SqlConnection sqlCon = new SqlConnection(ConnectionString);
                                 sqlCon.Open();
-                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                                 SqlDataReader dr = cmd.ExecuteReader();
@@ -312,24 +351,28 @@ namespace BIOSproject
                                 else
                                 {
                                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                                }
+                                        txtEndSeries.Text = "";
+                                    }
                                 sqlCon.Close();
                             }
                             else
                             {
                                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "ErrorUnits()", true);
-                            }
+                                    txtEndSeries.Text = "";
+                                }
                         }
                         else
                         {
                             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord2()", true);
-                        }
+                                txtEndSeries.Text = "";
+                            }
 
                     }
                     else
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "Invalid()", true);
-                    }
+                            txtEndSeries.Text = "";
+                        }
                 }
                 
                     
@@ -338,16 +381,10 @@ namespace BIOSproject
             {
                 lblCountUnits.Text = "0";
             }
-           
-            try
-            {
-                txtUserName.Text = Session["Username"].ToString();
-            }
-            catch (Exception ex)
-            {
 
             }
         }
+
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
@@ -579,20 +616,20 @@ namespace BIOSproject
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
+                SqlCommand cmd = new SqlCommand("[LBC.BIOS].[lbcbios].[InsertFinishGood]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TicketNo", TicketNo.Value);
                 cmd.Parameters.AddWithValue("@Supplier", Supplier.Value);
                 cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
                 cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
                 cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
-                cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
-                cmd.Parameters.AddWithValue("@StartingSeries", txtStartSeries.Text);
-                cmd.Parameters.AddWithValue("@EndingSeries", txtEndSeries.Text);
+                cmd.Parameters.AddWithValue("@Quantity", Convert.ToInt64(lblCountUnits.Text));
+                cmd.Parameters.AddWithValue("@StartingSeries", Convert.ToInt64(txtStartSeries.Text));
+                cmd.Parameters.AddWithValue("@EndingSeries", Convert.ToInt64(txtEndSeries.Text));
                 cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
                 cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
                 cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@RequestID", ID.Value);
                 cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
                 cmd.ExecuteNonQuery();
@@ -602,20 +639,20 @@ namespace BIOSproject
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                SqlCommand cmd = new SqlCommand("InsertFinishGood", con);
+                SqlCommand cmd = new SqlCommand("[LBC.BIOS].[lbcbios].[InsertFinishGood]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TicketNo", TicketNo.Value);
                 cmd.Parameters.AddWithValue("@Supplier", Supplier.Value);
                 cmd.Parameters.AddWithValue("@PONumber", PONumber.Value);
                 cmd.Parameters.AddWithValue("@Product", ProductQuantity.Value);
                 cmd.Parameters.AddWithValue("@TotalQuantity", lblTotal.Text);
-                cmd.Parameters.AddWithValue("@Quantity", lblCountUnits.Text);
-                cmd.Parameters.AddWithValue("@StartingSeries", txtEndSeries.Text);
-                cmd.Parameters.AddWithValue("@EndingSeries", txtStartSeries.Text);
+                cmd.Parameters.AddWithValue("@Quantity", Convert.ToInt64(lblCountUnits.Text));
+                cmd.Parameters.AddWithValue("@StartingSeries", Convert.ToInt64(txtEndSeries.Text));
+                cmd.Parameters.AddWithValue("@EndingSeries", Convert.ToInt64(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@RequestNo", RequestNo.Value);
                 cmd.Parameters.AddWithValue("@SupplierName", SupplierName.Value);
                 cmd.Parameters.AddWithValue("@CreatedBy", Session["Username"].ToString());
-                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@RequestID", ID.Value);
                 cmd.Parameters.AddWithValue("@Warehouse", "Blossom Warehouse(Alabang)");
                 cmd.ExecuteNonQuery();
@@ -692,7 +729,7 @@ namespace BIOSproject
             SqlConnection sqlCon2 = new SqlConnection(ConnectionString);
             if (sqlCon2.State == ConnectionState.Closed)
                 sqlCon2.Open();
-            SqlCommand sqlCmd = new SqlCommand("ScanFinish", sqlCon2);
+            SqlCommand sqlCmd = new SqlCommand("[LBC.BIOS].[lbcbios].[ScanFinish]", sqlCon2);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Id", ID.Value);
             sqlCmd.Parameters.AddWithValue("@ifFinish", "1");
@@ -719,8 +756,8 @@ namespace BIOSproject
             sqlCon.Open();
             if (txtStartSeries.Text != "" && txtUnits.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries From SSPNewRequest Where  StartingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0' or EndingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
-                cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                SqlCommand cmd = new SqlCommand("Select ID, EndingSeries From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where  StartingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0' or EndingSeries = @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1'  and WHcheck = '0'", sqlCon);
+                cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -753,8 +790,8 @@ namespace BIOSproject
             sqlCon3.Open();
             if (txtStartSeries.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
-                cmd.Parameters.AddWithValue("@SearchSeries", int.Parse(txtStartSeries.Text));
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
+                cmd.Parameters.AddWithValue("@SearchSeries", Convert.ToInt64(txtStartSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -798,6 +835,7 @@ namespace BIOSproject
                 else
                 {
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord()", true);
+                    txtStartSeries.Text = "";
                 }
                 sqlCon3.Close();
             }
@@ -849,8 +887,8 @@ namespace BIOSproject
             sqlCon3.Open();
             if (txtEndSeries.Text != "")
             {
-                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From SSPNewRequest Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
-                cmd.Parameters.AddWithValue("@SearchSeries", int.Parse(txtEndSeries.Text));
+                SqlCommand cmd = new SqlCommand("Select ID,TicketNo,PONumber,Supplier,ProductQuantity,TotalQuantity,Quantity,StartingSeries,EndingSeries,RequestNo,SupplierName From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @SearchSeries and EndingSeries >= @SearchSeries and Supplier = @Supplier and ifFinish = '0'", sqlCon3);
+                cmd.Parameters.AddWithValue("@SearchSeries", Convert.ToInt64(txtEndSeries.Text));
                 cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -894,6 +932,7 @@ namespace BIOSproject
                 else
                 {
                     Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "NoRecord()", true);
+                    txtEndSeries.Text = "";
                 }
                 sqlCon3.Close();
             }
@@ -942,9 +981,9 @@ namespace BIOSproject
         public void addingScan()
         {
             //lblUnits.Text = "0";
-            double txUnit, lbUnit, answer;
-            double.TryParse(txtUnits.Text, out txUnit);
-            double.TryParse(lblScanUnits.Text, out lbUnit);
+            long txUnit, lbUnit, answer;
+            long.TryParse(txtUnits.Text, out txUnit);
+            long.TryParse(lblScanUnits.Text, out lbUnit);
 
             answer = txUnit + lbUnit;
             if (answer > 0)
@@ -954,9 +993,9 @@ namespace BIOSproject
         public void addingScanTotal()
         {
             //lblUnits.Text = "0";
-            double txUnit, lbUnit, answer;
-            double.TryParse(lblCountUnits.Text, out txUnit);
-            double.TryParse(lblTotalCount.Text, out lbUnit);
+            long txUnit, lbUnit, answer;
+            long.TryParse(lblCountUnits.Text, out txUnit);
+            long.TryParse(lblTotalCount.Text, out lbUnit);
 
             answer = txUnit + lbUnit;
             if (answer > 0)
@@ -970,21 +1009,21 @@ namespace BIOSproject
             {
                 if (txtUnits.Text != "")
                 {
-                    if (Convert.ToInt32(txtUnits.Text) < 10)
+                    if (Convert.ToInt64(txtUnits.Text) < 10)
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) > Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) > Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) == 10 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) == 10 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnitSuccess()", true);
                         StartSeries.Visible = true;
@@ -992,7 +1031,7 @@ namespace BIOSproject
                         txtSeries.Text = "";
                         lblSeries.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) != Convert.ToInt32(lblTotal.Text) || Convert.ToInt32(txtUnits.Text) != 10 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) != Convert.ToInt64(lblTotal.Text) || Convert.ToInt64(txtUnits.Text) != 10 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
@@ -1012,21 +1051,21 @@ namespace BIOSproject
             {
                 if (txtUnits.Text != "")
                 {
-                    if (Convert.ToInt32(txtUnits.Text) < 100)
+                    if (Convert.ToInt64(txtUnits.Text) < 100)
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) > Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) > Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) == 100 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) == 100 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnitSuccess()", true);
                         StartSeries.Visible = true;
@@ -1034,7 +1073,7 @@ namespace BIOSproject
                         txtSeries.Text = "";
                         lblSeries.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) != Convert.ToInt32(lblTotal.Text) || Convert.ToInt32(txtUnits.Text) != 100 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) != Convert.ToInt64(lblTotal.Text) || Convert.ToInt64(txtUnits.Text) != 100 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
@@ -1054,21 +1093,21 @@ namespace BIOSproject
             {
                 if (txtUnits.Text != "")
                 {
-                    if (Convert.ToInt32(txtUnits.Text) < 20)
+                    if (Convert.ToInt64(txtUnits.Text) < 20)
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) > Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) > Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
                         txtStart.Visible = false;
                         txtStart.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) == 20 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) == 20 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnitSuccess()", true);
                         StartSeries.Visible = true;
@@ -1076,7 +1115,7 @@ namespace BIOSproject
                         txtSeries.Text = "";
                         lblSeries.Text = "";
                     }
-                    else if (Convert.ToInt32(txtUnits.Text) != Convert.ToInt32(lblTotal.Text) || Convert.ToInt32(txtUnits.Text) != 20 || Convert.ToInt32(txtUnits.Text) == Convert.ToInt32(lblTotal.Text))
+                    else if (Convert.ToInt64(txtUnits.Text) != Convert.ToInt64(lblTotal.Text) || Convert.ToInt64(txtUnits.Text) != 20 || Convert.ToInt64(txtUnits.Text) == Convert.ToInt64(lblTotal.Text))
                     {
                         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "randomtext", "CheckUnit()", true);
                         StartSeries.Visible = false;
@@ -1098,8 +1137,8 @@ namespace BIOSproject
                 {
                     SqlConnection sqlCon = new SqlConnection(ConnectionString);
                     sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From SSPNewRequest Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
-                    cmd.Parameters.AddWithValue("@Search", int.Parse(txtStartSeries.Text));
+                    SqlCommand cmd = new SqlCommand("Select ID, EndingSeries, TotalQuantity From [LBC.BIOS].[lbcbios].[SSPNewRequest] Where StartingSeries <= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0' or EndingSeries >= @Search and Supplier = @Supplier and forHitCheck = '1' and ifSend = '1' and WHcheck = '0'", sqlCon);
+                    cmd.Parameters.AddWithValue("@Search", Convert.ToInt64(txtStartSeries.Text));
                     cmd.Parameters.AddWithValue("@Supplier", Session["Username"].ToString());
 
                     SqlDataReader dr = cmd.ExecuteReader();
@@ -1132,19 +1171,19 @@ namespace BIOSproject
         }
         public void Hitcheck()
         {
-            int start = new int();
-            int end = new int();
+            long start = new long();
+            long end = new long();
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "SeriesFinished";
+            cmd.CommandText = "[LBC.BIOS].[lbcbios].[SeriesFinished]";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Search", txtStart.Text);
             cmd.Parameters.AddWithValue("@startmin", start);
             cmd.Parameters.AddWithValue("@endmax", end);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from FinishedGood where StartingSeries <= @search and EndingSeries >= @search";
+            string sqlquery = "select * from [LBC.BIOS].[lbcbios].[FinishedGood] where StartingSeries <= @search and EndingSeries >= @search";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStart.Text));
@@ -1209,7 +1248,7 @@ namespace BIOSproject
                 SqlConnection conn = new SqlConnection(ConnectionString);
                 conn.Open();
                 SqlCommand sql = new SqlCommand();
-                string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
+                string sqlquery = "select * from [LBC.BIOS].[lbcbios].[SSPNewRequest] where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
                 sql.CommandText = sqlquery;
                 sql.Connection = conn;
                 sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStart.Text));
@@ -1235,7 +1274,7 @@ namespace BIOSproject
                     SqlConnection conn = new SqlConnection(ConnectionString);
                     conn.Open();
                     SqlCommand sql = new SqlCommand();
-                    string sqlquery = "select * from SSPNewRequest where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
+                    string sqlquery = "select * from [LBC.BIOS].[lbcbios].[SSPNewRequest] where StartingSeries <= @search and EndingSeries >= @search and ID = @ID";
                     sql.CommandText = sqlquery;
                     sql.Connection = conn;
                     sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStart.Text));
@@ -1266,7 +1305,7 @@ namespace BIOSproject
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from FinishedGood where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
+            string sqlquery = "select * from [LBC.BIOS].[lbcbios].[FinishedGood] where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtStartSeries.Text));
@@ -1340,7 +1379,7 @@ namespace BIOSproject
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();
             SqlCommand sql = new SqlCommand();
-            string sqlquery = "select * from FinishedGood where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
+            string sqlquery = "select * from [LBC.BIOS].[lbcbios].[FinishedGood] where StartingSeries <= @search and EndingSeries >= @search and RequestID = @ID";
             sql.CommandText = sqlquery;
             sql.Connection = conn;
             sql.Parameters.AddWithValue("@search", Convert.ToInt64(txtEndSeries.Text));
@@ -1478,15 +1517,15 @@ namespace BIOSproject
                             txtSeries.Visible = true;
                             LabelSeries.Visible = true;
 
-                            int no = 1;
-                            int count = 0;
-                            int anss;
+                            long no = 1;
+                            long count = 0;
+                            long anss;
                             anss = no + count;
                             lblSeries.Text = Convert.ToString(anss);
 
-                            int no2 = 1;
-                            int count2 = Convert.ToInt32(lblScanUnitsCount.Text);
-                            int anss2;
+                            long no2 = 1;
+                            long count2 = Convert.ToInt64(lblScanUnitsCount.Text);
+                            long anss2;
                             anss2 = no2 + count2;
                             lblScanUnitsCount.Text = Convert.ToString(anss2);
                             //lblSeries.Visible = true;
@@ -1500,15 +1539,15 @@ namespace BIOSproject
                             string text = Convert.ToString(series);
                             txtSeries.Text = text;
 
-                            int no = 1;
-                            int count = Convert.ToInt32(lblSeries.Text);
-                            int anss;
+                            long no = 1;
+                            long count = Convert.ToInt64(lblSeries.Text);
+                            long anss;
                             anss = no + count;
                             lblSeries.Text = Convert.ToString(anss);
 
-                            int no2 = 1;
-                            int count2 = Convert.ToInt32(lblScanUnitsCount.Text);
-                            int anss2;
+                            long no2 = 1;
+                            long count2 = Convert.ToInt64(lblScanUnitsCount.Text);
+                            long anss2;
                             anss2 = no2 + count2;
                             lblScanUnitsCount.Text = Convert.ToString(anss2);
                             //lblSeries.Visible = true;
@@ -1554,7 +1593,13 @@ namespace BIOSproject
                 
             }
         }
-
-        
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Abandon();
+            Session.Clear();
+            Response.Cookies.Clear();
+            Response.Redirect("Default.aspx");
+        }
     }
 }

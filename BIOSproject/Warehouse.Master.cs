@@ -16,11 +16,26 @@ namespace BIOSproject.Hub
 {
     public partial class Warehouse : System.Web.UI.MasterPage
     {
+        String ConnectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                txtUserName.Text = Session["Username"].ToString();
+                
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                SqlConnection sqlCon = new SqlConnection(ConnectionString);
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("Select FirstName From Users Where Username = @Username", sqlCon);
+                cmd.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtUserName.Text = dr.GetString(0).ToString();
+                }
+                sqlCon.Close();
             }
             catch (Exception ex)
             {
@@ -74,6 +89,14 @@ namespace BIOSproject.Hub
             {
                 MsgError.Text = "ERROR" + ex.Message.ToString();
             }
+        }
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Abandon();
+            Session.Clear();
+            Response.Cookies.Clear();
+            Response.Redirect("Default.aspx");
         }
     }
 }

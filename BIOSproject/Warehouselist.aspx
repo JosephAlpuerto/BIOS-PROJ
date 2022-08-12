@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Warehouse.Master" AutoEventWireup="true" CodeBehind="Warehouselist.aspx.cs" Inherits="BIOSproject.Hub.Warehouselist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Warehouse.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="Warehouselist.aspx.cs" Inherits="BIOSproject.Hub.Warehouselist" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
@@ -288,7 +288,7 @@
                                          <asp:ButtonField DataTextField="PoNumber" HeaderText="PO No." />
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="Ending Series" />
-                                        <asp:ButtonField DataTextField="Supplier" HeaderText="SupplierName" />
+                                        <asp:ButtonField DataTextField="SupplierName" HeaderText="SupplierName" />
                                         <asp:ButtonField DataTextField="ScheduleDate" HeaderText="Schedule Dated" />
 
                                                         <%--<asp:TemplateField>

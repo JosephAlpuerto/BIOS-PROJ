@@ -19,6 +19,7 @@ namespace BIOSproject
         static String connectionString = @"Data Source = 172.25.8.134; Initial Catalog = LBC.BIOS; Persist Security Info=True;User ID = lbcbios;Password=lbcbios";
         protected void Page_Load(object sender, EventArgs e)
         {
+          
 
         }
 
@@ -30,7 +31,7 @@ namespace BIOSproject
                 //con.Open();
                 //SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
-                using (SqlCommand cmd = new SqlCommand("Users_Verify", con))
+                using (SqlCommand cmd = new SqlCommand("[lbcbios].[Users_Verify]", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

@@ -20,8 +20,16 @@ namespace BIOSproject
         {
             if (!IsPostBack)
             {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                    FillGridView();
+                }
 
-                FillGridView();
+                
             }
 
 

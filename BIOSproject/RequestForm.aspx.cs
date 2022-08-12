@@ -22,54 +22,62 @@ namespace BIOSproject
 
             if (!IsPostBack)
             {
-            //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-            //string sqlquery = "select * from Supplier";
-            //SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
-            //conn.Open();
-            //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-            //DataTable dt = new DataTable();
-            //sdr.Fill(dt);
-            //dropSupplier.DataSource = dt;
-            //dropSupplier.DataTextField = "SupplierName";
-            //dropSupplier.DataValueField = "SupplierName";
-            //dropSupplier.DataBind();
-            //conn.Close();
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else
+                {
+                 //string maincon = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                                //string sqlquery = "select * from Supplier";
+                                //SqlCommand sqlcomm = new SqlCommand(sqlquery, con);
+                                //conn.Open();
+                                //SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
+                                //DataTable dt = new DataTable();
+                                //sdr.Fill(dt);
+                                //dropSupplier.DataSource = dt;
+                                //dropSupplier.DataTextField = "SupplierName";
+                                //dropSupplier.DataValueField = "SupplierName";
+                                //dropSupplier.DataBind();
+                                //conn.Close();
 
-                string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
-                string sqlqueryy = "select * from Product where ProductName != '"+null+"'";
-                SqlCommand sqlcom = new SqlCommand(sqlqueryy, con);
-                conn.Open();
-                SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
-                DataTable td = new DataTable();
-                dr.Fill(td);
-                drpProduct.DataSource = td;
-                drpProduct.DataTextField = "ProductName";
-                drpProduct.DataValueField = "ProductName";
-                drpProduct.DataBind();
-                conn.Close();
+                                string mainconn = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;
+                                string sqlqueryy = "select * from Product where ProductName != '"+null+"'";
+                                SqlCommand sqlcom = new SqlCommand(sqlqueryy, con);
+                                conn.Open();
+                                SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
+                                DataTable td = new DataTable();
+                                dr.Fill(td);
+                                drpProduct.DataSource = td;
+                                drpProduct.DataTextField = "ProductName";
+                                drpProduct.DataValueField = "ProductName";
+                                drpProduct.DataBind();
+                                conn.Close();
 
 
 
-                //if(TicketNo.Text != "" || PONo.Text != "" || txtQuantity.Text !="")
-                //{
-                //    Button1.Enabled = true;
-                //}
-                //    string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
-                //    string sqlqueryy = "select * from ref_Branches";
-                //    SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
-                //    con.Open();
-                //    SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
-                //    DataSet ds = new DataSet();
-                //    sd.Fill(ds);
-                //    DropTeam.DataSource = ds;
-                //    DropTeam.DataTextField = "TeamDescr";
-                //    DropTeam.DataValueField = "TeamDescr";
-                //    DropTeam.DataBind();
-                //    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                //    {
+                                //if(TicketNo.Text != "" || PONo.Text != "" || txtQuantity.Text !="")
+                                //{
+                                //    Button1.Enabled = true;
+                                //}
+                                //    string mainconn = ConfigurationManager.ConnectionStrings["LBC_Ref"].ConnectionString;
+                                //    string sqlqueryy = "select * from ref_Branches";
+                                //    SqlCommand sqlcom = new SqlCommand(sqlqueryy, conn);
+                                //    con.Open();
+                                //    SqlDataAdapter sd = new SqlDataAdapter(sqlcom);
+                                //    DataSet ds = new DataSet();
+                                //    sd.Fill(ds);
+                                //    DropTeam.DataSource = ds;
+                                //    DropTeam.DataTextField = "TeamDescr";
+                                //    DropTeam.DataValueField = "TeamDescr";
+                                //    DropTeam.DataBind();
+                                //    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                                //    {
 
-                //        DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
-                ////    }
+                                //        DropBranch.Items.Add(ds.Tables[0].Rows[i][1] + "--" + ds.Tables[0].Rows[i][2]);
+                                ////    }
+                }
+               
             }
         }
 

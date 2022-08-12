@@ -54,13 +54,20 @@ namespace BIOSproject
                 //DropProduct.DataValueField = "ItemDescr";
                 //DropProduct.DataBind();
                 //con.Close();
-
-                ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
-                if (ViewState["Records"] == null)
+                if (Session["Username"] == null)
                 {
-                    dt.Columns.Add("List of Products");
-                    ViewState["Records"] = dt;
+                    Response.Redirect("~/Default.aspx");
                 }
+                else
+                {
+                    ReqDate.Text = DateTime.Now.ToString("yyyy-MM-dd").ToString();
+                    if (ViewState["Records"] == null)
+                    {
+                        dt.Columns.Add("List of Products");
+                        ViewState["Records"] = dt;
+                    }
+                }
+                
 
             }
         }

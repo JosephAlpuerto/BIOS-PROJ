@@ -1,4 +1,4 @@
-﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="BIOSproject.Default" %>
+﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" EnableEventValidation="false" ValidateRequest="false" Inherits="BIOSproject.Default" %>
 
 <!DOCTYPE html>
 
@@ -45,7 +45,8 @@
                                         <div class="user">
                                             <div class="form-group">
                                                 <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control form-control-user"
-                                                    placeholder="Enter Username..."/>
+                                                    placeholder="Enter Email..."/>
+                                               
                                             </div>
                                             <div class="form-group">
                                                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control form-control-user"
@@ -72,6 +73,7 @@
                                         </div>
                                         <br />
                    <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server"/>
+                                         
                                         <br />
                                         <br/>
                                         <div class="text-center">

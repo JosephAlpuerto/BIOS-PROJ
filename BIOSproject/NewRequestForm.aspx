@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="NewRequestForm.aspx.cs" Inherits="BIOSproject.NewRequestForm" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="NewRequestForm.aspx.cs" Inherits="BIOSproject.NewRequestForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -83,7 +83,7 @@
 
 
     <link href="css/NewRequest.css" rel="stylesheet" />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [LBC.BIOS].[lbcbios].[Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
 
 <div class="body">
     <div class="container">
@@ -107,10 +107,10 @@
                   
                 <div class="input-box4">
                    <span class="details">Supplier:</span>
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
-                    <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorEmail], [VendorName] as Vendor FROM [LBC.BIOS].[lbcbios].[Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [VendorName], [VendorEmail] FROM [LBC.BIOS].[lbcbios].[Reference] where VendorName != 'NULL'"></asp:SqlDataSource>
              
-                    <asp:DropDownList ID="dropSupplier" runat="server" AppendDataBoundItems="True" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorName" Width="300px" >
+                    <asp:DropDownList ID="dropSupplier" runat="server" AppendDataBoundItems="True" AutoPostBack="true" CssClass="drop1" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" DataSourceID="SqlDataSource5" DataTextField="VendorName" DataValueField="VendorEmail" Width="300px" >
                         <asp:ListItem Selected="True" Value="S" Text="--SELECT--"></asp:ListItem>
                 </asp:DropDownList>
                   <%--  <asp:DropDownList ID="dropSupplier" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropSupplier_SelectedIndexChanged" CssClass="drop1" Width="300px" >
@@ -129,7 +129,7 @@
 
                 <div class="input-box">
                     <span class="details">Product:</span>
-                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
+                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [LBC.BIOS].[lbcbios].[Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
                     <asp:DropDownList ID="DropProduct" AppendDataBoundItems="True" runat="server" AutoPostBack="true" CssClass="drop1" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product" Width="140px"> 
                         <asp:ListItem Selected="True" Value="S" Text="--SELECT--"></asp:ListItem>
                     </asp:DropDownList><asp:Label ID="lblerrorDrop" runat="server" ForeColor="Red" CssClass="label"></asp:Label> 
@@ -158,11 +158,11 @@
                     <asp:TextBox ID="txtTotal" Visible="false" runat="server" CssClass="input1" ReadOnly="True" ></asp:TextBox>
                 </div>
 
-                <div class="input-box6">
+               <%-- <div class="input-box6">
                     <asp:TextBox ID="txtStartSeries" runat="server" CssClass="input1"></asp:TextBox>
                     <asp:TextBox ID="txtEndSeries" runat="server" CssClass="input1"></asp:TextBox>
                     <asp:TextBox ID="txtListSeries" runat="server"></asp:TextBox>
-                </div>
+                </div>--%>
 
                 <asp:DropDownList ID="DDL" runat="server" Visible="false"></asp:DropDownList>
                 <asp:DropDownList ID="DDLQuantity" runat="server" Visible="false"></asp:DropDownList>
@@ -231,7 +231,7 @@
         <div>
             <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Check" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
        
-            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [TicketNo], [PONumber], [Supplier], [Products], [Quantity], [DateRequested], [RequestNo] FROM [TempRequest]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [TicketNo], [PONumber], [Supplier], [Products], [Quantity], [DateRequested], [RequestNo] FROM [LBC.BIOS].[lbcbios].[TempRequest]"></asp:SqlDataSource>
                 <asp:GridView ID="gvlist" runat="server" AutoGenerateColumns="False">
                     <Columns>
                         <asp:BoundField DataField="TicketNo" HeaderText="TicketNo" SortExpression="TicketNo" />
@@ -299,6 +299,7 @@
                       <span class="details">List of Product's</span>
                     <asp:TextBox ID="txtAllProductQuantity" runat="server" Enabled="false" CssClass="input1" TextMode="MultiLine" ></asp:TextBox>
                 </div>--%>
+    
 
              <asp:GridView ID="GridView1" runat="server" HorizontalAlign="Center" DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False">
                     <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -313,6 +314,12 @@
 
                     <Columns>
 
+                        <asp:TemplateField HeaderText="RequestNo">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("RequestNo") %>'></asp:Label>
+                            </ItemTemplate>
+                            
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Products">
                             <ItemTemplate>
                                 <asp:Label runat="server" Text='<%#Eval("Products") %>'></asp:Label>
@@ -362,6 +369,9 @@
                 <div class="input_field1">
                      <span class="details">Total Quantity</span>
                     <asp:TextBox ID="txtTotalQuantity" runat="server" Enabled="false" CssClass="input1"></asp:TextBox>
+                </div>
+                <div class="input_field1">
+                    <asp:TextBox ID="txtEmailDBA" Visible="false" runat="server" Enabled="false" CssClass="input1"></asp:TextBox>
                 </div>
 
                 <div class="input_field1">

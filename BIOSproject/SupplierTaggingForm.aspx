@@ -1,14 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" CodeBehind="SupplierTaggingForm.aspx.cs" Inherits="BIOSproject.SupplierTaggingForm" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supp.Master" AutoEventWireup="true" EnableEventValidation="false" ValidateRequest="false" CodeBehind="SupplierTaggingForm.aspx.cs" Inherits="BIOSproject.SupplierTaggingForm" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %> 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+ 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
      <script src="js/SA.js"></script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 
    <script>
 
@@ -25,6 +28,7 @@
                });
            return false;
        }
+      
    </script>
     <style type="text/css">
         .autoCompleteList
@@ -59,6 +63,8 @@
         <div class="container1">
 
                             <div class="forms">
+                                 <asp:HiddenField ID="hfSuppEmail" runat="server" />
+
                                 <asp:HiddenField ID="hfStart" runat="server" />
                                 <asp:HiddenField ID="hfEnd" runat="server" />
                                 <asp:HiddenField ID="hfId1" runat="server" />
@@ -158,8 +164,8 @@
             <div class="input_field1">
                 <asp:DropDownList ID="DDLlistseries" Visible="false" runat="server" ></asp:DropDownList>
                 <asp:Button ID="btnUpdate" Visible="false" Enabled="false" runat="server" Text="Update" CssClass="btn" OnClick="btnUpdate_Click"/>
-                <asp:Button ID="btnAdd" Enabled="false" runat="server" Text="Add" CssClass="btn" OnClick="btnAdd_Click"/>
-                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn" OnClick="btnClear_Click"/>
+                <asp:Button ID="btnAdd" Enabled="false" Visible="false" runat="server" Text="Add" CssClass="btn" OnClick="btnAdd_Click"/>
+                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn" OnClick="btnClear_Click" Width="200px"/>
                 </div>
                                 </div>
             </div>
@@ -168,7 +174,7 @@
 
          
 
-         <ajaxtoolkit:modalpopupextender ID="ModalInquiry" PopupControlID="PanelInquiry" TargetControlID="gvModal" CancelControlID="btnCloseInquiry" runat="server"></ajaxtoolkit:modalpopupextender>
+       <%--  <ajaxtoolkit:modalpopupextender ID="ModalInquiry" PopupControlID="PanelInquiry" TargetControlID="gvModal" CancelControlID="btnCloseInquiry" runat="server"></ajaxtoolkit:modalpopupextender>
        <asp:Panel ID="PanelInquiry" runat="server" TabIndex="1" CssClass="Modal" Height="500px">
  
            <div id="Div1" runat="server" style="max-height: 500px; overflow: auto;">
@@ -190,7 +196,8 @@
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
                 <div class="input_field1">
                     <asp:Label ID="Label2" runat="server" Text="Enter Tracking:" CssClass="label"></asp:Label>
-                    <asp:TextBox ID="txtTracking" runat="server" CssClass="input1" Width="330px" AutoPostBack="true" OnTextChanged="txtTracking_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtTracking" runat="server" CssClass="input1" Width="250px" AutoPostBack="true" OnTextChanged="txtTracking_TextChanged"></asp:TextBox>
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn2" OnClick="btnSearch_Click"/>
                 </div>
                                 
                 <div class="input_field1">
@@ -279,25 +286,42 @@
                 
             </div>
         </asp:Panel>
-     
+      
 
 
 
         <div class="container">
             <asp:HiddenField ID="gvModal" runat="server"/>
-                            <div class="forms">
-                                  
+                 <div class="forms">
                     <div class="input_field1">
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [ItemDescr]+'-'+[ItemMaterialCode2] as Product FROM [Reference] where ItemMaterialCode2 != 'NULL'"></asp:SqlDataSource>
                         <asp:Label ID="Label15" runat="server" Text="Enter Branch-Code:" CssClass="labelSearch"></asp:Label>
                        <asp:TextBox ID="txtSearch" runat="server" CssClass="inputSearch" OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
-                       <%--<asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btnSearch" OnClick="btnSearch_Click" Visible="false"/>--%>
-                  </div>
-
+                        <asp:DropDownList ID="DDLcode" Visible="false" runat="server" OnTextChanged="DDLcode_TextChanged" AppendDataBoundItems="True" AutoPostBack="true" CssClass="labelSearch2" DataSourceID="SqlDataSource3" DataTextField="Product" DataValueField="Product">
+                             <asp:ListItem Selected="True" Value="S" Text="--SELECT--"></asp:ListItem>
+                        </asp:DropDownList>
+                       
+                        <asp:Label ID="lblCode" Visible="false" runat="server" Text="Total Units:"></asp:Label>
+                        <asp:Label ID="lblCodeNo" Visible="false" runat="server" Text="" ForeColor="Blue"></asp:Label>
+                   </div>
+                     
+                  
 
                 <div class="input_field1">
-                    <%--<label>Date Requested</label>--%>
                     <asp:Label ID="Label1" runat="server" Text="Date" CssClass="label1"></asp:Label>
-                    <asp:TextBox ID="txtDate2" runat="server" CssClass="input" TextMode="Date"></asp:TextBox>
+                     
+                    <asp:TextBox ID="txtDated" runat="server" ReadOnly="true" Width="20%"></asp:TextBox>
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="AbsMiddle" Height="4%" ImageUrl="img/icons8-calendar-96.png" onclick="ImageButton1_Click" Width="5%" />
+                    <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged" Height="180px" Width="200px" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black">
+                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                        <NextPrevStyle VerticalAlign="Bottom" />
+                        <OtherMonthDayStyle ForeColor="#808080" />
+                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                        <SelectorStyle BackColor="#CCCCCC" />
+                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                        <WeekendDayStyle BackColor="#FFFFCC" />
+                    </asp:Calendar>
 
                      <asp:Button ID="btnDisplay" runat="server" Text="Display" CssClass="btn" OnClick="btnDisplay_Click"/>
                     <asp:DropDownList ID="DropPer" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropPer_SelectedIndexChanged">
@@ -336,14 +360,7 @@
       <asp:GridView runat="server" RowStyle-Width="100px" ID="Gridview1" CssClass="gridview" width="100%" AllowPaging="true" PagerStyle-HorizontalAlign="Center" PagerStyle-ForeColor="#003366" PageSize="8" PagerSettings-Mode="NextPrevious" PagerStyle-Font-Size="X-Large" OnPageIndexChanging="Gridview1_PageIndexChanging" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
           
                                     <Columns>
-                                        <%--<asp:TemplateField>
-                                            <HeaderTemplate>
-                                                <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true"/>
-                                                </HeaderTemplate>
-                                            <ItemTemplate>
-                                                 <asp:CheckBox ID="Check" runat="server" AutoPostBack="true" Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>'/>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
+                                    
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="StartSeries" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="EndSeries" />
                                         <asp:ButtonField DataTextField="Quantity" HeaderText="Units" />
@@ -356,17 +373,39 @@
                                         </asp:TemplateField>
                                         <asp:ButtonField DataTextField="RequestID" HeaderText="CtrlNo" />
 
-                                       <%-- <asp:TemplateField>
-                                           <ItemTemplate> 
-                                               <asp:Button ID="btnDetails" runat="server" CommandArgument='<%# Eval("ID") + "," + Eval("Branch") + "," + Eval("Team")+ "," + Eval("Area")+ "," + Eval("DestinationTo")+ "," + Eval("Hub")+ "," + Eval("Warehouse")%>' Text="View" ForeColor="White" BackColor="Gray" BorderStyle="None" OnClick="btnDetails_Click"/>
-                                           </ItemTemplate>
-                                        </asp:TemplateField>--%>
+                                   
 
                                     </Columns>
                                 </asp:GridView>
 
 
 
+                                </div>
+            </div>--%>
+
+         <div class="container">
+            <asp:HiddenField ID="gvModal" runat="server"/>
+                 <div class="forms">
+                    <div class="input_field1"> 
+                    <a style="padding-left: 60%;">
+                    <asp:Label ID="Label1" Font-Bold="true" ForeColor="Black" runat="server" Text="DATE:" CssClass="label1"></asp:Label>
+                    <asp:Label ID="lblDated" Font-Bold="true" ForeColor="Black" runat="server" CssClass="label1"></asp:Label>
+                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn" OnClick="btnSubmit_Click"/>
+                        </a>
+                   </div>
+                    
+      <asp:GridView runat="server" RowStyle-Width="100px" ID="Gridview1" CssClass="gridview" width="100%" AllowPaging="true" PagerStyle-HorizontalAlign="Center" PagerStyle-ForeColor="#003366" PageSize="8" PagerSettings-Mode="NextPrevious" PagerStyle-Font-Size="X-Large" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
+                                   <Columns>
+                                         <asp:TemplateField HeaderText="Products">
+                                            <ItemTemplate>
+                                               <asp:TextBox runat="server" Text='<%# Eval("Products") %>' Width="100%" Enabled="false" ForeColor="Black" BorderColor="White"></asp:TextBox>
+                                               </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <%--<asp:ButtonField DataTextField="StartingSeries" HeaderText="StartSeries" />
+                                        <asp:ButtonField DataTextField="EndingSeries" HeaderText="EndSeries" />--%>
+                                        <asp:ButtonField DataTextField="TQ" HeaderText="Total Units" />
+                                    </Columns>
+                                </asp:GridView>
                                 </div>
             </div>
 
@@ -550,7 +589,7 @@
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                  <asp:ImageButton runat="server" ImageUrl="~/img/EditIcon.png" ID="btnEdit" CommandArgument='<%# Eval("ID") + "," + Eval("StartingSeries") + "," + Eval("EndingSeries")+ "," + Eval("DestinationTo")+ "," + Eval("Branch")+ "," + Eval("Team")+ "," + Eval("Area")+ "," + Eval("Warehouse")+ "," + Eval("Hub")+ "," + Eval("Quantity")%>' OnClick="btnEdit_Click" Width="20px" Height="20px" />
-                                                 <asp:ImageButton runat="server" ImageUrl="~/img/TrashIcon.png" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px" />
+                                                 <asp:ImageButton runat="server" ImageUrl="~/img/TrashIcon.png" ID="btnDelete" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px" />
                                             </ItemTemplate>
                                            <%-- <EditItemTemplate>
                                                 <asp:ImageButton runat="server" ImageUrl="~/img/SaveIcon.png" CommandName="Update" ToolTip="Update" Width="20px" Height="20px" />
@@ -570,7 +609,7 @@
                                 <br />
                                 
                                 <asp:Label ID="lblSuccess" runat="server" Text="" ForeColor="Green"></asp:Label><asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
-              <%--     </div>
+   <%--                </div>
             </div>--%>
         
 </div>
