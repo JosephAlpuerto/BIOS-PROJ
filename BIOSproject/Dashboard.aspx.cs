@@ -167,7 +167,14 @@ namespace BIOSproject
                 answer = (DEL / PO) * 100;
                 decimal value = Convert.ToDecimal(answer);
                 decimal round = Decimal.Round(value);
-                FIEFulFilment.Text = round + "%";
+                if (round >= 101)
+                {
+                    FIEFulFilment.Text = 100 + "%";
+                }
+                else
+                {
+                    FIEFulFilment.Text = round + "%";
+                }
             }
             else
             {
@@ -212,7 +219,15 @@ namespace BIOSproject
                 answer = (DEL / PO) * 100;
                 decimal value = Convert.ToDecimal(answer);
                 decimal round = Decimal.Round(value);
-                WellFulFilment.Text = round + "%";
+                
+                if (round >= 101)
+                {
+                    WellFulFilment.Text = 100 + "%";
+                }
+                else
+                {
+                    WellFulFilment.Text = round + "%";
+                }
             }
             else
             {
@@ -255,7 +270,14 @@ namespace BIOSproject
                 answer = (DEL / PO) * 100;
                 decimal value = Convert.ToDecimal(answer);
                 decimal round = Decimal.Round(value);
-                ACFFulFilment.Text = round + "%";
+                if (round >= 101)
+                {
+                    ACFFulFilment.Text = 100 + "%";
+                }
+                else
+                {
+                    ACFFulFilment.Text = round + "%";
+                }
             }
             else
             {
@@ -301,7 +323,14 @@ namespace BIOSproject
                 answer = (DEL / PO) * 100;
                 decimal value = Convert.ToDecimal(answer);
                 decimal round = Decimal.Round(value);
-                DTMFulFilment.Text = round + "%";
+                if (round >= 101)
+                {
+                    DTMFulFilment.Text = 100 + "%";
+                }
+                else
+                {
+                    DTMFulFilment.Text = round + "%";
+                }
             }
             else
             {
@@ -345,7 +374,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    PCIFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        PCIFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        PCIFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -390,7 +426,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    JRDFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        JRDFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        JRDFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -435,7 +478,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    TFTFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        TFTFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        TFTFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -480,7 +530,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    kimwinFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        kimwinFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        kimwinFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -525,7 +582,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    UPIFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        UPIFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        UPIFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -571,7 +635,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    HFPCFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        HFPCFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        HFPCFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -617,7 +688,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    CPSCFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        CPSCFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        CPSCFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -662,7 +740,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    TCCFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        TCCFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        TCCFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -708,7 +793,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    SPMPCFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        SPMPCFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        SPMPCFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {
@@ -752,7 +844,14 @@ namespace BIOSproject
                     answer = (DEL / PO) * 100;
                     decimal value = Convert.ToDecimal(answer);
                     decimal round = Decimal.Round(value);
-                    AGPTIFulFilment.Text = round + "%";
+                    if (round >= 101)
+                    {
+                        AGPTIFulFilment.Text = 100 + "%";
+                    }
+                    else
+                    {
+                        AGPTIFulFilment.Text = round + "%";
+                    }
                 }
                 else
                 {

@@ -283,7 +283,7 @@
                                 <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" width="100%" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                     <Columns>
-                                         <asp:ButtonField DataTextField="ID" HeaderText="Request ID" />
+                                         <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PoNumber" HeaderText="PO No." />
                                         <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
@@ -308,7 +308,7 @@
 
                                                       <asp:TemplateField>
                                                            <ItemTemplate>
-                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("Id") %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
+                                                               <asp:LinkButton ID="DownloadView" runat="server" Text="Download" CommandArgument='<%# Eval("RequestNo") %>' OnClick="DownloadView_Click" CssClass="btn btn-primary btn-user btn-block"></asp:LinkButton>
                                                                
                                                            </ItemTemplate>
                                                        </asp:TemplateField>

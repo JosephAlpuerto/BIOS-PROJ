@@ -74,7 +74,14 @@ namespace BIOSproject
                 answer = (DEL / PO) * 100;
                 decimal value = Convert.ToDecimal(answer);
                 decimal round = Decimal.Round(value);
-                lblFulfilment.Text = round + "%";
+                if (round >= 101)
+                {
+                    lblFulfilment.Text = 100 + "%";
+                }
+                else
+                {
+                    lblFulfilment.Text = round + "%";
+                }
             }
             else
             {

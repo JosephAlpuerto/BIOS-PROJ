@@ -149,7 +149,7 @@ namespace BIOSproject
             sqlData.Fill(dtbl);
             sqlCon.Close();
             hfId.Value = Id.ToString();
-            txtRequestIDView.Text = dtbl.Rows[0]["Id"].ToString();
+            txtRequestIDView.Text = dtbl.Rows[0]["RequestNo"].ToString();
             txtTicketNoView.Text = dtbl.Rows[0]["TicketNo"].ToString();
             txtPONumberView.Text = dtbl.Rows[0]["PONumber"].ToString();
             txtStartingSeriesView.Text = dtbl.Rows[0]["StartingSeries"].ToString();

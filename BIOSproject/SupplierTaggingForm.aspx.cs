@@ -14,7 +14,8 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Web.Services;
-
+using System.Net.Mail;
+using System.IO;
 
 
 namespace BIOSproject
@@ -1734,7 +1735,30 @@ namespace BIOSproject
 
             
         }
+        //public void email()
+        //{
+        //    using (MailMessage mail = new MailMessage())
+        //    {
 
+        //        mail.From = new MailAddress("lbcbios08@gmail.com");
+        //        mail.To.Add(hfSuppEmail.Value);
+        //        mail.Subject = "Sent of Request By: " + Session["Username"].ToString() + " PO# " + txtPONumberView.Text + "  Request# " + txtRequestIDView.Text;
+        //        mail.Body = "BIOS-NEW REQUEST. <br/>BIOS TICKET NO:  " + txtTicketNoView.Text + "<br/>PONumber:   "
+        //            + txtPONumberView.Text + "<br/> Request NO.:   " + txtRequestIDView.Text + "<br/> Product:   " + txtProductView.Text + "<br/>Quantity:   " + txtQuantityView.Text +
+        //            "<br/>Starting Series:   " + txtStartingSeriesView.Text + "<br/>Ending Series:   " + txtEndingSeriesView.Text +
+        //             "<br/> Supplier:   " + txtSupplierView.Text + "<br/><br/>Thanks," + "<br/><br/> To view/respond to the request, URL: https://lbcbiosdev.azurewebsites.net/";
+        //        mail.IsBodyHtml = true;
+        //        using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+        //        {
+        //            smtp.UseDefaultCredentials = false;
+        //            smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
+        //            smtp.EnableSsl = true;
+        //            smtp.Send(mail);
+        //        }
+
+
+        //    }
+        //}
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             string main = ConfigurationManager.ConnectionStrings["LBC_BIOS"].ConnectionString;

@@ -389,7 +389,7 @@
                                 <asp:HiddenField ID="gvModal" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview1" CssClass="table table-bordered" width="100%" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" EmptyDataText="No Records !" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged">
                                     <Columns>
-                                        <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
+                                        <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />
@@ -437,7 +437,7 @@
                                 <asp:HiddenField ID="HFUsername" runat="server" />
                                 <asp:GridView runat="server" ID="Gridview2" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" width="100%" AutoGenerateColumns="False" OnSelectedIndexChanged="Gridview1_SelectedIndexChanged" OnRowDataBound="Gridview2_RowDataBound1">
                                     <Columns>
-                                        <asp:ButtonField DataTextField="Id" HeaderText="Request ID" />
+                                        <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                          <asp:ButtonField DataTextField="StartingSeries" HeaderText="Starting Series" />

@@ -585,7 +585,7 @@
                                                  <asp:CheckBox ID="Check" runat="server" AutoPostBack="true" Visible='<%# Eval("forHitCheck").ToString() == "False" &&  Eval("StartingSeries") != DBNull.Value %>' OnCheckedChanged="Check_CheckedChanged"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>--%>
-                                        <asp:ButtonField DataTextField="ID" HeaderText="Request No." />
+                                        <asp:ButtonField DataTextField="RequestNo" HeaderText="Request No." />
                                         <asp:ButtonField DataTextField="TicketNo" HeaderText="Ticket No." />
                                          <asp:ButtonField DataTextField="PONumber" HeaderText="PO No." />
                                         <asp:ButtonField DataTextField="ProductQuantity" HeaderText="Product/Quantity" />
