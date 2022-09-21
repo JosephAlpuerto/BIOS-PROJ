@@ -33,6 +33,24 @@ namespace BIOSproject
         protected global::System.Web.UI.WebControls.HiddenField hfSuppEmail;
 
         /// <summary>
+        /// hfWareEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfWareEmail;
+
+        /// <summary>
+        /// hfWareEmail5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfWareEmail5;
+
+        /// <summary>
         /// hfStart control.
         /// </summary>
         /// <remarks>

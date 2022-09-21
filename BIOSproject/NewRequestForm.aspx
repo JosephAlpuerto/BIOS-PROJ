@@ -24,11 +24,7 @@
                      });
                   });
     </script>
-    <style>
-        #error{
-            color: red;
-        }
-    </style>
+   
 
     <script>
         $(document).ready(function () {
@@ -84,6 +80,8 @@
 
     <link href="css/NewRequest.css" rel="stylesheet" />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [Username] FROM [LBC.BIOS].[lbcbios].[Users] WHERE RoleType = 'Supplier' and IsActive = '1'"></asp:SqlDataSource>
+     
+   
 
 <div class="body">
     <div class="container">
@@ -229,7 +227,8 @@
                 </asp:GridView><asp:Label ID="lblGridview" runat="server" ForeColor="Green" CssClass="label"></asp:Label><asp:Label ID="lblerrorGV" runat="server" ForeColor="Red" CssClass="label"></asp:Label>
 
         <div>
-            <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Check" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
+          
+           <asp:Button ID="Button1" runat="server" style="margin-top:30px" Text="Check" CssClass="btn btn-primary btn-user btn-block" OnClick="Button1_Click" Width="650px"/>
        
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:LBC_BIOS %>" SelectCommand="SELECT [TicketNo], [PONumber], [Supplier], [Products], [Quantity], [DateRequested], [RequestNo] FROM [LBC.BIOS].[lbcbios].[TempRequest]"></asp:SqlDataSource>
                 <asp:GridView ID="gvlist" runat="server" AutoGenerateColumns="False">
@@ -243,8 +242,12 @@
                         <asp:BoundField DataField="RequestNo" HeaderText="RequestNo" SortExpression="RequestNo" />
                     </Columns>
                </asp:GridView>
+          
+   
             </div>
     </div>
+
+   
     </div>
 
 
@@ -375,7 +378,24 @@
                 </div>
 
                 <div class="input_field1">
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSubmit_Click" />
+  <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div class="load">
+                <div class="center">
+                    <img src="img/loader.gif" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+   <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <div align="center">
+       <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-user btn-block" OnClick="btnSubmit_Click"> </asp:Button>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+   
+                       
                 </div>
                           
         </div>        
@@ -453,9 +473,27 @@
            
 
         </div>
-
+      
     </div>
+   
+      <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+            </div>
+    
+    <script>
+        //$(window).on("load", function () {
+        //    $(".loader-wrapper").fadeOut("slow");
+        //});
 
+        $(window).on('load', () => {
+            setTimeout(() => {
+                
+                $(".loader-wrapper").fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }, 500);
+        });
+    </script>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">

@@ -65,8 +65,9 @@ namespace BIOSproject
                                 ViewState["Records"] = dt;
                             }
 
-                        //Calendar1.Visible = false;
-                    }
+                    //Calendar1.Visible = false;
+
+                }
                 
 
                 }
@@ -323,6 +324,46 @@ namespace BIOSproject
                 }
             }
         }
+        public void emailWare()
+        {
+            SqlConnection sqlCon = new SqlConnection(ConnectionString);
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("Select Username From [Users] Where RoleType = 'Warehouse' and FirstName = 'Ferdinand'", sqlCon);
+            cmd.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                hfWareEmail.Value = dr.GetString(0).ToString();
+            }
+            sqlCon.Close();
+
+            SqlConnection sqlCon5 = new SqlConnection(ConnectionString);
+            sqlCon5.Open();
+            SqlCommand cmd5 = new SqlCommand("Select Username From [Users] Where RoleType = 'Warehouse' and FirstName = 'Warehouse'", sqlCon5);
+            cmd5.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+            SqlDataReader dr5 = cmd5.ExecuteReader();
+            if (dr5.Read())
+            {
+                hfWareEmail5.Value = dr5.GetString(0).ToString();
+            }
+            sqlCon5.Close();
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(hfSuppEmail.Value);
+                mail.To.Add(hfWareEmail.Value);
+                mail.To.Add(hfWareEmail5.Value);
+                mail.Subject = "(TEST ONLY) BIOS New Request. Sent By: " + Session["Username"].ToString();
+                mail.Body = "To view/respond to the request, URL: https://lbcbiosdev.azurewebsites.net/";
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("lbcbios08@gmail.com", "pdlgfieeiiqbcsvf");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
+        }
         public void Scanner()
         {
             SqlConnection sqlCon = new SqlConnection(ConnectionString2);
@@ -398,7 +439,7 @@ namespace BIOSproject
                                     int insert = cmd2.ExecuteNonQuery();
                                     if (insert > 0)
                                     {
-                                        FillGridView();
+                                    FillGridView();
                                         FillGridView2();
                                         //this.DropDesti.SelectedIndex = 0;
 
@@ -436,7 +477,7 @@ namespace BIOSproject
                                     int insert = cmd2.ExecuteNonQuery();
                                     if (insert > 0)
                                     {
-                                        FillGridView();
+                                    FillGridView();
                                         FillGridView2();
                                         //this.DropDesti.SelectedIndex = 0;
 
@@ -1629,6 +1670,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
@@ -1669,6 +1711,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
@@ -1709,6 +1752,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
@@ -1793,6 +1837,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
@@ -1833,6 +1878,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);
@@ -1873,6 +1919,7 @@ namespace BIOSproject
                         conn.Open();
                         sqlComma.ExecuteNonQuery();
                         DDLlistseries.Items.Clear();
+                        emailWare();
                         FillGridView();
                         FillGridView2();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "k", "swal('New Request added Successfully!','You clicked the button!', 'success')", true);

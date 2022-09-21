@@ -1301,9 +1301,9 @@ namespace BIOSproject
                 lblHubEdit.Visible = false;
                 DropHubEdit.Items.Clear();
 
-                DropWareEdit.Visible = false;
-                lblWareEdit.Visible = false;
-                DropWareEdit.Items.Clear();
+                //DropWareEdit.Visible = false;
+                //lblWareEdit.Visible = false;
+                //DropWareEdit.Items.Clear();
 
                 btnUpdateEdit.Enabled = true;
 
@@ -1331,42 +1331,42 @@ namespace BIOSproject
                 DropAreaEdit.Visible = false;
                 lblAreaEdit.Visible = false;
                 DropAreaEdit.Items.Clear();
-                DropWareEdit.Visible = false;
-                lblWareEdit.Visible = false;
-                DropWareEdit.Items.Clear();
+                //DropWareEdit.Visible = false;
+                //lblWareEdit.Visible = false;
+                //DropWareEdit.Items.Clear();
 
                 btnUpdateEdit.Enabled = true;
 
             }
-            else if (DropDestiEdit.SelectedValue == "W")
-            {
-                SqlConnection sqlcon = new SqlConnection(ConnectionString);
-                sqlcon.Open();
-                SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
-                sqlcmd.CommandType = CommandType.Text;
-                DropWareEdit.DataSource = sqlcmd.ExecuteReader();
-                DropWareEdit.DataTextField = "WareHouse";
-                DropWareEdit.DataValueField = "ID";
-                DropWareEdit.DataBind();
+            //else if (DropDestiEdit.SelectedValue == "W")
+            //{
+            //    SqlConnection sqlcon = new SqlConnection(ConnectionString);
+            //    sqlcon.Open();
+            //    SqlCommand sqlcmd = new SqlCommand("SELECT [ID], [WareHouse] FROM [LBC.BIOS].[lbcbios].[Reference] WHERE [WareHouse] != 'NULL'", sqlcon);
+            //    sqlcmd.CommandType = CommandType.Text;
+            //    DropWareEdit.DataSource = sqlcmd.ExecuteReader();
+            //    DropWareEdit.DataTextField = "WareHouse";
+            //    DropWareEdit.DataValueField = "ID";
+            //    DropWareEdit.DataBind();
 
-                DropWareEdit.Visible = true;
-                lblWareEdit.Visible = true;
+            //    DropWareEdit.Visible = true;
+            //    lblWareEdit.Visible = true;
 
-                DropBranchEdit.Visible = false;
-                lblBranchEdit.Visible = false;
-                DropBranchEdit.Text = "";
-                DropTeamEdit.Visible = false;
-                lblTeamEdit.Visible = false;
-                DropTeamEdit.Items.Clear();
-                DropAreaEdit.Visible = false;
-                lblAreaEdit.Visible = false;
-                DropAreaEdit.Items.Clear();
-                DropHubEdit.Visible = false;
-                lblHubEdit.Visible = false;
-                DropHubEdit.Items.Clear();
+            //    DropBranchEdit.Visible = false;
+            //    lblBranchEdit.Visible = false;
+            //    DropBranchEdit.Text = "";
+            //    DropTeamEdit.Visible = false;
+            //    lblTeamEdit.Visible = false;
+            //    DropTeamEdit.Items.Clear();
+            //    DropAreaEdit.Visible = false;
+            //    lblAreaEdit.Visible = false;
+            //    DropAreaEdit.Items.Clear();
+            //    DropHubEdit.Visible = false;
+            //    lblHubEdit.Visible = false;
+            //    DropHubEdit.Items.Clear();
 
-                btnUpdateEdit.Enabled = true;
-            }
+            //    btnUpdateEdit.Enabled = true;
+            //}
             else
             {
                 DropBranchEdit.Visible = false;
@@ -1385,9 +1385,9 @@ namespace BIOSproject
                 lblHubEdit.Visible = false;
                 DropHubEdit.Items.Clear();
 
-                DropWareEdit.Visible = false;
-                lblWareEdit.Visible = false;
-                DropWareEdit.Items.Clear();
+                //DropWareEdit.Visible = false;
+                //lblWareEdit.Visible = false;
+                //DropWareEdit.Items.Clear();
 
                 btnUpdateEdit.Enabled = false;
             }

@@ -336,7 +336,7 @@ namespace BIOSproject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+           
             if (TicketNo.Text == "")
             {
                 lblerrorTicket.Text = "Please Enter Ticket No.!";
@@ -352,12 +352,11 @@ namespace BIOSproject
             else if (TicketNo.Text != "" && DDL.Text != "")
             {
                 ListItemCollection list = DDL.Items;
-                //txtAllProductQuantity.Text = list[0].Text;
                 ModalReviewView.Show();
                 txtDate.Text = ReqDate.Text;
                 txtTicketNo.Text = TicketNo.Text;
                 txtPONumber.Text = PONumber.Text;
-                
+
                 txtRequest.Text = txtRequestNo.Text;
                 txtSupplier.Text = dropSupplier.SelectedItem.Text;
                 txtEmail.Text = DropFIE.SelectedItem.Text;
@@ -559,6 +558,7 @@ namespace BIOSproject
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            System.Threading.Thread.Sleep(5000);
             if (txtTicketNo.Text != "" && txtPONumber.Text != "")
             {
                 try
@@ -710,6 +710,10 @@ namespace BIOSproject
             DropFIE.DataValueField = "VendorEmail";
             DropFIE.DataBind();
         }
-        
+
+        protected void Button2_Click1(object sender, EventArgs e)
+        {
+            System.Threading.Thread.Sleep(5000);
+        }
     }
 }

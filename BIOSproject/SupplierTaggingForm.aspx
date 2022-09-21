@@ -64,6 +64,8 @@
 
                             <div class="forms">
                                  <asp:HiddenField ID="hfSuppEmail" runat="server" />
+                                 <asp:HiddenField ID="hfWareEmail" runat="server" />
+                                 <asp:HiddenField ID="hfWareEmail5" runat="server" />
 
                                 <asp:HiddenField ID="hfStart" runat="server" />
                                 <asp:HiddenField ID="hfEnd" runat="server" />
@@ -396,6 +398,16 @@
                     
       <asp:GridView runat="server" RowStyle-Width="100px" ID="Gridview1" CssClass="gridview" width="100%" AllowPaging="true" PagerStyle-HorizontalAlign="Center" PagerStyle-ForeColor="#003366" PageSize="8" PagerSettings-Mode="NextPrevious" PagerStyle-Font-Size="X-Large" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" EmptyDataText="No Records !">
                                    <Columns>
+                                       <asp:TemplateField HeaderText="StartingSeries">
+                                            <ItemTemplate>
+                                               <asp:TextBox runat="server" Text='<%# Eval("StartingSeries") %>' Width="100%" Enabled="false" ForeColor="Black" BorderColor="White"></asp:TextBox>
+                                               </ItemTemplate>
+                                        </asp:TemplateField>
+                                       <asp:TemplateField HeaderText="EndingSeries">
+                                            <ItemTemplate>
+                                               <asp:TextBox runat="server" Text='<%# Eval("EndingSeries") %>' Width="100%" Enabled="false" ForeColor="Black" BorderColor="White"></asp:TextBox>
+                                               </ItemTemplate>
+                                        </asp:TemplateField>
                                          <asp:TemplateField HeaderText="Products">
                                             <ItemTemplate>
                                                <asp:TextBox runat="server" Text='<%# Eval("Products") %>' Width="100%" Enabled="false" ForeColor="Black" BorderColor="White"></asp:TextBox>
@@ -403,7 +415,7 @@
                                         </asp:TemplateField>
                                         <%--<asp:ButtonField DataTextField="StartingSeries" HeaderText="StartSeries" />
                                         <asp:ButtonField DataTextField="EndingSeries" HeaderText="EndSeries" />--%>
-                                        <asp:ButtonField DataTextField="TQ" HeaderText="Total Units" />
+                                        <asp:ButtonField DataTextField="TQ" HeaderText="Total Qty" />
                                     </Columns>
                                 </asp:GridView>
                                 </div>
@@ -613,6 +625,23 @@
             </div>--%>
         
 </div>
+       <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+            </div>
+    
+    <script>
+        //$(window).on("load", function () {
+        //    $(".loader-wrapper").fadeOut("slow");
+        //});
+
+        $(window).on('load', () => {
+            setTimeout(() => {
+                $(".loader-wrapper").fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }, 150);
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>

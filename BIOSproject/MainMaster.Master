@@ -19,7 +19,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/SA.js"></script>
     <link href="css/SourcingReport.css" rel="stylesheet" />
+    <link href="css/Loading.css" rel="stylesheet" />
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
     <script>
 
         function Hitcheck() {
@@ -233,6 +235,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body id="page-top">
+    
     <form id="form1" runat="server">
         <div id="wrapper">
 
@@ -749,6 +752,6 @@
 
             </div>
         </div>
-    </form>
+      </form>
 </body>
 </html>

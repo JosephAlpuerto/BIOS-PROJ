@@ -709,8 +709,24 @@
                                 </div>
                             </div>
                      </div>--%>
+    
+       <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+            </div>
+    
+    <script>
+        //$(window).on("load", function () {
+        //    $(".loader-wrapper").fadeOut("slow");
+        //});
 
-
+        $(window).on('load', () => {
+            setTimeout(() => {
+                $(".loader-wrapper").fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }, 150);
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>

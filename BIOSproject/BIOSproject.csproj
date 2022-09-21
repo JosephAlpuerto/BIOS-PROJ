@@ -133,10 +133,12 @@
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="css\Dashboard.css" />
+    <Content Include="css\Loading.css" />
     <Content Include="css\NewRequest.css" />
     <Content Include="css\Scanfinishgood.css" />
     <Content Include="css\sorcedb.css" />
     <Content Include="css\SourcingReport.css" />
+    <Content Include="css\submit.css" />
     <Content Include="css\SupplierReport.css" />
     <Content Include="css\SupplierScan.css" />
     <Content Include="css\SuppTaggingForm.css" />
@@ -150,10 +152,12 @@
     <Content Include="img\arrow-icon-1175.png" />
     <Content Include="img\greenBox.png" />
     <Content Include="img\icons8-calendar-96.png" />
+    <Content Include="img\loader.gif" />
     <Content Include="InquiryForm.aspx" />
     <Content Include="js\jquery-3.5.1.min.js" />
     <Content Include="js\jquery-ui.css" />
     <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\submit.js" />
     <Content Include="sample1.aspx" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
